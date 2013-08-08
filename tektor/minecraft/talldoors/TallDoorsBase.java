@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.0")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.1")
 @NetworkMod( clientSideRequired = true)
 
 public class TallDoorsBase {
