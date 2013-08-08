@@ -27,8 +27,8 @@ public class TallDoorsBase {
         @SidedProxy(clientSide="tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide="tektor.minecraft.talldoors.TallDoorsCommonProxy")
         public static TallDoorsCommonProxy proxy;
         
-        public int itemID1;
-        public Item doorPlacer;
+        public static int itemID1;
+        public static Item doorPlacer;
         
         @EventHandler
         public void preInit(FMLPreInitializationEvent event) {
