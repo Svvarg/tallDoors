@@ -24,34 +24,75 @@ public class RenderEntranceDoor1 extends Render {
 		// Push a blank matrix onto the stack
 		GL11.glPushMatrix();
 
-		// Move the object into the correct position on the block (because the
-		// OBJ's origin is the center of the object)
-		if (((EntranceDoor1) entity).left) {
-			
-			if(((EntranceDoor1) entity).pos == 1)
-			{
-				x = x + 0.7f;
+		int orientation = ((EntranceDoor1) entity).orientation;
+		int pos = ((EntranceDoor1) entity).pos;
+		boolean left = ((EntranceDoor1) entity).left;
+		//System.out.println(orientation);
+		if ( orientation == 0) {
+			if (left) {
+
+				if ( pos == 1) {
+					x = x + 0.7f;
+				} else {
+					z = z + 0.7f;
+				}
+			}
+			GL11.glTranslatef((float) x + 0.5f, (float) y + 1.5f, (float) z
+					- 0.3f + 0.8f * pos);
+			GL11.glRotatef(180f, 0f, 0f, 1f);
+			int i = 0;
+			if (left) {
+				GL11.glRotatef(180f, 0f, 1f, 0f);
+				i = -1;
+
+			} else
+				i = 1;
+			GL11.glRotatef(180f + i * pos * 90f, 0f,
+					1f, 0f);
+		}
+		else if(orientation == 1)
+		{
+			if (left) {
+
+				if (pos == 1) {
+					x = x - 0.8f;
+					z = z - 0.1f;
+				} else {
+					x = x - 0.7f;
+					
+				}
+				
 			}
 			else
 			{
-				z = z + 0.7f;
+				if (pos == 1) {
+					x = x - 0.8f;
+					z = z - 0.8f;
+				} else {
+					
+				}
 			}
+			GL11.glTranslatef((float) x + 1.3f, (float) y + 1.5f, (float) z
+					+0.5f + 0.8f * pos);
+			GL11.glRotatef(180f, 0f, 0f, 1f);
+			int i = 0;
+			if (left) {
+				GL11.glRotatef(180f, 0f, 1f, 0f);
+				i = -1;
+
+			} else
+				i = 1;
+			GL11.glRotatef(270f + i * pos * 90f, 0f,
+					1f, 0f);
 		}
-		GL11.glTranslatef((float) x + 0.5f, (float) y + 1.5f, (float) z - 0.3f
-				+ 0.8f * ((EntranceDoor1) entity).pos);
-
-		GL11.glRotatef(180f, 0f, 0f, 1f);
-		int i = 0;
-		if (((EntranceDoor1) entity).left) {
-			GL11.glRotatef(180f, 0f, 1f, 0f);
-			i = -1;
-
-		} else
-			i = 1;
-		GL11.glRotatef(180f + i * ((EntranceDoor1) entity).pos * 90f, 0f, 1f,
-				0f);
-		// Scale our object to about half-size in all directions (the OBJ file
-		// is a little large)
+		else if(orientation == 2)
+		{
+			
+		}
+		else if(orientation == 3)
+		{
+			
+		}
 		GL11.glScalef(1f, 1f, 1f);
 		this.func_110776_a(this.func_110775_a(entity));
 		this.modelEntranceDoor1.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,

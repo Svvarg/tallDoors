@@ -14,6 +14,7 @@ public class EntranceDoor1 extends Entity {
 
 	public int pos;
 	public boolean left;
+	public int orientation;
 
 	public EntranceDoor1(World par1World) {
 		super(par1World);
@@ -28,6 +29,7 @@ public class EntranceDoor1 extends Entity {
 
 		this.dataWatcher.addObject(30, 0);
 		this.dataWatcher.addObject(29, 0);
+		this.dataWatcher.addObject(28,0);
 
 	}
 
@@ -45,12 +47,15 @@ public class EntranceDoor1 extends Entity {
 		return true;
 	}
 
-	public void setOrientation(boolean setLeft) {
+	public void setOrientation(boolean setLeft, int var24) {
 		left = setLeft;
+		orientation = var24;
 		if (left)
 			this.dataWatcher.updateObject(29, 1);
 		else
 			this.dataWatcher.updateObject(29, 0);
+		this.dataWatcher.updateObject(28, var24);
+		
 	}
 
 	@Override
@@ -58,6 +63,7 @@ public class EntranceDoor1 extends Entity {
 		if (this.worldObj.isRemote) {
 			pos = this.dataWatcher.getWatchableObjectInt(30);
 			left = this.dataWatcher.getWatchableObjectInt(29) == 1;
+			orientation = this.dataWatcher.getWatchableObjectInt(28);
 		}
 		setBoundsAt(posX, posY, posZ);
 	}
@@ -123,6 +129,8 @@ public class EntranceDoor1 extends Entity {
 			this.dataWatcher.updateObject(29, 1);
 		else
 			this.dataWatcher.updateObject(29, 0);
+		orientation = nbt.getInteger("orientation");
+		this.dataWatcher.updateObject(28, orientation);
 
 	}
 
@@ -130,6 +138,7 @@ public class EntranceDoor1 extends Entity {
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("left", left);
 		nbt.setInteger("pos", pos);
+		nbt.setInteger("orientation", orientation);
 
 	}
 
@@ -144,33 +153,43 @@ public class EntranceDoor1 extends Entity {
 	public void setBoundsAt(double par1, double par3, double par5) {
 		float f = this.width / 2.0F;
 		float f1 = this.height;
-		if (!left) {
-			if (pos == 0) {
-				this.boundingBox.setBounds(par1, par3 - (double) this.yOffset
-						+ (double) this.ySize, par5, par1 + (double) f * 2D,
-						par3 - (double) this.yOffset + (double) this.ySize
-								+ (double) f1, par5 + 0.1D);
+		if (orientation == 0) {
+			if (!left) {
+				if (pos == 0) {
+					this.boundingBox.setBounds(par1, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + (double) f * 2D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 0.1D);
+				} else {
+					this.boundingBox.setBounds(par1, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + 0.1D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f);
+				}
 			} else {
-				this.boundingBox.setBounds(par1, par3 - (double) this.yOffset
-						+ (double) this.ySize, par5, par1 + 0.1D, par3
-						- (double) this.yOffset + (double) this.ySize
-						+ (double) f1, par5 + 2D * f);
+				if (pos == 0) {
+					this.boundingBox.setBounds(par1 - 1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + (double) f * 2D - 1D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 0.1D);
+				} else {
+					this.boundingBox.setBounds(par1 + 1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + 0.9D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f);
+				}
 			}
 		}
-		else
+		else if(orientation == 1)
 		{
-			if (pos == 0) {
-				this.boundingBox.setBounds(par1-1D, par3 - (double) this.yOffset
-						+ (double) this.ySize, par5, par1 + (double) f * 2D - 1D,
-						par3 - (double) this.yOffset + (double) this.ySize
-								+ (double) f1, par5 + 0.1D);
-			} else {
-				this.boundingBox.setBounds(par1+1D, par3 - (double) this.yOffset
-						+ (double) this.ySize, par5, par1 +0.9D, par3
-						- (double) this.yOffset + (double) this.ySize
-						+ (double) f1, par5 + 2D * f);
+			
 		}
-	}
 	}
 
 }

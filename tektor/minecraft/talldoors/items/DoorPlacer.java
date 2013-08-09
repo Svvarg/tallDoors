@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DoorPlacer extends Item{
@@ -69,19 +70,25 @@ public class DoorPlacer extends Item{
 
 		if (!par3World.isRemote) {
 			--par1ItemStack.stackSize;
+			int var24 = MathHelper
+					.floor_double((double) (par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			
 			if (par1ItemStack.getItemDamage() == 0) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
-				door.setOrientation(false);
+				door.setOrientation(false,var24);
+				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
 			}
 			else if (par1ItemStack.getItemDamage() == 1) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
-				door.setOrientation(true);
+				door.setOrientation(true,var24);
+				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
+				
 			}
 
 		}
