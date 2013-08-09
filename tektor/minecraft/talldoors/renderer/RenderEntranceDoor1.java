@@ -10,35 +10,60 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderEntranceDoor1 extends Render{
-	
-	public RenderEntranceDoor1()
-	{
+public class RenderEntranceDoor1 extends Render {
+
+	public RenderEntranceDoor1() {
 		modelEntranceDoor1 = new ModelEntranceDoor1();
 	}
 
 	protected ModelEntranceDoor1 modelEntranceDoor1;
+
 	@Override
-	public void doRender(Entity entity, double x, double y, double z,
-			float f, float f1) {
+	public void doRender(Entity entity, double x, double y, double z, float f,
+			float f1) {
 		// Push a blank matrix onto the stack
-	    GL11.glPushMatrix();
-	 
-	    // Move the object into the correct position on the block (because the OBJ's origin is the center of the object)
-	    GL11.glTranslatef((float)x + 0.5f, (float)y + 1.5f, (float)z -0.3f + 0.8f* ((EntranceDoor1) entity).pos);
-	 
-	    GL11.glRotatef(180f + ((EntranceDoor1) entity).pos * 90f, 0f, 1f, 0f);
-	    // Scale our object to about half-size in all directions (the OBJ file is a little large)
-	    GL11.glScalef(1f, 1f, 1f);
+		GL11.glPushMatrix();
+
+		// Move the object into the correct position on the block (because the
+		// OBJ's origin is the center of the object)
+		if (((EntranceDoor1) entity).left) {
+			
+			if(((EntranceDoor1) entity).pos == 1)
+			{
+				x = x + 0.7f;
+			}
+			else
+			{
+				z = z + 0.7f;
+			}
+		}
+		GL11.glTranslatef((float) x + 0.5f, (float) y + 1.5f, (float) z - 0.3f
+				+ 0.8f * ((EntranceDoor1) entity).pos);
+
+		GL11.glRotatef(180f, 0f, 0f, 1f);
+		int i = 0;
+		if (((EntranceDoor1) entity).left) {
+			GL11.glRotatef(180f, 0f, 1f, 0f);
+			i = -1;
+
+		} else
+			i = 1;
+		GL11.glRotatef(180f + i * ((EntranceDoor1) entity).pos * 90f, 0f, 1f,
+				0f);
+		// Scale our object to about half-size in all directions (the OBJ file
+		// is a little large)
+		GL11.glScalef(1f, 1f, 1f);
 		this.func_110776_a(this.func_110775_a(entity));
-		this.modelEntranceDoor1.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		this.modelEntranceDoor1.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
+				0.0625F);
 		GL11.glPopMatrix();
-		
+
 	}
 
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
-		return new ResourceLocation("talldoors:textures/entities/modelEntrance.png");
+		return new ResourceLocation(
+				"talldoors:textures/entities/modelEntrance.png");
 	}
 
 }

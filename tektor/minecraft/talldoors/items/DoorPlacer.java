@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class DoorPlacer extends Item{
 
-	private Icon[] icon = new Icon[1];
+	private Icon[] icon = new Icon[2];
 
 	public DoorPlacer(int par1) {
 		super(par1);
@@ -34,14 +34,17 @@ public class DoorPlacer extends Item{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		icon[0] = par1IconRegister.registerIcon("tallDoors:entranceDoor1");
+		icon[0] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor1");
+		icon[1] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor1");
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		switch (stack.getItemDamage()) {
 		case 0:
-			return "entranceDoor1";
+			return "rightentranceDoor1";
+		case 1:
+			return "leftentranceDoor1";
 		default:
 			return "??";
 		}
@@ -52,7 +55,9 @@ public class DoorPlacer extends Item{
 	public String getItemDisplayName(ItemStack par1ItemStack) {
 		switch (par1ItemStack.getItemDamage()) {
 		case 0:
-			return "Entrance Door";
+			return "Right Entrance Door";
+		case 1:
+			return "Left Entrance Door";
 		default:
 			return "??";
 		}
@@ -66,7 +71,15 @@ public class DoorPlacer extends Item{
 			--par1ItemStack.stackSize;
 			if (par1ItemStack.getItemDamage() == 0) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
-				door.setLocationAndAngles(par4, par5 + 1, par6, 0.0F, 0.0F);
+				door.setOrientation(false);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+			}
+			else if (par1ItemStack.getItemDamage() == 1) {
+				EntranceDoor1 door = new EntranceDoor1(par3World);
+				door.setOrientation(true);
+				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
 			}
@@ -80,5 +93,6 @@ public class DoorPlacer extends Item{
 	public void getSubItems(int par1, CreativeTabs tab, List subItems) {
 
 		subItems.add(new ItemStack(this, 1, 0));
+		subItems.add(new ItemStack(this, 1, 1));
 	}
 }
