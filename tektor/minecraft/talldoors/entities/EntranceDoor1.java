@@ -188,7 +188,106 @@ public class EntranceDoor1 extends Entity {
 		}
 		else if(orientation == 1)
 		{
-			
+			if (!left) {
+				if (pos == 1) {
+					this.boundingBox.setBounds(par1-1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + (double) f * 2D-1D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 0.1D);
+				} else {
+					this.boundingBox.setBounds(par1+1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + 1.1D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f);
+				}
+			} else {
+				if (pos == 1) {
+					this.boundingBox.setBounds(par1 - 1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5+0.8f, par1 + (double) f * 2D - 1D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 0.9D);
+				} else {
+					this.boundingBox.setBounds(par1 + 1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5-1D, par1 + 0.9D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									-1D+ 2D * f);
+				}
+			}
+		}
+		else if(orientation == 2)
+		{
+			if (!left) {
+				if (pos == 0) {
+					this.boundingBox.setBounds(par1-1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5+1D, par1 + (double) f * 2D-1D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 1.1D);
+				} else {
+					this.boundingBox.setBounds(par1+0.9D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5-1D, par1 + 1.0D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f-1D);
+				}
+			} else {
+				if (pos == 0) {
+					this.boundingBox.setBounds(par1, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5+1D, par1 + (double) f * 2D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 1.1D);
+				} else {
+					this.boundingBox.setBounds(par1+0.2f, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5-1D, par1 +0.1D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f-1D);
+				}
+			}
+
+		}
+		else if(orientation == 3)
+		{
+			if (!left) {
+				if (pos == 1) {
+					this.boundingBox.setBounds(par1, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5+0.9D, par1 + (double) f * 2D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 + 1.0D);
+				} else {
+					this.boundingBox.setBounds(par1+0.1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5-1D, par1 + 0.2D, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f-1D);
+				}
+			} else {
+				if (pos == 1) {
+					this.boundingBox.setBounds(par1, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1 + (double) f * 2D, par3
+									- (double) this.yOffset
+									+ (double) this.ySize + (double) f1,
+							par5 +0.2f);
+				} else {
+					this.boundingBox.setBounds(par1+0.1D, par3
+							- (double) this.yOffset + (double) this.ySize,
+							par5, par1, par3 - (double) this.yOffset
+									+ (double) this.ySize + (double) f1, par5
+									+ 2D * f);
+				}
+			}
 		}
 	}
 
