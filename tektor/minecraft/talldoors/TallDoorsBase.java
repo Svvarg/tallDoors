@@ -3,6 +3,8 @@ package tektor.minecraft.talldoors;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
+import tektor.minecraft.talldoors.entities.EntranceDoor2;
+import tektor.minecraft.talldoors.entities.EntranceDoor3;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -63,6 +65,14 @@ public class TallDoorsBase {
         	EntityRegistry.registerGlobalEntityID(EntranceDoor1.class, "EntranceDoor1",
     				EntityRegistry.findGlobalUniqueEntityId());
     		EntityRegistry.registerModEntity(EntranceDoor1.class, "EntranceDoor1", 0,
+    				this.instance, 120, 5, true);
+    		EntityRegistry.registerGlobalEntityID(EntranceDoor2.class, "EntranceDoor2",
+    				EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerModEntity(EntranceDoor2.class, "EntranceDoor2", 1,
+    				this.instance, 120, 5, true);
+    		EntityRegistry.registerGlobalEntityID(EntranceDoor3.class, "EntranceDoor3",
+    				EntityRegistry.findGlobalUniqueEntityId());
+    		EntityRegistry.registerModEntity(EntranceDoor3.class, "EntranceDoor3", 2,
     				this.instance, 120, 5, true);
 			
 		}

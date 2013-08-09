@@ -3,6 +3,8 @@ package tektor.minecraft.talldoors.items;
 import java.util.List;
 
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
+import tektor.minecraft.talldoors.entities.EntranceDoor2;
+import tektor.minecraft.talldoors.entities.EntranceDoor3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -14,9 +16,9 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class DoorPlacer extends Item{
+public class DoorPlacer extends Item {
 
-	private Icon[] icon = new Icon[2];
+	private Icon[] icon = new Icon[6];
 
 	public DoorPlacer(int par1) {
 		super(par1);
@@ -37,6 +39,10 @@ public class DoorPlacer extends Item{
 	public void registerIcons(IconRegister par1IconRegister) {
 		icon[0] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor1");
 		icon[1] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor1");
+		icon[2] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor2");
+		icon[3] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor2");
+		icon[4] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor3");
+		icon[5] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor3");
 	}
 
 	@Override
@@ -46,6 +52,14 @@ public class DoorPlacer extends Item{
 			return "rightentranceDoor1";
 		case 1:
 			return "leftentranceDoor1";
+		case 2:
+			return "rightentranceDoor2";
+		case 3:
+			return "leftentranceDoor2";
+		case 4:
+			return "rightentranceDoor3";
+		case 5:
+			return "leftentranceDoor3";
 		default:
 			return "??";
 		}
@@ -59,6 +73,14 @@ public class DoorPlacer extends Item{
 			return "Right Entrance Door";
 		case 1:
 			return "Left Entrance Door";
+		case 2:
+			return "Right Entrance Door Size 5";
+		case 3:
+			return "Left Entrance Door Size 5";
+		case 4:
+			return "Right Entrance Door Size 6";
+		case 5:
+			return "Left Entrance Door Size 6";
 		default:
 			return "??";
 		}
@@ -72,23 +94,54 @@ public class DoorPlacer extends Item{
 			--par1ItemStack.stackSize;
 			int var24 = MathHelper
 					.floor_double((double) (par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-			
+
 			if (par1ItemStack.getItemDamage() == 0) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
-				door.setOrientation(false,var24);
+				door.setOrientation(false, var24);
 				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
-			}
-			else if (par1ItemStack.getItemDamage() == 1) {
+			} else if (par1ItemStack.getItemDamage() == 1) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
-				door.setOrientation(true,var24);
+				door.setOrientation(true, var24);
 				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
-				
+
+			}
+			else if (par1ItemStack.getItemDamage() == 2) {
+				EntranceDoor2 door = new EntranceDoor2(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 3) {
+				EntranceDoor2 door = new EntranceDoor2(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 4) {
+				EntranceDoor3 door = new EntranceDoor3(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 5) {
+				EntranceDoor3 door = new EntranceDoor3(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
 			}
 
 		}
@@ -101,5 +154,9 @@ public class DoorPlacer extends Item{
 
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 1));
+		subItems.add(new ItemStack(this, 1, 2));
+		subItems.add(new ItemStack(this, 1, 3));
+		subItems.add(new ItemStack(this, 1, 4));
+		subItems.add(new ItemStack(this, 1, 5));
 	}
 }

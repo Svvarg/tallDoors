@@ -1,7 +1,5 @@
 package tektor.minecraft.talldoors.entities;
 
-import tektor.minecraft.chalith.ChalithBase;
-import tektor.minecraft.talldoors.TallDoorsBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,16 +7,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import tektor.minecraft.talldoors.TallDoorsBase;
 
-public class EntranceDoor1 extends Entity {
+public class EntranceDoor3 extends Entity {
 
 	public int pos;
 	public boolean left;
 	public int orientation;
 
-	public EntranceDoor1(World par1World) {
+	public EntranceDoor3(World par1World) {
 		super(par1World);
-		this.setSize(2f, 4f);
+		this.setSize(2f, 6f);
 		this.ignoreFrustumCheck = true;
 		pos = 0;
 		left = false;
@@ -73,7 +72,7 @@ public class EntranceDoor1 extends Entity {
 	}
 
 	public int func_82330_g() {
-		return 64;
+		return 96;
 	}
 
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
