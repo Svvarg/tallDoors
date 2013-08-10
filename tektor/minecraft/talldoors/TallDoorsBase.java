@@ -57,6 +57,7 @@ public class TallDoorsBase {
 
 	private void registerRecipes() {
 		ItemStack door = new ItemStack(Item.doorWood, 1, 0);
+		ItemStack fenceGate = new ItemStack(Block.fenceGate,1);
 		ItemStack wood = new ItemStack(Block.planks, 1);
 
 		// Right 4 high Door
@@ -64,7 +65,7 @@ public class TallDoorsBase {
 				new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y', door });
 		// left 4 high
 		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 1),
-				new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y', door });
+				new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y', door });
 		// right 5 high
 		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 2),
 				new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y',
@@ -81,6 +82,14 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 5),
 				new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
 						new ItemStack(this.doorPlacer, 1, 3) });
+		// right fence gate
+				GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 6),
+						new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
+								fenceGate });
+		// left fence gate
+				GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 7),
+						new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y',
+								fenceGate });
 
 	}
 
