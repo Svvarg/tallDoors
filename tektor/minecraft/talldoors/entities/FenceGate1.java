@@ -9,15 +9,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
 
-public class EntranceDoor2 extends Entity {
+public class FenceGate1 extends Entity {
 
 	public int pos;
 	public boolean left;
 	public int orientation;
 
-	public EntranceDoor2(World par1World) {
+	public FenceGate1(World par1World) {
 		super(par1World);
-		this.setSize(2f, 5f);
+		this.setSize(2f, 1.5f);
 		this.ignoreFrustumCheck = true;
 		pos = 0;
 		left = false;
@@ -68,21 +68,22 @@ public class EntranceDoor2 extends Entity {
 	}
 
 	public int func_82329_d() {
-		return 16;
+		return 32;
 	}
 
 	public int func_82330_g() {
-		return 80;
+		return 24;
 	}
 
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (this.isEntityInvulnerable()) {
 			return false;
 		} else {
-			if (!this.isDead && !this.worldObj.isRemote && par1DamageSource.getEntity() instanceof EntityPlayer) {
+			if (!this.isDead && !this.worldObj.isRemote&& par1DamageSource.getEntity() instanceof EntityPlayer) {
 				this.setDead();
 				this.setBeenAttacked();
 				this.func_110128_b(par1DamageSource.getEntity());
+				
 			}
 
 			return true;
@@ -162,6 +163,7 @@ public class EntranceDoor2 extends Entity {
 		float f = this.width / 2.0F;
 		float f1 = this.height;
 		if (orientation == 0) {
+			par5 = par5 + 0.5f;
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
@@ -196,6 +198,7 @@ public class EntranceDoor2 extends Entity {
 		}
 		else if(orientation == 1)
 		{
+			par1 = par1 - 0.5f;
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1-1D, par3
@@ -230,6 +233,7 @@ public class EntranceDoor2 extends Entity {
 		}
 		else if(orientation == 2)
 		{
+			par5 = par5 - 0.5f;
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1-1D, par3
@@ -265,6 +269,7 @@ public class EntranceDoor2 extends Entity {
 		}
 		else if(orientation == 3)
 		{
+			par1 = par1 + 0.5f;
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1, par3

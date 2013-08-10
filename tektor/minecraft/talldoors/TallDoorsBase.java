@@ -7,6 +7,7 @@ import net.minecraftforge.common.Configuration;
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.EntranceDoor3;
+import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -19,7 +20,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.3")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.4")
 @NetworkMod(clientSideRequired = true)
 public class TallDoorsBase {
 
@@ -106,6 +107,10 @@ public class TallDoorsBase {
 				"EntranceDoor3", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntranceDoor3.class, "EntranceDoor3",
 				2, this.instance, 120, 5, true);
+		EntityRegistry.registerGlobalEntityID(FenceGate1.class,
+				"FenceGate1", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(FenceGate1.class, "FenceGate1",
+				3, this.instance, 120, 5, true);
 
 	}
 

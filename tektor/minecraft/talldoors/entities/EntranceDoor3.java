@@ -79,7 +79,7 @@ public class EntranceDoor3 extends Entity {
 		if (this.isEntityInvulnerable()) {
 			return false;
 		} else {
-			if (!this.isDead && !this.worldObj.isRemote) {
+			if (!this.isDead && !this.worldObj.isRemote && par1DamageSource.getEntity() instanceof EntityPlayer) {
 				this.setDead();
 				this.setBeenAttacked();
 				this.func_110128_b(par1DamageSource.getEntity());
@@ -166,7 +166,7 @@ public class EntranceDoor3 extends Entity {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
 							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D, par3
+							par5-0.4D, par1 + (double) f * 2D, par3
 									- (double) this.yOffset
 									+ (double) this.ySize + (double) f1,
 							par5 + 0.1D);
@@ -181,7 +181,7 @@ public class EntranceDoor3 extends Entity {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1 - 1D, par3
 							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D - 1D, par3
+							par5-0.4D, par1 + (double) f * 2D - 1D, par3
 									- (double) this.yOffset
 									+ (double) this.ySize + (double) f1,
 							par5 + 0.1D);
@@ -205,9 +205,9 @@ public class EntranceDoor3 extends Entity {
 									+ (double) this.ySize + (double) f1,
 							par5 + 0.1D);
 				} else {
-					this.boundingBox.setBounds(par1+1D, par3
+					this.boundingBox.setBounds(par1+0.9D, par3
 							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 1.1D, par3 - (double) this.yOffset
+							par5, par1 + 1.5D, par3 - (double) this.yOffset
 									+ (double) this.ySize + (double) f1, par5
 									+ 2D * f);
 				}
@@ -220,9 +220,9 @@ public class EntranceDoor3 extends Entity {
 									+ (double) this.ySize + (double) f1,
 							par5 + 0.9D);
 				} else {
-					this.boundingBox.setBounds(par1 + 1D, par3
+					this.boundingBox.setBounds(par1 + 0.8D, par3
 							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 0.9D, par3 - (double) this.yOffset
+							par5-1D, par1 + 1.5D, par3 - (double) this.yOffset
 									+ (double) this.ySize + (double) f1, par5
 									-1D+ 2D * f);
 				}
@@ -237,7 +237,7 @@ public class EntranceDoor3 extends Entity {
 							par5+1D, par1 + (double) f * 2D-1D, par3
 									- (double) this.yOffset
 									+ (double) this.ySize + (double) f1,
-							par5 + 1.1D);
+							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.9D, par3
 							- (double) this.yOffset + (double) this.ySize,
@@ -252,7 +252,7 @@ public class EntranceDoor3 extends Entity {
 							par5+1D, par1 + (double) f * 2D, par3
 									- (double) this.yOffset
 									+ (double) this.ySize + (double) f1,
-							par5 + 1.1D);
+							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.2f, par3
 							- (double) this.yOffset + (double) this.ySize,
@@ -274,7 +274,7 @@ public class EntranceDoor3 extends Entity {
 									+ (double) this.ySize + (double) f1,
 							par5 + 1.0D);
 				} else {
-					this.boundingBox.setBounds(par1+0.1D, par3
+					this.boundingBox.setBounds(par1-0.4D, par3
 							- (double) this.yOffset + (double) this.ySize,
 							par5-1D, par1 + 0.2D, par3 - (double) this.yOffset
 									+ (double) this.ySize + (double) f1, par5
@@ -289,9 +289,9 @@ public class EntranceDoor3 extends Entity {
 									+ (double) this.ySize + (double) f1,
 							par5 +0.2f);
 				} else {
-					this.boundingBox.setBounds(par1+0.1D, par3
+					this.boundingBox.setBounds(par1-0.4D, par3
 							- (double) this.yOffset + (double) this.ySize,
-							par5, par1, par3 - (double) this.yOffset
+							par5, par1+0.2D, par3 - (double) this.yOffset
 									+ (double) this.ySize + (double) f1, par5
 									+ 2D * f);
 				}

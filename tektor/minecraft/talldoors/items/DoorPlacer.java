@@ -5,6 +5,7 @@ import java.util.List;
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.EntranceDoor3;
+import tektor.minecraft.talldoors.entities.FenceGate1;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 
 public class DoorPlacer extends Item {
 
-	private Icon[] icon = new Icon[6];
+	private Icon[] icon = new Icon[8];
 
 	public DoorPlacer(int par1) {
 		super(par1);
@@ -43,6 +44,8 @@ public class DoorPlacer extends Item {
 		icon[3] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor2");
 		icon[4] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor3");
 		icon[5] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor3");
+		icon[6] = par1IconRegister.registerIcon("tallDoors:fenceGate1");
+		icon[7] = par1IconRegister.registerIcon("tallDoors:fenceGate1");
 	}
 
 	@Override
@@ -60,6 +63,10 @@ public class DoorPlacer extends Item {
 			return "rightentranceDoor3";
 		case 5:
 			return "leftentranceDoor3";
+		case 6:
+			return "rightFenceGate1";
+		case 7:
+			return "leftFenceGate1";
 		default:
 			return "??";
 		}
@@ -81,6 +88,10 @@ public class DoorPlacer extends Item {
 			return "Right Entrance Door Size 6";
 		case 5:
 			return "Left Entrance Door Size 6";
+		case 6:
+			return "Right Fence Door";
+		case 7:
+			return "Left Fence Door";
 		default:
 			return "??";
 		}
@@ -98,14 +109,12 @@ public class DoorPlacer extends Item {
 			if (par1ItemStack.getItemDamage() == 0) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
 				door.setOrientation(false, var24);
-				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
 			} else if (par1ItemStack.getItemDamage() == 1) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
 				door.setOrientation(true, var24);
-				System.out.println(var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
@@ -143,6 +152,22 @@ public class DoorPlacer extends Item {
 				par3World.spawnEntityInWorld(door);
 
 			}
+			else if (par1ItemStack.getItemDamage() == 6) {
+				FenceGate1 door = new FenceGate1(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 7) {
+				FenceGate1 door = new FenceGate1(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
 
 		}
 		return true;
@@ -158,5 +183,7 @@ public class DoorPlacer extends Item {
 		subItems.add(new ItemStack(this, 1, 3));
 		subItems.add(new ItemStack(this, 1, 4));
 		subItems.add(new ItemStack(this, 1, 5));
+		subItems.add(new ItemStack(this, 1, 6));
+		subItems.add(new ItemStack(this, 1, 7));
 	}
 }
