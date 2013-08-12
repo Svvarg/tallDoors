@@ -24,7 +24,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.4")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.5")
 @NetworkMod(clientSideRequired = true)
 public class TallDoorsBase {
 
@@ -37,9 +37,10 @@ public class TallDoorsBase {
 	public static TallDoorsCommonProxy proxy;
 
 	public static int itemID1;
-	//public static int itemID2;
+	// public static int itemID2;
 	public static Item doorPlacer;
-	//public static Item connector;
+
+	// public static Item connector;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -48,8 +49,8 @@ public class TallDoorsBase {
 		config.load();
 		itemID1 = config.get(Configuration.CATEGORY_ITEM, "itemID1", 7100)
 				.getInt();
-		//itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
-		//		.getInt();
+		// itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
+		// .getInt();
 		config.save();
 	}
 
@@ -65,8 +66,24 @@ public class TallDoorsBase {
 
 	private void registerRecipes() {
 		ItemStack door = new ItemStack(Item.doorWood, 1, 0);
-		ItemStack fenceGate = new ItemStack(Block.fenceGate,1);
+		ItemStack fenceGate = new ItemStack(Block.fenceGate, 1);
 		ItemStack wood = new ItemStack(Block.planks, 1);
+		ItemStack cobble = new ItemStack(Block.cobblestone, 1);
+		ItemStack iron = new ItemStack(Item.ingotIron, 1);
+
+		// Dark Metal Right 4 high Door
+		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 10),
+				new Object[] { "XXX", "XXY", "XXX", 'X', cobble, 'Y', door });
+		// Dark Metal left 4 high
+		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 11),
+				new Object[] { "XXX", "XXX", "YXX", 'X', cobble, 'Y', door });
+
+		// Metal Right 4 high Door
+		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 8),
+				new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y', door });
+		// Metal left 4 high
+		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 9),
+				new Object[] { "XXX", "XXX", "YXX", 'X', iron, 'Y', door });
 
 		// Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 0),
@@ -91,11 +108,13 @@ public class TallDoorsBase {
 				new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
 						new ItemStack(this.doorPlacer, 1, 3) });
 		// right fence gate
-				GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 6),
+		GameRegistry
+				.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 6),
 						new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
 								fenceGate });
 		// left fence gate
-				GameRegistry.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 7),
+		GameRegistry
+				.addShapedRecipe(new ItemStack(this.doorPlacer, 1, 7),
 						new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y',
 								fenceGate });
 
@@ -103,8 +122,7 @@ public class TallDoorsBase {
 
 	private void initializeIDs() {
 		doorPlacer = new DoorPlacer(itemID1);
-		//connector = new Connector(itemID2);
-		
+		// connector = new Connector(itemID2);
 
 	}
 
@@ -126,22 +144,25 @@ public class TallDoorsBase {
 				"EntranceDoor3", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntranceDoor3.class, "EntranceDoor3",
 				2, this.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(FenceGate1.class,
-				"FenceGate1", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(FenceGate1.class, "FenceGate1",
-				3, this.instance, 120, 5, true);
+		EntityRegistry.registerGlobalEntityID(FenceGate1.class, "FenceGate1",
+				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(FenceGate1.class, "FenceGate1", 3,
+				this.instance, 120, 5, true);
 		EntityRegistry.registerGlobalEntityID(EntityConnector.class,
 				"EntityConnector", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntityConnector.class, "EntityConnector",
-				4, this.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(MetalEntranceDoor1.class,
-				"MetalEntranceDoor1", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(MetalEntranceDoor1.class, "MetalEntranceDoor1",
-				5, this.instance, 120, 5, true);
+		EntityRegistry.registerModEntity(EntityConnector.class,
+				"EntityConnector", 4, this.instance, 120, 5, true);
+		EntityRegistry
+				.registerGlobalEntityID(MetalEntranceDoor1.class,
+						"MetalEntranceDoor1",
+						EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(MetalEntranceDoor1.class,
+				"MetalEntranceDoor1", 5, this.instance, 120, 5, true);
 		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor1.class,
-				"DarkMetalEntranceDoor1", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(DarkMetalEntranceDoor1.class, "DarkMetalEntranceDoor1",
-				6, this.instance, 120, 5, true);
+				"DarkMetalEntranceDoor1",
+				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DarkMetalEntranceDoor1.class,
+				"DarkMetalEntranceDoor1", 6, this.instance, 120, 5, true);
 
 	}
 
