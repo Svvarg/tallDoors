@@ -2,10 +2,12 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.entities.DarkMetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.FenceGate1;
+import tektor.minecraft.talldoors.entities.MetalEntranceDoor1;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,7 +21,7 @@ import net.minecraft.world.World;
 
 public class DoorPlacer extends Item {
 
-	private Icon[] icon = new Icon[8];
+	private Icon[] icon = new Icon[12];
 
 	public DoorPlacer(int par1) {
 		super(par1);
@@ -46,6 +48,10 @@ public class DoorPlacer extends Item {
 		icon[5] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor3");
 		icon[6] = par1IconRegister.registerIcon("tallDoors:fenceGate1");
 		icon[7] = par1IconRegister.registerIcon("tallDoors:fenceGate1");
+		icon[8] = par1IconRegister.registerIcon("tallDoors:rightMetalEntranceDoor1");
+		icon[9] = par1IconRegister.registerIcon("tallDoors:leftMetalEntranceDoor1");
+		icon[10] = par1IconRegister.registerIcon("tallDoors:rightDarkMetalEntranceDoor1");
+		icon[11] = par1IconRegister.registerIcon("tallDoors:leftDarkMetalEntranceDoor1");
 	}
 
 	@Override
@@ -67,6 +73,14 @@ public class DoorPlacer extends Item {
 			return "rightFenceGate1";
 		case 7:
 			return "leftFenceGate1";
+		case 8:
+			return "rightMetalEntranceDoor1";
+		case 9: 
+			return "leftMetalEntranceDoor1";
+		case 10:
+			return "rightDarkMetalEntranceDoor1";
+		case 11: 
+			return "leftDarkMetalEntranceDoor1";
 		default:
 			return "??";
 		}
@@ -92,6 +106,14 @@ public class DoorPlacer extends Item {
 			return "Right Fence Door";
 		case 7:
 			return "Left Fence Door";
+		case 8:
+			return "Right Metal Entrance Door";
+		case 9: 
+			return "Left Metal Entrance Door";
+		case 10:
+			return "Right Dark Metal Entrance Door";
+		case 11: 
+			return "Left Dark Metal Entrance Door";	
 		default:
 			return "??";
 		}
@@ -168,6 +190,40 @@ public class DoorPlacer extends Item {
 				par3World.spawnEntityInWorld(door);
 
 			}
+			
+			else if (par1ItemStack.getItemDamage() == 8) {
+				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 9) {
+				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			
+			else if (par1ItemStack.getItemDamage() == 10) {
+				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 11) {
+				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
 
 		}
 		return true;
@@ -185,5 +241,9 @@ public class DoorPlacer extends Item {
 		subItems.add(new ItemStack(this, 1, 5));
 		subItems.add(new ItemStack(this, 1, 6));
 		subItems.add(new ItemStack(this, 1, 7));
+		subItems.add(new ItemStack(this, 1, 8));
+		subItems.add(new ItemStack(this, 1, 9));
+		subItems.add(new ItemStack(this, 1, 10));
+		subItems.add(new ItemStack(this, 1, 11));
 	}
 }

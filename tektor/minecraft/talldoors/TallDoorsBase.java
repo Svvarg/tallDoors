@@ -4,11 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import tektor.minecraft.talldoors.entities.DarkMetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntityConnector;
 import tektor.minecraft.talldoors.entities.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.FenceGate1;
+import tektor.minecraft.talldoors.entities.MetalEntranceDoor1;
 import tektor.minecraft.talldoors.items.Connector;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import cpw.mods.fml.common.Mod;
@@ -34,9 +36,10 @@ public class TallDoorsBase {
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
 
-	public static int itemID1,itemID2;
+	public static int itemID1;
+	//public static int itemID2;
 	public static Item doorPlacer;
-	public static Item connector;
+	//public static Item connector;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -45,8 +48,8 @@ public class TallDoorsBase {
 		config.load();
 		itemID1 = config.get(Configuration.CATEGORY_ITEM, "itemID1", 7100)
 				.getInt();
-		itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
-				.getInt();
+		//itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
+		//		.getInt();
 		config.save();
 	}
 
@@ -100,7 +103,7 @@ public class TallDoorsBase {
 
 	private void initializeIDs() {
 		doorPlacer = new DoorPlacer(itemID1);
-		connector = new Connector(itemID2);
+		//connector = new Connector(itemID2);
 		
 
 	}
@@ -131,6 +134,14 @@ public class TallDoorsBase {
 				"EntityConnector", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityConnector.class, "EntityConnector",
 				4, this.instance, 120, 5, true);
+		EntityRegistry.registerGlobalEntityID(MetalEntranceDoor1.class,
+				"MetalEntranceDoor1", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(MetalEntranceDoor1.class, "MetalEntranceDoor1",
+				5, this.instance, 120, 5, true);
+		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor1.class,
+				"DarkMetalEntranceDoor1", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DarkMetalEntranceDoor1.class, "DarkMetalEntranceDoor1",
+				6, this.instance, 120, 5, true);
 
 	}
 
