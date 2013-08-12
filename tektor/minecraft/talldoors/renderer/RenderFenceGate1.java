@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.models.ModelEntranceDoor1;
 import tektor.minecraft.talldoors.models.ModelFenceGate1;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +24,7 @@ public class RenderFenceGate1 extends Render {
 		// Push a blank matrix onto the stack
 		GL11.glPushMatrix();
 
+		
 		int orientation = ((FenceGate1) entity).orientation;
 		int pos = ((FenceGate1) entity).pos;
 		boolean left = ((FenceGate1) entity).left;
@@ -183,7 +185,7 @@ public class RenderFenceGate1 extends Render {
 		this.modelFenceGate1.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
 				0.0625F);
 		GL11.glPopMatrix();
-
+		
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class ModelFenceGate1 extends ModelBase
     textureWidth = 64;
     textureHeight = 32;
     
+    	
       Shape1 = new ModelRenderer(this, 0, 0);
       Shape1.addBox(0F, 0F, 0F, 1, 16, 1);
       Shape1.setRotationPoint(-8F, 8F, -8F);
