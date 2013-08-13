@@ -10,8 +10,10 @@ import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import tektor.minecraft.talldoors.items.DoorPlacer;
+import tektor.minecraft.talldoors.items.DrawbridgeBasePlacer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -35,9 +37,10 @@ public class TallDoorsBase {
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
 
-	public static int itemID1;
+	public static int itemID1, itemID3;
 	// public static int itemID2;
 	public static Item doorPlacer;
+	public static Item drawbridge;
 
 	// public static Item connector;
 
@@ -50,6 +53,8 @@ public class TallDoorsBase {
 				.getInt();
 		// itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
 		// .getInt();
+		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
+				.getInt();
 		config.save();
 	}
 
@@ -71,62 +76,64 @@ public class TallDoorsBase {
 		ItemStack iron = new ItemStack(Item.ingotIron, 1);
 
 		// Dark Metal Right 4 high Door
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 10),
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				10),
 				new Object[] { "XXX", "XXY", "XXX", 'X', cobble, 'Y', door });
 		// Dark Metal left 4 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 11),
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				11),
 				new Object[] { "XXX", "XXX", "YXX", 'X', cobble, 'Y', door });
 
 		// Metal Right 4 high Door
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 8),
-				new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y', door });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				8), new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y', door });
 		// Metal left 4 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 9),
-				new Object[] { "XXX", "XXX", "YXX", 'X', iron, 'Y', door });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				9), new Object[] { "XXX", "XXX", "YXX", 'X', iron, 'Y', door });
 
 		// Right 4 high Door
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 0),
-				new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y', door });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				0), new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y', door });
 		// left 4 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 1),
-				new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y', door });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				1), new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y', door });
 		// right 5 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 2),
-				new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y',
-						new ItemStack(TallDoorsBase.doorPlacer, 1, 0) });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				2), new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 0) });
 		// left 5 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 3),
-				new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
-						new ItemStack(TallDoorsBase.doorPlacer, 1, 1) });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				3), new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 1) });
 		// right 6 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 4),
-				new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y',
-						new ItemStack(TallDoorsBase.doorPlacer, 1, 2) });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				4), new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 2) });
 		// left 6 high
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 5),
-				new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
-						new ItemStack(TallDoorsBase.doorPlacer, 1, 3) });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				5), new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 3) });
 		// right fence gate
-		GameRegistry
-				.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 6),
-						new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
-								fenceGate });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				6), new Object[] { "XXX", "YXX", "XXX", 'X', wood, 'Y',
+				fenceGate });
 		// left fence gate
-		GameRegistry
-				.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1, 7),
-						new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y',
-								fenceGate });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				7), new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y',
+				fenceGate });
 
 	}
 
 	private void initializeIDs() {
 		doorPlacer = new DoorPlacer(itemID1);
 		// connector = new Connector(itemID2);
+		drawbridge = new DrawbridgeBasePlacer(itemID3);
 
 	}
 
 	private void registerItems() {
-		// TODO Auto-generated method stub
+		GameRegistry.registerItem(doorPlacer, "doorplacer");
+		GameRegistry.registerItem(drawbridge, "drawbridge");
 
 	}
 
@@ -161,7 +168,12 @@ public class TallDoorsBase {
 				"DarkMetalEntranceDoor1",
 				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DarkMetalEntranceDoor1.class,
-				"DarkMetalEntranceDoor1", 6, TallDoorsBase.instance, 120, 5, true);
+				"DarkMetalEntranceDoor1", 6, TallDoorsBase.instance, 120, 5,
+				true);
+		EntityRegistry.registerGlobalEntityID(DrawbridgeBase.class,
+				"DrawbridgeBase", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DrawbridgeBase.class,
+				"DrawbridgeBase", 7, TallDoorsBase.instance, 120, 5, true);
 
 	}
 

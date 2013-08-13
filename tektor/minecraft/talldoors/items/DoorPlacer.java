@@ -309,10 +309,14 @@ public class DoorPlacer extends Item {
 				{
 					switch(orientation)
 					{
-					case 0: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
-					case 1: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
-					case 2: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
-					case 3: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
+					case 0: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
+					else break;
+					case 1: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
+					else break;
+					case 2: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
+					else break;
+					case 3: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
+					else break;
 					
 					}
 					
@@ -327,10 +331,14 @@ public class DoorPlacer extends Item {
 				{
 					switch(orientation)
 					{
-					case 0: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
-					case 1: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
-					case 2: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
-					case 3: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
+					case 0: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
+					else break;
+					case 1: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
+					else break;
+					case 2: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
+					else break;
+					case 3: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
+					else break;
 					
 					}
 					
