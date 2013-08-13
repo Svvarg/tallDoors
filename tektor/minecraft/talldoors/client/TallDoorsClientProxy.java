@@ -1,14 +1,15 @@
 package tektor.minecraft.talldoors.client;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import tektor.minecraft.talldoors.renderer.RenderDrawbridgeBase;
 import tektor.minecraft.talldoors.renderer.RenderEntranceDoor2;
 import tektor.minecraft.talldoors.renderer.RenderEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.RenderFenceGate1;
-import tektor.minecraft.talldoors.renderer.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.doors2x4.RenderDarkMetalEntranceDoor1;
 import tektor.minecraft.talldoors.renderer.doors2x4.RenderEntranceDoorSize4;
 import tektor.minecraft.talldoors.renderer.doors2x4.RenderMetalEntranceDoor1;
+import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
+import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeMachine;
+import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -17,6 +18,7 @@ import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
+import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 
 public class TallDoorsClientProxy extends TallDoorsCommonProxy{
@@ -31,6 +33,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(MetalEntranceDoor1.class, new RenderMetalEntranceDoor1());
 		RenderingRegistry.registerEntityRenderingHandler(DarkMetalEntranceDoor1.class, new RenderDarkMetalEntranceDoor1());
 		RenderingRegistry.registerEntityRenderingHandler(DrawbridgeBase.class, new RenderDrawbridgeBase());
+		RenderingRegistry.registerEntityRenderingHandler(DrawbridgeMachine.class, new RenderDrawbridgeMachine());
 		
 		
 	}

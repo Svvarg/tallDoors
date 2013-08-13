@@ -11,9 +11,11 @@ import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
+import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
+import tektor.minecraft.talldoors.items.Connector;
 import tektor.minecraft.talldoors.items.DoorPlacer;
-import tektor.minecraft.talldoors.items.DrawbridgeBasePlacer;
+import tektor.minecraft.talldoors.items.DrawbridgePlacer;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,7 +27,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.5")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.6")
 @NetworkMod(clientSideRequired = true)
 public class TallDoorsBase {
 
@@ -38,11 +40,11 @@ public class TallDoorsBase {
 	public static TallDoorsCommonProxy proxy;
 
 	public static int itemID1, itemID3;
-	// public static int itemID2;
+	public static int itemID2;
+	
 	public static Item doorPlacer;
 	public static Item drawbridge;
-
-	// public static Item connector;
+	public static Item connector;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -51,8 +53,8 @@ public class TallDoorsBase {
 		config.load();
 		itemID1 = config.get(Configuration.CATEGORY_ITEM, "itemID1", 7100)
 				.getInt();
-		// itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
-		// .getInt();
+		 itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
+		 .getInt();
 		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
 				.getInt();
 		config.save();
@@ -126,13 +128,14 @@ public class TallDoorsBase {
 
 	private void initializeIDs() {
 		doorPlacer = new DoorPlacer(itemID1);
-		// connector = new Connector(itemID2);
-		drawbridge = new DrawbridgeBasePlacer(itemID3);
+		connector = new Connector(itemID2);
+		drawbridge = new DrawbridgePlacer(itemID3);
 
 	}
 
 	private void registerItems() {
 		GameRegistry.registerItem(doorPlacer, "doorplacer");
+		GameRegistry.registerItem(connector, "connector");
 		GameRegistry.registerItem(drawbridge, "drawbridge");
 
 	}
@@ -174,6 +177,10 @@ public class TallDoorsBase {
 				"DrawbridgeBase", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DrawbridgeBase.class,
 				"DrawbridgeBase", 7, TallDoorsBase.instance, 120, 5, true);
+		EntityRegistry.registerGlobalEntityID(DrawbridgeMachine.class,
+				"DrawbridgeMachine", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DrawbridgeMachine.class,
+				"DrawbridgeMachine", 8, TallDoorsBase.instance, 120, 5, true);
 
 	}
 

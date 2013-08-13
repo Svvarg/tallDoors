@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.renderer;
+package tektor.minecraft.talldoors.renderer.drawbridge;
 
 import org.lwjgl.opengl.GL11;
 

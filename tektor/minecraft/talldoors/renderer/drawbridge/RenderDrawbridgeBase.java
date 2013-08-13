@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.renderer;
+package tektor.minecraft.talldoors.renderer.drawbridge;
 
 import org.lwjgl.opengl.GL11;
 
@@ -40,7 +40,7 @@ public class RenderDrawbridgeBase extends Render {
 			GL11.glRotated(90, 0, 1, 0);
 			break;
 		}
-		drawBase(tess, base.height2, base.width2, base.lon, base.rotation, true);
+		drawBase(tess, base.height2, base.width2, base.lon, base.rotation, base);
 
 		tess.draw();
 		GL11.glPopMatrix();
@@ -48,14 +48,14 @@ public class RenderDrawbridgeBase extends Render {
 	}
 
 	public void drawBase(Tessellator tess, double height, double width,
-			double lon, double angle, boolean c) {
+			double lon, double angle, DrawbridgeBase base) {
 
 		double a, b, e, d;
 		a = Math.cos(Math.toRadians(90 - angle)) * height;
 		b = Math.sin(Math.toRadians(90 - angle)) * height;
 		d = Math.cos(Math.toRadians(angle)) * lon;
 		e = Math.sin(Math.toRadians(angle)) * lon;
-		if (c) {
+	
 			// front
 			tess.addVertexWithUV(0, 0, 0, 1.0, 0.0);
 			tess.addVertexWithUV(0, 0 + b, 0 - a, 1, 0.01);
@@ -86,10 +86,28 @@ public class RenderDrawbridgeBase extends Render {
 			tess.addVertexWithUV(width, e, d, 0, 0);
 			tess.addVertexWithUV(width, e + b, d - a, 0, 0.01);
 			tess.addVertexWithUV(0, e + b, d - a, 1, 0.01);
+			
+			if(base.machine != null)
+			{
+				double f,g;
+				f = Math.cos(Math.toRadians(angle)) * (lon-0.125);
+				g = Math.sin(Math.toRadians(angle)) * (lon-0.125);
+				double c1,c2,c3;
+				c1 = base.posX - base.machine.posX;
+				c2 = base.posY - base.machine.posY;
+				c3 = base.posZ - base.machine.posZ;
+				System.out.println(base.machine.orientation + " " + (base.orientation - 1 % 4));
+				if(base.machine.orientation == (base.orientation - 1 % 4))
+				{
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1+0.4375, c2+0.4375, c3+0.4375, 0.01, 0);
+					tess.addVertexWithUV(c1+0.5625, c2+0.5625, c3+0.5625, 0, 0);
+					
+					tess.addVertexWithUV(0, b+g, f-a, 0.01, 1);
+				}
+			}
+			
 
-		} else {
-
-		}
 	}
 
 	@Override
