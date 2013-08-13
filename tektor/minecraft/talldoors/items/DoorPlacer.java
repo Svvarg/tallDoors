@@ -125,17 +125,26 @@ public class DoorPlacer extends Item {
 			int par6, int par7, float par8, float par9, float par10) {
 
 		if (!par3World.isRemote) {
-			--par1ItemStack.stackSize;
+			
 			int var24 = MathHelper
 					.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
+			
 			if (par1ItemStack.getItemDamage() == 0) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor1 door = new EntranceDoor1(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
 
 				par3World.spawnEntityInWorld(door);
 			} else if (par1ItemStack.getItemDamage() == 1) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor1 door = new EntranceDoor1(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -144,6 +153,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 2) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor2 door = new EntranceDoor2(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -152,6 +165,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 3) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor2 door = new EntranceDoor2(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -160,6 +177,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 4) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor3 door = new EntranceDoor3(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -168,6 +189,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 5) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				EntranceDoor3 door = new EntranceDoor3(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -176,6 +201,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 6) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 1, false, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				FenceGate1 door = new FenceGate1(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -184,6 +213,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 7) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 1, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				FenceGate1 door = new FenceGate1(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -193,6 +226,10 @@ public class DoorPlacer extends Item {
 			}
 			
 			else if (par1ItemStack.getItemDamage() == 8) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -201,6 +238,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 9) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -210,6 +251,10 @@ public class DoorPlacer extends Item {
 			}
 			
 			else if (par1ItemStack.getItemDamage() == 10) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
 				door.setOrientation(false, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -218,6 +263,10 @@ public class DoorPlacer extends Item {
 
 			}
 			else if (par1ItemStack.getItemDamage() == 11) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
 				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
 				door.setOrientation(true, var24);
 				door.setPosition(par4, par5 + 1, par6);
@@ -225,7 +274,7 @@ public class DoorPlacer extends Item {
 				par3World.spawnEntityInWorld(door);
 
 			}
-
+			--par1ItemStack.stackSize;
 		}
 		return true;
 	}
@@ -260,11 +309,11 @@ public class DoorPlacer extends Item {
 				{
 					switch(orientation)
 					{
-					case 0: if(!world.isAirBlock(posX, posY, posZ)) return false;
-					case 1: if(!world.isAirBlock(posX, posY, posZ)) return false;
-					case 2: if(!world.isAirBlock(posX, posY, posZ)) return false;
-					case 3: if(!world.isAirBlock(posX, posY, posZ)) return false;
-						default: return false;
+					case 0: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
+					case 1: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
+					case 2: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
+					case 3: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
+					
 					}
 					
 				}
@@ -272,7 +321,21 @@ public class DoorPlacer extends Item {
 		}
 		else
 		{
-			
+			for(int i = 0; i < width; i++)
+			{
+				for(int k = 0; k<height; k++)
+				{
+					switch(orientation)
+					{
+					case 0: if(!world.isAirBlock(posX-i, posY+k, posZ)) return false;
+					case 1: if(!world.isAirBlock(posX, posY+k, posZ-i)) return false;
+					case 2: if(!world.isAirBlock(posX+i, posY+k, posZ)) return false;
+					case 3: if(!world.isAirBlock(posX, posY+k, posZ+i)) return false;
+					
+					}
+					
+				}
+			}
 		}
 		return true;
 	}
