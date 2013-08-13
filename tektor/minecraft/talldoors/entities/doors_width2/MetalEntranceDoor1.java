@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.entities;
+package tektor.minecraft.talldoors.entities.doors_width2;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
 import net.minecraft.item.ItemStack;

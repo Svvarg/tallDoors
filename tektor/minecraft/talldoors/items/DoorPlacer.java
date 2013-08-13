@@ -2,12 +2,12 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
-import tektor.minecraft.talldoors.entities.DarkMetalEntranceDoor1;
-import tektor.minecraft.talldoors.entities.EntranceDoor1;
-import tektor.minecraft.talldoors.entities.EntranceDoor2;
-import tektor.minecraft.talldoors.entities.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.FenceGate1;
-import tektor.minecraft.talldoors.entities.MetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
+import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
+import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -119,6 +119,7 @@ public class DoorPlacer extends Item {
 		}
 	}
 
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
 			int par6, int par7, float par8, float par9, float par10) {
@@ -126,7 +127,7 @@ public class DoorPlacer extends Item {
 		if (!par3World.isRemote) {
 			--par1ItemStack.stackSize;
 			int var24 = MathHelper
-					.floor_double((double) (par2EntityPlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+					.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 			if (par1ItemStack.getItemDamage() == 0) {
 				EntranceDoor1 door = new EntranceDoor1(par3World);
@@ -245,5 +246,34 @@ public class DoorPlacer extends Item {
 		subItems.add(new ItemStack(this, 1, 9));
 		subItems.add(new ItemStack(this, 1, 10));
 		subItems.add(new ItemStack(this, 1, 11));
+	}
+	
+	private boolean checkFree(World world, int posX, int posY, int posZ, int width, int height, boolean left, int orientation)
+	{
+		boolean free =false;
+		
+		if(left)
+		{
+			for(int i = 0; i < width; i++)
+			{
+				for(int k = 0; k<height; k++)
+				{
+					switch(orientation)
+					{
+					case 0: if(!world.isAirBlock(posX, posY, posZ)) return false;
+					case 1: if(!world.isAirBlock(posX, posY, posZ)) return false;
+					case 2: if(!world.isAirBlock(posX, posY, posZ)) return false;
+					case 3: if(!world.isAirBlock(posX, posY, posZ)) return false;
+						default: return false;
+					}
+					
+				}
+			}
+		}
+		else
+		{
+			
+		}
+		return true;
 	}
 }

@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import tektor.minecraft.talldoors.models.ModelEntranceDoor3;
-import tektor.minecraft.talldoors.entities.EntranceDoor3;
+import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 
 public class RenderEntranceDoor3 extends Render {
 

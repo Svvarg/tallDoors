@@ -1,6 +1,5 @@
-package tektor.minecraft.talldoors.entities;
+package tektor.minecraft.talldoors.entities.doors_width2;
 
-import tektor.minecraft.talldoors.TallDoorsBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -41,6 +40,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 		return this.boundingBox;
 	}
 
+	@Override
 	public boolean canBeCollidedWith() {
 		return true;
 	}
@@ -74,6 +74,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 		return 64;
 	}
 
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (this.isEntityInvulnerable()) {
 			return false;
@@ -101,6 +102,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 		this.entityDropItem(getDrop(), 0.0F);
 	}
 	
+	@Override
 	public boolean func_130002_c(EntityPlayer player) {
 
 		
@@ -145,6 +147,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 
 	}
 
+	@Override
 	public void setPosition(double par1, double par3, double par5) {
 		this.posX = par1;
 		this.posY = par3;
@@ -160,31 +163,31 @@ public abstract class AbstractDoorWidth2 extends Entity {
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-0.4D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5-0.4D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 0.1D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 0.1D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			} else {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1 - 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-0.4D, par1 + (double) f * 2D - 1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5-0.4D, par1 + f * 2D - 1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1 + 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 0.9D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 0.9D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			}
@@ -194,31 +197,31 @@ public abstract class AbstractDoorWidth2 extends Entity {
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1-1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D-1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5, par1 + f * 2D-1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1+0.9D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 1.5D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 1.5D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			} else {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1 - 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+0.8f, par1 + (double) f * 2D - 1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+0.8f, par1 + f * 2D - 1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.9D);
 				} else {
 					this.boundingBox.setBounds(par1 + 0.8D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 1.5D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 1.5D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									-1D+ 2D * f);
 				}
 			}
@@ -228,31 +231,31 @@ public abstract class AbstractDoorWidth2 extends Entity {
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1-1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+1D, par1 + (double) f * 2D-1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+1D, par1 + f * 2D-1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.9D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 1.0D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 1.0D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			} else {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+1D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+1D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.2f, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 +0.1D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 +0.1D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			}
@@ -263,31 +266,31 @@ public abstract class AbstractDoorWidth2 extends Entity {
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+0.9D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+0.9D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.0D);
 				} else {
 					this.boundingBox.setBounds(par1-0.4D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 0.2D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 0.2D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			} else {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 +0.2f);
 				} else {
 					this.boundingBox.setBounds(par1-0.4D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1+0.2D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1+0.2D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			}
@@ -301,6 +304,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
     {
     }
 	
+	@Override
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
     {
         this.setPosition(par1, par3, par5);

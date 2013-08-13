@@ -42,6 +42,7 @@ public class FenceGate1 extends Entity {
 		return null;
 	}
 
+	@Override
 	public boolean canBeCollidedWith() {
 		return true;
 	}
@@ -75,6 +76,7 @@ public class FenceGate1 extends Entity {
 		return 24;
 	}
 
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (this.isEntityInvulnerable()) {
 			return false;
@@ -107,6 +109,7 @@ public class FenceGate1 extends Entity {
 					0.0F);
 	}
 
+	@Override
 	public boolean func_130002_c(EntityPlayer player) {
 
 		
@@ -151,6 +154,7 @@ public class FenceGate1 extends Entity {
 
 	}
 
+	@Override
 	public void setPosition(double par1, double par3, double par5) {
 		this.posX = par1;
 		this.posY = par3;
@@ -167,31 +171,31 @@ public class FenceGate1 extends Entity {
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-0.4D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5-0.4D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 0.1D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 0.1D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			} else {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1 - 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-0.4D, par1 + (double) f * 2D - 1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5-0.4D, par1 + f * 2D - 1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1 + 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 0.9D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 0.9D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			}
@@ -202,31 +206,31 @@ public class FenceGate1 extends Entity {
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1-1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D-1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5, par1 + f * 2D-1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.1D);
 				} else {
 					this.boundingBox.setBounds(par1+0.9D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + 1.5D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1 + 1.5D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			} else {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1 - 1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+0.8f, par1 + (double) f * 2D - 1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+0.8f, par1 + f * 2D - 1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 0.9D);
 				} else {
 					this.boundingBox.setBounds(par1 + 0.8D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 1.5D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 1.5D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									-1D+ 2D * f);
 				}
 			}
@@ -237,31 +241,31 @@ public class FenceGate1 extends Entity {
 			if (!left) {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1-1D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+1D, par1 + (double) f * 2D-1D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+1D, par1 + f * 2D-1D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.9D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 1.0D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 1.0D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			} else {
 				if (pos == 0) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+1D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+1D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.5D);
 				} else {
 					this.boundingBox.setBounds(par1+0.2f, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 +0.1D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 +0.1D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			}
@@ -273,31 +277,31 @@ public class FenceGate1 extends Entity {
 			if (!left) {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5+0.9D, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5+0.9D, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 + 1.0D);
 				} else {
 					this.boundingBox.setBounds(par1-0.4D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5-1D, par1 + 0.2D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5-1D, par1 + 0.2D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f-1D);
 				}
 			} else {
 				if (pos == 1) {
 					this.boundingBox.setBounds(par1, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1 + (double) f * 2D, par3
-									- (double) this.yOffset
-									+ (double) this.ySize + (double) f1,
+							- this.yOffset + this.ySize,
+							par5, par1 + f * 2D, par3
+									- this.yOffset
+									+ this.ySize + f1,
 							par5 +0.2f);
 				} else {
 					this.boundingBox.setBounds(par1-0.4D, par3
-							- (double) this.yOffset + (double) this.ySize,
-							par5, par1+0.2D, par3 - (double) this.yOffset
-									+ (double) this.ySize + (double) f1, par5
+							- this.yOffset + this.ySize,
+							par5, par1+0.2D, par3 - this.yOffset
+									+ this.ySize + f1, par5
 									+ 2D * f);
 				}
 			}

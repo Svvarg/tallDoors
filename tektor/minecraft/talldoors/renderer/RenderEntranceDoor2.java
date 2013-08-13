@@ -6,8 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import tektor.minecraft.talldoors.entities.EntranceDoor2;
-import tektor.minecraft.talldoors.models.ModelEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.models.ModelEntranceDoor2;
 
 public class RenderEntranceDoor2 extends Render {

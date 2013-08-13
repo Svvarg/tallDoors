@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.entities;
+package tektor.minecraft.talldoors.entities.drawbridge;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

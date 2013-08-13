@@ -1,18 +1,14 @@
-package tektor.minecraft.talldoors.entities;
+package tektor.minecraft.talldoors.entities.drawbridge;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class DrawbridgeMachine extends Entity{
+public class EntityConnector extends Entity{
 
-	public DrawbridgeMachine(World par1World) {
+	public EntityConnector(World par1World) {
 		super(par1World);
-		
+		this.ignoreFrustumCheck = true;
 	}
 
 	@Override
@@ -30,6 +26,11 @@ public class DrawbridgeMachine extends Entity{
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEnd(int par4, int par5, int par6) {
+	
 		
 	}
 

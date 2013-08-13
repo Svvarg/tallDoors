@@ -1,15 +1,16 @@
-package tektor.minecraft.talldoors.renderer;
+package tektor.minecraft.talldoors.renderer.doors2x4;
 
 import org.lwjgl.opengl.GL11;
 
-import tektor.minecraft.talldoors.entities.MetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.AbstractDoorWidth2;
 import tektor.minecraft.talldoors.models.ModelEntranceDoor1;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderMetalEntranceDoor1 extends Render{
-	public RenderMetalEntranceDoor1() {
+public class RenderEntranceDoorSize4 extends Render {
+
+	public RenderEntranceDoorSize4() {
 		modelEntranceDoor1 = new ModelEntranceDoor1();
 	}
 
@@ -21,9 +22,9 @@ public class RenderMetalEntranceDoor1 extends Render{
 		// Push a blank matrix onto the stack
 		GL11.glPushMatrix();
 
-		int orientation = ((MetalEntranceDoor1) entity).orientation;
-		int pos = ((MetalEntranceDoor1) entity).pos;
-		boolean left = ((MetalEntranceDoor1) entity).left;
+		int orientation = ((AbstractDoorWidth2) entity).orientation;
+		int pos = ((AbstractDoorWidth2) entity).pos;
+		boolean left = ((AbstractDoorWidth2) entity).left;
 		//System.out.println(orientation);
 		if ( orientation == 0) {
 			if (left) {
@@ -152,7 +153,7 @@ public class RenderMetalEntranceDoor1 extends Render{
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
 		return new ResourceLocation(
-				"talldoors:textures/entities/modelEntrance2.png");
+				"talldoors:textures/entities/modelEntrance.png");
 	}
 
 }

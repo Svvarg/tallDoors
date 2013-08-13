@@ -3,9 +3,7 @@ package tektor.minecraft.talldoors.renderer;
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.entities.FenceGate1;
-import tektor.minecraft.talldoors.models.ModelEntranceDoor1;
 import tektor.minecraft.talldoors.models.ModelFenceGate1;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
