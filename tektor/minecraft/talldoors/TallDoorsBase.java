@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import tektor.minecraft.talldoors.entities.FenceGate1;
@@ -27,7 +28,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.1.6")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.2.0a")
 @NetworkMod(clientSideRequired = true)
 public class TallDoorsBase {
 
@@ -41,7 +42,7 @@ public class TallDoorsBase {
 
 	public static int itemID1, itemID3;
 	public static int itemID2;
-	
+
 	public static Item doorPlacer;
 	public static Item drawbridge;
 	public static Item connector;
@@ -53,8 +54,8 @@ public class TallDoorsBase {
 		config.load();
 		itemID1 = config.get(Configuration.CATEGORY_ITEM, "itemID1", 7100)
 				.getInt();
-		 itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
-		 .getInt();
+		itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
+				.getInt();
 		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
 				.getInt();
 		config.save();
@@ -74,8 +75,25 @@ public class TallDoorsBase {
 		ItemStack door = new ItemStack(Item.doorWood, 1, 0);
 		ItemStack fenceGate = new ItemStack(Block.fenceGate, 1);
 		ItemStack wood = new ItemStack(Block.planks, 1);
+		ItemStack wood2 = new ItemStack(Block.wood, 1);
 		ItemStack cobble = new ItemStack(Block.cobblestone, 1);
 		ItemStack iron = new ItemStack(Item.ingotIron, 1);
+		ItemStack string = new ItemStack(Item.silk, 1);
+
+		// Connector
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,
+				0), new Object[] { " X ", "XYX", " X ", 'X', string, 'Y',
+				cobble });
+
+		// draw base
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
+				0), new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
+				wood2 });
+		
+		// draw machine
+				GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
+						1), new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y',
+						cobble });
 
 		// Dark Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,

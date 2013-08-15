@@ -7,8 +7,10 @@ import tektor.minecraft.talldoors.items.Connector;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class DrawbridgeBase extends Entity {
@@ -20,7 +22,9 @@ public class DrawbridgeBase extends Entity {
 	public int orientation;
 	boolean up, active;
 	public DrawbridgeMachine machine;
-	private double mX, mY, mZ;
+	double mX;
+	double mY;
+	double mZ;
 
 	public DrawbridgeBase(World par1World) {
 		super(par1World);
@@ -164,6 +168,8 @@ public class DrawbridgeBase extends Entity {
 	public void setBoundsAt(double par1, double par3, double par5) {
 		float f = this.width / 2.0F;
 		float f1 = this.height;
+		if(this.active == false && this.up == false)
+		{
 		if (orientation == 0) {
 			this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
 					par5, par1 + width2, par3 - this.yOffset + this.ySize + f1,
@@ -180,6 +186,28 @@ public class DrawbridgeBase extends Entity {
 			this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
 					par5- width2 +1, par1 + lon, par3 - this.yOffset + this.ySize + f1,
 					par5 + 1 );
+		}
+		}
+		else
+		{
+			f1 = 7f;
+			if (orientation == 0) {
+				this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
+						par5, par1 + width2, par3 - this.yOffset + this.ySize + f1,
+						par5 + 0.125f);
+			} else if (orientation == 1) {
+				this.boundingBox.setBounds(par1-0.125f +1 , par3 - this.yOffset + this.ySize,
+						par5, par1 +1, par3 - this.yOffset + this.ySize + f1,
+						par5+width2);
+			} else if (orientation == 2) {
+				this.boundingBox.setBounds(par1- width2 + 1, par3 - this.yOffset + this.ySize,
+						par5- 0.125f + 1, par1 +1 , par3 - this.yOffset + this.ySize + f1,
+						par5 +1);
+			} else if (orientation == 3) {
+				this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
+						par5- width2 +1, par1 + 0.125f, par3 - this.yOffset + this.ySize + f1,
+						par5 + 1 );
+			}
 		}
 	}
 
@@ -213,6 +241,46 @@ public class DrawbridgeBase extends Entity {
 			}
 		}
 		return true;
+	}
+
+	public void setMachinePos(double posX, double posY, double posZ) {
+		
+		mX = posX;
+		this.dataWatcher.updateObject(25, (int)mX);
+		mY = posY;
+		this.dataWatcher.updateObject(26, (int)mY);
+		mZ = posZ;
+		this.dataWatcher.updateObject(27, (int)mZ);
+		
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+		if (this.isEntityInvulnerable()) {
+			return false;
+		} else {
+			if (!this.isDead && !this.worldObj.isRemote
+					&& par1DamageSource.getEntity() instanceof EntityPlayer) {
+				this.setDead();
+				this.setBeenAttacked();
+				this.func_110128_b(par1DamageSource.getEntity());
+
+			}
+
+			return true;
+		}
+	}
+
+	public void func_110128_b(Entity par1Entity) {
+		if (par1Entity instanceof EntityPlayer) {
+			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
+
+			if (entityplayer.capabilities.isCreativeMode) {
+				return;
+			}
+		}
+		this.entityDropItem(new ItemStack(TallDoorsBase.drawbridge,1,0), 0.0F);
+		this.entityDropItem(new ItemStack(TallDoorsBase.connector,1,0), 0.0F);
 	}
 
 }

@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,6 +21,7 @@ public class Connector extends Item {
 	private int x;
 	private int y;
 	private int z;
+	public DrawbridgeBase base;
 
 	public Connector(int par1) {
 		super(par1);
@@ -61,88 +63,6 @@ public class Connector extends Item {
 		default:
 			return "??";
 		}
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
-			int par6, int par7, float par8, float par9, float par10) {
-
-		if (!par3World.isRemote) {
-			if (this.uses == 1) {
-
-				if (!par3World.getBlockMaterial(par4, par5, par6).isSolid()) {
-					return false;
-				} else {
-					if (par7 == 0) {
-						--par5;
-					}
-
-					if (par7 == 1) {
-						++par5;
-					}
-
-					if (par7 == 2) {
-						--par6;
-					}
-
-					if (par7 == 3) {
-						++par6;
-					}
-
-					if (par7 == 4) {
-						--par4;
-					}
-
-					if (par7 == 5) {
-						++par4;
-					}
-
-					--par1ItemStack.stackSize;
-
-					EntityConnector con = new EntityConnector(par3World);
-					con.setPosition(x, y, z);
-					con.setEnd(par4,par5,par6);
-					par3World.spawnEntityInWorld(con);
-				}
-			} else {
-
-				if (!par3World.getBlockMaterial(par4, par5, par6).isSolid()) {
-					return false;
-				} else {
-					if (par7 == 0) {
-						--par5;
-					}
-
-					if (par7 == 1) {
-						++par5;
-					}
-
-					if (par7 == 2) {
-						--par6;
-					}
-
-					if (par7 == 3) {
-						++par6;
-					}
-
-					if (par7 == 4) {
-						--par4;
-					}
-
-					if (par7 == 5) {
-						++par4;
-					}
-					this.uses = 1;
-					this.x = par4;
-					this.y = par5;
-					this.z = par6;
-
-				}
-			}
-
-		}
-		return true;
 	}
 
 	@SideOnly(Side.CLIENT)

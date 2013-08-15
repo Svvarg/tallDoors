@@ -42,7 +42,6 @@ public class RenderDrawbridgeBase extends Render {
 		}
 		drawBase(tess, base.height2, base.width2, base.lon, base.rotation, base);
 
-		tess.draw();
 		GL11.glPopMatrix();
 
 	}
@@ -55,58 +54,548 @@ public class RenderDrawbridgeBase extends Render {
 		b = Math.sin(Math.toRadians(90 - angle)) * height;
 		d = Math.cos(Math.toRadians(angle)) * lon;
 		e = Math.sin(Math.toRadians(angle)) * lon;
-	
-			// front
-			tess.addVertexWithUV(0, 0, 0, 1.0, 0.0);
-			tess.addVertexWithUV(0, 0 + b, 0 - a, 1, 0.01);
-			tess.addVertexWithUV(width, 0 + b, 0 - a, 0, 0.01);
-			tess.addVertexWithUV(width, 0, 0, 0, 0);
-			// top
-			tess.addVertexWithUV(0, b, 0 - a, 1, 0);
-			tess.addVertexWithUV(0, b + e, d - a, 1, 1);
-			tess.addVertexWithUV(width, b + e, d - a, 0, 1);
-			tess.addVertexWithUV(width, b, -a, 0, 0);
-			// right
-			tess.addVertexWithUV(0, 0, 0, 0, 0);
-			tess.addVertexWithUV(0, e, d, 1, 0);
-			tess.addVertexWithUV(0, b + e, d - a, 1, 0.01);
-			tess.addVertexWithUV(0, b, -a, 0, 0.01);
-			// bottom
-			tess.addVertexWithUV(0, 0, 0, 1, 0);
-			tess.addVertexWithUV(width, 0, 0, 0, 0);
-			tess.addVertexWithUV(width, e, d, 0, 1);
-			tess.addVertexWithUV(0, e, d, 1, 1);
-			// left
-			tess.addVertexWithUV(width, 0, 0, 0, 0);
-			tess.addVertexWithUV(width, b, -a, 0, 0.01);
-			tess.addVertexWithUV(width, b + e, d - a, 1, 0.01);
-			tess.addVertexWithUV(width, e, d, 1, 0);
-			// back
-			tess.addVertexWithUV(0, e, d, 1.0, 0.0);
-			tess.addVertexWithUV(width, e, d, 0, 0);
-			tess.addVertexWithUV(width, e + b, d - a, 0, 0.01);
-			tess.addVertexWithUV(0, e + b, d - a, 1, 0.01);
-			
-			if(base.machine != null)
-			{
-				double f,g;
-				f = Math.cos(Math.toRadians(angle)) * (lon-0.125);
-				g = Math.sin(Math.toRadians(angle)) * (lon-0.125);
-				double c1,c2,c3;
-				c1 = base.posX - base.machine.posX;
-				c2 = base.posY - base.machine.posY;
-				c3 = base.posZ - base.machine.posZ;
-				System.out.println(base.machine.orientation + " " + (base.orientation - 1 % 4));
-				if(base.machine.orientation == (base.orientation - 1 % 4))
-				{
+
+		// front
+		tess.addVertexWithUV(0, 0, 0, 1.0, 0.0);
+		tess.addVertexWithUV(0, 0 + b, 0 - a, 1, 0.01);
+		tess.addVertexWithUV(width, 0 + b, 0 - a, 0, 0.01);
+		tess.addVertexWithUV(width, 0, 0, 0, 0);
+		// top
+		tess.addVertexWithUV(0, b, 0 - a, 1, 0);
+		tess.addVertexWithUV(0, b + e, d - a, 1, 1);
+		tess.addVertexWithUV(width, b + e, d - a, 0, 1);
+		tess.addVertexWithUV(width, b, -a, 0, 0);
+		// right
+		tess.addVertexWithUV(0, 0, 0, 0, 0);
+		tess.addVertexWithUV(0, e, d, 1, 0);
+		tess.addVertexWithUV(0, b + e, d - a, 1, 0.01);
+		tess.addVertexWithUV(0, b, -a, 0, 0.01);
+		// bottom
+		tess.addVertexWithUV(0, 0, 0, 1, 0);
+		tess.addVertexWithUV(width, 0, 0, 0, 0);
+		tess.addVertexWithUV(width, e, d, 0, 1);
+		tess.addVertexWithUV(0, e, d, 1, 1);
+		// left
+		tess.addVertexWithUV(width, 0, 0, 0, 0);
+		tess.addVertexWithUV(width, b, -a, 0, 0.01);
+		tess.addVertexWithUV(width, b + e, d - a, 1, 0.01);
+		tess.addVertexWithUV(width, e, d, 1, 0);
+		// back
+		tess.addVertexWithUV(0, e, d, 1.0, 0.0);
+		tess.addVertexWithUV(width, e, d, 0, 0);
+		tess.addVertexWithUV(width, e + b, d - a, 0, 0.01);
+		tess.addVertexWithUV(0, e + b, d - a, 1, 0.01);
+
+		tess.draw();
+
+		if (base.machine != null) {
+			tess.startDrawingQuads();
+			Minecraft.getMinecraft().renderEngine
+					.func_110577_a(new ResourceLocation(
+							"talldoors:textures/entities/drawbridgeBase2.png"));
+			double f, g, j, k;
+			f = Math.cos(Math.toRadians(angle)) * (lon - 0.125);
+			g = Math.sin(Math.toRadians(angle)) * (lon - 0.125);
+
+			double c1, c2, c3;
+			c1 = base.machine.posX - base.posX;
+			c2 = base.machine.posY - base.posY;
+			c3 = base.machine.posZ - base.posZ;
+			if (base.machine.orientation == ((base.orientation - 1) % 4)|| (base.machine.orientation == 3 && base.orientation == 0)) {
+				if (base.orientation == 3) {
+					// right
 					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
-					tess.addVertexWithUV(c1+0.4375, c2+0.4375, c3+0.4375, 0.01, 0);
-					tess.addVertexWithUV(c1+0.5625, c2+0.5625, c3+0.5625, 0, 0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, c1 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, c1 + 0.50, 1,
+							0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.65,
+							c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, c1 + 0.50, 1,
+							1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.525,
+							c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.65,
+							c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, c1 + 0.50, 1,
+							1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.525,
+							c1 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							c1 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.525,
+							c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 0.875 + c3 + 0.4375,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							c1 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375 + width - 1, c2 + 0.525,
+							c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, c1 + 0.50, 0, 1);
+
+				} else if (base.orientation == 2) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65, -c3 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525, -c3 + 0.50,
+							1, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.65,
+							-c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65, -c3 + 0.50, 1,
+							1);
+
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.525,
+							-c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.65,
+							-c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525, -c3 + 0.50,
+							1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.525,
+							-c3 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.65,
+							-c3 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.525,
+							-c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 0.875 + c1 + 3.4375 - 3,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width + 2 + c1 + 0.4375 - 3,
+							c2 + 0.65, -c3 + 0.50, 1, 1);
+
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375 + width - 1, c2 + 0.525,
+							-c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c3 + 0.50, 0, 1);
+				} else if (base.orientation == 1) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, -c1 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, -c1 + 0.50,
+							1, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.65,
+							-c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, -c1 + 0.50, 1,
+							1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.525,
+							-c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.65,
+							-c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, -c1 + 0.50,
+							1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 0.125, c2 + 0.525,
+							-c1 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							-c1 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.525,
+							-c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 0.875 + c3 + 0.4375,
+							c2 + 0.65, -c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							-c1 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.65, -c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375 + width - 1, c2 + 0.525,
+							-c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c1 + 0.50, 0, 1);
+
+				} else if (base.orientation == 0) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65, c3 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525, c3 + 0.50, 1,
+							0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.65,
+							c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65, c3 + 0.50, 1,
+							1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.525,
+							c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.65,
+							c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525, c3 + 0.50, 1,
+							1);
+					tess.addVertexWithUV(c1 + 0.4375 + 0.125, c2 + 0.525,
+							c3 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.65,
+							c3 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.525,
+							c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 0.875 + c1 + 0.4375,
+							c2 + 0.65, c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.65,
+							c3 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.65, c3 + 0.50, 1, 0);
 					
-					tess.addVertexWithUV(0, b+g, f-a, 0.01, 1);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375 + width - 1, c2 + 0.525,
+							c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, c3 + 0.50, 0, 1);
+				}
+			} else if (base.machine.orientation == ((base.orientation + 1) % 4)) {
+				if (base.orientation == 3) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							c1 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.525,
+							c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 0.875 + c3 + 0.4375,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 1 + c3 + 0.4375, c2 + 0.65,
+							c1 + 0.50, 1, 1);
+
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 1, c2 + 0.525,
+							c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + width - 0.875,
+							c2 + 0.525, c1 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c3 + 2.4375 + width, c2 + 0.65,
+							c1 + 0.50, 0, 0);
+					tess.addVertexWithUV(c3 + 2.4375 + width, c2 + 0.525,
+							c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c3 + 2.4375 + 0.125 + width,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(c3 + 2.4375 + width, c2 + 0.65,
+							c1 + 0.50, 1, 1);
+
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 2.4375 + 0.125 + width,
+							c2 + 0.525, c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 2.4375 + 0.125 + width,
+							c2 + 0.65, c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+					tess.addVertexWithUV(c3 + 2.4375 + width, c2 + 0.525,
+							c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 2.4375 + 0.125 + width,
+							c2 + 0.525, c1 + 0.50, 0, 1);
+				} else if (base.orientation == 2) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.65,
+							-c3 + 0.50, 0, 0);
+					tess.addVertexWithUV(width - 1 + c1 + 0.4375, c2 + 0.525,
+							-c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width - 1.875 + c1 + 1.4375,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 2 + c1 + 1.4375, c2 + 0.65,
+							-c3 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375 + width - 1, c2 + 0.525,
+							-c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width - 0.875,
+							c2 + 0.525, -c3 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width + 2, c2 + 0.65,
+							-c3 + 0.50, 0, 0);
+					tess.addVertexWithUV(c1 + 0.4375 + width + 2, c2 + 0.525,
+							-c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c1 + width + 2.4375 + 0.125,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(c1 + width + 2.4375, c2 + 0.65,
+							-c3 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + width + 2.4375 + 0.125,
+							c2 + 0.525, -c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + width + 2.4375 + 0.125,
+							c2 + 0.65, -c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375 + width + 2, c2 + 0.525,
+							-c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + width + 2 + 0.125,
+							c2 + 0.525, -c3 + 0.50, 0, 1);
+
+				} else if (base.orientation == 1) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1, c2 + 0.65,
+							-c1 + 0.50, 0, 0);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1, c2 + 0.525,
+							-c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1 + 0.125,
+							c2 + 0.65, -c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1, c2 + 0.65,
+							-c1 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1 + 0.125,
+							c2 + 0.525, -c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1 + 0.125,
+							c2 + 0.65, -c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1, c2 + 0.525,
+							-c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 - width + 1 + 0.125,
+							c2 + 0.525, -c1 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, -c1 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, -c1 + 0.50,
+							1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(1 - 0.875 + c3 + 0.4375, c2 + 0.65,
+							-c1 + 0.50, 1, 0);
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.65, -c1 + 0.50, 1,
+							1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 1 - 0.875, c2 + 0.525,
+							-c1 + 0.50, 1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 1 - 0.875, c2 + 0.65,
+							-c1 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c3 + 0.4375, c2 + 0.525, -c1 + 0.50,
+							1, 1);
+					tess.addVertexWithUV(c3 + 0.4375 + 1 - 0.875, c2 + 0.525,
+							-c1 + 0.50, 0, 1);
+
+				} else if (base.orientation == 0) {
+					// right
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375-width+1, c2 + 0.65, c3 + 0.50, 0,
+							0);
+					tess.addVertexWithUV(c1 + 0.4375-width+1, c2 + 0.525, c3 + 0.50, 1,
+							0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(0, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(c1 + 0.4375-width+1 + 0.125, c2 + 0.65,
+							c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(c1 + 0.4375-width+1, c2 + 0.65, c3 + 0.50, 1,
+							1);
+					// left
+					tess.addVertexWithUV(0.125, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375-width+1 + 0.125, c2 + 0.525,
+							c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375-width+1 + 0.125, c2 + 0.65,
+							c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(0.125, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(0, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375-width+1, c2 + 0.525, c3 + 0.50, 1,
+							1);
+					tess.addVertexWithUV(c1 + 0.4375-width+1 + 0.125, c2 + 0.525,
+							c3 + 0.50, 0, 1);
+
+					// right
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65,
+							c3 + 0.50, 0, 0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525,
+							c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 1);
+					// top
+					tess.addVertexWithUV(width - 0.125, b + e, d - a, 0, 1);
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(1 - 0.875 + c1 + 0.4375,
+							c2 + 0.65, c3 + 0.50, 1, 0);
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.65,
+							c3 + 0.50, 1, 1);
+					// left
+					tess.addVertexWithUV(width, b + e, d - a, 0, 0);
+					tess.addVertexWithUV(width, b + g, f - a, 0, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 1 - 0.875,
+							c2 + 0.525, c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 1 - 0.875,
+							c2 + 0.65, c3 + 0.50, 1, 0);
+					// bottom
+					tess.addVertexWithUV(width, b + g, f - a, 0, 0);
+					tess.addVertexWithUV(width - 0.125, b + g, f - a, 1, 0);
+
+					tess.addVertexWithUV(c1 + 0.4375, c2 + 0.525,
+							c3 + 0.50, 1, 1);
+					tess.addVertexWithUV(c1 + 0.4375 + 1 - 0.875,
+							c2 + 0.525, c3 + 0.50, 0, 1);
+
 				}
 			}
-			
+			tess.draw();
+		}
 
 	}
 

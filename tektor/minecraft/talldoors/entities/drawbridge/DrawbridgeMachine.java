@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class DrawbridgeMachine extends Entity {
@@ -147,12 +148,48 @@ public class DrawbridgeMachine extends Entity {
 			ItemStack i = player.inventory.getCurrentItem();
 			if (i != null && i.itemID == TallDoorsBase.connector.itemID
 					&& ((Connector) player.inventory.getCurrentItem().getItem()).base != null) {
-				this.base = ((Connector) player.inventory.getCurrentItem()
-						.getItem()).base;
-				base.machine = this;
-				player.inventory.decrStackSize(player.inventory.currentItem, 1);
+				if (((Connector) player.inventory.getCurrentItem().getItem()).base.posY+6 < this.posY) {
+					this.base = ((Connector) player.inventory.getCurrentItem()
+							.getItem()).base;
+					base.machine = this;
+					base.setMachinePos(posX, posY, posZ);
+					player.inventory.decrStackSize(
+							player.inventory.currentItem, 1);
+				}
+				else
+				{
+					player.addChatMessage("A voice tells you: The Machine has to be placed higher.");
+				}
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+		if (this.isEntityInvulnerable()) {
+			return false;
+		} else {
+			if (!this.isDead && !this.worldObj.isRemote
+					&& par1DamageSource.getEntity() instanceof EntityPlayer) {
+				this.setDead();
+				this.setBeenAttacked();
+				this.func_110128_b(par1DamageSource.getEntity());
+
+			}
+
+			return true;
+		}
+	}
+
+	public void func_110128_b(Entity par1Entity) {
+		if (par1Entity instanceof EntityPlayer) {
+			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
+
+			if (entityplayer.capabilities.isCreativeMode) {
+				return;
+			}
+		}
+		this.entityDropItem(new ItemStack(TallDoorsBase.drawbridge,1,1), 0.0F);
 	}
 }
