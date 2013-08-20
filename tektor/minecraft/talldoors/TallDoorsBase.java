@@ -117,10 +117,10 @@ public class TallDoorsBase {
 				cobble });
 
 		// draw base
-		GameRegistry
-				.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1, 0),
-						new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
-								wood2 });
+//		GameRegistry
+//				.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1, 0),
+//						new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
+//								wood2 });
 
 		// draw machine
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
@@ -135,6 +135,22 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				11),
 				new Object[] { "XXX", "XXX", "YXX", 'X', cobble, 'Y', door });
+		// Metal right 5 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				12), new Object[] { "XXX", "XXY", "XXX", 'X', cobble, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 10) });
+		// Metal left 5 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				13), new Object[] { "XXX", "YXX", "XXX", 'X', cobble, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 11) });
+		// Metal right 6 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				14), new Object[] { "XXX", "XXY", "XXX", 'X', cobble, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 12) });
+		// Metal left 6 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				15), new Object[] { "XXX", "YXX", "XXX", 'X', cobble, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 13) });
 
 		// Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
@@ -142,6 +158,22 @@ public class TallDoorsBase {
 		// Metal left 4 high
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				9), new Object[] { "XXX", "XXX", "YXX", 'X', iron, 'Y', door });
+		// Metal right 5 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				16), new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 8) });
+		// Metal left 5 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				17), new Object[] { "XXX", "YXX", "XXX", 'X', iron, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 9) });
+		// Metal right 6 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				18), new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 16) });
+		// Metal left 6 high
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
+				19), new Object[] { "XXX", "YXX", "XXX", 'X', iron, 'Y',
+				new ItemStack(TallDoorsBase.doorPlacer, 1, 17) });
 
 		// Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
