@@ -319,7 +319,11 @@ public class DrawbridgeBase extends Entity {
 				return;
 			}
 		}
-		this.entityDropItem(new ItemStack(TallDoorsBase.drawbridge, 1, 0), 0.0F);
+		ItemStack drop = new ItemStack(TallDoorsBase.drawbridge, 1, 0);
+		drop.stackTagCompound = new NBTTagCompound();
+		drop.stackTagCompound.setInteger("width", (int)this.width2);
+		drop.stackTagCompound.setInteger("depth", (int)this.lon);
+		this.entityDropItem(drop, 0.0F);
 	}
 
 }
