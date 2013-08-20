@@ -19,6 +19,7 @@ public class DrawbridgeMachine extends Entity {
 	public DrawbridgeBase base;
 	public boolean powered;
 	private double mX, mY, mZ;
+	public double width2 = 4;
 
 	public DrawbridgeMachine(World par1World) {
 		super(par1World);
@@ -148,7 +149,7 @@ public class DrawbridgeMachine extends Entity {
 			ItemStack i = player.inventory.getCurrentItem();
 			if (i != null && i.itemID == TallDoorsBase.connector.itemID
 					&& ((Connector) player.inventory.getCurrentItem().getItem()).base != null) {
-				if (((Connector) player.inventory.getCurrentItem().getItem()).base.posY+6 < this.posY) {
+				if ((((Connector) player.inventory.getCurrentItem().getItem()).base.posY+((Connector) player.inventory.getCurrentItem().getItem()).base.lon-1) < this.posY) {
 					this.base = ((Connector) player.inventory.getCurrentItem()
 							.getItem()).base;
 					base.machine = this;

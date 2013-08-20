@@ -5,15 +5,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import tektor.minecraft.chalith.gui.ChalithGuiHandler;
+import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor2;
+import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor2;
+import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor3;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
+import tektor.minecraft.talldoors.gui.TallDoorsGuiHandler;
 import tektor.minecraft.talldoors.items.Connector;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import tektor.minecraft.talldoors.items.DrawbridgePlacer;
@@ -25,11 +32,13 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.2.0a")
-@NetworkMod(clientSideRequired = true)
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.2.2")
+@NetworkMod(channels = { "TallDoors" }, packetHandler = TallDoorsPacketHandler.class, clientSideRequired = true)
 public class TallDoorsBase {
 
 	// instance
@@ -40,12 +49,14 @@ public class TallDoorsBase {
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
 
-	public static int itemID1, itemID3;
-	public static int itemID2;
+	public static int itemID1, itemID2, itemID3;
+	public static int blockID1;
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
 	public static Item connector;
+
+	public static Block drawbridgeWorkbench;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -58,6 +69,9 @@ public class TallDoorsBase {
 				.getInt();
 		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
 				.getInt();
+
+		blockID1 = config.get(Configuration.CATEGORY_BLOCK, "blockID1", 860)
+				.getInt();
 		config.save();
 	}
 
@@ -65,10 +79,22 @@ public class TallDoorsBase {
 	public void load(FMLInitializationEvent event) {
 		initializeIDs();
 		registerItems();
+		registerBlocks();
 		registerEntities();
 		registerRecipes();
-
+		registerTileEntities();
 		proxy.registerRenderers();
+
+		NetworkRegistry.instance().registerGuiHandler(this,
+				new TallDoorsGuiHandler());
+	}
+
+	private void registerBlocks() {
+
+		GameRegistry.registerBlock(drawbridgeWorkbench, "drawbridgeWorkbench");
+		LanguageRegistry.addName(new ItemStack(drawbridgeWorkbench, 1, 0),
+				"Drawbridge Workbench");
+
 	}
 
 	private void registerRecipes() {
@@ -80,20 +106,26 @@ public class TallDoorsBase {
 		ItemStack iron = new ItemStack(Item.ingotIron, 1);
 		ItemStack string = new ItemStack(Item.silk, 1);
 
+		// Drawbridge Workbench
+		GameRegistry.addShapedRecipe(new ItemStack(
+				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
+				"XXX", "XXX", 'X', wood, 'Y', cobble });
+
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,
 				0), new Object[] { " X ", "XYX", " X ", 'X', string, 'Y',
 				cobble });
 
 		// draw base
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
-				0), new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
-				wood2 });
-		
+		GameRegistry
+				.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1, 0),
+						new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
+								wood2 });
+
 		// draw machine
-				GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
-						1), new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y',
-						cobble });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
+				1),
+				new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y', cobble });
 
 		// Dark Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
@@ -149,6 +181,8 @@ public class TallDoorsBase {
 		connector = new Connector(itemID2);
 		drawbridge = new DrawbridgePlacer(itemID3);
 
+		drawbridgeWorkbench = new DrawbridgeWorkbench(blockID1);
+
 	}
 
 	private void registerItems() {
@@ -200,6 +234,39 @@ public class TallDoorsBase {
 		EntityRegistry.registerModEntity(DrawbridgeMachine.class,
 				"DrawbridgeMachine", 8, TallDoorsBase.instance, 120, 5, true);
 
+		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor2.class,
+				"DarkMetalEntranceDoor2",
+				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DarkMetalEntranceDoor2.class,
+				"DarkMetalEntranceDoor2", 9, TallDoorsBase.instance, 120, 5,
+				true);
+
+		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor3.class,
+				"DarkMetalEntranceDoor3",
+				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DarkMetalEntranceDoor3.class,
+				"DarkMetalEntranceDoor3", 10, TallDoorsBase.instance, 120, 5,
+				true);
+		EntityRegistry
+				.registerGlobalEntityID(MetalEntranceDoor2.class,
+						"MetalEntranceDoor2",
+						EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(MetalEntranceDoor2.class,
+				"MetalEntranceDoor2", 11, TallDoorsBase.instance, 120, 5, true);
+		EntityRegistry
+				.registerGlobalEntityID(MetalEntranceDoor3.class,
+						"MetalEntranceDoor3",
+						EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(MetalEntranceDoor3.class,
+				"MetalEntranceDoor3", 12, TallDoorsBase.instance, 120, 5, true);
+
+	}
+
+	private void registerTileEntities() {
+		GameRegistry
+				.registerTileEntity(
+						tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity.class,
+						"Drawbridge_Workbench");
 	}
 
 	@EventHandler

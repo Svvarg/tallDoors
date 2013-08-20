@@ -4,10 +4,14 @@ import java.util.List;
 
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor2;
+import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
+import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor2;
+import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -21,7 +25,7 @@ import net.minecraft.world.World;
 
 public class DoorPlacer extends Item {
 
-	private Icon[] icon = new Icon[12];
+	private Icon[] icon = new Icon[20];
 
 	public DoorPlacer(int par1) {
 		super(par1);
@@ -52,6 +56,14 @@ public class DoorPlacer extends Item {
 		icon[9] = par1IconRegister.registerIcon("tallDoors:leftMetalEntranceDoor1");
 		icon[10] = par1IconRegister.registerIcon("tallDoors:rightDarkMetalEntranceDoor1");
 		icon[11] = par1IconRegister.registerIcon("tallDoors:leftDarkMetalEntranceDoor1");
+		icon[12] = par1IconRegister.registerIcon("tallDoors:rightDarkMetalEntranceDoor2");
+		icon[13] = par1IconRegister.registerIcon("tallDoors:leftDarkMetalEntranceDoor2");
+		icon[14] = par1IconRegister.registerIcon("tallDoors:rightDarkMetalEntranceDoor3");
+		icon[15] = par1IconRegister.registerIcon("tallDoors:leftDarkMetalEntranceDoor3");
+		icon[16] = par1IconRegister.registerIcon("tallDoors:rightMetalEntranceDoor2");
+		icon[17] = par1IconRegister.registerIcon("tallDoors:leftMetalEntranceDoor2");
+		icon[18] = par1IconRegister.registerIcon("tallDoors:rightMetalEntranceDoor3");
+		icon[19] = par1IconRegister.registerIcon("tallDoors:leftMetalEntranceDoor3");
 	}
 
 	@Override
@@ -81,6 +93,22 @@ public class DoorPlacer extends Item {
 			return "rightDarkMetalEntranceDoor1";
 		case 11: 
 			return "leftDarkMetalEntranceDoor1";
+		case 12:
+			return "rightDarkMetalEntranceDoor2";
+		case 13: 
+			return "leftDarkMetalEntranceDoor2";
+		case 14:
+			return "rightDarkMetalEntranceDoor3";
+		case 15: 
+			return "leftDarkMetalEntranceDoor3";
+		case 16:
+			return "rightMetalEntranceDoor2";
+		case 17: 
+			return "leftMetalEntranceDoor2";
+		case 18:
+			return "rightMetalEntranceDoor3";
+		case 19: 
+			return "leftMetalEntranceDoor3";
 		default:
 			return "??";
 		}
@@ -114,6 +142,22 @@ public class DoorPlacer extends Item {
 			return "Right Dark Metal Entrance Door";
 		case 11: 
 			return "Left Dark Metal Entrance Door";	
+		case 12:
+			return "Right Dark Metal Entrance Door Size 5";
+		case 13: 
+			return "Left Dark Metal Entrance Door Size 5";	
+		case 14:
+			return "Right Dark Metal Entrance Door Size 6";
+		case 15: 
+			return "Left Dark Metal Entrance Door Size 6";
+		case 16:
+			return "Right Metal Entrance Door Size 5";
+		case 17: 
+			return "Left Metal Entrance Door Size 5";
+		case 18:
+			return "Right Metal Entrance Door Size 6";
+		case 19: 
+			return "Left Metal Entrance Door Size 6";
 		default:
 			return "??";
 		}
@@ -274,6 +318,102 @@ public class DoorPlacer extends Item {
 				par3World.spawnEntityInWorld(door);
 
 			}
+			else if (par1ItemStack.getItemDamage() == 12) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				DarkMetalEntranceDoor2 door = new DarkMetalEntranceDoor2(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 13) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				DarkMetalEntranceDoor2 door = new DarkMetalEntranceDoor2(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 14) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				DarkMetalEntranceDoor3 door = new DarkMetalEntranceDoor3(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 15) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				DarkMetalEntranceDoor3 door = new DarkMetalEntranceDoor3(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 16) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				MetalEntranceDoor2 door = new MetalEntranceDoor2(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 17) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				MetalEntranceDoor2 door = new MetalEntranceDoor2(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 18) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)){
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				MetalEntranceDoor3 door = new MetalEntranceDoor3(par3World);
+				door.setOrientation(false, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
+			else if (par1ItemStack.getItemDamage() == 19) {
+				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)) {
+					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					return false;
+				}
+				MetalEntranceDoor3 door = new MetalEntranceDoor3(par3World);
+				door.setOrientation(true, var24);
+				door.setPosition(par4, par5 + 1, par6);
+
+				par3World.spawnEntityInWorld(door);
+
+			}
 			--par1ItemStack.stackSize;
 		}
 		return true;
@@ -295,6 +435,14 @@ public class DoorPlacer extends Item {
 		subItems.add(new ItemStack(this, 1, 9));
 		subItems.add(new ItemStack(this, 1, 10));
 		subItems.add(new ItemStack(this, 1, 11));
+		subItems.add(new ItemStack(this, 1, 12));
+		subItems.add(new ItemStack(this, 1, 13));
+		subItems.add(new ItemStack(this, 1, 14));
+		subItems.add(new ItemStack(this, 1, 15));
+		subItems.add(new ItemStack(this, 1, 16));
+		subItems.add(new ItemStack(this, 1, 17));
+		subItems.add(new ItemStack(this, 1, 18));
+		subItems.add(new ItemStack(this, 1, 19));
 	}
 	
 	private boolean checkFree(World world, int posX, int posY, int posZ, int width, int height, boolean left, int orientation)

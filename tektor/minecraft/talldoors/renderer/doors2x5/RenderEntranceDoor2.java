@@ -1,20 +1,21 @@
-package tektor.minecraft.talldoors.renderer;
-
-import org.lwjgl.opengl.GL11;
+package tektor.minecraft.talldoors.renderer.doors2x5;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import tektor.minecraft.talldoors.models.ModelEntranceDoor3;
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 
-public class RenderEntranceDoor3 extends Render {
+import org.lwjgl.opengl.GL11;
 
-	public RenderEntranceDoor3() {
-		modelEntranceDoor3 = new ModelEntranceDoor3();
+import tektor.minecraft.talldoors.entities.doors_width2.AbstractDoorWidth2;
+import tektor.minecraft.talldoors.models.ModelEntranceDoor2;
+
+public class RenderEntranceDoor2 extends Render {
+
+	public RenderEntranceDoor2() {
+		modelEntranceDoor2 = new ModelEntranceDoor2();
 	}
 
-	protected ModelEntranceDoor3 modelEntranceDoor3;
+	protected ModelEntranceDoor2 modelEntranceDoor2;
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float f,
@@ -22,9 +23,9 @@ public class RenderEntranceDoor3 extends Render {
 		// Push a blank matrix onto the stack
 		GL11.glPushMatrix();
 
-		int orientation = ((EntranceDoor3) entity).orientation;
-		int pos = ((EntranceDoor3) entity).pos;
-		boolean left = ((EntranceDoor3) entity).left;
+		int orientation = ((AbstractDoorWidth2) entity).orientation;
+		int pos = ((AbstractDoorWidth2) entity).pos;
+		boolean left = ((AbstractDoorWidth2) entity).left;
 		//System.out.println(orientation);
 		if ( orientation == 0) {
 			if (left) {
@@ -144,7 +145,7 @@ public class RenderEntranceDoor3 extends Render {
 		}
 		GL11.glScalef(1f, 1f, 1f);
 		this.func_110776_a(this.func_110775_a(entity));
-		this.modelEntranceDoor3.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
+		this.modelEntranceDoor2.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
 				0.0625F);
 		GL11.glPopMatrix();
 
