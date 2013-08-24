@@ -25,12 +25,14 @@ public class DrawbridgeWorkbenchTileEntity extends TileEntity implements
 	@Override
 	public void writeToNBT(NBTTagCompound par1) {
 		super.writeToNBT(par1);
+		par1.setInteger("meta", blockMetadata);
 
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1) {
 		super.readFromNBT(par1);
+		blockMetadata = par1.getInteger("meta");
 	}
 
 	@Override

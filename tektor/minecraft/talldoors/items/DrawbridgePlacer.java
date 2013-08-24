@@ -91,6 +91,18 @@ public class DrawbridgePlacer extends Item {
 						.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 				DrawbridgeMachine base = new DrawbridgeMachine(par3World);
 				base.setOrientation(var24);
+				if (par1ItemStack.stackTagCompound != null) {
+					base.setStuff(
+							par1ItemStack.stackTagCompound.getInteger("width"),
+							par1ItemStack.stackTagCompound.getInteger("height"),
+							par1ItemStack.stackTagCompound.getInteger("depth"),
+							0,
+							par1ItemStack.stackTagCompound.getInteger("spool"));
+				}
+				else
+				{
+					base.setStuff(4, 1, 1, 0, 1);
+				}
 				base.setPosition(par4, par5 + 1, par6);
 				par3World.spawnEntityInWorld(base);
 			}
@@ -121,7 +133,15 @@ public class DrawbridgePlacer extends Item {
 					+ par1ItemStack.stackTagCompound.getInteger("width"));
 			par3List.add("Depth:"
 					+ par1ItemStack.stackTagCompound.getInteger("depth"));
+			if(par1ItemStack.getItemDamage() == 1)
+			{
+				par3List.add("Height:"
+						+ par1ItemStack.stackTagCompound.getInteger("height"));
+				par3List.add("Spool:"
+						+ par1ItemStack.stackTagCompound.getInteger("spool"));
+			}
 		}
+		
 	}
 
 }
