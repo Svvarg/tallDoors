@@ -14,6 +14,7 @@ import tektor.minecraft.talldoors.renderer.doors2x6.RenderMetalEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
+import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -41,7 +42,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(MetalEntranceDoor1.class, new RenderMetalEntranceDoor1());
 		RenderingRegistry.registerEntityRenderingHandler(DarkMetalEntranceDoor1.class, new RenderDarkMetalEntranceDoor1());
 		RenderingRegistry.registerEntityRenderingHandler(DrawbridgeBase.class, new RenderDrawbridgeBase());
-		RenderingRegistry.registerEntityRenderingHandler(DrawbridgeMachine.class, new RenderDrawbridgeMachine());
+		RenderingRegistry.registerEntityRenderingHandler(DrawbridgeMachine.class, new TessRenderDrawbridgeMachine());
 		RenderingRegistry.registerEntityRenderingHandler(DarkMetalEntranceDoor2.class, new RenderDarkMetalEntranceDoor2());
 		RenderingRegistry.registerEntityRenderingHandler(DarkMetalEntranceDoor3.class, new RenderDarkMetalEntranceDoor3());
 		RenderingRegistry.registerEntityRenderingHandler(MetalEntranceDoor2.class, new RenderMetalEntranceDoor2());

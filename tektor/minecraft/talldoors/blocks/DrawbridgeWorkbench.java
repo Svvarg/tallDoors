@@ -1,5 +1,6 @@
 package tektor.minecraft.talldoors.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
@@ -21,11 +22,12 @@ import net.minecraft.world.World;
 
 public class DrawbridgeWorkbench extends BlockContainer{
 
-	private Icon[] icon = new Icon[3];
+	private Icon[] icon = new Icon[5];
 	public DrawbridgeWorkbench(int id) {
 		super(id,Material.wood);
 		setHardness(4.2F);
         setResistance(5.0F);
+        
 		setUnlocalizedName("drawbridgeWorkplace");
 		setCreativeTab(CreativeTabs.tabDecorations);
 	}
@@ -36,6 +38,8 @@ public class DrawbridgeWorkbench extends BlockContainer{
 		icon[0] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchTop");
 		icon[1] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchSide");
 		icon[2] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchBottom");
+		icon[3] = par1IconRegister.registerIcon("talldoors:machineWorkbenchTop");
+		icon[4] = par1IconRegister.registerIcon("talldoors:machineWorkbenchSide");
 	}
 	
 	@Override
@@ -54,6 +58,17 @@ public class DrawbridgeWorkbench extends BlockContainer{
 			case 5:return icon[1];
 			}
 		}
+		else if(par2 == 1)
+		{
+			switch(par1){
+			case 0: return icon[2];
+			case 1:return icon[3];
+			case 2:return icon[4];
+			case 3:return icon[4];
+			case 4:return icon[4];
+			case 5:return icon[4];
+			}
+		}
 		return icon[0];
 	}
 
@@ -64,14 +79,20 @@ public class DrawbridgeWorkbench extends BlockContainer{
 	
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z,
-                    EntityPlayer player, int metadata, float what, float these, float are) {
+                    EntityPlayer player, int dir, float what, float these, float are) {
             TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+            int metadata = world.getBlockMetadata(x, y, z);
             if (tileEntity == null || player.isSneaking()) {
                     return false;
             }
-            player.openGui(TallDoorsBase.instance, 0, world, x, y, z);
-    
-            return true;
+            if (metadata == 0) {
+				player.openGui(TallDoorsBase.instance, 0, world, x, y, z);
+			}
+            else if (metadata == 1)
+            {
+            	player.openGui(TallDoorsBase.instance, 1, world, x, y, z);
+            }
+			return true;
     }
 	
 	@Override
@@ -114,5 +135,13 @@ public class DrawbridgeWorkbench extends BlockContainer{
                     }
             }
     }
+    
+    @Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
+
+		subItems.add(new ItemStack(this, 1, 0));
+		subItems.add(new ItemStack(this, 1, 1));
+	}
 
 }

@@ -2,46 +2,36 @@ package tektor.minecraft.talldoors.gui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
+import tektor.minecraft.talldoors.container.MachineWorkbenchContainer;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
-public class DrawbridgeWorkbenchGUI extends GuiContainer {
+public class MachineWorkbenchGUI extends GuiContainer {
 
-	private int x, y;
-	private int planks, iron;
+	private int x, y, z, s;
+	private int planks, iron, wool;
 	private InventoryPlayer inv;
 	private DrawbridgeWorkbenchTileEntity te;
 	private EntityPlayer play;
 
-	public DrawbridgeWorkbenchGUI(EntityPlayer player,
+	public MachineWorkbenchGUI(EntityPlayer player,
 			InventoryPlayer inventoryPlayer, DrawbridgeWorkbenchTileEntity e) {
-		super(new DrawbridgeWorkbenchContainer(inventoryPlayer, e));
-		x = y = 1;
-		planks = 1;
-		iron = 2;
+		super(new MachineWorkbenchContainer(inventoryPlayer, e));
+		y = z = s = 1;
+		x = 2;
+		recalc();
 		inv = inventoryPlayer;
 		te = e;
 		play = player;
@@ -53,13 +43,19 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 		// the parameters for drawString are: string, x, y, color
 		fontRenderer.drawString("Drawbridge Workbench", 8, 6, 9919952);
 		// draws "Inventory" or your regional equivalent
-		fontRenderer.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 96 + 2, 9919952);
+//		fontRenderer.drawString(
+//				StatCollector.translateToLocal("container.inventory"), 8,
+//				ySize - 96 + 2, 9919952);
 		fontRenderer.drawString("" + x, 27, 35, 0000000);
 		fontRenderer.drawString("" + y, 27, 51, 0000000);
-		fontRenderer.drawString("Planks: " + planks, 62, 22, 9919952);
-		fontRenderer.drawString("Iron: " + iron, 62, 32, 9919952);
+		fontRenderer.drawString("" + z, 27, 67, 0000000);
+		fontRenderer.drawString("" + s, 69, 51, 0000000);
+		fontRenderer.drawString("Planks: " + planks, 117, 15, 9919952);
+		fontRenderer.drawString("Iron: " + iron, 117, 25, 9919952);
+		fontRenderer.drawString("Wool: " + wool, 117, 35, 9919952);
+		fontRenderer.drawString("Width,Depth,", 8, 16, 9919952);
+		fontRenderer.drawString("Height:", 8, 24, 9919952);
+		fontRenderer.drawString("Spool:", 57, 38, 9919952);
 	}
 
 	@Override
@@ -67,7 +63,7 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 			int par3) {
 		// draw your Gui here, only thing you need to change is the path
 		this.mc.renderEngine.func_110577_a(new ResourceLocation("talldoors",
-				"textures/gui/drawbridgeWorkbenchGUI.png"));
+				"textures/gui/machineWorkbenchGUI.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
@@ -80,7 +76,7 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 		par1 = par1 - guiLeft;
 		par2 = par2 - guiTop;
 		if (par3 == 0 && par1 > 11 && par1 < 23 && par2 > 33 && par2 < 45
-				&& x > 1) {
+				&& x > 2) {
 			x--;
 		} else if (par3 == 0 && par1 > 43 && par1 < 55 && par2 > 33
 				&& par2 < 45 && x < 64) {
@@ -91,7 +87,20 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 		} else if (par3 == 0 && par1 > 43 && par1 < 55 && par2 > 49
 				&& par2 < 61 && y < 64) {
 			y++;
+		}else if (par3 == 0 && par1 > 11 && par1 < 23 && par2 > 65
+				&& par2 < 76 && z > 1) {
+			z--;
+		}else if (par3 == 0 && par1 > 43 && par1 < 55 && par2 > 65
+				&& par2 < 76 && z < 64) {
+			z++;
+		}else if (par3 == 0 && par1 > 55 && par1 < 66 && par2 > 49
+				&& par2 < 61 && s > 1) {
+			s--;
+		} else if (par3 == 0 && par1 > 83 && par1 < 95 && par2 > 49
+				&& par2 < 61 && s < (x/2)) {
+			s++;
 		}
+		
 		recalc();
 		if (par3 == 0 && par1 > 96 && par1 < 126 && par2 > 57 && par2 < 73) {
 
@@ -100,8 +109,8 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 			try {
 				outputStream.writeInt(this.x);
 				outputStream.writeInt(this.y);
-				outputStream.writeInt(0);
-				outputStream.writeInt(0);
+				outputStream.writeInt(this.z);
+				outputStream.writeInt(this.s);
 
 				outputStream.writeInt(te.xCoord);
 				outputStream.writeInt(te.yCoord);
@@ -124,8 +133,9 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 	}
 
 	private void recalc() {
-		this.planks = x * y;
-		this.iron = x + y;
+		this.planks = 2*(x+y+z);
+		this.wool = 2*(y+z+s);
+		this.iron = x + y + z;
 
 	}
 }

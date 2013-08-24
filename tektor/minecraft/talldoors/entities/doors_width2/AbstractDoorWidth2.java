@@ -1,5 +1,6 @@
 package tektor.minecraft.talldoors.entities.doors_width2;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,12 +14,16 @@ public abstract class AbstractDoorWidth2 extends Entity {
 	public int pos;
 	public boolean left;
 	public int orientation;
+	public boolean locked;
+	public int keyCode;
 
 	public AbstractDoorWidth2(World par1World) {
 		super(par1World);
 		this.ignoreFrustumCheck = true;
 		pos = 0;
 		left = false;
+		locked = false;
+		keyCode = -1;
 	}
 
 	@Override
@@ -76,23 +81,12 @@ public abstract class AbstractDoorWidth2 extends Entity {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (this.isEntityInvulnerable()) {
-			return false;
-		} else {
-			if (!this.isDead && !this.worldObj.isRemote
-					&& par1DamageSource.getEntity() instanceof EntityPlayer) {
-				this.setDead();
-				this.setBeenAttacked();
-				this.func_110128_b(par1DamageSource.getEntity());
-
-			}
-
-			return true;
-		}
+		return false;
 	}
 
 	public void func_110128_b(Entity par1Entity) {
 		if (par1Entity instanceof EntityPlayer) {
+			this.setDead();
 			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
 
 			if (entityplayer.capabilities.isCreativeMode) {
@@ -105,10 +99,14 @@ public abstract class AbstractDoorWidth2 extends Entity {
 	@Override
 	public boolean func_130002_c(EntityPlayer player) {
 
-		
 		if (!this.worldObj.isRemote) {
-			if(!checkFree())
-			{
+			if (player.inventory.getCurrentItem() != null
+					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+				func_110128_b(player);
+				player.inventory.getCurrentItem().damageItem(1, player);
+				return true;
+			}
+			if (!checkFree()) {
 				player.addChatMessage("This door is blockaded");
 				return false;
 			}
@@ -123,7 +121,13 @@ public abstract class AbstractDoorWidth2 extends Entity {
 						1.0f);
 			}
 
+		} else {
+			if (player.inventory.getCurrentItem() != null
+					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+				player.swingItem();
+			}
 		}
+
 		this.dataWatcher.updateObject(30, pos);
 		setBoundsAt(posX, posY, posZ);
 		return true;
@@ -138,24 +142,28 @@ public abstract class AbstractDoorWidth2 extends Entity {
 						switch (orientation) {
 						case 0:
 							if (!worldObj.isAirBlock((int) posX - i, (int) posY
-									+ k, (int) posZ+j))
+									+ k, (int) posZ + j))
 								return false;
-							else break;
+							else
+								break;
 						case 1:
-							if (!worldObj.isAirBlock((int) posX-j,
-									(int) posY + k, (int) posZ - i))
+							if (!worldObj.isAirBlock((int) posX - j, (int) posY
+									+ k, (int) posZ - i))
 								return false;
-							else break;
+							else
+								break;
 						case 2:
 							if (!worldObj.isAirBlock((int) posX + i, (int) posY
-									+ k, (int) posZ-j))
+									+ k, (int) posZ - j))
 								return false;
-							else break;
+							else
+								break;
 						case 3:
-							if (!worldObj.isAirBlock((int) posX+j,
-									(int) posY + k, (int) posZ + i))
+							if (!worldObj.isAirBlock((int) posX + j, (int) posY
+									+ k, (int) posZ + i))
 								return false;
-							else break;
+							else
+								break;
 
 						}
 
@@ -163,30 +171,34 @@ public abstract class AbstractDoorWidth2 extends Entity {
 				}
 			}
 		} else {
-			for (int i = 0; i < (int)width; i++) {
-				for (int j = 0; j < (int)width; j++) {
+			for (int i = 0; i < (int) width; i++) {
+				for (int j = 0; j < (int) width; j++) {
 					for (int k = 0; k < height; k++) {
 						switch (orientation) {
 						case 0:
 							if (!worldObj.isAirBlock((int) posX + i, (int) posY
 									+ k, (int) posZ + j))
 								return false;
-							else break;
+							else
+								break;
 						case 1:
-							if (!worldObj.isAirBlock((int) posX-j,
-									(int) posY + k, (int) posZ + i))
+							if (!worldObj.isAirBlock((int) posX - j, (int) posY
+									+ k, (int) posZ + i))
 								return false;
-							else break;
+							else
+								break;
 						case 2:
 							if (!worldObj.isAirBlock((int) posX - i, (int) posY
 									+ k, (int) posZ - j))
 								return false;
-							else break;
+							else
+								break;
 						case 3:
-							if (!worldObj.isAirBlock((int) posX+j,
-									(int) posY + k, (int) posZ - i))
+							if (!worldObj.isAirBlock((int) posX + j, (int) posY
+									+ k, (int) posZ - i))
 								return false;
-							else break;
+							else
+								break;
 
 						}
 

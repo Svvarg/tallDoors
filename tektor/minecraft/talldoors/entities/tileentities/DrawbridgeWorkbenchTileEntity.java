@@ -1,6 +1,7 @@
 package tektor.minecraft.talldoors.entities.tileentities;
 
 import tektor.minecraft.chalith.container.ChalithWorkplaceContainer;
+import tektor.minecraft.talldoors.container.AbstractWorkbenchContainer;
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 public class DrawbridgeWorkbenchTileEntity extends TileEntity implements
 		IInventory {
 
-	public DrawbridgeWorkbenchContainer container;
+	public AbstractWorkbenchContainer container;
 	ItemStack[] inv = new ItemStack[8];
 	
 	public DrawbridgeWorkbenchTileEntity() {
@@ -124,9 +125,9 @@ public class DrawbridgeWorkbenchTileEntity extends TileEntity implements
 		return true;
 	}
 
-	public void produce(int x, int y) {
-		container.produce(x,y);
-		
+	public void produce(int x, int y, int z, int s) {
+		if(this.blockMetadata == 0) container.produce(x,y,0,0);
+		else if(this.blockMetadata == 1) container.produce(x, y, z, s);
 	}
 
 }

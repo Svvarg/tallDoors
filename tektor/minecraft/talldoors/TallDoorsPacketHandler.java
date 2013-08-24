@@ -25,11 +25,13 @@ public class TallDoorsPacketHandler implements IPacketHandler {
 	private void handle(Packet250CustomPayload packet, Player player) {
 		DataInputStream inputStream = new DataInputStream(
 				new ByteArrayInputStream(packet.data));
-		int x, y, corX, corY, corZ;
+		int x, y, z, s, corX, corY, corZ;
 
 		try {
 			x = inputStream.readInt();
 			y = inputStream.readInt();
+			z = inputStream.readInt();
+			s = inputStream.readInt();
 			corX = inputStream.readInt();
 			corY = inputStream.readInt();
 			corZ = inputStream.readInt();
@@ -41,7 +43,7 @@ public class TallDoorsPacketHandler implements IPacketHandler {
 		if (play.worldObj.getBlockTileEntity(corX, corY, corZ) instanceof DrawbridgeWorkbenchTileEntity) {
 			DrawbridgeWorkbenchTileEntity ent = (DrawbridgeWorkbenchTileEntity) play.worldObj
 					.getBlockTileEntity(corX, corY, corZ);
-			ent.produce(x,y);
+			ent.produce(x, y, z, s);
 		}
 
 	}

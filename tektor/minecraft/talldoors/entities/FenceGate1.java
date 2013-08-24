@@ -78,24 +78,13 @@ public class FenceGate1 extends Entity {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (this.isEntityInvulnerable()) {
-			return false;
-		} else {
-			if (!this.isDead && !this.worldObj.isRemote&& par1DamageSource.getEntity() instanceof EntityPlayer) {
-				this.setDead();
-				this.setBeenAttacked();
-				this.func_110128_b(par1DamageSource.getEntity());
-				
-			}
-
-			return true;
-		}
+		return false;
 	}
 
 	public void func_110128_b(Entity par1Entity) {
 		if (par1Entity instanceof EntityPlayer) {
 			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
-
+			this.setDead();
 			if (entityplayer.capabilities.isCreativeMode) {
 				return;
 			}
@@ -114,6 +103,12 @@ public class FenceGate1 extends Entity {
 
 		
 		if (!this.worldObj.isRemote) {
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
+			{
+				func_110128_b(player);
+				player.inventory.getCurrentItem().damageItem(1, player);
+				return true;
+			}
 			if (pos == 0)
 			{
 				pos = 1;
@@ -126,6 +121,13 @@ public class FenceGate1 extends Entity {
 				worldObj.playSoundAtEntity(this, "random.door_close", 1.0f, 1.0f);
 			}
 				
+		}
+		else
+		{
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
+			{
+				player.swingItem();
+			}
 		}
 		this.dataWatcher.updateObject(30, pos);
 		setBoundsAt(posX, posY, posZ);

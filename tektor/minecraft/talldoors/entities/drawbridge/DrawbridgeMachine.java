@@ -19,7 +19,11 @@ public class DrawbridgeMachine extends Entity {
 	public DrawbridgeBase base;
 	public boolean powered;
 	private double mX, mY, mZ;
-	public double width2 = 4;
+	public double width2 = 7;
+	public double height2 = 2;
+	public double lon = 2;
+	public double rotation = 0;
+	public double spool = 2;
 
 	public DrawbridgeMachine(World par1World) {
 		super(par1World);
@@ -50,8 +54,8 @@ public class DrawbridgeMachine extends Entity {
 		if (base == null) {
 			List<DrawbridgeBase> list = (List<DrawbridgeBase>) worldObj
 					.getEntitiesWithinAABB(DrawbridgeBase.class, boundingBox
-							.getBoundingBox(mX - 1, mY - 1, mZ - 1, mX +1, mY + 1,
-									mZ + 1));
+							.getBoundingBox(mX - 1, mY - 1, mZ - 1, mX + 1,
+									mY + 1, mZ + 1));
 			base = list.isEmpty() ? null : list.get(0);
 		}
 		setBoundsAt(posX, posY, posZ);
@@ -147,50 +151,50 @@ public class DrawbridgeMachine extends Entity {
 
 		if (!this.worldObj.isRemote) {
 			ItemStack i = player.inventory.getCurrentItem();
-			if (i != null && i.itemID == TallDoorsBase.connector.itemID
+			if (i != null
+					&& i.itemID == TallDoorsBase.connector.itemID
 					&& ((Connector) player.inventory.getCurrentItem().getItem()).base != null) {
-				if ((((Connector) player.inventory.getCurrentItem().getItem()).base.posY+((Connector) player.inventory.getCurrentItem().getItem()).base.lon-1) < this.posY) {
+				if ((((Connector) player.inventory.getCurrentItem().getItem()).base.posY
+						+ ((Connector) player.inventory.getCurrentItem()
+								.getItem()).base.lon - 1) < this.posY) {
 					this.base = ((Connector) player.inventory.getCurrentItem()
 							.getItem()).base;
 					base.machine = this;
 					base.setMachinePos(posX, posY, posZ);
 					player.inventory.decrStackSize(
 							player.inventory.currentItem, 1);
-				}
-				else
-				{
+				} else {
 					player.addChatMessage("A voice tells you: The Machine has to be placed higher.");
 				}
+			}
+			if (player.inventory.getCurrentItem() != null
+					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+				func_110128_b(player);
+				player.inventory.getCurrentItem().damageItem(1, player);
+				return true;
+			}
+		} else {
+			if (player.inventory.getCurrentItem() != null
+					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+				player.swingItem();
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (this.isEntityInvulnerable()) {
-			return false;
-		} else {
-			if (!this.isDead && !this.worldObj.isRemote
-					&& par1DamageSource.getEntity() instanceof EntityPlayer) {
-				this.setDead();
-				this.setBeenAttacked();
-				this.func_110128_b(par1DamageSource.getEntity());
-
-			}
-
-			return true;
-		}
+		return false;
 	}
 
 	public void func_110128_b(Entity par1Entity) {
 		if (par1Entity instanceof EntityPlayer) {
 			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
-
+			this.setDead();
 			if (entityplayer.capabilities.isCreativeMode) {
 				return;
 			}
 		}
-		this.entityDropItem(new ItemStack(TallDoorsBase.drawbridge,1,1), 0.0F);
+		this.entityDropItem(new ItemStack(TallDoorsBase.drawbridge, 1, 1), 0.0F);
 	}
 }

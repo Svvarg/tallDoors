@@ -22,8 +22,11 @@ import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import tektor.minecraft.talldoors.gui.TallDoorsGuiHandler;
 import tektor.minecraft.talldoors.items.Connector;
+import tektor.minecraft.talldoors.items.DestructionHammer;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import tektor.minecraft.talldoors.items.DrawbridgePlacer;
+import tektor.minecraft.talldoors.items.DrawbridgeWorkbenchItemBlock;
+import tektor.minecraft.talldoors.items.Key;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -37,7 +40,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.2.2")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.2.3")
 @NetworkMod(channels = { "TallDoors" }, packetHandler = TallDoorsPacketHandler.class, clientSideRequired = true)
 public class TallDoorsBase {
 
@@ -49,12 +52,14 @@ public class TallDoorsBase {
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
 
-	public static int itemID1, itemID2, itemID3;
+	public static int itemID1, itemID2, itemID3, itemID4, itemID5;
 	public static int blockID1;
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
 	public static Item connector;
+	public static Item destructionHammer;
+	public static Item key;
 
 	public static Block drawbridgeWorkbench;
 
@@ -68,6 +73,10 @@ public class TallDoorsBase {
 		itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
 				.getInt();
 		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
+				.getInt();
+		itemID4 = config.get(Configuration.CATEGORY_ITEM, "itemID4", 7103)
+				.getInt();
+		itemID5 = config.get(Configuration.CATEGORY_ITEM, "itemID5", 7104)
 				.getInt();
 
 		blockID1 = config.get(Configuration.CATEGORY_BLOCK, "blockID1", 860)
@@ -91,7 +100,7 @@ public class TallDoorsBase {
 
 	private void registerBlocks() {
 
-		GameRegistry.registerBlock(drawbridgeWorkbench, "drawbridgeWorkbench");
+		GameRegistry.registerBlock(drawbridgeWorkbench,DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
 		LanguageRegistry.addName(new ItemStack(drawbridgeWorkbench, 1, 0),
 				"Drawbridge Workbench");
 
@@ -105,7 +114,12 @@ public class TallDoorsBase {
 		ItemStack cobble = new ItemStack(Block.cobblestone, 1);
 		ItemStack iron = new ItemStack(Item.ingotIron, 1);
 		ItemStack string = new ItemStack(Item.silk, 1);
-
+		ItemStack stick = new ItemStack(Item.stick,1);
+		
+		// Destruction Hammer
+		GameRegistry.addShapedRecipe(new ItemStack(
+				TallDoorsBase.destructionHammer, 1, 0), new Object[] { "YYY",
+				"YXY", " X ", 'X', stick, 'Y', iron });
 		// Drawbridge Workbench
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
@@ -212,6 +226,8 @@ public class TallDoorsBase {
 		doorPlacer = new DoorPlacer(itemID1);
 		connector = new Connector(itemID2);
 		drawbridge = new DrawbridgePlacer(itemID3);
+		destructionHammer = new DestructionHammer(itemID4);
+		key = new Key(itemID5);
 
 		drawbridgeWorkbench = new DrawbridgeWorkbench(blockID1);
 
@@ -221,7 +237,8 @@ public class TallDoorsBase {
 		GameRegistry.registerItem(doorPlacer, "doorplacer");
 		GameRegistry.registerItem(connector, "connector");
 		GameRegistry.registerItem(drawbridge, "drawbridge");
-
+		GameRegistry.registerItem(destructionHammer, "destructionHammer");
+		GameRegistry.registerItem(key, "key");
 	}
 
 	private void registerEntities() {

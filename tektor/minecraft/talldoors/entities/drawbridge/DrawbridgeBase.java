@@ -260,7 +260,6 @@ public class DrawbridgeBase extends Entity {
 			this.dataWatcher.updateObject(21, 1);
 			this.dataWatcher.updateObject(20, 0);
 		}
-		System.out.println("activated");
 	}
 
 	public int func_82329_d() {
@@ -279,6 +278,19 @@ public class DrawbridgeBase extends Entity {
 					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.connector.itemID) {
 				((Connector) player.inventory.getCurrentItem().getItem()).base = this;
 			}
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
+			{
+				func_110128_b(player);
+				player.inventory.getCurrentItem().damageItem(1, player);
+				return true;
+			}
+		}
+		else
+		{
+			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
+			{
+				player.swingItem();
+			}
 		}
 		return true;
 	}
@@ -296,25 +308,13 @@ public class DrawbridgeBase extends Entity {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-		if (this.isEntityInvulnerable()) {
-			return false;
-		} else {
-			if (!this.isDead && !this.worldObj.isRemote
-					&& par1DamageSource.getEntity() instanceof EntityPlayer) {
-				this.setDead();
-				this.setBeenAttacked();
-				this.func_110128_b(par1DamageSource.getEntity());
-
-			}
-
-			return true;
-		}
+		return false;
 	}
 
 	public void func_110128_b(Entity par1Entity) {
 		if (par1Entity instanceof EntityPlayer) {
 			EntityPlayer entityplayer = (EntityPlayer) par1Entity;
-
+			this.setDead();
 			if (entityplayer.capabilities.isCreativeMode) {
 				return;
 			}

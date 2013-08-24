@@ -17,6 +17,7 @@ import tektor.minecraft.chalith.gui.ChalithWorkplaceGui;
 import tektor.minecraft.chalith.gui.DryStandGui;
 import tektor.minecraft.chalith.gui.OilPressGui;
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
+import tektor.minecraft.talldoors.container.MachineWorkbenchContainer;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -31,6 +32,12 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 				return new DrawbridgeWorkbenchContainer(player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
+		}else if (id == 1) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
+				return new MachineWorkbenchContainer(player.inventory,
+						(DrawbridgeWorkbenchTileEntity) tileEntity);
+			}
 		}
 		return null;
 	}
@@ -42,6 +49,12 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new DrawbridgeWorkbenchGUI(player, player.inventory,
+						(DrawbridgeWorkbenchTileEntity) tileEntity);
+			}
+		} else if (id == 1) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
+				return new MachineWorkbenchGUI(player, player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		}
