@@ -115,6 +115,7 @@ public class TallDoorsBase {
 		ItemStack iron = new ItemStack(Item.ingotIron, 1);
 		ItemStack string = new ItemStack(Item.silk, 1);
 		ItemStack stick = new ItemStack(Item.stick,1);
+		ItemStack redstone = new ItemStack(Item.redstone, 1);
 		
 		// Destruction Hammer
 		GameRegistry.addShapedRecipe(new ItemStack(
@@ -124,6 +125,11 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
 				"XXX", "XXX", 'X', wood, 'Y', cobble });
+		
+		// Machine Workbench
+				GameRegistry.addShapedRecipe(new ItemStack(
+						TallDoorsBase.drawbridgeWorkbench, 1, 1), new Object[] { "ZYZ",
+						"XXX", "XXX", 'X', wood, 'Y', cobble ,'Z', redstone});
 
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,
@@ -137,9 +143,9 @@ public class TallDoorsBase {
 //								wood2 });
 
 		// draw machine
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
-				1),
-				new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y', cobble });
+//		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1,
+//				1),
+//				new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y', cobble });
 
 		// Dark Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
