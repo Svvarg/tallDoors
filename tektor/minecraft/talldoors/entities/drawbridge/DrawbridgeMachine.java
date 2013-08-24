@@ -15,15 +15,15 @@ import net.minecraft.world.World;
 
 public class DrawbridgeMachine extends Entity {
 
-	public int orientation; //28
+	public int orientation; // 28
 	public DrawbridgeBase base;
 	public boolean powered;
 	private double mX, mY, mZ;
-	public double width2; //23
-	public double height2; //24
-	public double lon; //25
-	public double rotation; //26
-	public double spool; //27
+	public double width2; // 23
+	public double height2; // 24
+	public double lon; // 25
+	public double rotation; // 26
+	public double spool; // 27
 
 	public DrawbridgeMachine(World par1World) {
 		super(par1World);
@@ -36,19 +36,20 @@ public class DrawbridgeMachine extends Entity {
 		width2 = height2 = lon = rotation = spool = 0;
 	}
 
-	public void setStuff(double width, double height, double depth, double rot, double spoolsize)
-	{
+	public void setStuff(double width, double height, double depth, double rot,
+			double spoolsize) {
 		width2 = width;
-		this.dataWatcher.updateObject(23, (int)width2);
+		this.dataWatcher.updateObject(23, (int) width2);
 		height2 = height;
-		this.dataWatcher.updateObject(24, (int)height2);
+		this.dataWatcher.updateObject(24, (int) height2);
 		lon = depth;
-		this.dataWatcher.updateObject(25, (int)lon);
+		this.dataWatcher.updateObject(25, (int) lon);
 		rotation = rot;
-		this.dataWatcher.updateObject(26, (int)rot);
+		this.dataWatcher.updateObject(26, (int) rot);
 		spool = spoolsize;
-		this.dataWatcher.updateObject(27, (int)spool);
+		this.dataWatcher.updateObject(27, (int) spool);
 	}
+
 	public void onUpdate() {
 		if (this.worldObj.isRemote) {
 			width2 = this.dataWatcher.getWatchableObjectInt(23);
@@ -57,16 +58,68 @@ public class DrawbridgeMachine extends Entity {
 			rotation = this.dataWatcher.getWatchableObjectInt(26);
 			spool = this.dataWatcher.getWatchableObjectInt(27);
 			orientation = this.dataWatcher.getWatchableObjectInt(28);
-			
+
 		} else {
-			if (worldObj.getBlockPowerInput((int) posX, (int) posY, (int) posZ) > 0
-					&& powered == false) {
+			boolean power = false;
+			if (this.orientation == 0) {
+
+				for (int i = 0; i < this.width2; i++) {
+					for (int k = 0; k < this.lon; k++) {
+						if (worldObj.getBlockPowerInput((int) posX + k,
+								(int) posY, (int) posZ + i) > 0)
+							power = true;
+						if (power)
+							break;
+					}
+					if (power)
+						break;
+				}
+			} else if (this.orientation == 1) {
+
+				for (int i = 0; i < this.width2; i++) {
+					for (int k = 0; k < this.lon; k++) {
+						if (worldObj.getBlockPowerInput((int) posX - i,
+								(int) posY, (int) posZ + k) > 0)
+							power = true;
+						if (power)
+							break;
+					}
+					if (power)
+						break;
+				}
+			} else if (this.orientation == 2) {
+
+				for (int i = 0; i < this.width2; i++) {
+					for (int k = 0; k < this.lon; k++) {
+						if (worldObj.getBlockPowerInput((int) posX - k,
+								(int) posY, (int) posZ - i) > 0)
+							power = true;
+						if (power)
+							break;
+					}
+					if (power)
+						break;
+				}
+			} else if (this.orientation == 3) {
+
+				for (int i = 0; i < this.width2; i++) {
+					for (int k = 0; k < this.lon; k++) {
+						if (worldObj.getBlockPowerInput((int) posX + i,
+								(int) posY, (int) posZ - k) > 0)
+							power = true;
+						if (power)
+							break;
+					}
+					if (power)
+						break;
+				}
+			}
+			if (power && !powered) {
 				if (base != null) {
 					base.activate();
 				}
 				powered = true;
-			} else if (worldObj.getBlockPowerInput((int) posX, (int) posY,
-					(int) posZ) == 0) {
+			} else if (!power && powered){
 				powered = false;
 			}
 		}
@@ -108,16 +161,16 @@ public class DrawbridgeMachine extends Entity {
 		this.mY = nbt.getDouble("mY");
 		this.mZ = nbt.getDouble("mZ");
 		this.width2 = nbt.getDouble("width");
-		this.dataWatcher.updateObject(23, (int)width2);
+		this.dataWatcher.updateObject(23, (int) width2);
 		this.height2 = nbt.getDouble("height");
-		this.dataWatcher.updateObject(24, (int)height2);
+		this.dataWatcher.updateObject(24, (int) height2);
 		this.lon = nbt.getDouble("lon");
-		this.dataWatcher.updateObject(25, (int)lon);
+		this.dataWatcher.updateObject(25, (int) lon);
 		this.rotation = nbt.getDouble("rotation");
-		this.dataWatcher.updateObject(26, (int)rotation);
+		this.dataWatcher.updateObject(26, (int) rotation);
 		this.spool = nbt.getDouble("spool");
-		this.dataWatcher.updateObject(27, (int)spool);
-		
+		this.dataWatcher.updateObject(27, (int) spool);
+
 	}
 
 	@Override
@@ -180,27 +233,24 @@ public class DrawbridgeMachine extends Entity {
 
 	public void setBoundsAt(double par1, double par3, double par5) {
 		float f = this.width / 2.0F;
-		float f1 = this.height;
+		double f1 = this.height2;
 
-		this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
-				par5, par1 + width, par3 - this.yOffset + this.ySize + f1, par5
-						+ width);
-		
-		if(this.orientation == 0)
-		{
-			
-		}
-		else if (this.orientation == 1)
-		{
-			
-		}
-		else if (this.orientation == 2)
-		{
-			
-		}
-		else if (this.orientation == 3)
-		{
-			
+		if (this.orientation == 0) {
+			this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
+					par5, par1 + lon, par3 - this.yOffset + this.ySize + f1,
+					par5 + width2);
+		} else if (this.orientation == 1) {
+			this.boundingBox.setBounds(par1 - width2 + 1, par3 - this.yOffset
+					+ this.ySize, par5, par1 + 1, par3 - this.yOffset
+					+ this.ySize + f1, par5 + lon);
+		} else if (this.orientation == 2) {
+			this.boundingBox.setBounds(par1 - lon + 1, par3 - this.yOffset
+					+ this.ySize, par5 - width2 + 1, par1 + 1, par3
+					- this.yOffset + this.ySize + f1, par5 + 1);
+		} else if (this.orientation == 3) {
+			this.boundingBox.setBounds(par1, par3 - this.yOffset + this.ySize,
+					par5 - lon + 1, par1 + width2, par3 - this.yOffset
+							+ this.ySize + f1, par5 + 1);
 		}
 	}
 
