@@ -1,6 +1,7 @@
 package tektor.minecraft.talldoors.entities.doors_width2;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
+import tektor.minecraft.talldoors.entities.AbstractLockable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,9 +10,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public abstract class AbstractDoorWidth2 extends Entity {
+public abstract class AbstractDoorWidth2 extends AbstractLockable {
 
-	public int pos;
+	
 	public boolean left;
 	public int orientation;
 	public boolean locked;
@@ -97,40 +98,9 @@ public abstract class AbstractDoorWidth2 extends Entity {
 	}
 
 	@Override
-	public boolean func_130002_c(EntityPlayer player) {
-
-		if (!this.worldObj.isRemote) {
-			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
-				func_110128_b(player);
-				player.inventory.getCurrentItem().damageItem(1, player);
-				return true;
-			}
-			if (!checkFree()) {
-				player.addChatMessage("This door is blockaded");
-				return false;
-			}
-			if (pos == 0) {
-				pos = 1;
-				worldObj.playSoundAtEntity(this, "random.door_open", 1.0f, 1.0f);
-			}
-
-			else {
-				pos = 0;
-				worldObj.playSoundAtEntity(this, "random.door_close", 1.0f,
-						1.0f);
-			}
-
-		} else {
-			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
-				player.swingItem();
-			}
-		}
-
-		this.dataWatcher.updateObject(30, pos);
-		setBoundsAt(posX, posY, posZ);
-		return true;
+	public boolean interactFirst(EntityPlayer player) {
+		return super.interactFirst(player);
+		
 	}
 
 	private boolean checkFree() {
@@ -211,6 +181,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
 		pos = nbt.getInteger("pos");
 		this.dataWatcher.updateObject(30, pos);
 		left = nbt.getBoolean("left");
@@ -225,6 +196,7 @@ public abstract class AbstractDoorWidth2 extends Entity {
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
 		nbt.setBoolean("left", left);
 		nbt.setInteger("pos", pos);
 		nbt.setInteger("orientation", orientation);

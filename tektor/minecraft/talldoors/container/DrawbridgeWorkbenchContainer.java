@@ -2,10 +2,6 @@ package tektor.minecraft.talldoors.container;
 
 import org.apache.commons.lang3.StringUtils;
 
-import tektor.minecraft.chalith.ChalithBase;
-import tektor.minecraft.chalith.container.ChalithWorkbenchContainerInner;
-import tektor.minecraft.chalith.container.RestrictingSlot;
-import tektor.minecraft.chalith.entity.tileentity.ChalithWorkplaceTileEntity;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import tektor.minecraft.talldoors.items.DrawbridgePlacer;

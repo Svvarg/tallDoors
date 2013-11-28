@@ -33,7 +33,7 @@ public class DrawbridgeMachine extends Entity {
 		mX = 0;
 		mY = 0;
 		mZ = 0;
-		width2 = height2 = lon = rotation = spool = 0;
+		width2 = height2 = lon = rotation = spool = 1;
 	}
 
 	public void setStuff(double width, double height, double depth, double rot,
@@ -255,7 +255,7 @@ public class DrawbridgeMachine extends Entity {
 	}
 
 	@Override
-	public boolean func_130002_c(EntityPlayer player) {
+	public boolean interactFirst(EntityPlayer player) {
 
 		if (!this.worldObj.isRemote) {
 			ItemStack i = player.inventory.getCurrentItem();

@@ -7,18 +7,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import tektor.minecraft.chalith.container.ChalithWorkplaceContainer;
-import tektor.minecraft.chalith.container.DryStandContainer;
-import tektor.minecraft.chalith.container.OilPressContainer;
-import tektor.minecraft.chalith.entity.DryStand;
-import tektor.minecraft.chalith.entity.oilPress.OilPress;
-import tektor.minecraft.chalith.entity.tileentity.ChalithWorkplaceTileEntity;
-import tektor.minecraft.chalith.gui.ChalithWorkplaceGui;
-import tektor.minecraft.chalith.gui.DryStandGui;
-import tektor.minecraft.chalith.gui.OilPressGui;
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
+import tektor.minecraft.talldoors.container.KeyMakerGuiContainer;
 import tektor.minecraft.talldoors.container.MachineWorkbenchContainer;
+import tektor.minecraft.talldoors.container.MosaicGuiContainer;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
+import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
+import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class TallDoorsGuiHandler implements IGuiHandler {
@@ -39,6 +34,26 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		}
+		else if (id == 2) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof MosaicTileEntity) {
+				return new MosaicGuiContainer(player.inventory,
+						(MosaicTileEntity) tileEntity);
+			}
+		}else if (id == 3) {
+			List<Entity> list = world.getEntitiesWithinAABB(Entity.class,
+					AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
+			if (!list.isEmpty()) {
+				for (Entity ent : list) {
+					if (ent instanceof KeyMaker) {
+						return new KeyMakerGuiContainer(player.inventory,
+								(KeyMaker) ent);
+					}
+				}
+
+			}
+			
+		}
 		return null;
 	}
 
@@ -56,6 +71,26 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new MachineWorkbenchGUI(player, player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
+			}
+		}
+		else if (id == 2) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof MosaicTileEntity) {
+				return new MosaicChooserGUI(player, player.inventory,
+						(MosaicTileEntity) tileEntity);
+			}
+		}
+		else if (id == 3)
+		{
+			List<Entity> list = world.getEntitiesWithinAABB(Entity.class,
+					AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1));
+			if (!list.isEmpty()) {
+				for (Entity ent : list) {
+					if (ent instanceof KeyMaker) {
+						return new KeyMakerGUI(player, player.inventory, (KeyMaker) ent);
+					}
+				}
+
 			}
 		}
 		return null;

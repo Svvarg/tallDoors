@@ -37,7 +37,7 @@ public class RenderDrawbridgeMachine extends Render {
 		}
 
 		GL11.glScalef(1f, 1f, 1f);
-		this.func_110776_a(this.func_110775_a(entity));
+		this.bindTexture(this.getEntityTexture(entity));
 		this.modeldrawmachine.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
 				0.0625F);
 		GL11.glPopMatrix();
@@ -45,7 +45,7 @@ public class RenderDrawbridgeMachine extends Render {
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return new ResourceLocation(
 				"talldoors:textures/entities/drawbridgeMachine.png");
 	}

@@ -144,7 +144,7 @@ public class RenderEntranceDoor2 extends Render {
 					1f, 0f);
 		}
 		GL11.glScalef(1f, 1f, 1f);
-		this.func_110776_a(this.func_110775_a(entity));
+		this.bindTexture(this.getEntityTexture(entity));
 		this.modelEntranceDoor2.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
 				0.0625F);
 		GL11.glPopMatrix();
@@ -152,7 +152,7 @@ public class RenderEntranceDoor2 extends Render {
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return new ResourceLocation(
 				"talldoors:textures/entities/modelEntrance.png");
 	}

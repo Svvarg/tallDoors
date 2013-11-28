@@ -66,7 +66,7 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
 			int par3) {
 		// draw your Gui here, only thing you need to change is the path
-		this.mc.renderEngine.func_110577_a(new ResourceLocation("talldoors",
+		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
 				"textures/gui/drawbridgeWorkbenchGUI.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;

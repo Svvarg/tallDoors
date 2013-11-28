@@ -10,7 +10,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import tektor.minecraft.chalith.container.RestrictingSlot;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 

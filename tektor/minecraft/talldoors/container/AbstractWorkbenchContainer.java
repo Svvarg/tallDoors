@@ -10,7 +10,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import tektor.minecraft.chalith.container.RestrictingSlot;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 
@@ -30,7 +29,7 @@ public abstract class AbstractWorkbenchContainer extends Container {
 		// restrict slot 3
 		ItemStack[] slot3 = new ItemStack[0];
 		addSlotToContainer(new RestrictingSlot(this.outputSlot, 0, 142, 56,
-				slot3, null));
+				slot3, null, false));
 		bindPlayerInventory(inventoryPlayer);
 	}
 

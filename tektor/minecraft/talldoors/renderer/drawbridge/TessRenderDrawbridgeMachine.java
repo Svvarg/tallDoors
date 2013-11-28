@@ -19,7 +19,7 @@ public class TessRenderDrawbridgeMachine extends Render {
 		GL11.glPushMatrix();
 		// GL11.glTranslatef((float)d0, (float)d1, (float)d2);
 		Minecraft.getMinecraft().renderEngine
-				.func_110577_a(func_110775_a(entity));
+				.bindTexture(getEntityTexture(entity));
 		Tessellator tess = Tessellator.instance;
 		tess.startDrawingQuads();
 
@@ -229,7 +229,7 @@ public class TessRenderDrawbridgeMachine extends Render {
 
 		tess.startDrawingQuads();
 		Minecraft.getMinecraft().renderEngine
-				.func_110577_a(new ResourceLocation(
+				.bindTexture(new ResourceLocation(
 						"talldoors:textures/entities/drawbridgeBase2.png"));
 
 		// spool 1
@@ -295,7 +295,7 @@ public class TessRenderDrawbridgeMachine extends Render {
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return new ResourceLocation(
 				"talldoors:textures/entities/drawbridgeBase.png");
 	}

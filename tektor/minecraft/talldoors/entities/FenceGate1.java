@@ -9,9 +9,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
 
-public class FenceGate1 extends Entity {
+public class FenceGate1 extends AbstractLockable {
 
-	public int pos;
 	public boolean left;
 	public int orientation;
 
@@ -99,39 +98,8 @@ public class FenceGate1 extends Entity {
 	}
 
 	@Override
-	public boolean func_130002_c(EntityPlayer player) {
-
-		
-		if (!this.worldObj.isRemote) {
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
-			{
-				func_110128_b(player);
-				player.inventory.getCurrentItem().damageItem(1, player);
-				return true;
-			}
-			if (pos == 0)
-			{
-				pos = 1;
-				worldObj.playSoundAtEntity(this, "random.door_open", 1.0f, 1.0f);
-			}
-				
-			else
-			{
-				pos = 0;
-				worldObj.playSoundAtEntity(this, "random.door_close", 1.0f, 1.0f);
-			}
-				
-		}
-		else
-		{
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID)
-			{
-				player.swingItem();
-			}
-		}
-		this.dataWatcher.updateObject(30, pos);
-		setBoundsAt(posX, posY, posZ);
-		return true;
+	public boolean interactFirst(EntityPlayer player) {
+		return super.interactFirst(player);
 	}
 
 	@Override

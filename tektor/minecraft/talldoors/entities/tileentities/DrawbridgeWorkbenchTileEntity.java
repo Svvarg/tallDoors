@@ -1,6 +1,5 @@
 package tektor.minecraft.talldoors.entities.tileentities;
 
-import tektor.minecraft.chalith.container.ChalithWorkplaceContainer;
 import tektor.minecraft.talldoors.container.AbstractWorkbenchContainer;
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +43,7 @@ public class DrawbridgeWorkbenchTileEntity extends TileEntity implements
 
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		NBTTagCompound tag = pkt.customParam1;
+		NBTTagCompound tag = pkt.data;
 		this.readFromNBT(tag);
 	}
 

@@ -76,6 +76,8 @@ public class DrawbridgePlacer extends Item {
 				int var24 = MathHelper
 						.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 				DrawbridgeBase base = new DrawbridgeBase(par3World);
+				base.setPosition(par4, par5 + 1, par6);
+				base.setOrientation(var24);
 				if (par1ItemStack.stackTagCompound != null) {
 					base.setPars(
 							par1ItemStack.stackTagCompound.getInteger("width"),
@@ -83,8 +85,6 @@ public class DrawbridgePlacer extends Item {
 				} else {
 					base.setPars(4, 7);
 				}
-				base.setOrientation(var24);
-				base.setPosition(par4, par5 + 1, par6);
 				par3World.spawnEntityInWorld(base);
 			} else {
 				int var24 = MathHelper

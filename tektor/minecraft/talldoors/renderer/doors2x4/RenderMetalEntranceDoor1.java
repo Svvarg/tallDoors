@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderMetalEntranceDoor1 extends RenderEntranceDoorSize4{
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return new ResourceLocation(
 				"talldoors:textures/entities/modelEntrance2.png");
 	}

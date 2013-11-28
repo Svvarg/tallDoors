@@ -15,7 +15,7 @@ public class RenderRopeConnector extends Render{
 			float f, float f1) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)d0+0.375f, (float)d1, (float)d2+0.375f);
-		Minecraft.getMinecraft().renderEngine.func_110577_a(func_110775_a(entity));
+		Minecraft.getMinecraft().renderEngine.bindTexture(getEntityTexture(entity));
 		Tessellator tess = Tessellator.instance;
 		tess.startDrawingQuads();
 		
@@ -64,7 +64,7 @@ public class RenderRopeConnector extends Render{
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return new ResourceLocation("talldoors", "textures/entities/ropeConnector.png");
 	}
 
