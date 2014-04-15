@@ -8,6 +8,8 @@ import tektor.minecraft.talldoors.items.DrawbridgePlacer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -31,10 +33,10 @@ public class DrawbridgeWorkbenchContainer extends AbstractWorkbenchContainer {
 			int planksFound = 0;
 			int ironFound = 0;
 			for (int i = 0; i < 32; i++) {
-				if (in[i] != null && in[i].itemID == Block.planks.blockID) {
+				if (in[i] != null && in[i].getItem().equals(Blocks.planks)) {
 					planksFound = planksFound + in[i].stackSize;
 				} else if (in[i] != null
-						&& in[i].itemID == Item.ingotIron.itemID) {
+						&& in[i].getItem().equals(Items.iron_ingot)) {
 					ironFound = ironFound + in[i].stackSize;
 				}
 
@@ -42,14 +44,14 @@ public class DrawbridgeWorkbenchContainer extends AbstractWorkbenchContainer {
 			int planksNeed = x * y;
 			int ironNeed = x + y;
 			if (planksNeed <= planksFound && ironNeed <= ironFound) {
-				ItemStack plank = new ItemStack(Block.planks, planksNeed);
-				ItemStack iron = new ItemStack(Item.ingotIron, ironNeed);
+				ItemStack plank = new ItemStack(Blocks.planks, planksNeed);
+				ItemStack iron = new ItemStack(Items.iron_ingot, ironNeed);
 				for (int i = 0; i < 32; i++) {
-					if (in[i] != null && in[i].itemID == Block.planks.blockID) {
+					if (in[i] != null && in[i].getItem().equals(Blocks.planks)) {
 						ItemStack ret = inv.decrStackSize(i, plank.stackSize);
 						plank.stackSize = plank.stackSize - ret.stackSize;
 					} else if (in[i] != null
-							&& in[i].itemID == Item.ingotIron.itemID) {
+							&& in[i].getItem().equals(Items.iron_ingot)) {
 						ItemStack ret = inv.decrStackSize(i, iron.stackSize);
 						iron.stackSize = iron.stackSize - ret.stackSize;
 					}

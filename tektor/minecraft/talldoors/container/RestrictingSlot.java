@@ -24,7 +24,7 @@ public class RestrictingSlot extends Slot{
 	   public boolean isItemValid(ItemStack itemstack) {
 	      for(ItemStack item: items)
 	      {
-	    	  if(item.itemID == itemstack.itemID && item.getItemDamage() == itemstack.getItemDamage()) return true;
+	    	  if(item.getItem().equals(itemstack.getItem()) && item.getItemDamage() == itemstack.getItemDamage()) return true;
 	      }
 	      return false;
 	   }

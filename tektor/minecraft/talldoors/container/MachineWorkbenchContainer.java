@@ -3,6 +3,8 @@ package tektor.minecraft.talldoors.container;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -27,14 +29,14 @@ public class MachineWorkbenchContainer extends AbstractWorkbenchContainer {
 			int ironFound = 0;
 			int woolFound = 0;
 			for (int i = 0; i < 32; i++) {
-				if (in[i] != null && in[i].itemID == Block.planks.blockID) {
+				if (in[i] != null && in[i].getItem().equals(Blocks.planks)) {
 					planksFound = planksFound + in[i].stackSize;
 				} else if (in[i] != null
-						&& in[i].itemID == Item.ingotIron.itemID) {
+						&& in[i].getItem().equals(Items.iron_ingot)) {
 					ironFound = ironFound + in[i].stackSize;
 				}
 				else if(in[i] != null
-						&& in[i].itemID == Block.cloth.blockID) {
+						&& in[i].getItem().equals(Blocks.wool)) {
 					woolFound = woolFound + in[i].stackSize;
 				}
 			}
@@ -42,19 +44,19 @@ public class MachineWorkbenchContainer extends AbstractWorkbenchContainer {
 			int woolNeed = 2*(s+y+z);
 			int ironNeed = x + y + z;
 			if (planksNeed <= planksFound && ironNeed <= ironFound && woolNeed <= woolFound) {
-				ItemStack plank = new ItemStack(Block.planks, planksNeed);
-				ItemStack iron = new ItemStack(Item.ingotIron, ironNeed);
-				ItemStack wool = new ItemStack(Block.cloth, woolNeed);
+				ItemStack plank = new ItemStack(Blocks.planks, planksNeed);
+				ItemStack iron = new ItemStack(Items.iron_ingot, ironNeed);
+				ItemStack wool = new ItemStack(Blocks.wool, woolNeed);
 				for (int i = 0; i < 32; i++) {
-					if (in[i] != null && in[i].itemID == Block.planks.blockID) {
+					if (in[i] != null && in[i].getItem().equals(Blocks.planks)) {
 						ItemStack ret = inv.decrStackSize(i, plank.stackSize);
 						plank.stackSize = plank.stackSize - ret.stackSize;
 					} else if (in[i] != null
-							&& in[i].itemID == Item.ingotIron.itemID) {
+							&& in[i].getItem().equals(Items.iron_ingot)) {
 						ItemStack ret = inv.decrStackSize(i, iron.stackSize);
 						iron.stackSize = iron.stackSize - ret.stackSize;
 					}else if (in[i] != null
-							&& in[i].itemID == Block.cloth.blockID) {
+							&& in[i].getItem().equals(Blocks.wool)) {
 						ItemStack ret = inv.decrStackSize(i, wool.stackSize);
 						wool.stackSize = wool.stackSize - ret.stackSize;
 					}

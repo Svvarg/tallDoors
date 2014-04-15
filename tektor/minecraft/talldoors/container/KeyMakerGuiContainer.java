@@ -6,6 +6,7 @@ import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -106,17 +107,17 @@ public class KeyMakerGuiContainer extends Container{
 				ItemStack[] in = inv.mainInventory;
 				int ironFound = 0;
 				for (int i = 0; i < 32; i++) {
-					if (in[i] != null && in[i].itemID == Item.ingotIron.itemID) {
+					if (in[i] != null && in[i].getItem().equals(Items.iron_ingot)) {
 						ironFound = ironFound + in[i].stackSize;
 					}
 
 				}
 				int ironNeed = 5;
 				if (ironNeed <= ironFound) {
-					ItemStack iron = new ItemStack(Item.ingotIron, ironNeed);
+					ItemStack iron = new ItemStack(Items.iron_ingot, ironNeed);
 					for (int i = 0; i < 32; i++) {
 						if (in[i] != null
-								&& in[i].itemID == Item.ingotIron.itemID) {
+								&& in[i].getItem().equals(Items.iron_ingot)) {
 							ItemStack ret = inv
 									.decrStackSize(i, iron.stackSize);
 							iron.stackSize = iron.stackSize - ret.stackSize;
@@ -137,17 +138,17 @@ public class KeyMakerGuiContainer extends Container{
 				ItemStack[] in = inv.mainInventory;
 				int ironFound = 0;
 				for (int i = 0; i < 32; i++) {
-					if (in[i] != null && in[i].itemID == Item.ingotGold.itemID) {
+					if (in[i] != null && in[i].getItem().equals(Items.gold_ingot)) {
 						ironFound = ironFound + in[i].stackSize;
 					}
 
 				}
 				int ironNeed = 5;
 				if (ironNeed <= ironFound) {
-					ItemStack iron = new ItemStack(Item.ingotGold, ironNeed);
+					ItemStack iron = new ItemStack(Items.gold_ingot, ironNeed);
 					for (int i = 0; i < 32; i++) {
 						if (in[i] != null
-								&& in[i].itemID == Item.ingotGold.itemID) {
+								&& in[i].getItem().equals(Items.gold_ingot)) {
 							ItemStack ret = inv
 									.decrStackSize(i, iron.stackSize);
 							iron.stackSize = iron.stackSize - ret.stackSize;
