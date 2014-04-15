@@ -2,19 +2,19 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class Key extends Item {
-	private Icon[] icon = new Icon[2];
+	private IIcon[] icon = new IIcon[2];
 
 	public Key() {
 		super();
@@ -26,13 +26,13 @@ public class Key extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return icon[par1];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister.registerIcon("tallDoors:ironKey");
 		icon[1] = par1IconRegister.registerIcon("tallDoors:goldKey");
 	}
@@ -51,7 +51,7 @@ public class Key extends Item {
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack par1ItemStack) {
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		switch (par1ItemStack.getItemDamage()) {
 		case 0:
 			return "Iron Key";
@@ -64,7 +64,7 @@ public class Key extends Item {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(int par1, CreativeTabs tab, List subItems) {
+	public void getSubItems(Item par1, CreativeTabs tab, List subItems) {
 
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 1));

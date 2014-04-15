@@ -12,17 +12,17 @@ import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DrawbridgePlacer extends Item {
-	private Icon[] icon = new Icon[2];
+	private IIcon[] icon = new IIcon[2];
 
 	public DrawbridgePlacer() {
 		super();
@@ -34,13 +34,13 @@ public class DrawbridgePlacer extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return icon[par1];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister.registerIcon("tallDoors:drawbridgeBase");
 		icon[1] = par1IconRegister.registerIcon("tallDoors:drawbridgeMachine");
 	}
@@ -113,7 +113,7 @@ public class DrawbridgePlacer extends Item {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(int par1, CreativeTabs tab, List subItems) {
+	public void getSubItems(Item par1, CreativeTabs tab, List subItems) {
 
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 1));

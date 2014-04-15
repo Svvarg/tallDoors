@@ -24,7 +24,7 @@ public class MosaicTool extends Item{
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlockId(x, y, z) == TallDoorsBase.mosaic.blockID) {
+			if (world.getBlock(x, y, z).equals(TallDoorsBase.mosaic) || world.getBlock(x, y, z).equals(TallDoorsBase.mosaicGlass) ) {
 				//stack.damageItem(1, player);
 				return false;
 			}

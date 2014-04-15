@@ -28,14 +28,14 @@ public class PermanentMosaicTool extends Item {
 			World world, int x, int y, int z, int side, float hitX, float hitY,
 			float hitZ) {
 		if (!world.isRemote) {
-			if (world.getBlockId(x, y, z) == TallDoorsBase.mosaic.blockID || world.getBlockId(x, y, z) == TallDoorsBase.mosaicGlass.blockID) {
+			if (world.getBlock(x, y, z).equals(TallDoorsBase.mosaic) || world.getBlock(x, y, z).equals(TallDoorsBase.mosaicGlass)) {
 				if(stack.stackTagCompound == null)
 				{
 					player.openGui(TallDoorsBase.instance, 2, world, x, y, z);
 				}
 				else
 				{
-					MosaicTileEntity ent = (MosaicTileEntity) world.getBlockTileEntity(x, y, z);
+					MosaicTileEntity ent = (MosaicTileEntity) world.getTileEntity(x, y, z);
 					if (ent.icon != stack.stackTagCompound.getString("chosen")) {
 						ent.icon = stack.stackTagCompound.getString("chosen");
 						world.markBlockForUpdate(x, y, z);

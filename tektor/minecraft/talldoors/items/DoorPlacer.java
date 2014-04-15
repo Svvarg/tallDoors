@@ -14,18 +14,19 @@ import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor2;
 import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DoorPlacer extends Item {
 
-	private Icon[] icon = new Icon[20];
+	private IIcon[] icon = new IIcon[20];
 
 	public DoorPlacer() {
 		super();
@@ -37,13 +38,13 @@ public class DoorPlacer extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return icon[par1];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor1");
 		icon[1] = par1IconRegister.registerIcon("tallDoors:leftentranceDoor1");
 		icon[2] = par1IconRegister.registerIcon("tallDoors:rightentranceDoor2");
@@ -116,7 +117,7 @@ public class DoorPlacer extends Item {
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack par1ItemStack) {
+	public String getItemStackDisplayName(ItemStack par1ItemStack) {
 		switch (par1ItemStack.getItemDamage()) {
 		case 0:
 			return "Right Entrance Door";
@@ -176,7 +177,7 @@ public class DoorPlacer extends Item {
 			
 			if (par1ItemStack.getItemDamage() == 0) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor1 door = new EntranceDoor1(par3World);
@@ -186,7 +187,7 @@ public class DoorPlacer extends Item {
 				par3World.spawnEntityInWorld(door);
 			} else if (par1ItemStack.getItemDamage() == 1) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor1 door = new EntranceDoor1(par3World);
@@ -198,7 +199,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 2) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor2 door = new EntranceDoor2(par3World);
@@ -210,7 +211,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 3) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor2 door = new EntranceDoor2(par3World);
@@ -222,7 +223,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 4) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor3 door = new EntranceDoor3(par3World);
@@ -234,7 +235,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 5) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				EntranceDoor3 door = new EntranceDoor3(par3World);
@@ -246,7 +247,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 6) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 1, false, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				FenceGate1 door = new FenceGate1(par3World);
@@ -258,7 +259,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 7) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 1, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				FenceGate1 door = new FenceGate1(par3World);
@@ -271,7 +272,7 @@ public class DoorPlacer extends Item {
 			
 			else if (par1ItemStack.getItemDamage() == 8) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
@@ -283,7 +284,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 9) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor1 door = new MetalEntranceDoor1(par3World);
@@ -296,7 +297,7 @@ public class DoorPlacer extends Item {
 			
 			else if (par1ItemStack.getItemDamage() == 10) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
@@ -308,7 +309,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 11) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 4, true, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor1 door = new DarkMetalEntranceDoor1(par3World);
@@ -320,7 +321,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 12) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor2 door = new DarkMetalEntranceDoor2(par3World);
@@ -332,7 +333,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 13) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor2 door = new DarkMetalEntranceDoor2(par3World);
@@ -344,7 +345,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 14) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor3 door = new DarkMetalEntranceDoor3(par3World);
@@ -356,7 +357,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 15) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				DarkMetalEntranceDoor3 door = new DarkMetalEntranceDoor3(par3World);
@@ -368,7 +369,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 16) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, false, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor2 door = new MetalEntranceDoor2(par3World);
@@ -380,7 +381,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 17) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 5, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor2 door = new MetalEntranceDoor2(par3World);
@@ -392,7 +393,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 18) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, false, var24)){
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor3 door = new MetalEntranceDoor3(par3World);
@@ -404,7 +405,7 @@ public class DoorPlacer extends Item {
 			}
 			else if (par1ItemStack.getItemDamage() == 19) {
 				if(!checkFree(par3World,par4,par5+1,par6, 2, 6, true, var24)) {
-					par2EntityPlayer.addChatMessage("A voice whispers to you: There is not enough space for this");
+					par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
 					return false;
 				}
 				MetalEntranceDoor3 door = new MetalEntranceDoor3(par3World);
@@ -421,7 +422,7 @@ public class DoorPlacer extends Item {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(int par1, CreativeTabs tab, List subItems) {
+	public void getSubItems(Item par1, CreativeTabs tab, List subItems) {
 
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 1));
