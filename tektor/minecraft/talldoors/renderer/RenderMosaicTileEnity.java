@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -30,8 +30,8 @@ public class RenderMosaicTileEnity implements ISimpleBlockRenderingHandler {
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
                     Block block, int modelId, RenderBlocks renderer) {
-    	MosaicTileEntity te = (MosaicTileEntity) world.getBlockTileEntity(x, y, z);
-    	Icon ic = MosaicIconRegistry.getIcon(te.icon);
+    	MosaicTileEntity te = (MosaicTileEntity) world.getTileEntity(x, y, z);
+    	IIcon ic = MosaicIconRegistry.getIcon(te.icon);
     	renderer.renderAllFaces = true;
     	float f = 0.1875F;
         renderer.setOverrideBlockTexture(ic);
@@ -45,7 +45,7 @@ public class RenderMosaicTileEnity implements ISimpleBlockRenderingHandler {
 
    
     @Override
-    public boolean shouldRender3DInInventory() {
+    public boolean shouldRender3DInInventory(int modelID) {
            
             return false;
     }

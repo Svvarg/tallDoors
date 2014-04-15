@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -40,7 +39,7 @@ public class RenderMosaicGlassTileEntity extends TileEntitySpecialRenderer {
 		 * not match to render coordinates (d, etc) that are calculated as [true
 		 * coordinates] - [player coordinates (camera coordinates)]
 		 */
-		renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord,
+		renderBlockYour(tileEntityYour, tileEntity.getWorldObj(), tileEntity.xCoord,
 				tileEntity.yCoord, tileEntity.zCoord, TallDoorsBase.mosaicGlass);
 		GL11.glPopMatrix();
 	}
@@ -66,7 +65,7 @@ public class RenderMosaicGlassTileEntity extends TileEntitySpecialRenderer {
         }
         
 		int dir = world.getBlockMetadata(i, j, k);
-		adjustLightFixture(world, i, j, k, block);
+		//adjustLightFixture(world, i, j, k, block);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.5F, 0, 0.5F);
 		// This line actually rotates the renderer.
@@ -118,15 +117,15 @@ public class RenderMosaicGlassTileEntity extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void adjustLightFixture(World world, int i, int j, int k,
-			Block block) {
-		Tessellator tess = Tessellator.instance;
-		float brightness = block.getBlockBrightness(world, i, j, k);
-		int skyLight = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
-		int modulousModifier = skyLight % 65536;
-		int divModifier = skyLight / 65536;
-		tess.setColorOpaque_F(brightness, brightness, brightness);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
-				(float) modulousModifier, divModifier);
-	}
+//	private void adjustLightFixture(World world, int i, int j, int k,
+//			Block block) {
+//		Tessellator tess = Tessellator.instance;
+//		float brightness = block.getBlockBrightness(world, i, j, k);
+//		int skyLight = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
+//		int modulousModifier = skyLight % 65536;
+//		int divModifier = skyLight / 65536;
+//		tess.setColorOpaque_F(brightness, brightness, brightness);
+//		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
+//				(float) modulousModifier, divModifier);
+//	}
 }
