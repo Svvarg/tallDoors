@@ -40,13 +40,13 @@ public class KeyMakerGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRenderer.drawString("Key Maker", 8, 6, 4210752);
+		fontRendererObj.drawString("Key Maker", 8, 6, 4210752);
 		// draws "Inventory" or your regional equivalent
-		fontRenderer.drawString(
+		fontRendererObj.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
 				ySize - 96 + 2, 4210752);
-		fontRenderer.drawString("gold key", 117, 46, 4210752);
-		fontRenderer.drawString("iron key", 117, 60, 4210752);
+		fontRendererObj.drawString("gold key", 117, 46, 4210752);
+		fontRendererObj.drawString("iron key", 117, 60, 4210752);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class KeyMakerGUI extends GuiContainer {
 		Keyboard.enableRepeatEvents(true);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		this.itemNameField = new GuiTextField(this.fontRenderer, i + 37,
+		this.itemNameField = new GuiTextField(this.fontRendererObj, i + 37,
 				j + 22, 90, 12);
 		this.itemNameField.setTextColor(-1);
 		this.itemNameField.setDisabledTextColour(-1);

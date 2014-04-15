@@ -41,21 +41,21 @@ public class MachineWorkbenchGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRenderer.drawString("Drawbridge Workbench", 8, 6, 9919952);
-		// draws "Inventory" or your regional equivalent
+		fontRendererObj.drawString("Drawbridge Workbench", 8, 6, 9919952);
+		// draws "Inventory"
 //		fontRenderer.drawString(
 //				StatCollector.translateToLocal("container.inventory"), 8,
 //				ySize - 96 + 2, 9919952);
-		fontRenderer.drawString("" + x, 27, 35, 0000000);
-		fontRenderer.drawString("" + y, 27, 51, 0000000);
-		fontRenderer.drawString("" + z, 27, 67, 0000000);
-		fontRenderer.drawString("" + s, 69, 51, 0000000);
-		fontRenderer.drawString("Planks: " + planks, 117, 15, 9919952);
-		fontRenderer.drawString("Iron: " + iron, 117, 25, 9919952);
-		fontRenderer.drawString("Wool: " + wool, 117, 35, 9919952);
-		fontRenderer.drawString("Width,Depth,", 8, 16, 9919952);
-		fontRenderer.drawString("Height:", 8, 24, 9919952);
-		fontRenderer.drawString("Spool:", 57, 38, 9919952);
+		fontRendererObj.drawString("" + x, 27, 35, 0000000);
+		fontRendererObj.drawString("" + y, 27, 51, 0000000);
+		fontRendererObj.drawString("" + z, 27, 67, 0000000);
+		fontRendererObj.drawString("" + s, 69, 51, 0000000);
+		fontRendererObj.drawString("Planks: " + planks, 117, 15, 9919952);
+		fontRendererObj.drawString("Iron: " + iron, 117, 25, 9919952);
+		fontRendererObj.drawString("Wool: " + wool, 117, 35, 9919952);
+		fontRendererObj.drawString("Width,Depth,", 8, 16, 9919952);
+		fontRendererObj.drawString("Height:", 8, 24, 9919952);
+		fontRendererObj.drawString("Spool:", 57, 38, 9919952);
 	}
 
 	@Override

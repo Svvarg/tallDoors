@@ -51,15 +51,15 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRenderer.drawString("Drawbridge Workbench", 8, 6, 9919952);
+		fontRendererObj.drawString("Drawbridge Workbench", 8, 6, 9919952);
 		// draws "Inventory" or your regional equivalent
-		fontRenderer.drawString(
+		fontRendererObj.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
 				ySize - 96 + 2, 9919952);
-		fontRenderer.drawString("" + x, 27, 35, 0000000);
-		fontRenderer.drawString("" + y, 27, 51, 0000000);
-		fontRenderer.drawString("Planks: " + planks, 62, 22, 9919952);
-		fontRenderer.drawString("Iron: " + iron, 62, 32, 9919952);
+		fontRendererObj.drawString("" + x, 27, 35, 0000000);
+		fontRendererObj.drawString("" + y, 27, 51, 0000000);
+		fontRendererObj.drawString("Planks: " + planks, 62, 22, 9919952);
+		fontRendererObj.drawString("Iron: " + iron, 62, 32, 9919952);
 	}
 
 	@Override

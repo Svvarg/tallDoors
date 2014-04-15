@@ -22,20 +22,20 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
 		if (id == 0) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new DrawbridgeWorkbenchContainer(player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		}else if (id == 1) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new MachineWorkbenchContainer(player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		}
 		else if (id == 2) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof MosaicTileEntity) {
 				return new MosaicGuiContainer(player.inventory,
 						(MosaicTileEntity) tileEntity);
@@ -61,20 +61,20 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int id, EntityPlayer player, World world,
 			int x, int y, int z) {
 		if (id == 0) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new DrawbridgeWorkbenchGUI(player, player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		} else if (id == 1) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof DrawbridgeWorkbenchTileEntity) {
 				return new MachineWorkbenchGUI(player, player.inventory,
 						(DrawbridgeWorkbenchTileEntity) tileEntity);
 			}
 		}
 		else if (id == 2) {
-			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(x, y, z);
 			if (tileEntity instanceof MosaicTileEntity) {
 				return new MosaicChooserGUI(player, player.inventory,
 						(MosaicTileEntity) tileEntity);

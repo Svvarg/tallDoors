@@ -58,16 +58,16 @@ public class MosaicChooserGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRenderer.drawString("Mosaics", 8, 6, 9919952);
-		fontRenderer.drawString("Textures:", 8, 17, 9919952);
+		fontRendererObj.drawString("Mosaics", 8, 6, 9919952);
+		fontRendererObj.drawString("Textures:", 8, 17, 9919952);
 		for (int i = off; (i < off + 10 && i < keys.length); i++) {
 			int color = 9919952;
 			if (chosen.equals(keys[i]))
 				color = 5919952;
 
-			fontRenderer.drawString(keys[i], 8, 27 + (i - off) * 10, color);
+			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
 		}
-		fontRenderer.drawString(page + "/" + pages, 48, 127, 9919952);
+		fontRendererObj.drawString(page + "/" + pages, 48, 127, 9919952);
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public class MosaicChooserGUI extends GuiContainer {
 		Keyboard.enableRepeatEvents(true);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		this.itemNameField = new GuiTextField(this.fontRenderer, i + 151,
+		this.itemNameField = new GuiTextField(this.fontRendererObj, i + 151,
 				j + 84, 90, 12);
 		this.itemNameField.setTextColor(-1);
 		this.itemNameField.setDisabledTextColour(-1);
