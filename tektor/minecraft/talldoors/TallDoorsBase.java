@@ -11,10 +11,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
 import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
@@ -54,14 +55,12 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.3.2")
-@NetworkMod(channels = { "TallDoors", "TallDoors_Mosaic", "TallDoors2" }, packetHandler = TallDoorsPacketHandler.class, clientSideRequired = true)
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.0")
 public class TallDoorsBase {
 
 	// instance
@@ -71,10 +70,6 @@ public class TallDoorsBase {
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
-
-	public static int itemID1, itemID2, itemID3, itemID4, itemID5, itemID6,
-			itemID7, itemID8, itemID9;
-	public static int blockID1, blockID2, blockID3, blockID4;
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
@@ -96,7 +91,7 @@ public class TallDoorsBase {
 	public void preInit(FMLPreInitializationEvent event) {
 		
 		File jarName = null;
-		List<String> results = new ArrayList();
+		List<String> results = new ArrayList<String>();
 		try {
 			jarName = event.getSourceFile();
 		} catch (Exception e) {
@@ -124,37 +119,6 @@ public class TallDoorsBase {
 		}
 		MosaicIconRegistry.mosaicsIntern = results;
 
-		Configuration config = new Configuration(
-				event.getSuggestedConfigurationFile());
-		config.load();
-		itemID1 = config.get(Configuration.CATEGORY_ITEM, "itemID1", 7100)
-				.getInt();
-		itemID2 = config.get(Configuration.CATEGORY_ITEM, "itemID2", 7101)
-				.getInt();
-		itemID3 = config.get(Configuration.CATEGORY_ITEM, "itemID3", 7102)
-				.getInt();
-		itemID4 = config.get(Configuration.CATEGORY_ITEM, "itemID4", 7103)
-				.getInt();
-		itemID5 = config.get(Configuration.CATEGORY_ITEM, "itemID5", 7104)
-				.getInt();
-		itemID6 = config.get(Configuration.CATEGORY_ITEM, "itemID6", 7105)
-				.getInt();
-		itemID7 = config.get(Configuration.CATEGORY_ITEM, "itemID7", 7106)
-				.getInt();
-		itemID8 = config.get(Configuration.CATEGORY_ITEM, "itemID8", 7107)
-				.getInt();
-		itemID9 = config.get(Configuration.CATEGORY_ITEM, "itemID9", 7108)
-				.getInt();
-
-		blockID1 = config.get(Configuration.CATEGORY_BLOCK, "blockID1", 860)
-				.getInt();
-		blockID2 = config.get(Configuration.CATEGORY_BLOCK, "blockID2", 861)
-				.getInt();
-		blockID3 = config.get(Configuration.CATEGORY_BLOCK, "blockID3", 862)
-				.getInt();
-		blockID4 = config.get(Configuration.CATEGORY_BLOCK, "blockID4", 863)
-				.getInt();
-		config.save();
 	}
 
 	@EventHandler
@@ -168,7 +132,7 @@ public class TallDoorsBase {
 		proxy.registerRenderers();
 		registerTileEntities();
 
-		NetworkRegistry.instance().registerGuiHandler(this,
+		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
 	}
 
@@ -190,19 +154,19 @@ public class TallDoorsBase {
 	}
 
 	private void registerRecipes() {
-		ItemStack door = new ItemStack(Item.doorWood, 1, 0);
-		ItemStack hatch = new ItemStack(Block.trapdoor, 1, 0);
-		ItemStack fenceGate = new ItemStack(Block.fenceGate, 1);
-		ItemStack wood = new ItemStack(Block.planks, 1);
-		ItemStack wood2 = new ItemStack(Block.wood, 1);
-		ItemStack cobble = new ItemStack(Block.cobblestone, 1);
-		ItemStack sand = new ItemStack(Block.sand, 1);
-		ItemStack iron = new ItemStack(Item.ingotIron, 1);
-		ItemStack string = new ItemStack(Item.silk, 1);
-		ItemStack stick = new ItemStack(Item.stick, 1);
-		ItemStack redstone = new ItemStack(Item.redstone, 1);
-		ItemStack glass = new ItemStack(Block.glass,1);
-		ItemStack glow = new ItemStack(Item.glowstone,1);
+		ItemStack door = new ItemStack(Items.wooden_door, 1, 0);
+		ItemStack hatch = new ItemStack(Blocks.trapdoor, 1, 0);
+		ItemStack fenceGate = new ItemStack(Blocks.fence_gate, 1);
+		ItemStack wood = new ItemStack(Blocks.planks, 1);
+		ItemStack wood2 = new ItemStack(Blocks.log, 1);
+		ItemStack cobble = new ItemStack(Blocks.cobblestone, 1);
+		ItemStack sand = new ItemStack(Blocks.sand, 1);
+		ItemStack iron = new ItemStack(Items.iron_ingot, 1);
+		ItemStack string = new ItemStack(Items.string, 1);
+		ItemStack stick = new ItemStack(Items.stick, 1);
+		ItemStack redstone = new ItemStack(Items.redstone, 1);
+		ItemStack glass = new ItemStack(Blocks.glass,1);
+		ItemStack glow = new ItemStack(Items.glowstone_dust,1);
 
 		// mosaic tool
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool, 1,
@@ -342,20 +306,20 @@ public class TallDoorsBase {
 	}
 
 	private void initializeIDs() {
-		doorPlacer = new DoorPlacer(itemID1);
-		connector = new Connector(itemID2);
-		drawbridge = new DrawbridgePlacer(itemID3);
-		destructionHammer = new DestructionHammer(itemID4);
-		key = new Key(itemID5);
-		mosaicTool = new MosaicTool(itemID6);
-		keyMakerPlacer = new KeyMakerPlacer(itemID7);
-		trapDoor = new TrapDoorsPlacer(itemID8);
-		mosaicTool2 = new PermanentMosaicTool(itemID9);
+		doorPlacer = new DoorPlacer();
+		connector = new Connector();
+		drawbridge = new DrawbridgePlacer();
+		destructionHammer = new DestructionHammer();
+		key = new Key();
+		mosaicTool = new MosaicTool();
+		keyMakerPlacer = new KeyMakerPlacer();
+		trapDoor = new TrapDoorsPlacer();
+		mosaicTool2 = new PermanentMosaicTool();
 
-		drawbridgeWorkbench = new DrawbridgeWorkbench(blockID1);
-		keyRedstoneLock = new KeyRedstoneLock(blockID2);
-		mosaic = new MosaicBlock(blockID3);
-		mosaicGlass = new MosaicGlass(blockID4);
+		drawbridgeWorkbench = new DrawbridgeWorkbench();
+		keyRedstoneLock = new KeyRedstoneLock();
+		mosaic = new MosaicBlock();
+		mosaicGlass = new MosaicGlass();
 
 	}
 
