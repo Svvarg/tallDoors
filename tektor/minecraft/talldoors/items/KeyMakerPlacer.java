@@ -17,8 +17,8 @@ public class KeyMakerPlacer extends Item {
 
 	private Icon[] icon = new Icon[1];
 
-	public KeyMakerPlacer(int par1) {
-		super(par1);
+	public KeyMakerPlacer() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

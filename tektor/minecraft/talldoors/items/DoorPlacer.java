@@ -27,8 +27,8 @@ public class DoorPlacer extends Item {
 
 	private Icon[] icon = new Icon[20];
 
-	public DoorPlacer(int par1) {
-		super(par1);
+	public DoorPlacer() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

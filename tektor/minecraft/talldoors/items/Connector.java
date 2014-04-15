@@ -23,8 +23,8 @@ public class Connector extends Item {
 	private int z;
 	public DrawbridgeBase base;
 
-	public Connector(int par1) {
-		super(par1);
+	public Connector() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class DestructionHammer extends Item {
 
-	public DestructionHammer(int par1) {
-		super(par1);
+	public DestructionHammer() {
+		super();
 		this.setMaxDamage(60);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

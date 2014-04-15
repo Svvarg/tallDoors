@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 public class MosaicTool extends Item{
 
-	public MosaicTool(int par1) {
-		super(par1);
+	public MosaicTool() {
+		super();
 		this.setMaxDamage(50);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

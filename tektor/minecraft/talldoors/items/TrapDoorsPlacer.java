@@ -18,8 +18,8 @@ public class TrapDoorsPlacer extends Item {
 
 	private Icon[] icon = new Icon[1];
 
-	public TrapDoorsPlacer(int par1) {
-		super(par1);
+	public TrapDoorsPlacer() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

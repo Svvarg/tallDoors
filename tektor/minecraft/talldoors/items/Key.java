@@ -16,8 +16,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Key extends Item {
 	private Icon[] icon = new Icon[2];
 
-	public Key(int par1) {
-		super(par1);
+	public Key() {
+		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);

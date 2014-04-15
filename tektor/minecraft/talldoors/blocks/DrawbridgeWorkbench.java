@@ -23,8 +23,8 @@ import net.minecraft.world.World;
 public class DrawbridgeWorkbench extends BlockContainer{
 
 	private Icon[] icon = new Icon[5];
-	public DrawbridgeWorkbench(int id) {
-		super(id,Material.wood);
+	public DrawbridgeWorkbench() {
+		super(Material.wood);
 		setHardness(4.2F);
         setResistance(5.0F);
         

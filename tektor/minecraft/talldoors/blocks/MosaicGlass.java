@@ -18,8 +18,8 @@ import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 
 public class MosaicGlass extends BlockContainer {
 
-	public MosaicGlass(int par1) {
-		super(par1, Material.rock);
+	public MosaicGlass() {
+		super(Material.glass);
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setUnlocalizedName("mosaicGlass");

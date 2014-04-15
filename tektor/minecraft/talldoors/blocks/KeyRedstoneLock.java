@@ -25,8 +25,8 @@ public class KeyRedstoneLock extends BlockContainer {
 
 	private Icon[] icon = new Icon[2];
 
-	public KeyRedstoneLock(int par1) {
-		super(par1, Material.rock);
+	public KeyRedstoneLock() {
+		super(Material.rock);
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setUnlocalizedName("keyRedstoneLock");

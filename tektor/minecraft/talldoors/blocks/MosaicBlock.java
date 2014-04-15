@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 
 public class MosaicBlock extends BlockContainer {
 
-	public MosaicBlock(int par1) {
-		super(par1, Material.rock);
+	public MosaicBlock() {
+		super(Material.rock);
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setUnlocalizedName("mosaic");

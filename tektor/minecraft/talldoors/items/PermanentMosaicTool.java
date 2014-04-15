@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class PermanentMosaicTool extends Item {
 
-	public PermanentMosaicTool(int par1) {
-		super(par1);
+	public PermanentMosaicTool() {
+		super();
 		this.setMaxDamage(50);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
