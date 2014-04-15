@@ -2,8 +2,6 @@ package tektor.minecraft.talldoors;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -14,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
@@ -47,6 +44,7 @@ import tektor.minecraft.talldoors.items.KeyMakerPlacer;
 import tektor.minecraft.talldoors.items.MosaicTool;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
+import tektor.minecraft.talldoors.packet.PacketPipeline;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -134,6 +132,7 @@ public class TallDoorsBase {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
+		
 	}
 
 	private void registerBlocks() {
@@ -444,4 +443,17 @@ public class TallDoorsBase {
 
 	}
 
+	//Network
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
+	@EventHandler
+	public void initialise(FMLInitializationEvent evt) {
+	    packetPipeline.initalise();
+	}
+
+	@EventHandler
+	public void postInitialise(FMLPostInitializationEvent evt) {
+	    packetPipeline.postInitialise();
+	}
+	
 }
