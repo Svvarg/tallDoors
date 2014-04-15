@@ -1,31 +1,22 @@
 package tektor.minecraft.talldoors.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
-import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.MosaicGuiContainer;
-import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
+import tektor.minecraft.talldoors.packet.MosaicPacket;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 public class MosaicChooserGUI extends GuiContainer {
 	String[] keys;
@@ -149,25 +140,10 @@ public class MosaicChooserGUI extends GuiContainer {
 
 	public void onGuiClosed() {
 		super.onGuiClosed();
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeUTF(this.chosen);
-			outputStream.writeInt(te.xCoord);
-			outputStream.writeInt(te.yCoord);
-			outputStream.writeInt(te.zCoord);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "TallDoors_Mosaic";
-		packet.data = bos.toByteArray();
-		packet.length = bos.size();
-		if (!te.worldObj.isRemote) {
-		} else if (te.worldObj.isRemote) {
-			EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.play;
-			PacketDispatcher.sendPacketToServer(packet);
+		MosaicPacket packet = new MosaicPacket(te.xCoord,te.yCoord,te.zCoord,itemNameField.getText());
+		if (!te.getWorldObj().isRemote) {
+		} else if (te.getWorldObj().isRemote) {
+			TallDoorsBase.packetPipeline.sendToServer(packet);
 		}
 		Keyboard.enableRepeatEvents(false);
 	}

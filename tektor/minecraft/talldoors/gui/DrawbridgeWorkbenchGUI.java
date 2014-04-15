@@ -1,50 +1,30 @@
 package tektor.minecraft.talldoors.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
+import tektor.minecraft.talldoors.packet.DrawBridgeWorkbenchPacket;
 
 public class DrawbridgeWorkbenchGUI extends GuiContainer {
 
 	private int x, y;
 	private int planks, iron;
-	private InventoryPlayer inv;
 	private DrawbridgeWorkbenchTileEntity te;
-	private EntityPlayer play;
-
 	public DrawbridgeWorkbenchGUI(EntityPlayer player,
 			InventoryPlayer inventoryPlayer, DrawbridgeWorkbenchTileEntity e) {
 		super(new DrawbridgeWorkbenchContainer(inventoryPlayer, e));
 		x = y = 1;
 		planks = 1;
 		iron = 2;
-		inv = inventoryPlayer;
 		te = e;
-		play = player;
 	}
 
 	@Override
@@ -95,29 +75,12 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 		recalc();
 		if (par3 == 0 && par1 > 96 && par1 < 126 && par2 > 57 && par2 < 73) {
 
-			ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-			DataOutputStream outputStream = new DataOutputStream(bos);
-			try {
-				outputStream.writeInt(this.x);
-				outputStream.writeInt(this.y);
-				outputStream.writeInt(0);
-				outputStream.writeInt(0);
 
-				outputStream.writeInt(te.xCoord);
-				outputStream.writeInt(te.yCoord);
-				outputStream.writeInt(te.zCoord);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
 
-			Packet250CustomPayload packet = new Packet250CustomPayload();
-			packet.channel = "TallDoors";
-			packet.data = bos.toByteArray();
-			packet.length = bos.size();
-			if (!te.worldObj.isRemote) {
-			} else if (te.worldObj.isRemote) {
-				EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.play;
-				PacketDispatcher.sendPacketToServer(packet);
+			DrawBridgeWorkbenchPacket packet = new DrawBridgeWorkbenchPacket(x,y,0,0,te.xCoord,te.yCoord,te.zCoord);
+			if (!te.getWorldObj().isRemote) {
+			} else if (te.getWorldObj().isRemote) {
+				TallDoorsBase.packetPipeline.sendToServer(packet);
 			}
 
 		}

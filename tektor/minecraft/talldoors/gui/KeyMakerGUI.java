@@ -1,39 +1,29 @@
 package tektor.minecraft.talldoors.gui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.KeyMakerGuiContainer;
-import tektor.minecraft.talldoors.container.MachineWorkbenchContainer;
-import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import tektor.minecraft.talldoors.packet.KeyPacket;
 
 public class KeyMakerGUI extends GuiContainer {
 
-	private InventoryPlayer inv;
 	private KeyMaker te;
-	private EntityPlayer play;
 	public GuiTextField itemNameField;
 
 	public KeyMakerGUI(EntityPlayer player, InventoryPlayer inventoryPlayer,
 			KeyMaker e) {
 		super(new KeyMakerGuiContainer(inventoryPlayer, e));
-		inv = inventoryPlayer;
 		te = e;
-		play = player;
 	}
 
 	@Override
@@ -78,26 +68,10 @@ public class KeyMakerGUI extends GuiContainer {
 	}
 
 	private void press(boolean b) {
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-			outputStream.writeUTF(this.itemNameField.getText());
-			outputStream.writeBoolean(b);
-			outputStream.writeInt((int) te.posX);
-			outputStream.writeInt((int) te.posY);
-			outputStream.writeInt((int) te.posZ);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "TallDoors2";
-		packet.data = bos.toByteArray();
-		packet.length = bos.size();
+		KeyPacket packet = new KeyPacket((int)te.posX,(int)te.posY,(int)te.posZ, b,itemNameField.getText());
 		if (!te.worldObj.isRemote) {
 		} else if (te.worldObj.isRemote) {
-			EntityClientPlayerMP player2 = (EntityClientPlayerMP) this.play;
-			PacketDispatcher.sendPacketToServer(packet);
+			TallDoorsBase.packetPipeline.sendToServer(packet);
 		}
 		
 	}
