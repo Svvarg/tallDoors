@@ -113,7 +113,7 @@ public class TrapDoor extends Entity {
 	public boolean interactFirst(EntityPlayer player) {
 		if (!this.worldObj.isRemote) {
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 
 				func_110128_b(player);
 				player.inventory.getCurrentItem().damageItem(1, player);

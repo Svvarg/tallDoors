@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public abstract class AbstractLockable extends Entity {
@@ -23,24 +24,24 @@ public abstract class AbstractLockable extends Entity {
 
 		if (!this.worldObj.isRemote) {
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				if (!this.locked) {
 					func_110128_b(player);
 					player.inventory.getCurrentItem().damageItem(1, player);
 				} else {
-					player.addChatMessage("You can't destroy locked doors");
+					player.addChatMessage(new ChatComponentText("You can't destroy locked doors"));
 				}
 				return true;
 			} else if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.key.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.key)) {
 				if (!locked
 						&& player.inventory.getCurrentItem().stackTagCompound != null
 						&& player.inventory.getCurrentItem().getItemDamage() == 1) {
 					this.keyCode = player.inventory.getCurrentItem().stackTagCompound
 							.getString("keyCode");
 					locked = true;
-					player.addChatMessage("Locked the door with the key "
-							+ keyCode);
+					player.addChatMessage(new ChatComponentText("Locked the door with the key"
+							+ keyCode));
 					return true;
 				} else if (!keyCode.equals("-1")
 						&& keyCode
@@ -49,7 +50,7 @@ public abstract class AbstractLockable extends Entity {
 						&& player.inventory.getCurrentItem().getItemDamage() == 1) {
 					this.keyCode = "-1";
 					locked = false;
-					player.addChatMessage("Unlocked this door.");
+					player.addChatMessage(new ChatComponentText("Unlocked this door."));
 					return true;
 
 				}
@@ -81,13 +82,13 @@ public abstract class AbstractLockable extends Entity {
 								1.0f, 1.0f);
 					}
 				} else {
-					player.addChatMessage("This door is locked, you need the right key in your inventory.");
+					player.addChatMessage(new ChatComponentText("This door is locked, you need the right key in your inventory."));
 				}
 			}
 
 		} else {
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				player.swingItem();
 			}
 		}
@@ -101,7 +102,7 @@ public abstract class AbstractLockable extends Entity {
 	private boolean checkKey(EntityPlayer player) {
 		for (ItemStack stack : player.inventory.mainInventory) {
 			if (stack != null
-					&& stack.itemID == TallDoorsBase.key.itemID
+					&& stack.getItem().equals(TallDoorsBase.key)
 					&& stack.stackTagCompound.getString("keyCode").equals(
 							keyCode)) {
 				return true;

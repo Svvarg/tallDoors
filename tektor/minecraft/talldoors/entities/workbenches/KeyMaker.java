@@ -54,7 +54,7 @@ public class KeyMaker extends Entity {
 	public boolean interactFirst(EntityPlayer player) {
 
 		if (player.inventory.getCurrentItem() != null
-				&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+				&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 			if (!this.worldObj.isRemote) {
 
 				func_110128_b(player);

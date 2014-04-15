@@ -805,18 +805,18 @@ public class DrawbridgeBase extends Entity {
 		if (!this.worldObj.isRemote) {
 
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.connector.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.connector)) {
 				((Connector) player.inventory.getCurrentItem().getItem()).base = this;
 			}
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				func_110128_b(player);
 				player.inventory.getCurrentItem().damageItem(1, player);
 				return true;
 			}
 		} else {
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				player.swingItem();
 			}
 		}

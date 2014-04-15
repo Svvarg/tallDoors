@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -260,7 +261,7 @@ public class DrawbridgeMachine extends Entity {
 		if (!this.worldObj.isRemote) {
 			ItemStack i = player.inventory.getCurrentItem();
 			if (i != null
-					&& i.itemID == TallDoorsBase.connector.itemID
+					&& i.getItem().equals(TallDoorsBase.connector)
 					&& ((Connector) player.inventory.getCurrentItem().getItem()).base != null) {
 				if ((((Connector) player.inventory.getCurrentItem().getItem()).base.posY
 						+ ((Connector) player.inventory.getCurrentItem()
@@ -272,18 +273,18 @@ public class DrawbridgeMachine extends Entity {
 					player.inventory.decrStackSize(
 							player.inventory.currentItem, 1);
 				} else {
-					player.addChatMessage("A voice tells you: The Machine has to be placed higher.");
+					player.addChatMessage(new ChatComponentText("A voice tells you: The Machine has to be placed higher."));
 				}
 			}
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				func_110128_b(player);
 				player.inventory.getCurrentItem().damageItem(1, player);
 				return true;
 			}
 		} else {
 			if (player.inventory.getCurrentItem() != null
-					&& player.inventory.getCurrentItem().itemID == TallDoorsBase.destructionHammer.itemID) {
+					&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.destructionHammer)) {
 				player.swingItem();
 			}
 		}
