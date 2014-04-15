@@ -1,18 +1,15 @@
 package tektor.minecraft.talldoors.services;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class MosaicIconRegistry {
 	
-	public static HashMap icons = new HashMap();
+	public static HashMap<String,IIcon> icons = new HashMap<String,IIcon>();
 	public static List<String> mosaicsIntern;
 	
 	public MosaicIconRegistry()
@@ -20,7 +17,7 @@ public class MosaicIconRegistry {
 		
 	}
 	
-	public static void register(IconRegister reg)
+	public static void register(IIconRegister reg)
 	{
 		
 		try {
@@ -37,8 +34,8 @@ public class MosaicIconRegistry {
 		
 	}
 
-	public static Icon getIcon(String icon) {
-		return (Icon) icons.get(icon);
+	public static IIcon getIcon(String icon) {
+		return (IIcon) icons.get(icon);
 	}
 	
 	public static String getRandom()

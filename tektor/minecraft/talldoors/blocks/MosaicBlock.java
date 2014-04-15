@@ -8,13 +8,11 @@ import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -24,14 +22,14 @@ public class MosaicBlock extends BlockContainer {
 		super(Material.rock);
 		setHardness(4.2F);
 		setResistance(5.0F);
-		setUnlocalizedName("mosaic");
+		setBlockName("mosaic");
 		setCreativeTab(CreativeTabs.tabBlock);
-		this.setLightValue(0);
+		this.setLightLevel(0);
 		this.setLightOpacity(1000);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int var2) {
 		return new MosaicTileEntity();
 	}
 
@@ -73,13 +71,13 @@ public class MosaicBlock extends BlockContainer {
 		return 1;
 	}
 
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IIconRegister par1IconRegister) {
 		MosaicIconRegistry.register(par1IconRegister);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		return MosaicIconRegistry.getIcon("standard");
 	}
 
@@ -91,7 +89,7 @@ public class MosaicBlock extends BlockContainer {
 			return false;
 		}
 		if (player.inventory.getCurrentItem() != null
-				&& player.inventory.getCurrentItem().itemID == TallDoorsBase.mosaicTool.itemID) {
+				&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.mosaicTool)) {
 
 			player.openGui(TallDoorsBase.instance, 2, world, x, y, z);
 			return true;

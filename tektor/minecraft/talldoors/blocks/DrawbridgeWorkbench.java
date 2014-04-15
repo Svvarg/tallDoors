@@ -7,34 +7,35 @@ import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class DrawbridgeWorkbench extends BlockContainer{
 
-	private Icon[] icon = new Icon[5];
+	private IIcon[] icon = new IIcon[5];
 	public DrawbridgeWorkbench() {
 		super(Material.wood);
 		setHardness(4.2F);
         setResistance(5.0F);
-        
-		setUnlocalizedName("drawbridgeWorkplace");
+        this.setBlockName("drawbridgeWorkplace");
 		setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchTop");
 		icon[1] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchSide");
 		icon[2] = par1IconRegister.registerIcon("talldoors:drawbridgeWorkbenchBottom");
@@ -44,7 +45,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int par1,
+	public IIcon getIcon(int par1,
 	           int par2)
 	{
 		if(par2 == 0)
@@ -71,16 +72,11 @@ public class DrawbridgeWorkbench extends BlockContainer{
 		}
 		return icon[0];
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new DrawbridgeWorkbenchTileEntity();
-	}
 	
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z,
                     EntityPlayer player, int dir, float what, float these, float are) {
-            TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
             int metadata = world.getBlockMetadata(x, y, z);
             if (tileEntity == null || player.isSneaking()) {
                     return false;
@@ -96,7 +92,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
     }
 	
 	@Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+    public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
             dropItems(world, x, y, z);
             super.breakBlock(world, x, y, z, par5, par6);
     }
@@ -104,7 +100,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
     private void dropItems(World world, int x, int y, int z){
             Random rand = new Random();
 
-            TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
             if (!(tileEntity instanceof IInventory)) {
                     return;
             }
@@ -120,7 +116,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
 
                             EntityItem entityItem = new EntityItem(world,
                                             x + rx, y + ry, z + rz,
-                                            new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
+                                            new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
 
                             if (item.hasTagCompound()) {
                                     entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
@@ -138,10 +134,15 @@ public class DrawbridgeWorkbench extends BlockContainer{
     
     @Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
+	public void getSubBlocks(Item par1, CreativeTabs tab, List subItems) {
 
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 1));
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new DrawbridgeWorkbenchTileEntity();
 	}
 
 }

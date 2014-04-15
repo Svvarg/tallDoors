@@ -7,13 +7,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
-import tektor.minecraft.talldoors.client.TallDoorsClientProxy;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 
 public class MosaicGlass extends BlockContainer {
@@ -22,12 +19,12 @@ public class MosaicGlass extends BlockContainer {
 		super(Material.glass);
 		setHardness(4.2F);
 		setResistance(5.0F);
-		setUnlocalizedName("mosaicGlass");
+		setBlockName("mosaicGlass");
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int var2) {
 		return new MosaicGlassTileEntity();
 	}
 
@@ -65,7 +62,7 @@ public class MosaicGlass extends BlockContainer {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		return MosaicIconRegistry.getIcon("standard");
 	}
 
@@ -77,7 +74,7 @@ public class MosaicGlass extends BlockContainer {
 			return false;
 		}
 		if (player.inventory.getCurrentItem() != null
-				&& player.inventory.getCurrentItem().itemID == TallDoorsBase.mosaicTool.itemID) {
+				&& player.inventory.getCurrentItem().getItem().equals(TallDoorsBase.mosaicTool)) {
 
 			player.openGui(TallDoorsBase.instance, 2, world, x, y, z);
 			return true;
