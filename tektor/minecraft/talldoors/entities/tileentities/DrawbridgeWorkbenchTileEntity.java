@@ -1,7 +1,6 @@
 package tektor.minecraft.talldoors.entities.tileentities;
 
 import tektor.minecraft.talldoors.container.AbstractWorkbenchContainer;
-import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

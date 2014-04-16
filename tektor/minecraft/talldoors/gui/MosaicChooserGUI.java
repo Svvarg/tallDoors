@@ -28,13 +28,10 @@ public class MosaicChooserGUI extends GuiContainer {
 	public GuiTextField itemNameField;
 
 	private MosaicTileEntity te;
-	private EntityPlayer play;
-
 	public MosaicChooserGUI(EntityPlayer player,
 			InventoryPlayer inventoryPlayer, MosaicTileEntity e) {
 		super(new MosaicGuiContainer(inventoryPlayer, e));
 		te = e;
-		play = player;
 		off = 0;
 		chosen = e.icon;
 		xSize = 256;
@@ -132,7 +129,6 @@ public class MosaicChooserGUI extends GuiContainer {
 					chosen = keys[off + 8];
 				else if (par2 > 116 && par2 < 127 && off+9 < keys.length)
 					chosen = keys[off + 9];
-				
 			}
 
 		}
@@ -140,7 +136,7 @@ public class MosaicChooserGUI extends GuiContainer {
 
 	public void onGuiClosed() {
 		super.onGuiClosed();
-		MosaicPacket packet = new MosaicPacket(te.xCoord,te.yCoord,te.zCoord,itemNameField.getText());
+		MosaicPacket packet = new MosaicPacket(te.xCoord,te.yCoord,te.zCoord,chosen);
 		if (!te.getWorldObj().isRemote) {
 		} else if (te.getWorldObj().isRemote) {
 			TallDoorsBase.packetPipeline.sendToServer(packet);

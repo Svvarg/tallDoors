@@ -1,9 +1,5 @@
 package tektor.minecraft.talldoors.entities;
 
-import java.util.List;
-
-import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
-import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -139,7 +135,6 @@ public class FakeEntity extends Entity {
 	}
 
 	public void setBoundsAt(double par1, double par3, double par5) {
-		float f = this.width / 2.0F;
 		double f1 = this.height2;
 		if (this.active == false && this.up == false) {
 			if (orientation == 0) {

@@ -71,7 +71,8 @@ public class MosaicBlock extends BlockContainer {
 		return 1;
 	}
 
-	public void registerIcons(IIconRegister par1IconRegister) {
+	@Override
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		MosaicIconRegistry.register(par1IconRegister);
 	}
 

@@ -1,6 +1,5 @@
 package tektor.minecraft.talldoors.entities.doors_width2;
 
-import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.AbstractLockable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

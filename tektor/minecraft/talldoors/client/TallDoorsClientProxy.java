@@ -18,7 +18,6 @@ import tektor.minecraft.talldoors.renderer.doors2x6.RenderDarkMetalEntranceDoor3
 import tektor.minecraft.talldoors.renderer.doors2x6.RenderEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.doors2x6.RenderMetalEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
-import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
@@ -37,7 +36,6 @@ import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.entities.trapdoors.TrapDoor;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 

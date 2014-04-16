@@ -1,12 +1,8 @@
 package tektor.minecraft.talldoors.entities.drawbridge;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.items.Connector;
@@ -17,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DrawbridgeBase extends Entity {
@@ -720,7 +715,6 @@ public class DrawbridgeBase extends Entity {
 	}
 
 	public void setBoundsAt(double par1, double par3, double par5) {
-		float f = this.width / 2.0F;
 		double f1 = this.height2;
 		if (this.active == false && this.up == false) {
 			if (orientation == 0) {

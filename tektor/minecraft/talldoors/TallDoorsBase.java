@@ -101,7 +101,6 @@ public class TallDoorsBase {
 			Enumeration e = zf.entries();
 			while (e.hasMoreElements()) {
 				ZipEntry ze = (ZipEntry) e.nextElement();
-
 				if (ze.getName().contains(
 						"assets/talldoors/textures/blocks/mosaic/")) {
 					String[] a = ze.getName().split(
@@ -154,7 +153,7 @@ public class TallDoorsBase {
 
 	private void registerRecipes() {
 		ItemStack door = new ItemStack(Items.wooden_door, 1, 0);
-		ItemStack hatch = new ItemStack(Blocks.trapdoor, 1, 0);
+		new ItemStack(Blocks.trapdoor, 1, 0);
 		ItemStack fenceGate = new ItemStack(Blocks.fence_gate, 1);
 		ItemStack wood = new ItemStack(Blocks.planks, 1);
 		ItemStack wood2 = new ItemStack(Blocks.log, 1);

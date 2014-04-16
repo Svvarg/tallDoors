@@ -233,7 +233,6 @@ public class DrawbridgeMachine extends Entity {
 	}
 
 	public void setBoundsAt(double par1, double par3, double par5) {
-		float f = this.width / 2.0F;
 		double f1 = this.height2;
 
 		if (this.orientation == 0) {
