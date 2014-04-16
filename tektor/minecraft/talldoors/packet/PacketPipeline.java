@@ -107,12 +107,14 @@ public class PacketPipeline extends
 
 	// Method to call from FMLInitializationEvent
 	public void initalise() {
-		this.channels = NetworkRegistry.INSTANCE.newChannel("TConstruct", this);
+		this.channels = NetworkRegistry.INSTANCE.newChannel("TallDoors", this);
 		registerPackets();
 	}
 
 	public void registerPackets() {
-		//registerPacket(PacketDoubleJump.class);
+		registerPacket(KeyPacket.class);
+		registerPacket(MosaicPacket.class);
+		registerPacket(DrawBridgeWorkbenchPacket.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent
