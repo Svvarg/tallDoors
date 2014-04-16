@@ -4,12 +4,6 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import tektor.minecraft.talldoors.entities.FenceGate1;
-import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor3;
-import tektor.minecraft.talldoors.entities.doors_width2.MetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import net.minecraft.client.renderer.texture.IIconRegister;

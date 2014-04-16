@@ -3,7 +3,6 @@ package tektor.minecraft.talldoors.items;
 import java.util.List;
 
 import tektor.minecraft.talldoors.entities.trapdoors.TrapDoor;
-import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;

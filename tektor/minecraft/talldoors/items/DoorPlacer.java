@@ -448,8 +448,6 @@ public class DoorPlacer extends Item {
 	
 	private boolean checkFree(World world, int posX, int posY, int posZ, int width, int height, boolean left, int orientation)
 	{
-		boolean free =false;
-		
 		if(left)
 		{
 			for(int i = 0; i < width; i++)
