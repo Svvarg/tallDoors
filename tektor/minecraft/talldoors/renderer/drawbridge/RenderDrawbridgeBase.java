@@ -93,7 +93,7 @@ public class RenderDrawbridgeBase extends Render {
 			Minecraft.getMinecraft().renderEngine
 					.bindTexture(new ResourceLocation(
 							"talldoors:textures/entities/drawbridgeBase2.png"));
-			double f, g, j, k;
+			double f, g;
 			f = Math.cos(Math.toRadians(angle)) * (lon - 0.125);
 			g = Math.sin(Math.toRadians(angle)) * (lon - 0.125);
 

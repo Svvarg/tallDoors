@@ -6,10 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor2;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.models.ModelDrawbridgeMachine;
-import tektor.minecraft.talldoors.models.ModelEntranceDoor2;
 
 public class RenderDrawbridgeMachine extends Render {
 

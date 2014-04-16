@@ -4,27 +4,17 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelSign;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
-import tektor.minecraft.talldoors.client.TallDoorsClientProxy;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.models.ModelMosaicGlass;
-import tektor.minecraft.talldoors.services.MosaicIconRegistry;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderMosaicGlassTileEntity extends TileEntitySpecialRenderer {
-
-	private final ModelMosaicGlass model = new ModelMosaicGlass();
 
 	// This method is called when minecraft renders a tile entity
 	public void renderTileEntityAt(TileEntity tileEntity, double d, double d1,
