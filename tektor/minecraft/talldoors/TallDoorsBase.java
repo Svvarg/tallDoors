@@ -17,7 +17,7 @@ import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
-import tektor.minecraft.talldoors.doorworkshop.PlainDoorPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -142,6 +142,8 @@ public class TallDoorsBase {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		
+		DoorPartRegistry.initialize();
 	
 	}
 
