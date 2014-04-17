@@ -156,7 +156,7 @@ public class TallDoorsBase {
 	}
 
 	private void registerDoorParts() {
-		//DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
+		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
 		
 	}
 
