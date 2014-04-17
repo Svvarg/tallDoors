@@ -17,6 +17,7 @@ import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
+import tektor.minecraft.talldoors.doorworkshop.PlainDoorPartType;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -45,6 +46,7 @@ import tektor.minecraft.talldoors.items.MosaicTool;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
+import tektor.minecraft.talldoors.services.DoorPartRegistry;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -58,7 +60,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.0")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.0b")
 public class TallDoorsBase {
 
 	// instance
@@ -68,6 +70,9 @@ public class TallDoorsBase {
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
+
+	//Network
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
@@ -126,11 +131,32 @@ public class TallDoorsBase {
 		registerBlocks();
 		registerEntities();
 		registerRecipes();
+		registerDoorParts();
 		proxy.registerRenderers();
 		registerTileEntities();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
+		
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+	
+	}
+
+	@EventHandler
+	public void initialise(FMLInitializationEvent evt) {
+	    packetPipeline.initalise();
+	}
+
+	@EventHandler
+	public void postInitialise(FMLPostInitializationEvent evt) {
+	    packetPipeline.postInitialise();
+	}
+
+	private void registerDoorParts() {
+		//DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
 		
 	}
 
@@ -435,24 +461,6 @@ public class TallDoorsBase {
 				.registerTileEntity(
 						tektor.minecraft.talldoors.entities.tileentities.KeyRedstoneLockTileEntity.class,
 						"keylock");
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-
-	}
-
-	//Network
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
-
-	@EventHandler
-	public void initialise(FMLInitializationEvent evt) {
-	    packetPipeline.initalise();
-	}
-
-	@EventHandler
-	public void postInitialise(FMLPostInitializationEvent evt) {
-	    packetPipeline.postInitialise();
 	}
 	
 }
