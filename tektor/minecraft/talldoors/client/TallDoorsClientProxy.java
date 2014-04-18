@@ -21,6 +21,9 @@ import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
+import tektor.minecraft.talldoors.doorworkshop.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -61,7 +64,13 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(FakeEntity.class, new RenderFakeEntity());
 		RenderingRegistry.registerEntityRenderingHandler(KeyMaker.class, new KeyMakerRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(TrapDoor.class, new TrapDoorRenderer());
+		
+		RenderingRegistry.registerEntityRenderingHandler(DoorBase.class, new RenderFakeEntity());
+		RenderingRegistry.registerEntityRenderingHandler(PlainDoorPartEntity.class, new PlainDoorPartRenderer());
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
+		
+		
 		mosaicRenderType = RenderingRegistry.getNextAvailableRenderId();
 		mosaicGlassRenderType = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderMosaicTileEnity());

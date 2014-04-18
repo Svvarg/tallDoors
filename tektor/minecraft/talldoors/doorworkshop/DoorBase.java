@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
@@ -16,17 +18,17 @@ import net.minecraft.world.World;
 
 public class DoorBase extends Entity {
 
-	private int orientation;
+	public int orientation;
 	String[][] constructionPlan;
-	String[][] texturePlan;
 	
-	AbstractDoorPart[] parts;
+	List<AbstractDoorPart> parts;
 	
 	public DoorBase(World par1World) {
 		super(par1World);
 		constructionPlan = new String[1][1];
-		texturePlan = new String[1][1];
-		parts = new AbstractDoorPart[1];
+		parts = new ArrayList<AbstractDoorPart>(1);
+
+		this.ignoreFrustumCheck = true;
 	}
 
 	
@@ -34,13 +36,9 @@ public class DoorBase extends Entity {
 	public void setConstructionPlan(String[][] plan)
 	{
 		this.constructionPlan = plan;
+		this.parts = new ArrayList<AbstractDoorPart>(plan[0].length * plan.length);
 	}
 	
-	public void setTexturePlan(String[][] plan)
-	{
-		this.texturePlan = plan;
-	}
-
 	// logic: each array in this array represents a column
 
 	@Override
@@ -51,7 +49,7 @@ public class DoorBase extends Entity {
 
 	public void constructFromPlan() {
 		for (int columns = 0; columns < constructionPlan.length; columns++) {
-			int heightPosition = 0;
+			int heightPosition = (int) this.posY;
 			int sizer = 1;
 
 			for (int blocks = 0; blocks < constructionPlan[columns].length; blocks++) {
@@ -60,8 +58,8 @@ public class DoorBase extends Entity {
 								.equals(constructionPlan[columns][blocks + 1])) {
 					sizer++;
 					continue;
-				} else {
-					AbstractDoorPart part = null;
+				} 
+						AbstractDoorPart part = null;
 					switch (orientation) {
 					case 0: {
 						AbstractDoorPartType classH = DoorPartRegistry
@@ -69,8 +67,9 @@ public class DoorBase extends Entity {
 						part = classH.getNewEntity(this.worldObj,
 								(int) this.posX - columns,
 								(int) heightPosition, (int) this.posZ, sizer,
-								orientation,
-								texturePlan[columns][blocks]);
+								orientation);
+						this.parts.add(part);
+						worldObj.spawnEntityInWorld(part);
 						break;
 					}
 					}
@@ -80,17 +79,24 @@ public class DoorBase extends Entity {
 
 			}
 		}
-	}
+
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound var1) {
 		byte[] byteArray = var1.getByteArray("constructionPlan");
+		byte[] bytes2 = var1.getByteArray("parts");
 		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
 				byteArray);
+		final ByteArrayInputStream byteArrayInputStream2 = new ByteArrayInputStream(
+				bytes2);
 		try {
-			final ObjectInputStream objectInputStream = new ObjectInputStream(
+			ObjectInputStream objectInputStream = new ObjectInputStream(
 					byteArrayInputStream);
 			constructionPlan = (String[][]) objectInputStream.readObject();
+			objectInputStream = new ObjectInputStream(
+					byteArrayInputStream2);
+			parts = (List<AbstractDoorPart>) objectInputStream.readObject();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,7 +121,27 @@ public class DoorBase extends Entity {
 		}
 		final byte[] bytes = stream.toByteArray();
 		var1.setByteArray("constructionPlan", bytes);
+		stream.reset();
+		ObjectOutputStream objStream;
+		try {
+			objStream = new ObjectOutputStream(stream);
+			objStream.writeObject(parts);
+			objStream.flush();
+			objStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final byte[] bytes2 = stream.toByteArray();
+		var1.setByteArray("parts", bytes2);
+		
+	}
 
+
+
+	public void setOrientation(boolean b, int var24) {
+		orientation = var24;
+		
 	}
 
 }

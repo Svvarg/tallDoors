@@ -13,7 +13,7 @@ public class PlainDoorPartType extends AbstractDoorPartType{
 	@Override
 	public void initialize() {
 		
-		depth = 0.05;
+		depth = 0.25f;
 		baseCost = new ArrayList<ItemStack>(1);
 		baseCost.add(new ItemStack(Blocks.planks,1,0));
 		costPerSize = new ArrayList<ItemStack>(1);
@@ -22,8 +22,8 @@ public class PlainDoorPartType extends AbstractDoorPartType{
 	}
 
 	@Override
-	public AbstractDoorPart getNewEntity(World world, int posX, int heightPosition, int posZ, int heightSize, int orientation, String texture) {
-		AbstractDoorPart part = new PlainDoorPartEntity(world, posX, heightPosition, posZ, heightSize, orientation, texture);
+	public AbstractDoorPart getNewEntity(World world, int posX, int heightPosition, int posZ, int heightSize, int orientation) {
+		AbstractDoorPart part = new PlainDoorPartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
 		return part;
 	}
 }
