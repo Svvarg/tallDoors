@@ -10,13 +10,13 @@ import java.util.List;
 
 import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
-import tektor.minecraft.talldoors.services.DoorPartRegistry;
+import tektor.minecraft.talldoors.entities.AbstractLockable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class DoorBase extends Entity {
+public class DoorBase extends AbstractLockable {
 
 	public int orientation;
 	String[][] constructionPlan;
@@ -83,6 +83,7 @@ public class DoorBase extends Entity {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound var1) {
+		super.readFromNBT(var1);
 		byte[] byteArray = var1.getByteArray("constructionPlan");
 		byte[] bytes2 = var1.getByteArray("parts");
 		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
@@ -109,6 +110,7 @@ public class DoorBase extends Entity {
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound var1) {
+		super.writeEntityToNBT(var1);
 		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		try {
 			final ObjectOutputStream objStream = new ObjectOutputStream(stream);
@@ -141,6 +143,22 @@ public class DoorBase extends Entity {
 
 	public void setOrientation(boolean b, int var24) {
 		orientation = var24;
+		
+	}
+
+
+
+	@Override
+	public void func_110128_b(Entity player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void setBoundsAt(double posX, double posY, double posZ) {
+		// TODO Auto-generated method stub
 		
 	}
 

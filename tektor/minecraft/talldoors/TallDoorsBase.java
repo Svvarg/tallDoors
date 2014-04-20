@@ -18,6 +18,8 @@ import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
 import tektor.minecraft.talldoors.doorworkshop.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
+import tektor.minecraft.talldoors.doorworkshop.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
@@ -49,7 +51,6 @@ import tektor.minecraft.talldoors.items.MosaicTool;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
-import tektor.minecraft.talldoors.services.DoorPartRegistry;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -93,6 +94,7 @@ public class TallDoorsBase {
 	public static Block keyRedstoneLock;
 	public static Block mosaic;
 	public static Block mosaicGlass;
+	public static Block doorWorkshop;
 
 
 	@EventHandler
@@ -179,6 +181,8 @@ public class TallDoorsBase {
 		keyRedstoneLock = new KeyRedstoneLock();
 		mosaic = new MosaicBlock();
 		mosaicGlass = new MosaicGlass();
+		
+		doorWorkshop = new DoorWorkshop();
 	
 	}
 
@@ -201,6 +205,8 @@ public class TallDoorsBase {
 		LanguageRegistry.addName(new ItemStack(mosaic, 1, 0), "Mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
 		LanguageRegistry.addName(new ItemStack(mosaicGlass, 1, 0), "Mosaic Glass");
+		
+		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
 
 	}
 
@@ -330,6 +336,10 @@ public class TallDoorsBase {
 				.registerTileEntity(
 						tektor.minecraft.talldoors.entities.tileentities.KeyRedstoneLockTileEntity.class,
 						"keylock");
+		
+		GameRegistry.registerTileEntity(
+				tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity.class,
+				"doorWorkshop");
 	}
 
 	private void registerRecipes() {

@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.services;
+package tektor.minecraft.talldoors.doorworkshop;
 
 import java.util.HashMap;
 
