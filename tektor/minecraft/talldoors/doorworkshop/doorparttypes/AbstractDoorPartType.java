@@ -19,4 +19,5 @@ public abstract class AbstractDoorPartType{
 	
 	public abstract AbstractDoorPart getNewEntity(World world, int posX, int heightPosition, int posZ, int heightSize, int orientation);
 	
+	public abstract List<String> getCostAsString();
 }

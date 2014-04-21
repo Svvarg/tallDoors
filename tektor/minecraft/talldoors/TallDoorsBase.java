@@ -18,6 +18,7 @@ import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
 import tektor.minecraft.talldoors.doorworkshop.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
@@ -89,12 +90,14 @@ public class TallDoorsBase {
 	public static Item mosaicTool2;
 	
 	public static Item modularDoorPlacer;
+	public static Item doorModule;
 	
 	public static Block drawbridgeWorkbench;
 	public static Block keyRedstoneLock;
 	public static Block mosaic;
 	public static Block mosaicGlass;
 	public static Block doorWorkshop;
+
 
 
 	@EventHandler
@@ -183,6 +186,7 @@ public class TallDoorsBase {
 		mosaicGlass = new MosaicGlass();
 		
 		doorWorkshop = new DoorWorkshop();
+		doorModule = new DoorModule();
 	
 	}
 
@@ -221,6 +225,7 @@ public class TallDoorsBase {
 		GameRegistry.registerItem(trapDoor, "trapDoorPlacer");
 		
 		GameRegistry.registerItem(modularDoorPlacer, "modularDoorPlacer");
+		GameRegistry.registerItem(doorModule, "doorModule");
 		
 		LanguageRegistry.addName(mosaicTool, "Mosaic Tool");
 		LanguageRegistry.addName(mosaicTool2, "Permanent Mosaic Tool");

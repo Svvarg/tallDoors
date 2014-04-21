@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.doorworkshop;
+package tektor.minecraft.talldoors.doorworkshop.gui;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -8,9 +8,13 @@ import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.MosaicGuiContainer;
+import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchPacket;
+import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.packet.MosaicPacket;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -29,9 +33,10 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 	int pages;
 	String chosen;
 	public GuiTextField itemNameField;
-	public GuiButton button;
 	
 	private DoorModuleWorkbenchTileEntity te;
+	private String moduleType;
+	private int priority;
 
 	public DoorModuleWorkbenchGUI(EntityPlayer player,
 			InventoryPlayer inventoryPlayer, DoorModuleWorkbenchTileEntity e) {
@@ -44,7 +49,17 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		key.addAll(DoorPartRegistry.registeredParts.keySet());
 		keys = keysOrigin = (String[]) key.toArray(new String[0]);
 		page = 1;
-		pages = (int) Math.ceil(keys.length / 10f);
+		priority = 1;
+		moduleType = "horiz.";
+		pages = (int) Math.ceil(keys.length / 8f);
+	}
+	
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		super.mouseClicked(par1, par2, par3);
+		this.itemNameField.mouseClicked(par1, par2, par3);
+		par1 = par1 - guiLeft;
+		par2 = par2 - guiTop;
 	}
 	
 	@Override
@@ -53,15 +68,23 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		// the parameters for drawString are: string, x, y, color
 		fontRendererObj.drawString("Door Modules", 8, 6, 9919952);
 		fontRendererObj.drawString("Modules:", 8, 17, 9919952);
-		for (int i = off; (i < off + 10 && i < keys.length); i++) {
+		for (int i = off; (i < off + 8 && i < keys.length); i++) {
 			int color = 9919952;
 			if (chosen.equals(keys[i]))
 				color = 5919952;
 
 			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
 		}
-		fontRendererObj.drawString(page + "/" + pages, 48, 127, 9919952);
-	}
+		fontRendererObj.drawString(page + "/" + pages, 48, 107, 9919952);
+		
+		fontRendererObj.drawString("Prio " + priority +" " + moduleType + " " + chosen + " module", 8, 122, 9919952);
+		int i = 0;
+		for(String s : DoorPartRegistry.getPartForIndex(chosen).getCostAsString())
+		{	
+			fontRendererObj.drawString(s, 8, 132 + i, 9919952);
+			i = i + 10;
+		}
+		}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
@@ -73,26 +96,14 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		this.drawTexturedModalRect(x+40, y +137, 0, 166, 14, 15);
-		this.drawTexturedModalRect(x+59, y +137, 14, 166, 14, 15);
 		drawPreview(x, y);
 	}
 	
 	public void drawPreview(int x, int y) {
 		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
-				"textures/doorparts/preview/" + chosen + ".png"));
-		Tessellator tessellator = Tessellator.instance;
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(x + 163, y + 16 + 64, 0, 0.0, 1.0);
-		tessellator.addVertexWithUV(x + 163 + 64, y + 16 + 64, 0, 1.0, 1.0);
-		tessellator.addVertexWithUV(x + 163 + 64, y + 16, 0, 1.0, 0.0);
-		tessellator.addVertexWithUV(x + 163, y + 16, 0, 0.0, 0.0);
-		tessellator.draw();
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glDisable(GL11.GL_BLEND);
+				"textures/doorparts/preview/"+ chosen + ".png"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.drawTexturedModalRect(x+150, y+5, 0, 0, 100, 77);
 	}
 	
 	public void onGuiClosed() {
@@ -135,7 +146,19 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		this.itemNameField.setMaxStringLength(40);
 		this.itemNameField.setText("");
 		
-		this.button = new GuiButton(i + 100, j + 100, 50, 50,14,"OK");
+		//id, x,y,width,height,buttontext
+		this.buttonList.clear();
+		this.buttonList.add(new GuiButton(0,i+178,j+135,40,20,"OK"));
+		this.buttonList.add(new GuiButton(1,i+164,j+95,20,20,"1"));
+		this.buttonList.add(new GuiButton(2,i+186,j+95,20,20,"2"));
+		this.buttonList.add(new GuiButton(3,i+208,j+95,20,20,"3"));
+		this.buttonList.add(new GuiButton(4,i+230,j+95,20,20,"4"));
+		this.buttonList.add(new GuiButton(5,i+154,j+115,20,20,"S"));
+		this.buttonList.add(new GuiButton(6,i+176,j+115,20,20,"H"));
+		this.buttonList.add(new GuiButton(7,i+198,j+115,20,20,"V"));
+		this.buttonList.add(new GuiButton(8,i+154,j+135,20,20,"F"));
+		this.buttonList.add(new GuiButton(9,i+25,j+102,20,20,"-"));
+		this.buttonList.add(new GuiButton(10,i+69,j+102,20,20,"+"));
 	}
 	
 	@Override
@@ -143,6 +166,80 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		super.drawScreen(par1, par2, par3);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		this.itemNameField.drawTextBox();
+	}
+	
+	protected void actionPerformed(GuiButton button)
+	{
+		switch(button.id)
+		{
+			case 0:
+			{
+				DoorModuleWorkbenchPacket pack = new DoorModuleWorkbenchPacket(this.te.xCoord, this.te.yCoord, this.te.zCoord, this.priority, this.chosen, this.moduleType);
+				if (!te.getWorldObj().isRemote) {
+				} else if (te.getWorldObj().isRemote) {
+					TallDoorsBase.packetPipeline.sendToServer(pack);
+				}
+				break;
+			}
+			case 1:
+			{
+				this.priority = 1;
+				break;
+			}
+			case 2:
+			{
+				this.priority = 2;
+				break;
+			}
+			case 3:
+			{
+				this.priority = 3;
+				break;
+			}
+			case 4:
+			{
+				this.priority = 4;
+				break;
+			}
+			case 5:
+			{
+				this.moduleType = "single";
+				break;
+			}
+			case 6:
+			{
+				this.moduleType = "horiz.";
+				break;
+			}
+			case 7:
+			{
+				this.moduleType = "vertical";
+				break;
+			}
+			case 8:
+			{
+				this.moduleType = "full";
+				break;
+			}
+			case 9:
+			{
+				if(page > 1)
+				{
+					page--;
+					off = (page - 1) * 8;
+				}
+				break;
+			}
+			case 10:
+			{
+				if(page < pages)
+				{
+					page++;
+					off = (page - 1) * 8;
+				}
+				break;
+			}
+		}
 	}
 
 }

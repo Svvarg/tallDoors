@@ -1,5 +1,6 @@
 package tektor.minecraft.talldoors.doorworkshop;
 
+import tektor.minecraft.talldoors.doorworkshop.gui.DoorModuleWorkbenchContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -119,6 +120,11 @@ public class DoorModuleWorkbenchTileEntity extends TileEntity implements IInvent
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return true;
+	}
+
+	public void produce(int priority, String chosen, String type) {
+		container.produce(priority, chosen, type);
+		
 	}
 
 }

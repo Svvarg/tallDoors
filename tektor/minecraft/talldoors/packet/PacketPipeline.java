@@ -8,6 +8,8 @@ import io.netty.buffer.*;
 import io.netty.channel.*;
 import io.netty.handler.codec.MessageToMessageCodec;
 import java.util.*;
+
+import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.*;
 import net.minecraft.network.*;
@@ -115,6 +117,7 @@ public class PacketPipeline extends
 		registerPacket(KeyPacket.class);
 		registerPacket(MosaicPacket.class);
 		registerPacket(DrawBridgeWorkbenchPacket.class);
+		registerPacket(DoorModuleWorkbenchPacket.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent
