@@ -39,7 +39,7 @@ public class ModularDoorPlacer extends Item {
 			{
 				for(int blocks = 0; blocks < cons[columns].length; blocks++)
 				{
-					cons[columns][blocks] = "plain";
+					cons[columns][blocks] = "horizontal";
 				}
 			}
 			door.setConstructionPlan(cons);

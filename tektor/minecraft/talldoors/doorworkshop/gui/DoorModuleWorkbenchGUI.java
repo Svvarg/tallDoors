@@ -7,21 +7,14 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
-import tektor.minecraft.talldoors.container.MosaicGuiContainer;
 import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchPacket;
 import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
-import tektor.minecraft.talldoors.packet.MosaicPacket;
-import tektor.minecraft.talldoors.services.MosaicIconRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class DoorModuleWorkbenchGUI extends GuiContainer{
@@ -45,7 +38,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		off = 0;
 		chosen = "plain";
 		xSize = 256;
-		SortedSet key = new TreeSet();
+		SortedSet<String> key = new TreeSet<String>();
 		key.addAll(DoorPartRegistry.registeredParts.keySet());
 		keys = keysOrigin = (String[]) key.toArray(new String[0]);
 		page = 1;
@@ -55,81 +48,10 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 	}
 	
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
-		super.mouseClicked(par1, par2, par3);
-		this.itemNameField.mouseClicked(par1, par2, par3);
-		par1 = par1 - guiLeft;
-		par2 = par2 - guiTop;
-	}
-	
-	@Override
-	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		// draw text and stuff here
-		// the parameters for drawString are: string, x, y, color
-		fontRendererObj.drawString("Door Modules", 8, 6, 9919952);
-		fontRendererObj.drawString("Modules:", 8, 17, 9919952);
-		for (int i = off; (i < off + 8 && i < keys.length); i++) {
-			int color = 9919952;
-			if (chosen.equals(keys[i]))
-				color = 5919952;
-
-			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
-		}
-		fontRendererObj.drawString(page + "/" + pages, 48, 107, 9919952);
-		
-		fontRendererObj.drawString("Prio " + priority +" " + moduleType + " " + chosen + " module", 8, 122, 9919952);
-		int i = 0;
-		for(String s : DoorPartRegistry.getPartForIndex(chosen).getCostAsString())
-		{	
-			fontRendererObj.drawString(s, 8, 132 + i, 9919952);
-			i = i + 10;
-		}
-		}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
-			int par3) {
-		// draw your Gui here, only thing you need to change is the path
-		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
-				"textures/gui/doorModuleGUI.png"));
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		drawPreview(x, y);
-	}
-	
-	public void drawPreview(int x, int y) {
-		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
-				"textures/doorparts/preview/"+ chosen + ".png"));
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(x+150, y+5, 0, 0, 100, 77);
-	}
-	
-	public void onGuiClosed() {
-		super.onGuiClosed();
-		
-		Keyboard.enableRepeatEvents(false);
-	}
-	
-	@Override
-	protected void keyTyped(char par1, int par2) {
-		if (this.itemNameField.textboxKeyTyped(par1, par2)) {
-			this.search();
-		} else {
-			super.keyTyped(par1, par2);
-		}
-	}
-	
-	private void search() {
-		SortedSet key = new TreeSet();
-		
-		for(String s : keysOrigin)
-		{
-			if(s.contains(itemNameField.getText())) key.add(s);
-		}
-		keys = (String[]) key.toArray(new String[0]);
-		
+	public void drawScreen(int par1, int par2, float par3) {
+		super.drawScreen(par1, par2, par3);
+		GL11.glDisable(GL11.GL_LIGHTING);
+		this.itemNameField.drawTextBox();
 	}
 
 	@Override
@@ -160,12 +82,66 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		this.buttonList.add(new GuiButton(9,i+25,j+102,20,20,"-"));
 		this.buttonList.add(new GuiButton(10,i+69,j+102,20,20,"+"));
 	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
+		// draw text and stuff here
+		// the parameters for drawString are: string, x, y, color
+		fontRendererObj.drawString("Door Modules", 8, 6, 9919952);
+		fontRendererObj.drawString("Modules:", 8, 17, 9919952);
+		for (int i = off; (i < off + 8 && i < keys.length); i++) {
+			int color = 9919952;
+			if (chosen.equals(keys[i]))
+				color = 5919952;
+	
+			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
+		}
+		fontRendererObj.drawString(page + "/" + pages, 48, 107, 9919952);
+		
+		fontRendererObj.drawString("Prio " + priority +" " + moduleType + " " + chosen + " module", 8, 122, 9919952);
+		int i = 0;
+		for(String s : DoorPartRegistry.getPartForIndex(chosen).getCostAsString())
+		{	
+			fontRendererObj.drawString(s, 8, 132 + i, 9919952);
+			i = i + 10;
+		}
+		}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
+			int par3) {
+		// draw your Gui here, only thing you need to change is the path
+		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
+				"textures/gui/doorModuleGUI.png"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		drawPreview(x, y);
+	}
+
+	public void drawPreview(int x, int y) {
+		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
+				"textures/doorparts/preview/"+ chosen + ".png"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.drawTexturedModalRect(x+150, y+5, 0, 0, 100, 77);
+	}
+
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		super.mouseClicked(par1, par2, par3);
+		this.itemNameField.mouseClicked(par1, par2, par3);
+		par1 = par1 - guiLeft;
+		par2 = par2 - guiTop;
+	}
 	
 	@Override
-	public void drawScreen(int par1, int par2, float par3) {
-		super.drawScreen(par1, par2, par3);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		this.itemNameField.drawTextBox();
+	protected void keyTyped(char par1, int par2) {
+		if (this.itemNameField.textboxKeyTyped(par1, par2)) {
+			this.search();
+		} else {
+			super.keyTyped(par1, par2);
+		}
 	}
 	
 	protected void actionPerformed(GuiButton button)
@@ -240,6 +216,23 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 				break;
 			}
 		}
+	}
+
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		
+		Keyboard.enableRepeatEvents(false);
+	}
+
+	private void search() {
+		SortedSet key = new TreeSet();
+		
+		for(String s : keysOrigin)
+		{
+			if(s.contains(itemNameField.getText())) key.add(s);
+		}
+		keys = (String[]) key.toArray(new String[0]);
+		
 	}
 
 }

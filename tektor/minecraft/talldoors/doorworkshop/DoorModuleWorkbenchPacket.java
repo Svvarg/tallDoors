@@ -5,9 +5,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import tektor.minecraft.talldoors.TallDoorsBase;
-import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.packet.AbstractPacket;
 
 public class DoorModuleWorkbenchPacket extends AbstractPacket{

@@ -22,7 +22,9 @@ import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
+import tektor.minecraft.talldoors.doorworkshop.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
@@ -65,7 +67,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.0b")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.1")
 public class TallDoorsBase {
 
 	// instance
@@ -192,6 +194,7 @@ public class TallDoorsBase {
 
 	private void registerDoorParts() {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
+		DoorPartRegistry.registerDoorPart("horizontal", new HorizontalBalkPartType());
 		
 	}
 
@@ -322,6 +325,12 @@ public class TallDoorsBase {
 				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(PlainDoorPartEntity.class, "PlainDoorPartEntity", 17,
 				TallDoorsBase.instance, 120, 5, true);
+		
+		EntityRegistry.registerGlobalEntityID(HorizontalBalkPartEntity.class, "HorizontalDoorPartEntity",
+				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class, "HorizontalDoorPartEntity", 18,
+				TallDoorsBase.instance, 120, 5, true);
+		
 	}
 
 	private void registerTileEntities() {

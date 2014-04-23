@@ -2,23 +2,21 @@ package tektor.minecraft.talldoors.doorworkshop.doorpartrenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import tektor.minecraft.talldoors.doorworkshop.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
-
-import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class PlainDoorPartRenderer extends Render {
+public class DoubleHorizontalBalkPartRenderer extends Render{
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z,
 			float var8, float var9) {
-
 		GL11.glPushMatrix();
 
-		int orientation = ((PlainDoorPartEntity) entity).orientation;
-		int pos = ((PlainDoorPartEntity) entity).pos;
+		int orientation = ((DoubleHorizontalBalkPartEntity) entity).orientation;
+		int pos = ((DoubleHorizontalBalkPartEntity) entity).pos;
 		//System.out.println(orientation);
 		if ( orientation == 0) {
 			
@@ -83,9 +81,23 @@ public class PlainDoorPartRenderer extends Render {
 		}
 		GL11.glScalef(1f, 1f, 1f);
 		this.bindTexture(this.getEntityTexture(entity));
-		
-		RenderUtil.renderFrontBack(((PlainDoorPartEntity)entity).height2, 1, ((PlainDoorPartEntity)entity).depth, 0, entity);
+		DoubleHorizontalBalkPartEntity ent = (DoubleHorizontalBalkPartEntity)entity;
+		RenderUtil.renderFrontBack(ent.height2, 1, ent.depth, 0, ent);
+		this.bindTexture(new ResourceLocation("talldoors:textures/doorparts/horizontalBalk.png"));
+		GL11.glTranslatef(0f, 0.5f, 0f);
+		RenderUtil.renderCuboid(ent, 1, 0.25f, 0.125f, 0);
+		GL11.glTranslatef(0f, 0f, 0.125f+ent.depth);
+		GL11.glRotatef(180f, 0, 1, 0);
+		RenderUtil.renderCuboid(ent, 1, 0.25f, 0.125f, 0);
+		for(int i = 1; i < ent.height2; i++)
+		{
+			GL11.glTranslatef(0, 1, 0);
+			RenderUtil.renderCuboid(ent, 1, 0.25f, -0.125f, 0);			
+		}
 		GL11.glPopMatrix();
+		
+
+		
 		
 	}
 

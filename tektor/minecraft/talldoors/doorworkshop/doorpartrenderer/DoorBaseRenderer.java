@@ -2,23 +2,22 @@ package tektor.minecraft.talldoors.doorworkshop.doorpartrenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import tektor.minecraft.talldoors.renderer.RenderUtil;
-
 import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.renderer.RenderUtil;
+import tektor.minecraft.talldoors.doorworkshop.DoorBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class PlainDoorPartRenderer extends Render {
+public class DoorBaseRenderer extends Render{
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z,
 			float var8, float var9) {
-
 		GL11.glPushMatrix();
 
-		int orientation = ((PlainDoorPartEntity) entity).orientation;
-		int pos = ((PlainDoorPartEntity) entity).pos;
+		int orientation = ((DoorBase) entity).orientation;
+		int pos = ((DoorBase) entity).pos;
 		//System.out.println(orientation);
 		if ( orientation == 0) {
 			
@@ -84,14 +83,16 @@ public class PlainDoorPartRenderer extends Render {
 		GL11.glScalef(1f, 1f, 1f);
 		this.bindTexture(this.getEntityTexture(entity));
 		
-		RenderUtil.renderFrontBack(((PlainDoorPartEntity)entity).height2, 1, ((PlainDoorPartEntity)entity).depth, 0, entity);
+		DoorBase ent = (DoorBase)entity;
+		
+		RenderUtil.renderOutline(ent.height2, ent.width2, ent.depth, 0, ent);
 		GL11.glPopMatrix();
 		
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		return new ResourceLocation("talldoors:textures/doorparts/plain.png");
+		return new ResourceLocation("talldoors:textures/doorparts/side.png");
 	}
 
 }

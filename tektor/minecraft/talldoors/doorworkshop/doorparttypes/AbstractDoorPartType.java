@@ -1,5 +1,6 @@
 package tektor.minecraft.talldoors.doorworkshop.doorparttypes;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
@@ -19,5 +20,12 @@ public abstract class AbstractDoorPartType{
 	
 	public abstract AbstractDoorPart getNewEntity(World world, int posX, int heightPosition, int posZ, int heightSize, int orientation);
 	
-	public abstract List<String> getCostAsString();
+	public List<String> getCostAsString() {
+		List<String> a = new LinkedList<String>();
+		for(ItemStack i : baseCost)
+		{
+			a.add(i.getDisplayName() + " " + i.stackSize);
+		}
+		return a;
+	}
 }

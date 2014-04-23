@@ -18,10 +18,15 @@ import net.minecraft.world.World;
 
 public class DoorBase extends AbstractLockable {
 
-	public int orientation;
 	String[][] constructionPlan;
 	
+	public int orientation; //28
+	public int pos; //25
+	public float depth; //26
+	
 	List<AbstractDoorPart> parts;
+	public double height2; //27
+	public double width2; //24
 	
 	public DoorBase(World par1World) {
 		super(par1World);
@@ -30,21 +35,45 @@ public class DoorBase extends AbstractLockable {
 
 		this.ignoreFrustumCheck = true;
 	}
-
+	//TODO Communication of values
 	
 	
 	public void setConstructionPlan(String[][] plan)
 	{
 		this.constructionPlan = plan;
 		this.parts = new ArrayList<AbstractDoorPart>(plan[0].length * plan.length);
+		this.width2 = constructionPlan.length;
+		this.height2 = constructionPlan[0].length;
+		this.depth = 0.25f;
+		
+		
+		this.dataWatcher.updateObject(26, this.depth);
+		this.dataWatcher.updateObject(27, "" + this.height2);
+		this.dataWatcher.updateObject(24, "" + this.width2);
+		
 	}
 	
 	// logic: each array in this array represents a column
 
 	@Override
 	protected void entityInit() {
-		// TODO Auto-generated method stub
+		this.dataWatcher.addObject(28, 0);
 
+		this.dataWatcher.addObject(25, 0);
+		this.dataWatcher.addObject(26, 0f);
+		this.dataWatcher.addObject(27, ""+0);
+		this.dataWatcher.addObject(24, ""+0);
+	}
+	
+	public void onUpdate() {
+		if (this.worldObj.isRemote) {
+			orientation = this.dataWatcher.getWatchableObjectInt(28);
+			pos = this.dataWatcher.getWatchableObjectInt(25);
+			depth = this.dataWatcher.getWatchableObjectFloat(26);
+			height2 = Double.parseDouble(this.dataWatcher
+					.getWatchableObjectString(27));
+			width2 = Double.parseDouble(this.dataWatcher.getWatchableObjectString(24));
+		}
 	}
 
 	public void constructFromPlan() {
@@ -82,21 +111,15 @@ public class DoorBase extends AbstractLockable {
 
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound var1) {
-		super.readFromNBT(var1);
-		byte[] byteArray = var1.getByteArray("constructionPlan");
-		byte[] bytes2 = var1.getByteArray("parts");
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		byte[] byteArray = nbt.getByteArray("constructionPlan");
 		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
 				byteArray);
-		final ByteArrayInputStream byteArrayInputStream2 = new ByteArrayInputStream(
-				bytes2);
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(
 					byteArrayInputStream);
-			constructionPlan = (String[][]) objectInputStream.readObject();
-			objectInputStream = new ObjectInputStream(
-					byteArrayInputStream2);
-			parts = (List<AbstractDoorPart>) objectInputStream.readObject();
+			constructionPlan = (String[][]) objectInputStream.readObject(); //TODO does not work
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -105,12 +128,25 @@ public class DoorBase extends AbstractLockable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		depth = nbt.getFloat("depth");
+		height2 = nbt.getDouble("height2");
+		pos = nbt.getInteger("pos");
+		orientation = nbt.getInteger("orientation");
+		width2 = nbt.getInteger("width2");
+		
+		this.dataWatcher.updateObject(28, this.orientation);
+		this.dataWatcher.updateObject(25, pos);
+		this.dataWatcher.updateObject(26, this.depth);
+		this.dataWatcher.updateObject(27, "" + this.height2);
+		this.dataWatcher.updateObject(24, "" + this.width2);
+		
+		this.constructFromPlan();
 
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound var1) {
-		super.writeEntityToNBT(var1);
+	protected void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
 		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		try {
 			final ObjectOutputStream objStream = new ObjectOutputStream(stream);
@@ -122,20 +158,13 @@ public class DoorBase extends AbstractLockable {
 			e.printStackTrace();
 		}
 		final byte[] bytes = stream.toByteArray();
-		var1.setByteArray("constructionPlan", bytes);
-		stream.reset();
-		ObjectOutputStream objStream;
-		try {
-			objStream = new ObjectOutputStream(stream);
-			objStream.writeObject(parts);
-			objStream.flush();
-			objStream.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		final byte[] bytes2 = stream.toByteArray();
-		var1.setByteArray("parts", bytes2);
+		nbt.setByteArray("constructionPlan", bytes);
+		
+		nbt.setInteger("orientation", orientation);
+		nbt.setInteger("pos", pos); 
+		nbt.setFloat("depth",depth);
+		nbt.setDouble("height2",height2);
+		nbt.setDouble("width2", width2);
 		
 	}
 
@@ -143,7 +172,8 @@ public class DoorBase extends AbstractLockable {
 
 	public void setOrientation(boolean b, int var24) {
 		orientation = var24;
-		
+		this.dataWatcher.updateObject(28, this.orientation);
+		this.dataWatcher.updateObject(25, pos);
 	}
 
 

@@ -3,15 +3,16 @@ package tektor.minecraft.talldoors.doorworkshop.doorparts;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class PlainDoorPartEntity extends AbstractDoorPart{
+public class DoubleHorizontalBalkPartEntity extends AbstractDoorPart{
 	
-	public PlainDoorPartEntity(World par1World) {
+	public DoubleHorizontalBalkPartEntity(World par1World) {
 		super(par1World);
-
 		this.ignoreFrustumCheck = true;
 	}
 
-	public PlainDoorPartEntity(World par1World, int posX, int heightPosition, int posZ,
+	
+	
+	public DoubleHorizontalBalkPartEntity(World par1World, int posX, int heightPosition, int posZ,
 			int heightSize, int orientation, float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation, depth);
 	}
@@ -19,7 +20,7 @@ public class PlainDoorPartEntity extends AbstractDoorPart{
 	public void onUpdate() {
 		super.onUpdate();
 	}
-
+	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -30,7 +31,7 @@ public class PlainDoorPartEntity extends AbstractDoorPart{
 		super.readEntityFromNBT(nbt);
 		
 	}
-
+	
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
