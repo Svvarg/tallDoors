@@ -31,7 +31,26 @@ public class DoorModuleWorkbenchContainer extends Container {
 		ItemStack[] slot2 = new ItemStack[0];
 		addSlotToContainer(new RestrictingSlot(outputSlot, 1, 225, 133, slot2,
 				null, false));
-		// bindPlayerInventory(inventoryPlayer);
+		bindPlayerInventory(inventoryPlayer);
+	}
+
+	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 165));
+		}
+		for(int i = 0; i < 2; i++)
+		{
+			for(int k = 0; k < 6; k++)
+			{
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 9, -30 + i * 18, 8 + k * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, i + 6 + k + 21, 252 + i * 18, 8 + k * 18));
+			}
+		}
+		for(int i = 0; i < 3; i++)
+		{
+			addSlotToContainer(new Slot(inventoryPlayer, i + 33, 198 + i * 18, 164));
+		}
+		
 	}
 
 	@Override
@@ -96,7 +115,10 @@ public class DoorModuleWorkbenchContainer extends Container {
 		if (this.outputSlot.getStackInSlot(0) == null) {
 			ItemStack[] in = inv.mainInventory;
 			List<ItemStack> debt = new LinkedList<ItemStack>();
-			debt.addAll(DoorPartRegistry.getPartForIndex(chosen).baseCost);
+			for(ItemStack i : DoorPartRegistry.getPartForIndex(chosen).baseCost)
+			{
+				debt.add(i.copy());
+			}
 			int[] found = new int[debt.size()];
 			for (int i = 0; i < 32; i++) {
 				for (int k = 0; k < debt.size(); k++) {

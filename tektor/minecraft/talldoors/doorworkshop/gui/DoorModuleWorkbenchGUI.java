@@ -17,8 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class DoorModuleWorkbenchGUI extends GuiContainer{
-	
+public class DoorModuleWorkbenchGUI extends GuiContainer {
+
 	String[] keys;
 	String[] keysOrigin;
 	int off;
@@ -26,7 +26,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 	int pages;
 	String chosen;
 	public GuiTextField itemNameField;
-	
+
 	private DoorModuleWorkbenchTileEntity te;
 	private String moduleType;
 	private int priority;
@@ -46,7 +46,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		moduleType = "horiz.";
 		pages = (int) Math.ceil(keys.length / 8f);
 	}
-	
+
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
 		super.drawScreen(par1, par2, par3);
@@ -67,20 +67,20 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		this.itemNameField.setEnableBackgroundDrawing(false);
 		this.itemNameField.setMaxStringLength(40);
 		this.itemNameField.setText("");
-		
-		//id, x,y,width,height,buttontext
+
+		// id, x,y,width,height,buttontext
 		this.buttonList.clear();
-		this.buttonList.add(new GuiButton(0,i+178,j+135,40,20,"OK"));
-		this.buttonList.add(new GuiButton(1,i+164,j+95,20,20,"1"));
-		this.buttonList.add(new GuiButton(2,i+186,j+95,20,20,"2"));
-		this.buttonList.add(new GuiButton(3,i+208,j+95,20,20,"3"));
-		this.buttonList.add(new GuiButton(4,i+230,j+95,20,20,"4"));
-		this.buttonList.add(new GuiButton(5,i+154,j+115,20,20,"S"));
-		this.buttonList.add(new GuiButton(6,i+176,j+115,20,20,"H"));
-		this.buttonList.add(new GuiButton(7,i+198,j+115,20,20,"V"));
-		this.buttonList.add(new GuiButton(8,i+154,j+135,20,20,"F"));
-		this.buttonList.add(new GuiButton(9,i+25,j+102,20,20,"-"));
-		this.buttonList.add(new GuiButton(10,i+69,j+102,20,20,"+"));
+		this.buttonList.add(new GuiButton(0, i + 178, j + 135, 40, 20, "OK"));
+		this.buttonList.add(new GuiButton(1, i + 164, j + 95, 20, 20, "1"));
+		this.buttonList.add(new GuiButton(2, i + 186, j + 95, 20, 20, "2"));
+		this.buttonList.add(new GuiButton(3, i + 208, j + 95, 20, 20, "3"));
+		this.buttonList.add(new GuiButton(4, i + 230, j + 95, 20, 20, "4"));
+		this.buttonList.add(new GuiButton(5, i + 154, j + 115, 20, 20, "S"));
+		this.buttonList.add(new GuiButton(6, i + 176, j + 115, 20, 20, "H"));
+		this.buttonList.add(new GuiButton(7, i + 198, j + 115, 20, 20, "V"));
+		this.buttonList.add(new GuiButton(8, i + 154, j + 135, 20, 20, "F"));
+		this.buttonList.add(new GuiButton(9, i + 25, j + 102, 20, 20, "-"));
+		this.buttonList.add(new GuiButton(10, i + 69, j + 102, 20, 20, "+"));
 	}
 
 	@Override
@@ -93,19 +93,20 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 			int color = 9919952;
 			if (chosen.equals(keys[i]))
 				color = 5919952;
-	
+
 			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
 		}
 		fontRendererObj.drawString(page + "/" + pages, 48, 107, 9919952);
-		
-		fontRendererObj.drawString("Prio " + priority +" " + moduleType + " " + chosen + " module", 8, 122, 9919952);
+
+		fontRendererObj.drawString("Prio " + priority + " " + moduleType + " "
+				+ chosen + " module", 8, 122, 9919952);
 		int i = 0;
-		for(String s : DoorPartRegistry.getPartForIndex(chosen).getCostAsString())
-		{	
+		for (String s : DoorPartRegistry.getPartForIndex(chosen)
+				.getCostAsString()) {
 			fontRendererObj.drawString(s, 8, 132 + i, 9919952);
 			i = i + 10;
 		}
-		}
+	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
@@ -116,15 +117,19 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		this.drawTexturedModalRect(x, y, 0, 0, 256, 189);
+		this.drawTexturedModalRect(x - 36, y + 3, 0, 189, 36, 67);
+		this.drawTexturedModalRect(x + 256, y + 3, 72, 189, 36, 67);
+		this.drawTexturedModalRect(x - 36, y + 70, 36, 189, 36, 67);
+		this.drawTexturedModalRect(x + 256, y + 70, 108, 189, 36, 49);
 		drawPreview(x, y);
 	}
 
 	public void drawPreview(int x, int y) {
 		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
-				"textures/doorparts/preview/"+ chosen + ".png"));
+				"textures/doorparts/preview/" + chosen + ".png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(x+150, y+5, 0, 0, 100, 77);
+		this.drawTexturedModalRect(x + 150, y + 5, 0, 0, 100, 77);
 	}
 
 	@Override
@@ -133,8 +138,28 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 		this.itemNameField.mouseClicked(par1, par2, par3);
 		par1 = par1 - guiLeft;
 		par2 = par2 - guiTop;
+
+		if (par3 == 0) {
+			if (par2 > 26 && par2 < 37 && off < keys.length)
+				chosen = keys[off];
+			else if (par2 > 36 && par2 < 47 && off + 1 < keys.length)
+				chosen = keys[off + 1];
+			else if (par2 > 46 && par2 < 57 && off + 2 < keys.length)
+				chosen = keys[off + 2];
+			else if (par2 > 56 && par2 < 67 && off + 3 < keys.length)
+				chosen = keys[off + 3];
+			else if (par2 > 66 && par2 < 77 && off + 4 < keys.length)
+				chosen = keys[off + 4];
+			else if (par2 > 76 && par2 < 87 && off + 5 < keys.length)
+				chosen = keys[off + 5];
+			else if (par2 > 86 && par2 < 97 && off + 6 < keys.length)
+				chosen = keys[off + 6];
+			else if (par2 > 96 && par2 < 107 && off + 7 < keys.length)
+				chosen = keys[off + 7];
+		}
+
 	}
-	
+
 	@Override
 	protected void keyTyped(char par1, int par2) {
 		if (this.itemNameField.textboxKeyTyped(par1, par2)) {
@@ -143,96 +168,83 @@ public class DoorModuleWorkbenchGUI extends GuiContainer{
 			super.keyTyped(par1, par2);
 		}
 	}
-	
-	protected void actionPerformed(GuiButton button)
-	{
-		switch(button.id)
-		{
-			case 0:
-			{
-				DoorModuleWorkbenchPacket pack = new DoorModuleWorkbenchPacket(this.te.xCoord, this.te.yCoord, this.te.zCoord, this.priority, this.chosen, this.moduleType);
-				if (!te.getWorldObj().isRemote) {
-				} else if (te.getWorldObj().isRemote) {
-					TallDoorsBase.packetPipeline.sendToServer(pack);
-				}
-				break;
+
+	protected void actionPerformed(GuiButton button) {
+		switch (button.id) {
+		case 0: {
+			DoorModuleWorkbenchPacket pack = new DoorModuleWorkbenchPacket(
+					this.te.xCoord, this.te.yCoord, this.te.zCoord,
+					this.priority, this.chosen, this.moduleType);
+			if (!te.getWorldObj().isRemote) {
+			} else if (te.getWorldObj().isRemote) {
+				TallDoorsBase.packetPipeline.sendToServer(pack);
 			}
-			case 1:
-			{
-				this.priority = 1;
-				break;
+			break;
+		}
+		case 1: {
+			this.priority = 1;
+			break;
+		}
+		case 2: {
+			this.priority = 2;
+			break;
+		}
+		case 3: {
+			this.priority = 3;
+			break;
+		}
+		case 4: {
+			this.priority = 4;
+			break;
+		}
+		case 5: {
+			this.moduleType = "single";
+			break;
+		}
+		case 6: {
+			this.moduleType = "horiz.";
+			break;
+		}
+		case 7: {
+			this.moduleType = "vertical";
+			break;
+		}
+		case 8: {
+			this.moduleType = "full";
+			break;
+		}
+		case 9: {
+			if (page > 1) {
+				page--;
+				off = (page - 1) * 8;
 			}
-			case 2:
-			{
-				this.priority = 2;
-				break;
+			break;
+		}
+		case 10: {
+			if (page < pages) {
+				page++;
+				off = (page - 1) * 8;
 			}
-			case 3:
-			{
-				this.priority = 3;
-				break;
-			}
-			case 4:
-			{
-				this.priority = 4;
-				break;
-			}
-			case 5:
-			{
-				this.moduleType = "single";
-				break;
-			}
-			case 6:
-			{
-				this.moduleType = "horiz.";
-				break;
-			}
-			case 7:
-			{
-				this.moduleType = "vertical";
-				break;
-			}
-			case 8:
-			{
-				this.moduleType = "full";
-				break;
-			}
-			case 9:
-			{
-				if(page > 1)
-				{
-					page--;
-					off = (page - 1) * 8;
-				}
-				break;
-			}
-			case 10:
-			{
-				if(page < pages)
-				{
-					page++;
-					off = (page - 1) * 8;
-				}
-				break;
-			}
+			break;
+		}
 		}
 	}
 
 	public void onGuiClosed() {
 		super.onGuiClosed();
-		
+
 		Keyboard.enableRepeatEvents(false);
 	}
 
 	private void search() {
 		SortedSet key = new TreeSet();
-		
-		for(String s : keysOrigin)
-		{
-			if(s.contains(itemNameField.getText())) key.add(s);
+
+		for (String s : keysOrigin) {
+			if (s.contains(itemNameField.getText()))
+				key.add(s);
 		}
 		keys = (String[]) key.toArray(new String[0]);
-		
+
 	}
 
 }

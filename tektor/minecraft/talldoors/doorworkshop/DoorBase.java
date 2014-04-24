@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.entities.AbstractLockable;
@@ -112,22 +114,8 @@ public class DoorBase extends AbstractLockable {
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		byte[] byteArray = nbt.getByteArray("constructionPlan");
-		final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(
-				byteArray);
-		try {
-			ObjectInputStream objectInputStream = new ObjectInputStream(
-					byteArrayInputStream);
-			constructionPlan = (String[][]) objectInputStream.readObject(); //TODO does not work
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super.readEntityFromNBT(nbt);
+		constructionPlan = (String[][]) SerializationUtils.deserialize(nbt.getByteArray("constructionPlan"));
 		depth = nbt.getFloat("depth");
 		height2 = nbt.getDouble("height2");
 		pos = nbt.getInteger("pos");
@@ -147,17 +135,7 @@ public class DoorBase extends AbstractLockable {
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		try {
-			final ObjectOutputStream objStream = new ObjectOutputStream(stream);
-			objStream.writeObject(constructionPlan);
-			objStream.flush();
-			objStream.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		final byte[] bytes = stream.toByteArray();
+		final byte[] bytes = SerializationUtils.serialize(this.constructionPlan);
 		nbt.setByteArray("constructionPlan", bytes);
 		
 		nbt.setInteger("orientation", orientation);
