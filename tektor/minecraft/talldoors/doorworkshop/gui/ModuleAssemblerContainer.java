@@ -1,20 +1,31 @@
 package tektor.minecraft.talldoors.doorworkshop.gui;
 
+import java.util.List;
+
+import org.apache.commons.lang3.SerializationUtils;
+
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.RestrictingSlot;
-import tektor.minecraft.talldoors.doorworkshop.ModuleAssemblerTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
+import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.util.DeleteAllInventory;
+import tektor.minecraft.talldoors.doorworkshop.util.PositionItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class ModuleAssemblerContainer extends Container{
 
 	protected ModuleAssemblerTileEntity ent;
 	IInventory outputSlot = new InventoryCraftResult();
 	InventoryPlayer inv;
+	int x,y;
 
 	public ModuleAssemblerContainer(InventoryPlayer inventoryPlayer,
 			ModuleAssemblerTileEntity e) {
@@ -22,28 +33,50 @@ public class ModuleAssemblerContainer extends Container{
 		e.container = this;
 		inv = inventoryPlayer;
 		ItemStack[] slot2 = new ItemStack[0];
-		addSlotToContainer(new RestrictingSlot(outputSlot, 1, 225, 133, slot2,
+		addSlotToContainer(new RestrictingSlot(outputSlot, 1, 276, 154, slot2,
 				null, false));
+		
 		bindPlayerInventory(inventoryPlayer);
+		bindFieldInventory(ent);
 	}
 	
-	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,
-						8 + j * 18, 84 + i * 18));
+	private void bindFieldInventory(ModuleAssemblerTileEntity field2) {
+		for(int i = 0; i < 8; i++)
+		{
+			for(int k = 0; k < 13; k++)
+			{
+				ItemStack[] slot = new ItemStack[1];
+				slot[0] = new ItemStack(TallDoorsBase.doorModule,1,0);
+				addSlotToContainer(new RestrictingSlot(field2,i*13+k,12+k*18,6+i*18,slot,null,false));
 			}
 		}
-
+		
+	}	
+	
+	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 165));
 		}
+		for(int i = 0; i < 2; i++)
+		{
+			for(int k = 0; k < 6; k++)
+			{
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 9, -30 + i * 18, 8 + k * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 21, 252 + i * 18, 8 + k * 18));
+			}
+		}
+		for(int i = 0; i < 3; i++)
+		{
+			addSlotToContainer(new Slot(inventoryPlayer, i + 33, 198 + i * 18, 164));
+		}
+		
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return ent.isUseableByPlayer(entityplayer);
+		return true;
 	}
+
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
@@ -79,7 +112,7 @@ public class ModuleAssemblerContainer extends Container{
 				slotObject.onPickupFromSlot(player, stackInSlot);
 			}
 		}
-
+		
 		return stack;
 	}
 
@@ -96,6 +129,15 @@ public class ModuleAssemblerContainer extends Container{
 		}
 		return success;
 
+	}
+
+	public void produce(String[][] constructionPlan) {
+		if (this.outputSlot.getStackInSlot(0) == null) {
+			this.outputSlot.setInventorySlotContents(0, new ItemStack(TallDoorsBase.modularDoorPlacer,1,0));
+			this.outputSlot.getStackInSlot(0).stackTagCompound = new NBTTagCompound();
+			final byte[] bytes = SerializationUtils.serialize(constructionPlan);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setByteArray("constructionPlan", bytes);
+		}
 	}
 
 

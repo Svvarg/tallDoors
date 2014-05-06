@@ -3,7 +3,7 @@ package tektor.minecraft.talldoors.doorworkshop.doorparttypes;
 import java.util.LinkedList;
 import java.util.List;
 
-import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

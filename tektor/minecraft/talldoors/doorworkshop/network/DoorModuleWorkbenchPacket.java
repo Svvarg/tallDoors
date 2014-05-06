@@ -1,10 +1,11 @@
-package tektor.minecraft.talldoors.doorworkshop;
+package tektor.minecraft.talldoors.doorworkshop.network;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity;
 import tektor.minecraft.talldoors.packet.AbstractPacket;
 
 public class DoorModuleWorkbenchPacket extends AbstractPacket{
@@ -53,7 +54,6 @@ public class DoorModuleWorkbenchPacket extends AbstractPacket{
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		// TODO Auto-generated method stub
 		
 	}
 

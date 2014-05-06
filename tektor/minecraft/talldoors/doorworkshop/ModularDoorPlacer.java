@@ -1,5 +1,9 @@
 package tektor.minecraft.talldoors.doorworkshop;
 
+import org.apache.commons.lang3.SerializationUtils;
+
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -27,24 +31,21 @@ public class ModularDoorPlacer extends Item {
 			int var24 = MathHelper
 					.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-			if(!checkFree(par3World,par4,par5+1,par6, 2, 4, false, var24)) {
-				par2EntityPlayer.addChatMessage(new ChatComponentText("A voice whispers to you: There is not enough space for this"));
+			if (!checkFree(par3World, par4, par5 + 1, par6, 2, 4, false, var24)) {
+				par2EntityPlayer
+						.addChatMessage(new ChatComponentText(
+								"A voice whispers to you: There is not enough space for this"));
 				return false;
 			}
 			DoorBase door = new DoorBase(par3World);
-			door.setOrientation(false, var24);
+			door.setOrientation(true, var24);
 			door.setPosition(par4, par5 + 1, par6);
-			String[][] cons = new String[10][10];
-			for(int columns = 0; columns < cons.length; columns++)
-			{
-				for(int blocks = 0; blocks < cons[columns].length; blocks++)
-				{
-					cons[columns][blocks] = "horizontal";
-				}
-			}
-			door.setConstructionPlan(cons);
+			String[][] result = ((String[][]) SerializationUtils
+					.deserialize(par1ItemStack.stackTagCompound
+							.getByteArray("constructionPlan")));
+			door.setConstructionPlan(result);
 			door.constructFromPlan();
-
+			
 			par3World.spawnEntityInWorld(door);
 		}
 

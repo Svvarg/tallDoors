@@ -8,8 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 
 public class PlainDoorPartType extends AbstractDoorPartType{
 

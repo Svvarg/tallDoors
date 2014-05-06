@@ -17,15 +17,18 @@ import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
-import tektor.minecraft.talldoors.doorworkshop.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
-import tektor.minecraft.talldoors.doorworkshop.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.HorizontalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
+import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -78,7 +81,7 @@ public class TallDoorsBase {
 	@SidedProxy(clientSide = "tektor.minecraft.talldoors.client.TallDoorsClientProxy", serverSide = "tektor.minecraft.talldoors.TallDoorsCommonProxy")
 	public static TallDoorsCommonProxy proxy;
 
-	//Network
+	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	public static Item doorPlacer;
@@ -90,21 +93,21 @@ public class TallDoorsBase {
 	public static Item keyMakerPlacer;
 	public static Item trapDoor;
 	public static Item mosaicTool2;
-	
+
 	public static Item modularDoorPlacer;
 	public static Item doorModule;
-	
+
 	public static Block drawbridgeWorkbench;
 	public static Block keyRedstoneLock;
 	public static Block mosaic;
 	public static Block mosaicGlass;
+
 	public static Block doorWorkshop;
-
-
+	public static Block doorAssembly;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+
 		File jarName = null;
 		List<String> results = new ArrayList<String>();
 		try {
@@ -149,24 +152,24 @@ public class TallDoorsBase {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
-		
+
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		
+
 		DoorPartRegistry.initialize();
-	
+
 	}
 
 	@EventHandler
 	public void initialise(FMLInitializationEvent evt) {
-	    packetPipeline.initalise();
+		packetPipeline.initalise();
 	}
 
 	@EventHandler
 	public void postInitialise(FMLPostInitializationEvent evt) {
-	    packetPipeline.postInitialise();
+		packetPipeline.postInitialise();
 	}
 
 	private void initializeIDs() {
@@ -179,23 +182,26 @@ public class TallDoorsBase {
 		keyMakerPlacer = new KeyMakerPlacer();
 		trapDoor = new TrapDoorsPlacer();
 		mosaicTool2 = new PermanentMosaicTool();
-		
+
 		modularDoorPlacer = new ModularDoorPlacer();
-	
+
 		drawbridgeWorkbench = new DrawbridgeWorkbench();
 		keyRedstoneLock = new KeyRedstoneLock();
 		mosaic = new MosaicBlock();
 		mosaicGlass = new MosaicGlass();
-		
+
 		doorWorkshop = new DoorWorkshop();
+		doorAssembly = new ModuleAssembler();
 		doorModule = new DoorModule();
-	
+
 	}
 
 	private void registerDoorParts() {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
-		DoorPartRegistry.registerDoorPart("horizontal", new HorizontalBalkPartType());
-		
+		DoorPartRegistry.registerDoorPart("horizontal",
+				new HorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("double horizontal", new DoubleHorizontalBalkPartType());
+
 	}
 
 	private void registerBlocks() {
@@ -211,10 +217,11 @@ public class TallDoorsBase {
 		GameRegistry.registerBlock(mosaic, "mosaic");
 		LanguageRegistry.addName(new ItemStack(mosaic, 1, 0), "Mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
-		LanguageRegistry.addName(new ItemStack(mosaicGlass, 1, 0), "Mosaic Glass");
-		
-		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
+		LanguageRegistry.addName(new ItemStack(mosaicGlass, 1, 0),
+				"Mosaic Glass");
 
+		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
+		GameRegistry.registerBlock(doorAssembly, "Door Assembly");
 	}
 
 	private void registerItems() {
@@ -226,10 +233,10 @@ public class TallDoorsBase {
 		GameRegistry.registerItem(mosaicTool, "mosaicTool");
 		GameRegistry.registerItem(keyMakerPlacer, "keyMakerPlacer");
 		GameRegistry.registerItem(trapDoor, "trapDoorPlacer");
-		
+
 		GameRegistry.registerItem(modularDoorPlacer, "modularDoorPlacer");
 		GameRegistry.registerItem(doorModule, "doorModule");
-		
+
 		LanguageRegistry.addName(mosaicTool, "Mosaic Tool");
 		LanguageRegistry.addName(mosaicTool2, "Permanent Mosaic Tool");
 	}
@@ -315,22 +322,34 @@ public class TallDoorsBase {
 				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(TrapDoor.class, "TrapDoor", 15,
 				TallDoorsBase.instance, 120, 5, true);
-		
+
 		EntityRegistry.registerGlobalEntityID(DoorBase.class, "DoorBase",
 				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DoorBase.class, "DoorBase", 16,
-				TallDoorsBase.instance, 120, 5, true);
-		
-		EntityRegistry.registerGlobalEntityID(PlainDoorPartEntity.class, "PlainDoorPartEntity",
+				TallDoorsBase.instance, 128, 5, true);
+
+		EntityRegistry.registerGlobalEntityID(PlainDoorPartEntity.class,
+				"PlainDoorPartEntity",
 				EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(PlainDoorPartEntity.class, "PlainDoorPartEntity", 17,
-				TallDoorsBase.instance, 120, 5, true);
-		
-		EntityRegistry.registerGlobalEntityID(HorizontalBalkPartEntity.class, "HorizontalDoorPartEntity",
+		EntityRegistry
+				.registerModEntity(PlainDoorPartEntity.class,
+						"PlainDoorPartEntity", 17, TallDoorsBase.instance, 128,
+						5, true);
+
+		EntityRegistry.registerGlobalEntityID(HorizontalBalkPartEntity.class,
+				"HorizontalDoorPartEntity",
 				EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class, "HorizontalDoorPartEntity", 18,
-				TallDoorsBase.instance, 120, 5, true);
+		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
+				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
+				true);
 		
+//		EntityRegistry.registerGlobalEntityID(DoubleHorizontalBalkPartEntity.class,
+//				"DoubleHorizontalBalkPartEntity",
+//				EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
+				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance, 128, 5,
+				true);
+
 	}
 
 	private void registerTileEntities() {
@@ -343,17 +362,23 @@ public class TallDoorsBase {
 						tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity.class,
 						"Mosaic");
 		GameRegistry
-		.registerTileEntity(
-				tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity.class,
-				"Mosaic Glass");
+				.registerTileEntity(
+						tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity.class,
+						"Mosaic Glass");
 		GameRegistry
 				.registerTileEntity(
 						tektor.minecraft.talldoors.entities.tileentities.KeyRedstoneLockTileEntity.class,
 						"keylock");
-		
-		GameRegistry.registerTileEntity(
-				tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity.class,
-				"doorWorkshop");
+
+		GameRegistry
+				.registerTileEntity(
+						tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity.class,
+						"doorWorkshop");
+		GameRegistry
+				.registerTileEntity(
+						tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity.class,
+						"doorAssembly");
+
 	}
 
 	private void registerRecipes() {
@@ -368,34 +393,35 @@ public class TallDoorsBase {
 		ItemStack string = new ItemStack(Items.string, 1);
 		ItemStack stick = new ItemStack(Items.stick, 1);
 		ItemStack redstone = new ItemStack(Items.redstone, 1);
-		ItemStack glass = new ItemStack(Blocks.glass,1);
-		ItemStack glow = new ItemStack(Items.glowstone_dust,1);
-	
+		ItemStack glass = new ItemStack(Blocks.glass, 1);
+		ItemStack glow = new ItemStack(Items.glowstone_dust, 1);
+
 		// mosaic tool
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool, 1,
 				0), new Object[] { "Y Y", "YXY", "X X", 'X', wood, 'Y', iron });
 		// mosaic tool 2
-		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool2, 1,
-				0), new Object[] { "Y Y", "YZY", "X X", 'X', wood, 'Y', iron,
-				'Z', wood2 });
-	
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool2,
+				1, 0), new Object[] { "Y Y", "YZY", "X X", 'X', wood, 'Y',
+				iron, 'Z', wood2 });
+
 		// mosaic
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaic, 1, 0),
 				new Object[] { "YXY", "XYX", "YXY", 'X', cobble, 'Y', sand });
 		// mosaic
-				GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicGlass, 8, 0),
-						new Object[] { "YXY", "XYX", "YXY", 'X', glow, 'Y', glass });
-				
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicGlass,
+				8, 0), new Object[] { "YXY", "XYX", "YXY", 'X', glow, 'Y',
+				glass });
+
 		// key maker
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.keyMakerPlacer, 1, 0), new Object[] { "XYX",
 				"XYX", "X X", 'X', wood, 'Y', iron });
-	
+
 		// redstone lock
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.keyRedstoneLock, 1, 0), new Object[] { "XYX",
 				"XZX", "XYX", 'X', wood, 'Y', iron, 'Z', redstone });
-	
+
 		// Destruction Hammer
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.destructionHammer, 1, 0), new Object[] { "YYY",
@@ -404,29 +430,29 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
 				"XXX", "XXX", 'X', wood, 'Y', cobble });
-	
+
 		// Machine Workbench
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 1), new Object[] { "ZYZ",
 				"XXX", "XXX", 'X', wood, 'Y', cobble, 'Z', redstone });
-	
+
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,
 				0), new Object[] { " X ", "XYX", " X ", 'X', string, 'Y',
 				cobble });
-	
+
 		// draw base
 		// GameRegistry
 		// .addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge, 1, 0),
 		// new Object[] { "XXX", "XYX", "XXX", 'X', wood, 'Y',
 		// wood2 });
-	
+
 		// draw machine
 		// GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.drawbridge,
 		// 1,
 		// 1),
 		// new Object[] { "XXX", "YXY", "XXX", 'X', wood, 'Y', cobble });
-	
+
 		// Dark Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				10),
@@ -451,7 +477,7 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				15), new Object[] { "XXX", "YXX", "XXX", 'X', cobble, 'Y',
 				new ItemStack(TallDoorsBase.doorPlacer, 1, 13) });
-	
+
 		// Metal Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				8), new Object[] { "XXX", "XXY", "XXX", 'X', iron, 'Y', door });
@@ -474,7 +500,7 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				19), new Object[] { "XXX", "YXX", "XXX", 'X', iron, 'Y',
 				new ItemStack(TallDoorsBase.doorPlacer, 1, 17) });
-	
+
 		// Right 4 high Door
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				0), new Object[] { "XXX", "XXY", "XXX", 'X', wood, 'Y', door });
@@ -505,7 +531,7 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorPlacer, 1,
 				7), new Object[] { "XXX", "XXX", "YXX", 'X', wood, 'Y',
 				fenceGate });
-	
+
 	}
-	
+
 }

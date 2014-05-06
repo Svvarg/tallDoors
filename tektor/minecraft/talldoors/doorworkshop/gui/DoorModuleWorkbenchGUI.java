@@ -7,9 +7,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
-import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchPacket;
-import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.network.DoorModuleWorkbenchPacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -37,7 +37,8 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		te = e;
 		off = 0;
 		chosen = "plain";
-		xSize = 256;
+		xSize = 328;
+		ySize = 205;
 		SortedSet<String> key = new TreeSet<String>();
 		key.addAll(DoorPartRegistry.registeredParts.keySet());
 		keys = keysOrigin = (String[]) key.toArray(new String[0]);

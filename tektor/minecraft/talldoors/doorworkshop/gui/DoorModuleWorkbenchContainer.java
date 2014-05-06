@@ -5,8 +5,8 @@ import java.util.List;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.RestrictingSlot;
-import tektor.minecraft.talldoors.doorworkshop.DoorModuleWorkbenchTileEntity;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -43,7 +43,7 @@ public class DoorModuleWorkbenchContainer extends Container {
 			for(int k = 0; k < 6; k++)
 			{
 				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 9, -30 + i * 18, 8 + k * 18));
-				addSlotToContainer(new Slot(inventoryPlayer, i + 6 + k + 21, 252 + i * 18, 8 + k * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 21, 252 + i * 18, 8 + k * 18));
 			}
 		}
 		for(int i = 0; i < 3; i++)

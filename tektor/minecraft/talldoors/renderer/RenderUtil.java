@@ -18,20 +18,20 @@ public class RenderUtil {
 		d = Math.cos(Math.toRadians(angle)) * depth;
 		e = Math.sin(Math.toRadians(angle)) * depth;
 		
-		tess.addVertexWithUV(0, b, 0 - a, depth, 0);
+		tess.addVertexWithUV(0, b, 0 - a, 0, width);
 		tess.addVertexWithUV(0, b + e, d - a, depth, width);
-		tess.addVertexWithUV(width, b + e, d - a, 0, width);
+		tess.addVertexWithUV(width, b + e, d - a, depth, 0);
 		tess.addVertexWithUV(width, b, -a, 0, 0);
 		// right
 		tess.addVertexWithUV(0, 0, 0, 0, 0);
-		tess.addVertexWithUV(0, e, d, height, 0);
-		tess.addVertexWithUV(0, b + e, d - a, height, depth);
-		tess.addVertexWithUV(0, b, -a, 0, depth);
+		tess.addVertexWithUV(0, e, d, depth, 0);
+		tess.addVertexWithUV(0, b + e, d - a, depth, height);
+		tess.addVertexWithUV(0, b, -a, 0, height);
 		// bottom
-		tess.addVertexWithUV(0, 0, 0, depth, 0);
+		tess.addVertexWithUV(0, 0, 0, width, 0);
 		tess.addVertexWithUV(width, 0, 0, 0, 0);
-		tess.addVertexWithUV(width, e, d, 0, width);
-		tess.addVertexWithUV(0, e, d, depth, width);
+		tess.addVertexWithUV(width, e, d, 0, depth);
+		tess.addVertexWithUV(0, e, d, width, depth);
 		// left
 		tess.addVertexWithUV(width, 0, 0, 0, 0);
 		tess.addVertexWithUV(width, b, -a, 0, height);

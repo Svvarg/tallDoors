@@ -6,9 +6,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.DoubleHorizontalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 
 public class DoubleHorizontalBalkPartType extends AbstractDoorPartType{
 

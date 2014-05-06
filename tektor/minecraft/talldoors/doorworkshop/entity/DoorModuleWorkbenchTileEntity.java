@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.doorworkshop;
+package tektor.minecraft.talldoors.doorworkshop.entity;
 
 import tektor.minecraft.talldoors.doorworkshop.gui.DoorModuleWorkbenchContainer;
 import net.minecraft.entity.player.EntityPlayer;

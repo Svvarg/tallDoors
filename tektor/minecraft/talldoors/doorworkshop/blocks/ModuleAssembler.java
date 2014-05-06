@@ -1,8 +1,9 @@
-package tektor.minecraft.talldoors.doorworkshop;
+package tektor.minecraft.talldoors.doorworkshop.blocks;
 
 import java.util.Random;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,18 +20,29 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class DoorWorkshop extends BlockContainer {
+public class ModuleAssembler extends BlockContainer{
 
 	private IIcon[] icon = new IIcon[5];
-
-	public DoorWorkshop() {
-		super(Material.wood);
+	public ModuleAssembler() {
+		super(Material.iron);
 		setHardness(4.2F);
 		setResistance(5.0F);
-		this.setBlockName("doorWorkshop");
+		this.setBlockName("moduleAssemler");
 		setCreativeTab(CreativeTabs.tabDecorations);
 	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int dir, float what, float these, float are) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking()) {
+			return false;
+		}
+		if(!world.isRemote)player.openGui(TallDoorsBase.instance, 5, world, x, y, z);
 
+		return true;
+	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
@@ -45,7 +57,7 @@ public class DoorWorkshop extends BlockContainer {
 		icon[4] = par1IconRegister
 				.registerIcon("talldoors:machineWorkbenchSide");
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2) {
@@ -67,17 +79,10 @@ public class DoorWorkshop extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int dir, float what, float these, float are) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if (tileEntity == null || player.isSneaking()) {
-			return false;
-		}
-		player.openGui(TallDoorsBase.instance, 4, world, x, y, z);
-
-		return true;
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new ModuleAssemblerTileEntity();
 	}
-
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block par5,
 			int par6) {
@@ -120,10 +125,4 @@ public class DoorWorkshop extends BlockContainer {
 			}
 		}
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return new DoorModuleWorkbenchTileEntity();
-	}
-
 }
