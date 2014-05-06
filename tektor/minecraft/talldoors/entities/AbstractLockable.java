@@ -99,7 +99,7 @@ public abstract class AbstractLockable extends Entity {
 
 	}
 
-	private boolean checkKey(EntityPlayer player) {
+	protected boolean checkKey(EntityPlayer player) {
 		for (ItemStack stack : player.inventory.mainInventory) {
 			if (stack != null
 					&& stack.getItem().equals(TallDoorsBase.key)

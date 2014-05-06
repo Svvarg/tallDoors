@@ -12,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
-import tektor.minecraft.talldoors.models.ModelMosaicGlass;
 
 public class RenderMosaicGlassTileEntity extends TileEntitySpecialRenderer {
 

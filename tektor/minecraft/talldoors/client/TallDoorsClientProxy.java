@@ -21,6 +21,14 @@ import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.DoorBaseRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.DoubleHorizontalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.HorizontalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -61,7 +69,15 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(FakeEntity.class, new RenderFakeEntity());
 		RenderingRegistry.registerEntityRenderingHandler(KeyMaker.class, new KeyMakerRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(TrapDoor.class, new TrapDoorRenderer());
+		
+		RenderingRegistry.registerEntityRenderingHandler(DoorBase.class, new DoorBaseRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(PlainDoorPartEntity.class, new PlainDoorPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(HorizontalBalkPartEntity.class, new HorizontalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoubleHorizontalBalkPartEntity.class, new DoubleHorizontalBalkPartRenderer());
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
+		
+		
 		mosaicRenderType = RenderingRegistry.getNextAvailableRenderId();
 		mosaicGlassRenderType = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderMosaicTileEnity());

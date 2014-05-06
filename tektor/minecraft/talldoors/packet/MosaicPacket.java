@@ -52,10 +52,8 @@ public class MosaicPacket extends AbstractPacket{
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		System.out.println(this.chosen);
 		EntityPlayerMP play = (EntityPlayerMP) player;
 		if (play.inventory.getCurrentItem().getItem().equals(TallDoorsBase.mosaicTool)) {
-			System.out.println(this.chosen);
 			if (play.worldObj.getTileEntity(corX, corY, corZ) instanceof MosaicTileEntity ) {
 				MosaicTileEntity ent = (MosaicTileEntity) play.worldObj
 						.getTileEntity(corX, corY, corZ);

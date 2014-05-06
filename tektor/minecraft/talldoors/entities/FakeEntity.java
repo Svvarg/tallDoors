@@ -189,6 +189,7 @@ public class FakeEntity extends Entity {
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
 	}
 
+	@Override
 	public boolean interactFirst(EntityPlayer player) {
 
 		if(master != null)master.interactFirst(player);
