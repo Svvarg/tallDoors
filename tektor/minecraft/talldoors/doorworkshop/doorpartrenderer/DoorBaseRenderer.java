@@ -49,11 +49,7 @@ public class DoorBaseRenderer extends Render {
 			GL11.glRotatef(270f + i * pos * 90f, 0f, 1f, 0f);
 		}
 		GL11.glScalef(1f, 1f, 1f);
-		this.bindTexture(this.getEntityTexture(entity));
-
-		DoorBase ent = (DoorBase) entity;
-
-		RenderUtil.renderOutline(ent.height2, ent.width2, ent.depth, 0, ent);
+		
 		GL11.glPopMatrix();
 
 	}
