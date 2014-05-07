@@ -24,10 +24,12 @@ import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
@@ -201,6 +203,7 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("horizontal",
 				new HorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("double horizontal", new DoubleHorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
 
 	}
 
@@ -321,28 +324,26 @@ public class TallDoorsBase {
 		EntityRegistry.registerModEntity(DoorBase.class, "DoorBase", 16,
 				TallDoorsBase.instance, 128, 5, true);
 
-		EntityRegistry.registerGlobalEntityID(PlainDoorPartEntity.class,
-				"PlainDoorPartEntity",
-				EntityRegistry.findGlobalUniqueEntityId());
+		registerDoorPartEntities();
+
+	}
+
+	private void registerDoorPartEntities() {
 		EntityRegistry
 				.registerModEntity(PlainDoorPartEntity.class,
 						"PlainDoorPartEntity", 17, TallDoorsBase.instance, 128,
 						5, true);
 
-		EntityRegistry.registerGlobalEntityID(HorizontalBalkPartEntity.class,
-				"HorizontalDoorPartEntity",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
 				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
 				true);
 		
-//		EntityRegistry.registerGlobalEntityID(DoubleHorizontalBalkPartEntity.class,
-//				"DoubleHorizontalBalkPartEntity",
-//				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
 				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance, 128, 5,
 				true);
-
+		EntityRegistry.registerModEntity(NullPartEntity.class,
+				"NullPartEntity", 20, TallDoorsBase.instance, 128, 5,
+				true);
 	}
 
 	private void registerTileEntities() {
