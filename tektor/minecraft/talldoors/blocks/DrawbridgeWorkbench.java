@@ -33,6 +33,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
 		setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {

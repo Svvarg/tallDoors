@@ -18,8 +18,8 @@ public class DrawbridgeWorkbenchItemBlock extends ItemBlock{
 		
 		switch(stack.getItemDamage())
 		{
-		case 0: name = "Drawbridge Workbench";break;
-		case 1: name = "Machine Workbench";break;
+		case 0: name = "drawbridge";break;
+		case 1: name = "machine";break;
 		}
 		return name;
 		

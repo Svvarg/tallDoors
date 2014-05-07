@@ -208,18 +208,11 @@ public class TallDoorsBase {
 
 		GameRegistry.registerBlock(drawbridgeWorkbench,
 				DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
-		LanguageRegistry.addName(new ItemStack(drawbridgeWorkbench, 1, 0),
-				"Drawbridge Workbench");
 
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
-		LanguageRegistry.addName(new ItemStack(keyRedstoneLock, 1, 0),
-				"Redstone Lock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
-		LanguageRegistry.addName(new ItemStack(mosaic, 1, 0), "Mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
-		LanguageRegistry.addName(new ItemStack(mosaicGlass, 1, 0),
-				"Mosaic Glass");
-
+		
 		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
 		GameRegistry.registerBlock(doorAssembly, "Door Assembly");
 	}
