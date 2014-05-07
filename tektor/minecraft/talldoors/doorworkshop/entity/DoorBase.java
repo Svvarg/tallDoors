@@ -244,7 +244,7 @@ public class DoorBase extends AbstractLockable {
 	}
 
 	public void setBoundsAt(double x, double y, double z) {
-					this.boundingBox.setBounds(x,y,z,x+1,y+height2,z+1);
+					this.boundingBox.setBounds(x,y,z,x+0.1,y+0.1,z+0.1);
 				
 	}
 
