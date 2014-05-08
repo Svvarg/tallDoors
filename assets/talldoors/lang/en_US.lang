@@ -1,4 +1,6 @@
-item.doorModule.name=Modular Door Placer
+item.doorModule.name=Door Module
+item.modularDoorPlacer.name=Modular Door Placer
+
 drawbridgeBase.name=Drawbridge
 drawbridgeMachine.name=Drawbridge Machine
 
