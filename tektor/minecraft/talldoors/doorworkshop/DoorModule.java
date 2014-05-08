@@ -65,7 +65,7 @@ public class DoorModule extends Item {
 			if (stack.stackTagCompound.getString("moduleType").equals("single")) {
 				return icon[5];
 			}
-			else if (stack.stackTagCompound.getString("moduleType").equals("horizontal"))
+			else if (stack.stackTagCompound.getString("moduleType").equals("horiz."))
 			{
 				return icon[6];
 			}
@@ -81,9 +81,16 @@ public class DoorModule extends Item {
 		}
 		return null;
 	}
-
+	
+	@Override
 	public boolean requiresMultipleRenderPasses() {
 		return true;
+	}
+	
+	@Override
+	public int getRenderPasses(int meta)
+	{	
+		return 3;
 	}
 
 }

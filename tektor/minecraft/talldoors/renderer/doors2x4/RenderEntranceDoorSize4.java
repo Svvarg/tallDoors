@@ -25,7 +25,6 @@ public class RenderEntranceDoorSize4 extends Render {
 		int orientation = ((AbstractDoorWidth2) entity).orientation;
 		int pos = ((AbstractDoorWidth2) entity).pos;
 		boolean left = ((AbstractDoorWidth2) entity).left;
-		//System.out.println(orientation);
 		if ( orientation == 0) {
 			if (left) {
 

@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor2;
@@ -33,7 +34,7 @@ public class DoorPlacer extends Item {
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override

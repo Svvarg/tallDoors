@@ -202,42 +202,39 @@ public abstract class AbstractDoorPart extends Entity{
 				if (pos == 0) {
 					this.boundingBox.setBounds(x+0.2D, y+0.1D, z, x+1-0.2D, y+height2-0.1D, z+depth);
 				} else {
-					//
-					this.boundingBox.setBounds(x, y+0.1D, z+0.2D, x+depth, y+height2-0.1D, z+1-0.2D);
+					
+					this.boundingBox.setBounds(x+1-depth, y+0.1D, z+0.2D, x+1, y+height2-0.1D, z+0.8D);
 					
 				}
 			} else {
 				if (pos == 0) {
-					this.boundingBox.setBounds(x-0.8D, y+0.1D, z, x-0.2D, y+height2-0.1D, z+depth);
+					this.boundingBox.setBounds(x+0.2D, y+0.1D, z, x+0.8D, y+height2-0.1D, z+depth);
 				} else {
-					//
-					this.boundingBox.setBounds(x, y+0.1D, z-0.8D, x+depth, y+height2-0.1D, z-0.2D);
+					this.boundingBox.setBounds(x+1, y+0.1D, z+0.2D, x+depth+1, y+height2-0.1D, z+0.8D);
 				}
 			}
 		} else if (orientation == 1) {
 			if (!left) {
 				if (pos == 1) {
-					//
-					this.boundingBox.setBounds(x-depth,y+0.1D,z-0.8D,x,y+height2-0.1D,z-0.2D);
+					this.boundingBox.setBounds(x+0.2D,y+0.1D,z-depth+1,x+0.8D,y+height2-0.1D,z+1);
 				} else {
-					//
-					this.boundingBox.setBounds(x,y+0.1D,z-0.2D,x-depth,y+height2-0.1D,z-1+0.2D);
+					this.boundingBox.setBounds(x-depth+1,y+0.1D,z+0.2D,x+1,y+height2-0.1D,z+0.8D);
 				}
 			} else {
 				if (pos == 1) {
 					this.boundingBox.setBounds(x-0.8D,y+0.1D,z-depth+1,x-0.2D,y+height2-0.1D,z+1);
 					
 				} else {
-					this.boundingBox.setBounds(x-depth,y+0.1D,z-0.8D,x,y+height2-0.1D,z-0.2D);
+					this.boundingBox.setBounds(x-depth+1,y+0.1D,z+0.2D,x+1,y+height2-0.1D,z+0.8D);
 				}
 			}
 		} else if (orientation == 2) {
 			if (!left) {
 				if (pos == 0) {
-					//
-					this.boundingBox.setBounds(x-0.2D, y+0.1D, z, x-1+0.2D, y+height2-0.1D, z+depth);
-				} else {
+					this.boundingBox.setBounds(x+0.2D, y+0.1D, z+1, x+0.8D, y+height2-0.1D, z+depth+1);
 					
+				} else {
+					this.boundingBox.setBounds(x, y+0.1D, z-0.8D, x+depth, y+height2-0.1D, z-0.2D);
 				}
 			} else {
 				if (pos == 0) {
@@ -250,8 +247,10 @@ public abstract class AbstractDoorPart extends Entity{
 		} else if (orientation == 3) {
 			if (!left) {
 				if (pos == 1) {
+					this.boundingBox.setBounds(x+0.2D,y+0.1D,z,x+0.8D,y+height2-0.1D,z+depth);
 					
 				} else {
+					this.boundingBox.setBounds(x,y+0.1D,z+0.2D,x+depth,y+height2-0.1D,z+0.8D);
 					
 				}
 			} else {

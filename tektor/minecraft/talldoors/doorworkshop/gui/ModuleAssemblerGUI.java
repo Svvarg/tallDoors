@@ -52,10 +52,8 @@ public class ModuleAssemblerGUI extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		fontRendererObj.drawString("Width:", -51, 123, -1);
-		fontRendererObj.drawString("" + this.dSizeX, -31, 138, -1);
-		fontRendererObj.drawString("Height:", -51, 152, -1);
-		fontRendererObj.drawString("" + this.dSizeY, -31, 167, -1);
+		fontRendererObj.drawString("Width: " + this.dSizeX, -51, 123, -1);
+		fontRendererObj.drawString("Height: " + this.dSizeY, -51, 152, -1);
 		int negX = (int) (Math.ceil(dSizeX / 2D)) - 1;
 		int posX = (int) (Math.floor(dSizeX / 2D));
 		int negY = (int) (Math.ceil(dSizeY / 2D) - 1);
@@ -81,20 +79,21 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
 		this.buttonList.clear();
-		this.buttonList.add(new GuiButton(0, i + 265, j + 125, 40, 20, "OK"));
-		this.buttonList.add(new GuiButton(1, i + 300, j + 220, 20, 20, "<"));
-		this.buttonList.add(new GuiButton(2, i + 320, j + 210, 20, 20, "^"));
-		this.buttonList.add(new GuiButton(3, i + 320, j + 230, 20, 20, "v"));
-		this.buttonList.add(new GuiButton(4, i + 340, j + 220, 20, 20, ">"));
+		this.buttonList.add(new GuiButton(0, i + 260, j + 125, 20, 20, "L"));
+		this.buttonList.add(new GuiButton(10,i+288, j+125,20,20,"R"));
+		this.buttonList.add(new GuiButton(1, i + 300, j + 70, 20, 20, "\u2190"));
+		this.buttonList.add(new GuiButton(2, i + 320, j + 60, 20, 20, "\u2191"));
+		this.buttonList.add(new GuiButton(3, i + 320, j + 80, 20, 20, "\u2193"));
+		this.buttonList.add(new GuiButton(4, i + 340, j + 70, 20, 20, "\u2192"));
 		this.buttonList
-				.add(new GuiButton(5, i + 300, j + 180, 40, 20, "Center"));
+				.add(new GuiButton(5, i + 345, j + 28, 40, 20, "Center"));
 		this.buttonList.add(new GuiButton(6, i - 53, j + 131, 20, 20, "-"));
 		this.buttonList.add(new GuiButton(7, i - 23, j + 131, 20, 20, "+"));
 		this.buttonList.add(new GuiButton(8, i - 53, j + 160, 20, 20, "-"));
 		this.buttonList.add(new GuiButton(9, i - 23, j + 160, 20, 20, "+"));
 
 		this.itemNameField = new GuiTextField(this.fontRendererObj, i + 300,
-				j + 40, 40, 15);
+				j + 20, 40, 15);
 		this.itemNameField.setTextColor(-1);
 		this.itemNameField.setDisabledTextColour(-1);
 		this.itemNameField.setEnableBackgroundDrawing(true);
@@ -102,7 +101,7 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		this.itemNameField.setText("" + y);
 
 		this.itemNameField2 = new GuiTextField(this.fontRendererObj, i + 300,
-				j + 60, 40, 15);
+				j +40, 40, 15);
 		this.itemNameField2.setTextColor(-1);
 		this.itemNameField2.setDisabledTextColour(-1);
 		this.itemNameField2.setEnableBackgroundDrawing(true);
@@ -129,10 +128,12 @@ public class ModuleAssemblerGUI extends GuiContainer {
 	protected void actionPerformed(GuiButton button) {
 		switch (button.id) {
 		case 0: {
-			ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
-					this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY);
+			
 			if (!te.getWorldObj().isRemote) {
 			} else if (te.getWorldObj().isRemote) {
+				
+				ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
+						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY, true);
 				TallDoorsBase.packetPipeline.sendToServer(pack);
 			}
 			break;
@@ -212,6 +213,16 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		}
 		case 9: {
 			this.dSizeY++;
+			break;
+		}
+		case 10: {
+			if (!te.getWorldObj().isRemote) {
+			} else if (te.getWorldObj().isRemote) {
+				
+				ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
+						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY, false);
+				TallDoorsBase.packetPipeline.sendToServer(pack);
+			}
 			break;
 		}
 		}

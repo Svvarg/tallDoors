@@ -14,19 +14,21 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 
 	int corX,corY,corZ;
 	int dSizeX, dSizeY;
+	boolean left;
 	
 	public ModuleAssemblerPacket()
 	{
 		
 	}
 	
-	public ModuleAssemblerPacket(int corX, int corY, int corZ, int dX, int dY)
+	public ModuleAssemblerPacket(int corX, int corY, int corZ, int dX, int dY,boolean left)
 	{
 		this.corX = corX;
 		this.corY = corY;
 		this.corZ = corZ;
 		this.dSizeX = dX;
 		this.dSizeY = dY;
+		this.left = left;
 	}
 	
 	@Override
@@ -36,6 +38,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		buffer.writeInt(corZ);
 		buffer.writeInt(dSizeX);
 		buffer.writeInt(dSizeY);
+		buffer.writeBoolean(left);
 		
 	}
 
@@ -46,6 +49,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		corZ = buffer.readInt();
 		dSizeX = buffer.readInt();
 		dSizeY = buffer.readInt();
+		left = buffer.readBoolean();
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		if (play.worldObj.getTileEntity(corX, corY, corZ) instanceof ModuleAssemblerTileEntity) {
 			ModuleAssemblerTileEntity ent = (ModuleAssemblerTileEntity) play.worldObj
 					.getTileEntity(corX, corY, corZ);
-			ent.produce(dSizeX,dSizeY);
+			ent.produce(dSizeX,dSizeY,left);
 		}
 	}
 

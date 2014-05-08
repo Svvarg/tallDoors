@@ -13,6 +13,7 @@ import tektor.minecraft.talldoors.doorworkshop.network.DoorModuleWorkbenchPacket
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -88,23 +89,22 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRendererObj.drawString("Door Modules", 8, 6, 9919952);
-		fontRendererObj.drawString("Modules:", 8, 17, 9919952);
+		fontRendererObj.drawString("Door Modules", 8, 6, -1);
+		fontRendererObj.drawString("Modules:", 8, 17, -1);
 		for (int i = off; (i < off + 8 && i < keys.length); i++) {
-			int color = 9919952;
+			int color = -1;
 			if (chosen.equals(keys[i]))
 				color = 5919952;
 
 			fontRendererObj.drawString(keys[i], 8, 27 + (i - off) * 10, color);
 		}
-		fontRendererObj.drawString(page + "/" + pages, 48, 107, 9919952);
+		fontRendererObj.drawString(page + "/" + pages, 48, 107, -1);
 
-		fontRendererObj.drawString("Prio " + priority + " " + moduleType + " "
-				+ chosen + " module", 8, 122, 9919952);
+		fontRendererObj.drawString("Prio " + priority + " " + moduleType, 8, 122, -1);
 		int i = 0;
 		for (String s : DoorPartRegistry.getPartForIndex(chosen)
 				.getCostAsString()) {
-			fontRendererObj.drawString(s, 8, 132 + i, 9919952);
+			fontRendererObj.drawString(s, 8, 132 + i, -1);
 			i = i + 10;
 		}
 	}
@@ -125,12 +125,22 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		this.drawTexturedModalRect(x + 256, y + 70, 108, 189, 36, 49);
 		drawPreview(x, y);
 	}
-
+	
 	public void drawPreview(int x, int y) {
 		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
 				"textures/doorparts/preview/" + chosen + ".png"));
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(x + 150, y + 5, 0, 0, 100, 77);
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(x + 150, y + 5 + 77, 0, 0.0, 1.0);
+		tessellator.addVertexWithUV(x + 150 + 100, y + 5 + 77, 0, 1.0, 1.0);
+		tessellator.addVertexWithUV(x + 150 + 100, y + 5, 0, 1.0, 0.0);
+		tessellator.addVertexWithUV(x + 150, y + 5, 0, 0.0, 0.0);
+		tessellator.draw();
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	@Override

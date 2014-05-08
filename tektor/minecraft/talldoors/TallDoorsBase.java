@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -24,10 +25,12 @@ import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
@@ -69,6 +72,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.1")
 public class TallDoorsBase {
@@ -83,6 +88,15 @@ public class TallDoorsBase {
 
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
+	// CreativeTab
+	public static CreativeTabs tabTallDoors = new CreativeTabs("tallDoors") {
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem() {
+			return TallDoorsBase.modularDoorPlacer;
+		}
+	};
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
@@ -200,7 +214,9 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
 		DoorPartRegistry.registerDoorPart("horizontal",
 				new HorizontalBalkPartType());
-		DoorPartRegistry.registerDoorPart("double horizontal", new DoubleHorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("double_horizontal",
+				new DoubleHorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
 
 	}
 
@@ -208,17 +224,10 @@ public class TallDoorsBase {
 
 		GameRegistry.registerBlock(drawbridgeWorkbench,
 				DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
-		LanguageRegistry.addName(new ItemStack(drawbridgeWorkbench, 1, 0),
-				"Drawbridge Workbench");
 
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
-		LanguageRegistry.addName(new ItemStack(keyRedstoneLock, 1, 0),
-				"Redstone Lock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
-		LanguageRegistry.addName(new ItemStack(mosaic, 1, 0), "Mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
-		LanguageRegistry.addName(new ItemStack(mosaicGlass, 1, 0),
-				"Mosaic Glass");
 
 		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
 		GameRegistry.registerBlock(doorAssembly, "Door Assembly");
@@ -328,28 +337,25 @@ public class TallDoorsBase {
 		EntityRegistry.registerModEntity(DoorBase.class, "DoorBase", 16,
 				TallDoorsBase.instance, 128, 5, true);
 
-		EntityRegistry.registerGlobalEntityID(PlainDoorPartEntity.class,
-				"PlainDoorPartEntity",
-				EntityRegistry.findGlobalUniqueEntityId());
+		registerDoorPartEntities();
+
+	}
+
+	private void registerDoorPartEntities() {
 		EntityRegistry
 				.registerModEntity(PlainDoorPartEntity.class,
 						"PlainDoorPartEntity", 17, TallDoorsBase.instance, 128,
 						5, true);
 
-		EntityRegistry.registerGlobalEntityID(HorizontalBalkPartEntity.class,
-				"HorizontalDoorPartEntity",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
 				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
 				true);
-		
-//		EntityRegistry.registerGlobalEntityID(DoubleHorizontalBalkPartEntity.class,
-//				"DoubleHorizontalBalkPartEntity",
-//				EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
-				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance, 128, 5,
-				true);
 
+		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
+				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance,
+				128, 5, true);
+		EntityRegistry.registerModEntity(NullPartEntity.class,
+				"NullPartEntity", 20, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {
@@ -435,6 +441,16 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 1), new Object[] { "ZYZ",
 				"XXX", "XXX", 'X', wood, 'Y', cobble, 'Z', redstone });
+
+		// Door Module Workbench
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorWorkshop,
+				1, 0), new Object[] { "ZYZ", "XXX", "XXX", 'X', wood, 'Y',
+				cobble, 'Z', iron });
+
+		// Machine Workbench
+		GameRegistry.addShapedRecipe(new ItemStack(
+				TallDoorsBase.doorAssembly, 1, 0), new Object[] { "ZYZ",
+				"ZXZ", "ZXZ", 'X', wood, 'Y', cobble, 'Z', iron });
 
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,

@@ -139,7 +139,6 @@ public class DoorModuleWorkbenchContainer extends Container {
 				}
 			}
 			for (int k = 0; k < debt.size(); k++) {
-				System.out.println(debt.get(k).stackSize + " " + found[k]);
 				if (debt.get(k).stackSize > found[k]) {
 					return;
 				}

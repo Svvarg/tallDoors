@@ -20,7 +20,7 @@ public class MosaicGlass extends BlockContainer {
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setBlockName("mosaicGlass");
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 	
 	@Override

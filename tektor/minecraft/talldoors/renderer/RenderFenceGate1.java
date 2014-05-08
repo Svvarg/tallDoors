@@ -26,7 +26,6 @@ public class RenderFenceGate1 extends Render {
 		int orientation = ((FenceGate1) entity).orientation;
 		int pos = ((FenceGate1) entity).pos;
 		boolean left = ((FenceGate1) entity).left;
-		//System.out.println(orientation);
 		if ( orientation == 0) {
 			if (left) {
 

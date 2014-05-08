@@ -25,10 +25,13 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 
 	ItemStack[] inv = new ItemStack[104];
 	List<PositionItemStack> stacks;
-	int x, y;
+	int a, b;
 
 	public ModuleAssemblerTileEntity() {
 		stacks = new CopyOnWriteArrayList<PositionItemStack>();
+		blockMetadata = 0;
+		this.a = 0;
+		this.b = 0;
 	}
 
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
@@ -40,8 +43,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	public void writeToNBT(NBTTagCompound par1) {
 		super.writeToNBT(par1);
 		par1.setInteger("meta", blockMetadata);
-		par1.setInteger("x", x);
-		par1.setInteger("y", y);
+		par1.setInteger("a", a);
+		par1.setInteger("b", b);
 
 //		NBTTagList tagList0 = new NBTTagList();
 //		for (int i = 0; i < this.stacks.size(); ++i) {
@@ -72,8 +75,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	public void readFromNBT(NBTTagCompound par1) {
 		super.readFromNBT(par1);
 		blockMetadata = par1.getInteger("meta");
-		this.x = par1.getInteger("x");
-		this.y = par1.getInteger("y");
+		this.a = par1.getInteger("a");
+		this.b = par1.getInteger("b");
 
 //		this.stacks.clear();
 //		NBTTagList var1 = (NBTTagList) par1.getTag("stacks");
@@ -145,8 +148,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack stack) {
 		inv[i] = stack;
-		this.changeStacks(x + (i % 13) - 6,
-				(int) (y + (Math.ceil(i / 13))) - 3, stack);
+		this.changeStacks(a + (i % 13) - 6,
+				(int) (b + (Math.ceil(i / 13))) - 3, stack);
 	}
 	
 	public void setInventorySlotContentsWithoutCheck(int i, ItemStack stack)
@@ -190,8 +193,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	 */
 	public void rearrange(int x, int y) {
 		if (!this.worldObj.isRemote) {
-			this.x = x;
-			this.y = y;
+			this.a = x;
+			this.b = y;
 			deleteAll();
 			for (PositionItemStack pis : stacks) {
 				if (pis.y > (y - 4) && pis.y < (y + 5) && pis.x > (x - 7)
@@ -208,7 +211,6 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	public void changeStacks(int i, int d, ItemStack stack) {
 		if (!this.worldObj.isRemote) {
 			if (stack != null) {
-				System.out.println("found one 2");
 				if(stack.stackSize != 0)
 				{
 				stacks.add(new PositionItemStack(i, d, stack.copy()));
@@ -244,7 +246,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		}
 	}
 
-	public void produce(int dSizeX, int dSizeY) {
+	public void produce(int dSizeX, int dSizeY, boolean left) {
 		List<PositionItemStack> prio4 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio3 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio2 = new ArrayList<PositionItemStack>();
@@ -283,7 +285,9 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		result = buildForList(dSizeY, prio3, negX, negY, result);
 		result = buildForList(dSizeY, prio2, negX, negY, result);
 		result = buildForList(dSizeY, prio1, negX, negY, result);
-		this.container.produce(result);
+		this.container.produce(result,left);
+		this.stacks.clear();
+		this.deleteAll();
 		
 	}
 

@@ -1,0 +1,15 @@
+item.doorModule.name=Door Module
+item.modularDoorPlacer.name=Modular Door Placer
+
+drawbridgeBase.name=Drawbridge
+drawbridgeMachine.name=Drawbridge Machine
+
+drawbridge.name=Drawbridge Workbench
+machine.name=Machine Workbench
+tile.doorWorkshop.name=Door Module Workbench
+tile.moduleAssemler.name=Module Door Assembly
+tile.mosaic.name=Mosaic
+tile.mosaicGlass.name=Mosaic Glass
+tile.keyRedstoneLock.name=Redstone Lock
+
+itemGroup.tallDoors=Tall Doors
