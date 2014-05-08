@@ -21,7 +21,6 @@ public class DoorBaseRenderer extends Render {
 		int drop = 0;
 		if (pos == 0)
 			drop = 1;
-		// System.out.println(orientation);
 		if (orientation == 0) {
 			GL11.glTranslatef((float) x + 1f, (float) y, (float) z + 0.2f
 					* drop);

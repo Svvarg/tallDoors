@@ -33,7 +33,6 @@ public class DrawbridgeWorkbenchContainer extends AbstractWorkbenchContainer {
 			}
 			int planksNeed = x * y;
 			int ironNeed = x + y;
-			System.out.println(planksNeed + " " + planksFound + " " + ironNeed + " " + ironFound);
 			if (planksNeed <= planksFound && ironNeed <= ironFound) {
 				ItemStack plank = new ItemStack(Blocks.planks, planksNeed);
 				ItemStack iron = new ItemStack(Items.iron_ingot, ironNeed);

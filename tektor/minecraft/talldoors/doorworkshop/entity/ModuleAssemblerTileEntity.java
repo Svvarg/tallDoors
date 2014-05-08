@@ -211,7 +211,6 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 	public void changeStacks(int i, int d, ItemStack stack) {
 		if (!this.worldObj.isRemote) {
 			if (stack != null) {
-				System.out.println("found one 2");
 				if(stack.stackSize != 0)
 				{
 				stacks.add(new PositionItemStack(i, d, stack.copy()));

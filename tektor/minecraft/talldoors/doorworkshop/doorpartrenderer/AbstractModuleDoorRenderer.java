@@ -18,7 +18,6 @@ public abstract class AbstractModuleDoorRenderer extends Render {
 
 		int orientation = ((AbstractDoorPart) entity).orientation;
 		int pos = ((AbstractDoorPart) entity).pos;
-		// System.out.println(orientation);
 		int drop = 0;
 		if (pos == 0)
 			drop = 1;
