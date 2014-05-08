@@ -38,11 +38,29 @@ public class ModularDoorPlacer extends Item {
 //				return false;
 //			}
 			DoorBase door = new DoorBase(par3World);
-			door.setOrientation(true, var24);
-			door.setPosition(par4, par5 + 1, par6);
+			boolean left = par1ItemStack.stackTagCompound.getBoolean("left");
+			door.setOrientation(left, var24);
+
 			String[][] result = ((String[][]) SerializationUtils
 					.deserialize(par1ItemStack.stackTagCompound
 							.getByteArray("constructionPlan")));
+			
+			if (!left) {
+				switch (var24) {
+				case 0:
+					door.setPosition(par4+result.length -1, par5 + 1, par6);break;
+				case 1:
+					door.setPosition(par4, par5 + 1, par6+result.length-1);break;
+				case 2:
+					door.setPosition(par4-result.length+1, par5 + 1, par6);break;
+				case 3:
+					door.setPosition(par4, par5 + 1, par6-result.length+1);break;
+				}
+			}
+			else
+			{
+				door.setPosition(par4, par5 + 1, par6);
+			}
 			door.setConstructionPlan(result);
 			door.constructFromPlan();
 			

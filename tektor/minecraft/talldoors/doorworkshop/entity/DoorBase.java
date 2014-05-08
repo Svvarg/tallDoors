@@ -136,8 +136,7 @@ public class DoorBase extends AbstractLockable {
 					part.master = this;
 					break;
 				}
-				case 3:
-				{
+				case 3: {
 					AbstractDoorPartType classH = DoorPartRegistry
 							.getPartForIndex(constructionPlan[columns][blocks]);
 					part = classH.getNewEntity(this.worldObj, (int) this.posX,
@@ -244,8 +243,8 @@ public class DoorBase extends AbstractLockable {
 	}
 
 	public void setBoundsAt(double x, double y, double z) {
-					this.boundingBox.setBounds(x,y,z,x+0.1,y+0.1,z+0.1);
-				
+		this.boundingBox.setBounds(x, y, z, x + 0.1, y + 0.1, z + 0.1);
+
 	}
 
 	@Override
@@ -328,22 +327,30 @@ public class DoorBase extends AbstractLockable {
 								part.setPos(pos);
 							}
 						} else {
-
+							for (AbstractDoorPart part : parts) {
+								part.setPosition(this.posX - this.width2
+										+ this.depth, part.posY, this.posZ
+										+ (this.posX - part.posX));
+								part.setPos(pos);
+							}
 						}
 						break;
 					}
 					case 1: {
-						if(left)
-						{
+						if (left) {
 							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX+(part.posZ-this.posZ), part.posY,
+								part.setPosition(this.posX
+										+ (part.posZ - this.posZ), part.posY,
 										this.posZ);
 								part.setPos(pos);
 							}
-						}
-						else
-						{
-							
+						} else {
+							for (AbstractDoorPart part : parts) {
+								part.setPosition(this.posX
+										+ (part.posZ - this.posZ), part.posY,
+										this.posZ - this.width2 + this.depth);
+								part.setPos(pos);
+							}
 						}
 						break;
 					}
@@ -355,22 +362,30 @@ public class DoorBase extends AbstractLockable {
 								part.setPos(pos);
 							}
 						} else {
-
+							for (AbstractDoorPart part : parts) {
+								part.setPosition(this.posX + this.width2
+										- this.depth, part.posY, this.posZ
+										+ (this.posX - part.posX));
+								part.setPos(pos);
+							}
 						}
 						break;
 					}
 					case 3: {
-						if(left)
-						{
+						if (left) {
 							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX+(part.posZ-this.posZ), part.posY,
+								part.setPosition(this.posX
+										+ (part.posZ - this.posZ), part.posY,
 										this.posZ);
 								part.setPos(pos);
 							}
-						}
-						else
-						{
-							
+						} else {
+							for (AbstractDoorPart part : parts) {
+								part.setPosition(this.posX
+										+ (part.posZ - this.posZ), part.posY,
+										this.posZ + this.width2 - this.depth);
+								part.setPos(pos);
+							}
 						}
 						break;
 					}
@@ -384,58 +399,39 @@ public class DoorBase extends AbstractLockable {
 							1.0f);
 					switch (orientation) {
 					case 0: {
-						if (left) {
-							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX
-										+ (this.posZ - part.posZ), part.posY,
-										this.posZ);
-								part.setPos(pos);
-							}
-						} else {
+
+						for (AbstractDoorPart part : parts) {
+							part.setPosition(this.posX
+									+ (this.posZ - part.posZ), part.posY,
+									this.posZ);
+							part.setPos(pos);
 
 						}
 						break;
 					}
 					case 1: {
-						if(left)
-						{
-							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX, part.posY,
-										this.posZ+(part.posX-this.posX));
-								part.setPos(pos);
-							}
-						}
-						else
-						{
-							
+
+						for (AbstractDoorPart part : parts) {
+							part.setPosition(this.posX, part.posY, this.posZ
+									+ (part.posX - this.posX));
+							part.setPos(pos);
 						}
 						break;
 					}
 					case 2: {
-						if (left) {
-							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX
-										+ (this.posZ - part.posZ), part.posY,
-										this.posZ);
-								part.setPos(pos);
-							}
-						} else {
-
+						for (AbstractDoorPart part : parts) {
+							part.setPosition(this.posX
+									+ (this.posZ - part.posZ), part.posY,
+									this.posZ);
+							part.setPos(pos);
 						}
 						break;
 					}
 					case 3: {
-						if(left)
-						{
-							for (AbstractDoorPart part : parts) {
-								part.setPosition(this.posX, part.posY,
-										this.posZ+(part.posX-this.posX));
-								part.setPos(pos);
-							}
-						}
-						else
-						{
-							
+						for (AbstractDoorPart part : parts) {
+							part.setPosition(this.posX, part.posY, this.posZ
+									+ (part.posX - this.posX));
+							part.setPos(pos);
 						}
 						break;
 					}
@@ -447,15 +443,14 @@ public class DoorBase extends AbstractLockable {
 						pos = 1;
 						worldObj.playSoundAtEntity(this, "random.door_open",
 								1.0f, 1.0f);
-						
-						
+
 					}
 
 					else {
 						pos = 0;
 						worldObj.playSoundAtEntity(this, "random.door_close",
 								1.0f, 1.0f);
-						
+
 					}
 				} else {
 					player.addChatMessage(new ChatComponentText(
