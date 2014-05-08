@@ -133,7 +133,7 @@ public class ModuleAssemblerGUI extends GuiContainer {
 			} else if (te.getWorldObj().isRemote) {
 				
 				ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
-						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY);
+						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY, true);
 				TallDoorsBase.packetPipeline.sendToServer(pack);
 			}
 			break;
@@ -213,6 +213,16 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		}
 		case 9: {
 			this.dSizeY++;
+			break;
+		}
+		case 10: {
+			if (!te.getWorldObj().isRemote) {
+			} else if (te.getWorldObj().isRemote) {
+				
+				ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
+						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY, false);
+				TallDoorsBase.packetPipeline.sendToServer(pack);
+			}
 			break;
 		}
 		}

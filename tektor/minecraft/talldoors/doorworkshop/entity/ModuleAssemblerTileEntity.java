@@ -247,7 +247,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		}
 	}
 
-	public void produce(int dSizeX, int dSizeY) {
+	public void produce(int dSizeX, int dSizeY, boolean left) {
 		List<PositionItemStack> prio4 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio3 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio2 = new ArrayList<PositionItemStack>();
@@ -286,7 +286,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		result = buildForList(dSizeY, prio3, negX, negY, result);
 		result = buildForList(dSizeY, prio2, negX, negY, result);
 		result = buildForList(dSizeY, prio1, negX, negY, result);
-		this.container.produce(result);
+		this.container.produce(result,left);
 		
 	}
 

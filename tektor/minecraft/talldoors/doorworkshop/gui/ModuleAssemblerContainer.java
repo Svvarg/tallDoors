@@ -131,12 +131,13 @@ public class ModuleAssemblerContainer extends Container{
 
 	}
 
-	public void produce(String[][] constructionPlan) {
+	public void produce(String[][] constructionPlan, boolean left) {
 		if (this.outputSlot.getStackInSlot(0) == null) {
 			this.outputSlot.setInventorySlotContents(0, new ItemStack(TallDoorsBase.modularDoorPlacer,1,0));
 			this.outputSlot.getStackInSlot(0).stackTagCompound = new NBTTagCompound();
 			final byte[] bytes = SerializationUtils.serialize(constructionPlan);
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setByteArray("constructionPlan", bytes);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setBoolean("left", left);
 		}
 	}
 
