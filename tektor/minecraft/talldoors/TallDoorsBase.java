@@ -88,10 +88,9 @@ public class TallDoorsBase {
 
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
-	
-	//CreativeTab
-	public static CreativeTabs tabTallDoors = new CreativeTabs("tallDoors")
-	{
+
+	// CreativeTab
+	public static CreativeTabs tabTallDoors = new CreativeTabs("tallDoors") {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
@@ -215,7 +214,8 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
 		DoorPartRegistry.registerDoorPart("horizontal",
 				new HorizontalBalkPartType());
-		DoorPartRegistry.registerDoorPart("double_horizontal", new DoubleHorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("double_horizontal",
+				new DoubleHorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
 
 	}
@@ -228,7 +228,7 @@ public class TallDoorsBase {
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
-		
+
 		GameRegistry.registerBlock(doorWorkshop, "Door Workshop");
 		GameRegistry.registerBlock(doorAssembly, "Door Assembly");
 	}
@@ -350,13 +350,12 @@ public class TallDoorsBase {
 		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
 				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
 				true);
-		
+
 		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
-				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance, 128, 5,
-				true);
+				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance,
+				128, 5, true);
 		EntityRegistry.registerModEntity(NullPartEntity.class,
-				"NullPartEntity", 20, TallDoorsBase.instance, 128, 5,
-				true);
+				"NullPartEntity", 20, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {
@@ -442,6 +441,16 @@ public class TallDoorsBase {
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 1), new Object[] { "ZYZ",
 				"XXX", "XXX", 'X', wood, 'Y', cobble, 'Z', redstone });
+
+		// Door Module Workbench
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorWorkshop,
+				1, 0), new Object[] { "ZYZ", "XXX", "XXX", 'X', wood, 'Y',
+				cobble, 'Z', iron });
+
+		// Machine Workbench
+		GameRegistry.addShapedRecipe(new ItemStack(
+				TallDoorsBase.doorAssembly, 1, 0), new Object[] { "ZYZ",
+				"ZXZ", "ZXZ", 'X', wood, 'Y', cobble, 'Z', iron });
 
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,
