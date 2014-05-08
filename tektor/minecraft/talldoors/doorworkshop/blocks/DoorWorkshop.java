@@ -22,29 +22,25 @@ import net.minecraft.world.World;
 
 public class DoorWorkshop extends BlockContainer {
 
-	private IIcon[] icon = new IIcon[5];
+	private IIcon[] icon = new IIcon[3];
 
 	public DoorWorkshop() {
 		super(Material.wood);
 		setHardness(4.2F);
 		setResistance(5.0F);
 		this.setBlockName("doorWorkshop");
-		setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister
-				.registerIcon("talldoors:drawbridgeWorkbenchTop");
+				.registerIcon("talldoors:moduleWorkshopTop");
 		icon[1] = par1IconRegister
-				.registerIcon("talldoors:drawbridgeWorkbenchSide");
+				.registerIcon("talldoors:moduleWorkshopSide");
 		icon[2] = par1IconRegister
-				.registerIcon("talldoors:drawbridgeWorkbenchBottom");
-		icon[3] = par1IconRegister
-				.registerIcon("talldoors:machineWorkbenchTop");
-		icon[4] = par1IconRegister
-				.registerIcon("talldoors:machineWorkbenchSide");
+				.registerIcon("talldoors:moduleWorkshopBottom");
 	}
 
 	@Override

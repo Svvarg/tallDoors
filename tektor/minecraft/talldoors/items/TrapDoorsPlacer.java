@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.trapdoors.TrapDoor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +23,7 @@ public class TrapDoorsPlacer extends Item {
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override

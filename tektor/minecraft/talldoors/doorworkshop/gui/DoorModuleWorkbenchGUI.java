@@ -13,6 +13,7 @@ import tektor.minecraft.talldoors.doorworkshop.network.DoorModuleWorkbenchPacket
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -124,12 +125,22 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		this.drawTexturedModalRect(x + 256, y + 70, 108, 189, 36, 49);
 		drawPreview(x, y);
 	}
-
+	
 	public void drawPreview(int x, int y) {
 		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
 				"textures/doorparts/preview/" + chosen + ".png"));
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModalRect(x + 150, y + 5, 0, 0, 100, 77);
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(x + 150, y + 5 + 77, 0, 0.0, 1.0);
+		tessellator.addVertexWithUV(x + 150 + 100, y + 5 + 77, 0, 1.0, 1.0);
+		tessellator.addVertexWithUV(x + 150 + 100, y + 5, 0, 1.0, 0.0);
+		tessellator.addVertexWithUV(x + 150, y + 5, 0, 0.0, 0.0);
+		tessellator.draw();
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	@Override

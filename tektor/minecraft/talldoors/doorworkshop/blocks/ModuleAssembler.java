@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 
 public class ModuleAssembler extends BlockContainer{
 
-	private IIcon[] icon = new IIcon[5];
+	private IIcon[] icon = new IIcon[3];
 	public ModuleAssembler() {
 		super(Material.iron);
 		setHardness(4.2F);
 		setResistance(5.0F);
 		this.setBlockName("moduleAssemler");
-		setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 	
 	@Override
@@ -47,15 +47,11 @@ public class ModuleAssembler extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		icon[0] = par1IconRegister
-				.registerIcon("talldoors:drawbridgeWorkbenchTop");
+				.registerIcon("talldoors:moduleAssemblyTop");
 		icon[1] = par1IconRegister
-				.registerIcon("talldoors:drawbridgeWorkbenchSide");
+				.registerIcon("talldoors:moduleAssemblySide");
 		icon[2] = par1IconRegister
 				.registerIcon("talldoors:drawbridgeWorkbenchBottom");
-		icon[3] = par1IconRegister
-				.registerIcon("talldoors:machineWorkbenchTop");
-		icon[4] = par1IconRegister
-				.registerIcon("talldoors:machineWorkbenchSide");
 	}
 	
 	@Override

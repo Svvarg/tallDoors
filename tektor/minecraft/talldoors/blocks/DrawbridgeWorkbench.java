@@ -30,7 +30,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
 		setHardness(4.2F);
         setResistance(5.0F);
         this.setBlockName("drawbridgeWorkplace");
-		setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 	
 	

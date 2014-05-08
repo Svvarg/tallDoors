@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -71,6 +72,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.1")
 public class TallDoorsBase {
@@ -85,6 +88,16 @@ public class TallDoorsBase {
 
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+	
+	//CreativeTab
+	public static CreativeTabs tabTallDoors = new CreativeTabs("tallDoors")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem() {
+			return TallDoorsBase.modularDoorPlacer;
+		}
+	};
 
 	public static Item doorPlacer;
 	public static Item drawbridge;
@@ -202,7 +215,7 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
 		DoorPartRegistry.registerDoorPart("horizontal",
 				new HorizontalBalkPartType());
-		DoorPartRegistry.registerDoorPart("double horizontal", new DoubleHorizontalBalkPartType());
+		DoorPartRegistry.registerDoorPart("double_horizontal", new DoubleHorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
 
 	}

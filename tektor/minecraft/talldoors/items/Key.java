@@ -2,6 +2,8 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +22,7 @@ public class Key extends Item {
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabs.tabTools);
+		this.setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override

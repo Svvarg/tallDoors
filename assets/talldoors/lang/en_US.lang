@@ -11,3 +11,5 @@ tile.moduleAssemler.name=Module Door Assembly
 tile.mosaic.name=Mosaic
 tile.mosaicGlass.name=Mosaic Glass
 tile.keyRedstoneLock.name=Redstone Lock
+
+itemGroup.tallDoors=Tall Doors
