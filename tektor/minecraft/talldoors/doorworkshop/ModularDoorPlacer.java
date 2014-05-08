@@ -19,9 +19,12 @@ public class ModularDoorPlacer extends Item {
 		this.setMaxDamage(0);
 		this.setHasSubtypes(false);
 		this.setMaxStackSize(1);
+		this.setUnlocalizedName("modularDoorPlacer");
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
-
+	
+	
+	
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
