@@ -82,19 +82,19 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		int j = (this.height - this.ySize) / 2;
 		this.buttonList.clear();
 		this.buttonList.add(new GuiButton(0, i + 265, j + 125, 40, 20, "OK"));
-		this.buttonList.add(new GuiButton(1, i + 300, j + 220, 20, 20, "<"));
-		this.buttonList.add(new GuiButton(2, i + 320, j + 210, 20, 20, "^"));
-		this.buttonList.add(new GuiButton(3, i + 320, j + 230, 20, 20, "v"));
-		this.buttonList.add(new GuiButton(4, i + 340, j + 220, 20, 20, ">"));
+		this.buttonList.add(new GuiButton(1, i + 300, j + 70, 20, 20, "<"));
+		this.buttonList.add(new GuiButton(2, i + 320, j + 60, 20, 20, "^"));
+		this.buttonList.add(new GuiButton(3, i + 320, j + 80, 20, 20, "v"));
+		this.buttonList.add(new GuiButton(4, i + 340, j + 70, 20, 20, ">"));
 		this.buttonList
-				.add(new GuiButton(5, i + 300, j + 180, 40, 20, "Center"));
+				.add(new GuiButton(5, i + 345, j + 28, 40, 20, "Center"));
 		this.buttonList.add(new GuiButton(6, i - 53, j + 131, 20, 20, "-"));
 		this.buttonList.add(new GuiButton(7, i - 23, j + 131, 20, 20, "+"));
 		this.buttonList.add(new GuiButton(8, i - 53, j + 160, 20, 20, "-"));
 		this.buttonList.add(new GuiButton(9, i - 23, j + 160, 20, 20, "+"));
 
 		this.itemNameField = new GuiTextField(this.fontRendererObj, i + 300,
-				j + 40, 40, 15);
+				j + 20, 40, 15);
 		this.itemNameField.setTextColor(-1);
 		this.itemNameField.setDisabledTextColour(-1);
 		this.itemNameField.setEnableBackgroundDrawing(true);
@@ -102,7 +102,7 @@ public class ModuleAssemblerGUI extends GuiContainer {
 		this.itemNameField.setText("" + y);
 
 		this.itemNameField2 = new GuiTextField(this.fontRendererObj, i + 300,
-				j + 60, 40, 15);
+				j +40, 40, 15);
 		this.itemNameField2.setTextColor(-1);
 		this.itemNameField2.setDisabledTextColour(-1);
 		this.itemNameField2.setEnableBackgroundDrawing(true);
@@ -129,10 +129,12 @@ public class ModuleAssemblerGUI extends GuiContainer {
 	protected void actionPerformed(GuiButton button) {
 		switch (button.id) {
 		case 0: {
-			ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
-					this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY);
+			
 			if (!te.getWorldObj().isRemote) {
 			} else if (te.getWorldObj().isRemote) {
+				
+				ModuleAssemblerPacket pack = new ModuleAssemblerPacket(this.te.xCoord,
+						this.te.yCoord, this.te.zCoord, this.dSizeX, this.dSizeY);
 				TallDoorsBase.packetPipeline.sendToServer(pack);
 			}
 			break;

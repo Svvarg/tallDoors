@@ -56,6 +56,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 	@Override
 	public void handleServerSide(EntityPlayer player) {
 		EntityPlayerMP play = (EntityPlayerMP) player;
+		System.out.println(this.corX + " " + this.corY + " " + this.corZ);
 		if (play.worldObj.getTileEntity(corX, corY, corZ) instanceof ModuleAssemblerTileEntity) {
 			ModuleAssemblerTileEntity ent = (ModuleAssemblerTileEntity) play.worldObj
 					.getTileEntity(corX, corY, corZ);

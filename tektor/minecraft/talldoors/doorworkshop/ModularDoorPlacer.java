@@ -31,12 +31,12 @@ public class ModularDoorPlacer extends Item {
 			int var24 = MathHelper
 					.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-			if (!checkFree(par3World, par4, par5 + 1, par6, 2, 4, false, var24)) {
-				par2EntityPlayer
-						.addChatMessage(new ChatComponentText(
-								"A voice whispers to you: There is not enough space for this"));
-				return false;
-			}
+//			if (!checkFree(par3World, par4, par5 + 1, par6, 2, 4, true, var24)) {
+//				par2EntityPlayer
+//						.addChatMessage(new ChatComponentText(
+//								"A voice whispers to you: There is not enough space for this"));
+//				return false;
+//			}
 			DoorBase door = new DoorBase(par3World);
 			door.setOrientation(true, var24);
 			door.setPosition(par4, par5 + 1, par6);
