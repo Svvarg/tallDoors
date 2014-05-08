@@ -287,6 +287,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		result = buildForList(dSizeY, prio2, negX, negY, result);
 		result = buildForList(dSizeY, prio1, negX, negY, result);
 		this.container.produce(result,left);
+		this.stacks.clear();
+		this.deleteAll();
 		
 	}
 

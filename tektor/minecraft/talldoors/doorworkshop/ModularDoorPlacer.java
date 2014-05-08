@@ -8,7 +8,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -20,6 +19,7 @@ public class ModularDoorPlacer extends Item {
 		this.setHasSubtypes(false);
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName("modularDoorPlacer");
+		this.setTextureName("tallDoors:modularDoorPlacer");
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
@@ -68,6 +68,7 @@ public class ModularDoorPlacer extends Item {
 			door.constructFromPlan();
 			
 			par3World.spawnEntityInWorld(door);
+			--par1ItemStack.stackSize;
 		}
 
 		return true;
