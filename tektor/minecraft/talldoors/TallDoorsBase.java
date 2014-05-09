@@ -14,10 +14,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
+import tektor.minecraft.talldoors.blocks.OreBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
@@ -54,9 +59,11 @@ import tektor.minecraft.talldoors.items.DestructionHammer;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import tektor.minecraft.talldoors.items.DrawbridgePlacer;
 import tektor.minecraft.talldoors.items.DrawbridgeWorkbenchItemBlock;
+import tektor.minecraft.talldoors.items.IngotBase;
 import tektor.minecraft.talldoors.items.Key;
 import tektor.minecraft.talldoors.items.KeyMakerPlacer;
 import tektor.minecraft.talldoors.items.MosaicTool;
+import tektor.minecraft.talldoors.items.OreBaseItemBlock;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
@@ -98,6 +105,7 @@ public class TallDoorsBase {
 		}
 	};
 
+	//ITEMS
 	public static Item doorPlacer;
 	public static Item drawbridge;
 	public static Item connector;
@@ -111,6 +119,12 @@ public class TallDoorsBase {
 	public static Item modularDoorPlacer;
 	public static Item doorModule;
 
+	public static Item luiviteIngot;
+
+	
+	//BLOCKS
+	public static Block luiviteOre;
+	
 	public static Block drawbridgeWorkbench;
 	public static Block keyRedstoneLock;
 	public static Block mosaic;
@@ -119,6 +133,10 @@ public class TallDoorsBase {
 	public static Block doorWorkshop;
 	public static Block doorAssembly;
 
+	
+	//MISC
+	public static boolean spawnLuivite;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -150,6 +168,13 @@ public class TallDoorsBase {
 		}
 		MosaicIconRegistry.mosaicsIntern = results;
 
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		config.load();
+		
+		spawnLuivite = config.get(Configuration.CATEGORY_GENERAL, "spawnLuiviteOre", false).getBoolean(false);
+		
+		config.save();
+		
 	}
 
 	@EventHandler
@@ -158,14 +183,40 @@ public class TallDoorsBase {
 		initializeIDs();
 		registerItems();
 		registerBlocks();
+		registerOre();
+		registerIngot();
+
 		registerEntities();
+
 		registerRecipes();
+		
+		GameRegistry.registerWorldGenerator(new TallDoorshWorldGen(), 0);
 		registerDoorParts();
 		proxy.registerRenderers();
 		registerTileEntities();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
+
+	}
+
+	private void registerIngot() {
+		GameRegistry.registerItem(luiviteIngot, "luiviteIngot");
+
+		OreDictionary.registerOre("ingotLuivite", new ItemStack(luiviteIngot,
+				1, 0));
+
+	}
+
+	private void registerOre() {
+		//Luivite
+		GameRegistry.registerBlock(this.luiviteOre, OreBaseItemBlock.class,
+		"luiviteOre");
+		OreDictionary.registerOre("oreLuivite", new ItemStack(luiviteOre, 1,
+		0));
+		FurnaceRecipes.smelting().func_151394_a(new ItemStack(
+				TallDoorsBase.luiviteOre,1, 0),
+				new ItemStack(TallDoorsBase.luiviteIngot, 1, 0), 0.4F);
 
 	}
 
@@ -196,6 +247,9 @@ public class TallDoorsBase {
 		keyMakerPlacer = new KeyMakerPlacer();
 		trapDoor = new TrapDoorsPlacer();
 		mosaicTool2 = new PermanentMosaicTool();
+
+		luiviteIngot = new IngotBase();
+		luiviteOre = new OreBase();
 
 		modularDoorPlacer = new ModularDoorPlacer();
 
@@ -401,7 +455,15 @@ public class TallDoorsBase {
 		ItemStack redstone = new ItemStack(Items.redstone, 1);
 		ItemStack glass = new ItemStack(Blocks.glass, 1);
 		ItemStack glow = new ItemStack(Items.glowstone_dust, 1);
+		
+		ItemStack luivite = new ItemStack(TallDoorsBase.luiviteIngot,1,0);
 
+		//luivite ingot
+		GameRegistry.addRecipe(new ItemStack(TallDoorsBase.luiviteIngot, 4,
+				0), new Object[] { "YX", "XZ", 'X', iron, 'Y', redstone, 'Z', glow });
+		GameRegistry.addRecipe(new ItemStack(TallDoorsBase.luiviteIngot, 4,
+				0), new Object[] { "ZX", "XY", 'X', iron, 'Y', redstone, 'Z', glow });
+		
 		// mosaic tool
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool, 1,
 				0), new Object[] { "Y Y", "YXY", "X X", 'X', wood, 'Y', iron });
@@ -431,7 +493,7 @@ public class TallDoorsBase {
 		// Destruction Hammer
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.destructionHammer, 1, 0), new Object[] { "YYY",
-				"YXY", " X ", 'X', stick, 'Y', iron });
+				"YXY", " X ", 'X', stick, 'Y', luivite });
 		// Drawbridge Workbench
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
@@ -448,9 +510,9 @@ public class TallDoorsBase {
 				cobble, 'Z', iron });
 
 		// Machine Workbench
-		GameRegistry.addShapedRecipe(new ItemStack(
-				TallDoorsBase.doorAssembly, 1, 0), new Object[] { "ZYZ",
-				"ZXZ", "ZXZ", 'X', wood, 'Y', cobble, 'Z', iron });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorAssembly,
+				1, 0), new Object[] { "ZYZ", "ZXZ", "ZXZ", 'X', wood, 'Y',
+				cobble, 'Z', iron });
 
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,

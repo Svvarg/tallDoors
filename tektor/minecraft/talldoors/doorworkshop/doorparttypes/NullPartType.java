@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 
@@ -15,9 +16,9 @@ public class NullPartType extends AbstractDoorPartType{
 	public void initialize() {
 		depth = 0.25f;
 		baseCost = new ArrayList<ItemStack>(1);
-		baseCost.add(new ItemStack(Items.iron_ingot,2,0));
+		baseCost.add(new ItemStack(TallDoorsBase.luiviteIngot,1,0));
 		costPerSize = new ArrayList<ItemStack>(1);
-		costPerSize.add(new ItemStack(Blocks.planks,1,0));
+		costPerSize.add(new ItemStack(Blocks.planks,2,0));
 		entityClass = NullPartEntity.class;
 	}
 
