@@ -23,14 +23,22 @@ import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachin
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
 import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.DoorBaseRenderer;
 import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.DoubleHorizontalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.GlassWindow2PartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.GlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.HorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.NullPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.SimpleWindow2PartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.doorpartrenderer.SimpleWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -78,7 +86,10 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(HorizontalBalkPartEntity.class, new HorizontalBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(DoubleHorizontalBalkPartEntity.class, new DoubleHorizontalBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(NullPartEntity.class, new NullPartRenderer());
-		
+		RenderingRegistry.registerEntityRenderingHandler(SimpleWindowPartEntity.class, new SimpleWindowPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(GlassWindowPartEntity.class, new GlassWindowPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(GlassWindow2PartEntity.class, new GlassWindow2PartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(SimpleWindow2PartEntity.class, new SimpleWindow2PartRenderer());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
 		
