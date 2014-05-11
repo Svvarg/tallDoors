@@ -46,7 +46,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		page = 1;
 		priority = 1;
 		moduleType = "horiz.";
-		pages = (int) Math.ceil(keys.length / 8f);
+		pages = (int) Math.ceil(keys.length / 7f);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		// the parameters for drawString are: string, x, y, color
 		fontRendererObj.drawString("Door Modules", 8, 6, -1);
 		fontRendererObj.drawString("Modules:", 8, 17, -1);
-		for (int i = off; (i < off + 8 && i < keys.length); i++) {
+		for (int i = off; (i < off + 7 && i < keys.length); i++) {
 			int color = -1;
 			if (chosen.equals(keys[i]))
 				color = 5919952;
@@ -165,8 +165,6 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 				chosen = keys[off + 5];
 			else if (par2 > 86 && par2 < 97 && off + 6 < keys.length)
 				chosen = keys[off + 6];
-			else if (par2 > 96 && par2 < 107 && off + 7 < keys.length)
-				chosen = keys[off + 7];
 		}
 
 	}
@@ -227,14 +225,14 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		case 9: {
 			if (page > 1) {
 				page--;
-				off = (page - 1) * 8;
+				off = (page - 1) * 7;
 			}
 			break;
 		}
 		case 10: {
 			if (page < pages) {
 				page++;
-				off = (page - 1) * 8;
+				off = (page - 1) * 7;
 			}
 			break;
 		}
