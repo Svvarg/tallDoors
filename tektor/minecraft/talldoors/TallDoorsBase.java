@@ -98,7 +98,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.1")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.2")
 public class TallDoorsBase {
 
 	// instance

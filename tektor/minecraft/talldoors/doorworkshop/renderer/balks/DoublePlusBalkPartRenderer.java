@@ -45,8 +45,8 @@ public class DoublePlusBalkPartRenderer extends AbstractModuleDoorRenderer {
 			GL11.glTranslatef(0.625f, 0, 0);
 			RenderUtil.renderCuboid(ent, 0.375, 0.25f, +0.125f, 0);
 		}
-		GL11.glTranslatef(0, (float) -(ent.height2-1), 0);
-		GL11.glTranslatef(1f, 0f, -(ent.depth));
+		GL11.glTranslatef(0, (float) -(ent.height2-0.5), 0);
+		GL11.glTranslatef(0, 0f, -(ent.depth));
 		GL11.glRotatef(180f, 0, 1, 0);
 		RenderUtil.renderCuboid(ent, 0.25, ent.height2, +0.125f, 0);
 		GL11.glTranslatef(-0.375f, 0.5f, 0);
