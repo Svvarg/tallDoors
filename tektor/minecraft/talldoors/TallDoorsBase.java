@@ -29,18 +29,22 @@ import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.FBVerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.VerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.FBVerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
@@ -274,7 +278,7 @@ public class TallDoorsBase {
 
 	private void registerDoorParts() {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
-		DoorPartRegistry.registerDoorPart("horizontal",
+		DoorPartRegistry.registerDoorPart("horizontal_balk",
 				new HorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("double_horizontal",
 				new DoubleHorizontalBalkPartType());
@@ -283,6 +287,8 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("glass window", new GlassWindowPartType());
 		DoorPartRegistry.registerDoorPart("glass window 2", new GlassWindow2PartType());
 		DoorPartRegistry.registerDoorPart("simple window 2", new SimpleWindow2PartType());
+		DoorPartRegistry.registerDoorPart("vertical_balk", new VerticalBalkPartType());
+		DoorPartRegistry.registerDoorPart("vertical_balk(f&b)", new FBVerticalBalkPartType());
 	}
 
 	private void registerBlocks() {
@@ -429,6 +435,10 @@ public class TallDoorsBase {
 				"GlassWindow2PartEntity", 23, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(SimpleWindow2PartEntity.class,
 				"SimpleWindow2PartEntity", 24, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(VerticalBalkPartEntity.class,
+				"VerticalBalkPartEntity", 25, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(FBVerticalBalkPartEntity.class,
+				"FBVerticalBalkPartEntity", 26, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {

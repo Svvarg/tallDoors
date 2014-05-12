@@ -1,15 +1,16 @@
-package tektor.minecraft.talldoors.doorworkshop.doorpartrenderer;
+package tektor.minecraft.talldoors.doorworkshop.renderer.windows;
 
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.renderer.AbstractModuleDoorRenderer;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class GlassWindow2PartRenderer extends AbstractModuleDoorRenderer {
+public class SimpleWindow2PartRenderer extends AbstractModuleDoorRenderer {
 
 	@Override
 	public void doRender(Entity var1, double var2, double var4, double var6,
@@ -34,12 +35,10 @@ public class GlassWindow2PartRenderer extends AbstractModuleDoorRenderer {
 
 		Tessellator tess = Tessellator.instance;
 		drawWindow(ent, tess);
-		drawGlass(ent, tess);
 
 		for (int i = 1; i < ent.height2; i++) {
 			GL11.glTranslatef(0, 1, 0);
 			drawWindow(ent, tess);
-			drawGlass(ent, tess);
 		}
 
 	}
@@ -115,25 +114,6 @@ public class GlassWindow2PartRenderer extends AbstractModuleDoorRenderer {
 		
 		tess.draw();
 
-	}
-	private void drawGlass(AbstractDoorPart ent, Tessellator tess) {
-		this.bindTexture(new ResourceLocation(
-				"minecraft:textures/blocks/glass.png"));
-		float depth = ent.depth;
-		tess.startDrawingQuads();
-		float depthH = depth / 2;
-		// left bottom front
-		tess.addVertexWithUV(0.125, 0.125, depthH + 0.05, 1, 1);
-		tess.addVertexWithUV(0.875, 0.125, depthH + 0.05, 1, 0);
-		tess.addVertexWithUV(0.875, 0.875, depthH + 0.05, 0, 0);
-		tess.addVertexWithUV(0.125, 0.875, depthH + 0.05, 0, 1);
-		// left bottom back
-		tess.addVertexWithUV(0.125, 0.125, depthH - 0.05, 1, 1);
-		tess.addVertexWithUV(0.125, 0.875, depthH - 0.05, 0, 1);
-		tess.addVertexWithUV(0.875, 0.875, depthH - 0.05, 0, 0);
-		tess.addVertexWithUV(0.875, 0.125, depthH - 0.05, 1, 0);
-		
-		tess.draw();
 	}
 
 }

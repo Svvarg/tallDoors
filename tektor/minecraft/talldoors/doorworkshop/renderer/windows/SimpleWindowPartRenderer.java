@@ -1,8 +1,9 @@
-package tektor.minecraft.talldoors.doorworkshop.doorpartrenderer;
+package tektor.minecraft.talldoors.doorworkshop.renderer.windows;
 
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.renderer.AbstractModuleDoorRenderer;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
