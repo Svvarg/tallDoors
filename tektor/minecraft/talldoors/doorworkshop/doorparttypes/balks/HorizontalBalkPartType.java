@@ -1,15 +1,16 @@
-package tektor.minecraft.talldoors.doorworkshop.doorparttypes;
+package tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks;
 
 import java.util.ArrayList;
-
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.VerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 
-public class VerticalBalkPartType extends AbstractDoorPartType{
+public class HorizontalBalkPartType extends AbstractDoorPartType{
 
 	@Override
 	public void initialize() {
@@ -19,15 +20,15 @@ public class VerticalBalkPartType extends AbstractDoorPartType{
 		baseCost.add(new ItemStack(TallDoorsBase.luiviteIngot,2,0));
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
-		entityClass = VerticalBalkPartEntity.class;
+		entityClass = HorizontalBalkPartEntity.class;
 		
 	}
 
 	@Override
 	public AbstractDoorPart getNewEntity(World world, int posX,
 			int heightPosition, int posZ, int heightSize, int orientation) {
-		AbstractDoorPart part = new VerticalBalkPartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
+		AbstractDoorPart part = new HorizontalBalkPartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
 		return part;
 	}
-	
+
 }

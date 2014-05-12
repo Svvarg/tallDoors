@@ -28,12 +28,15 @@ import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.FBVerticalBalkPartType;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.VerticalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoubleHorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.FBVerticalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.HorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.PlusBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.VerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
@@ -44,6 +47,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.FBVerticalBalkPa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlusBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
@@ -289,6 +293,8 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("simple window 2", new SimpleWindow2PartType());
 		DoorPartRegistry.registerDoorPart("vertical_balk", new VerticalBalkPartType());
 		DoorPartRegistry.registerDoorPart("vertical_balk(f&b)", new FBVerticalBalkPartType());
+		DoorPartRegistry.registerDoorPart("plus_balk", new PlusBalkPartType());
+		DoorPartRegistry.registerDoorPart("double_plus_balk", new DoublePlusBalkPartType());
 	}
 
 	private void registerBlocks() {
@@ -417,11 +423,9 @@ public class TallDoorsBase {
 				.registerModEntity(PlainDoorPartEntity.class,
 						"PlainDoorPartEntity", 17, TallDoorsBase.instance, 128,
 						5, true);
-
 		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
 				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
 				true);
-
 		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
 				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance,
 				128, 5, true);
@@ -439,6 +443,10 @@ public class TallDoorsBase {
 				"VerticalBalkPartEntity", 25, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(FBVerticalBalkPartEntity.class,
 				"FBVerticalBalkPartEntity", 26, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(PlusBalkPartEntity.class,
+				"PlusBalkPartEntity", 27, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(DoublePlusBalkPartEntity.class,
+				"DoublePlusBalkPartEntity", 28, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {

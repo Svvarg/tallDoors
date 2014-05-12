@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.doorworkshop.doorparttypes;
+package tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;

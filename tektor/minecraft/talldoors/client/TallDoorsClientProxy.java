@@ -21,12 +21,14 @@ import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.FBVerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlusBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
@@ -38,7 +40,9 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.FBVerticalBalkPartRender
 import tektor.minecraft.talldoors.doorworkshop.renderer.HorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.NullPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.PlusBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.VerticalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoublePlusBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindow2PartRenderer;
@@ -96,6 +100,8 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(SimpleWindow2PartEntity.class, new SimpleWindow2PartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(VerticalBalkPartEntity.class, new VerticalBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(FBVerticalBalkPartEntity.class, new FBVerticalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(PlusBalkPartEntity.class, new PlusBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoublePlusBalkPartEntity.class, new DoublePlusBalkPartRenderer());
 		
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
