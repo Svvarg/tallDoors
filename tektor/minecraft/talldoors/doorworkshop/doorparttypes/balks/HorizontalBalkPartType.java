@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
 
 public class HorizontalBalkPartType extends AbstractDoorPartType{
 

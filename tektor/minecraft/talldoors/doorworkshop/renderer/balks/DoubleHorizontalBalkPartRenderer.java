@@ -1,9 +1,10 @@
-package tektor.minecraft.talldoors.doorworkshop.renderer;
+package tektor.minecraft.talldoors.doorworkshop.renderer.balks;
 
 import org.lwjgl.opengl.GL11;
 
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.renderer.AbstractModuleDoorRenderer;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

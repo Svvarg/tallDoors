@@ -1,5 +1,6 @@
-package tektor.minecraft.talldoors.doorworkshop.entity.doorparts;
+package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks;
 
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import net.minecraft.world.World;
 
 public class VerticalBalkPartEntity extends AbstractDoorPart{

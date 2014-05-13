@@ -23,6 +23,7 @@ import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
 import tektor.minecraft.talldoors.blocks.OreBase;
+import tektor.minecraft.talldoors.blocks.StoneBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
@@ -31,7 +32,6 @@ import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoubleHorizontalBalkPartType;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.FBVerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.HorizontalBalkPartType;
@@ -42,13 +42,14 @@ import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.FBVerticalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlusBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.VerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
@@ -81,6 +82,7 @@ import tektor.minecraft.talldoors.items.KeyMakerPlacer;
 import tektor.minecraft.talldoors.items.MosaicTool;
 import tektor.minecraft.talldoors.items.OreBaseItemBlock;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
+import tektor.minecraft.talldoors.items.StoneBaseItemBlock;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
@@ -140,6 +142,7 @@ public class TallDoorsBase {
 	
 	//BLOCKS
 	public static Block luiviteOre;
+	public static Block iconoStone;
 	
 	public static Block drawbridgeWorkbench;
 	public static Block keyRedstoneLock;
@@ -266,6 +269,7 @@ public class TallDoorsBase {
 
 		luiviteIngot = new IngotBase();
 		luiviteOre = new OreBase();
+		iconoStone = new StoneBase();
 
 		modularDoorPlacer = new ModularDoorPlacer();
 
@@ -301,7 +305,9 @@ public class TallDoorsBase {
 
 		GameRegistry.registerBlock(drawbridgeWorkbench,
 				DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
-
+		GameRegistry.registerBlock(iconoStone, StoneBaseItemBlock.class, "iconoStone");
+		GameRegistry.registerBlock(luiviteOre, OreBaseItemBlock.class, "luiviteOre");
+		
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
@@ -311,6 +317,8 @@ public class TallDoorsBase {
 	}
 
 	private void registerItems() {
+		GameRegistry.registerItem(luiviteIngot, "luviteIngot");
+				
 		GameRegistry.registerItem(doorPlacer, "doorplacer");
 		GameRegistry.registerItem(connector, "connector");
 		GameRegistry.registerItem(drawbridge, "drawbridge");

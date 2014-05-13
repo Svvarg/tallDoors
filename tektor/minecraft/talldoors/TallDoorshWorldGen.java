@@ -19,9 +19,12 @@ public class TallDoorshWorldGen implements IWorldGenerator {
 				int firstBlockXCoord = chunkX * 16 + random.nextInt(16);
 				int firstBlockYCoord = 10 + random.nextInt(64);
 				int firstBlockZCoord = chunkZ * 16 + random.nextInt(16);
-				(new WorldGenMinable(TallDoorsBase.luiviteOre,0,6, Blocks.stone)).generate(
+				(new WorldGenMinable(TallDoorsBase.iconoStone,0,23, Blocks.stone)).generate(
 				world, random, firstBlockXCoord, firstBlockYCoord,
 				firstBlockZCoord);
+				(new WorldGenMinable(TallDoorsBase.luiviteOre,0,6, TallDoorsBase.iconoStone)).generate(
+						world, random, firstBlockXCoord, firstBlockYCoord,
+						firstBlockZCoord);
 				}
 		}
 
