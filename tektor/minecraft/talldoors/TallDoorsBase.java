@@ -14,24 +14,46 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import tektor.minecraft.talldoors.blocks.DrawbridgeWorkbench;
 import tektor.minecraft.talldoors.blocks.KeyRedstoneLock;
 import tektor.minecraft.talldoors.blocks.MosaicBlock;
 import tektor.minecraft.talldoors.blocks.MosaicGlass;
+import tektor.minecraft.talldoors.blocks.OreBase;
+import tektor.minecraft.talldoors.blocks.StoneBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorModule;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.blocks.DoorWorkshop;
 import tektor.minecraft.talldoors.doorworkshop.blocks.ModuleAssembler;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.DoubleHorizontalBalkPartType;
-import tektor.minecraft.talldoors.doorworkshop.doorparttypes.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoubleHorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.FBVerticalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.HorizontalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.PlusBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.VerticalBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.DoubleHorizontalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -54,10 +76,13 @@ import tektor.minecraft.talldoors.items.DestructionHammer;
 import tektor.minecraft.talldoors.items.DoorPlacer;
 import tektor.minecraft.talldoors.items.DrawbridgePlacer;
 import tektor.minecraft.talldoors.items.DrawbridgeWorkbenchItemBlock;
+import tektor.minecraft.talldoors.items.IngotBase;
 import tektor.minecraft.talldoors.items.Key;
 import tektor.minecraft.talldoors.items.KeyMakerPlacer;
 import tektor.minecraft.talldoors.items.MosaicTool;
+import tektor.minecraft.talldoors.items.OreBaseItemBlock;
 import tektor.minecraft.talldoors.items.PermanentMosaicTool;
+import tektor.minecraft.talldoors.items.StoneBaseItemBlock;
 import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
@@ -75,7 +100,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.1")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.2")
 public class TallDoorsBase {
 
 	// instance
@@ -98,6 +123,7 @@ public class TallDoorsBase {
 		}
 	};
 
+	//ITEMS
 	public static Item doorPlacer;
 	public static Item drawbridge;
 	public static Item connector;
@@ -111,6 +137,13 @@ public class TallDoorsBase {
 	public static Item modularDoorPlacer;
 	public static Item doorModule;
 
+	public static Item luiviteIngot;
+
+	
+	//BLOCKS
+	public static Block luiviteOre;
+	public static Block iconoStone;
+	
 	public static Block drawbridgeWorkbench;
 	public static Block keyRedstoneLock;
 	public static Block mosaic;
@@ -119,6 +152,10 @@ public class TallDoorsBase {
 	public static Block doorWorkshop;
 	public static Block doorAssembly;
 
+	
+	//MISC
+	public static boolean spawnLuivite;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -150,6 +187,13 @@ public class TallDoorsBase {
 		}
 		MosaicIconRegistry.mosaicsIntern = results;
 
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		config.load();
+		
+		spawnLuivite = config.get(Configuration.CATEGORY_GENERAL, "spawnLuiviteOre", false).getBoolean(false);
+		
+		config.save();
+		
 	}
 
 	@EventHandler
@@ -158,14 +202,40 @@ public class TallDoorsBase {
 		initializeIDs();
 		registerItems();
 		registerBlocks();
+		registerOre();
+		registerIngot();
+
 		registerEntities();
+
 		registerRecipes();
+		
+		GameRegistry.registerWorldGenerator(new TallDoorshWorldGen(), 0);
 		registerDoorParts();
 		proxy.registerRenderers();
 		registerTileEntities();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this,
 				new TallDoorsGuiHandler());
+
+	}
+
+	private void registerIngot() {
+		GameRegistry.registerItem(luiviteIngot, "luiviteIngot");
+
+		OreDictionary.registerOre("ingotLuivite", new ItemStack(luiviteIngot,
+				1, 0));
+
+	}
+
+	private void registerOre() {
+		//Luivite
+		GameRegistry.registerBlock(this.luiviteOre, OreBaseItemBlock.class,
+		"luiviteOre");
+		OreDictionary.registerOre("oreLuivite", new ItemStack(luiviteOre, 1,
+		0));
+		FurnaceRecipes.smelting().func_151394_a(new ItemStack(
+				TallDoorsBase.luiviteOre,1, 0),
+				new ItemStack(TallDoorsBase.luiviteIngot, 1, 0), 0.4F);
 
 	}
 
@@ -197,6 +267,10 @@ public class TallDoorsBase {
 		trapDoor = new TrapDoorsPlacer();
 		mosaicTool2 = new PermanentMosaicTool();
 
+		luiviteIngot = new IngotBase();
+		luiviteOre = new OreBase();
+		iconoStone = new StoneBase();
+
 		modularDoorPlacer = new ModularDoorPlacer();
 
 		drawbridgeWorkbench = new DrawbridgeWorkbench();
@@ -212,19 +286,28 @@ public class TallDoorsBase {
 
 	private void registerDoorParts() {
 		DoorPartRegistry.registerDoorPart("plain", new PlainDoorPartType());
-		DoorPartRegistry.registerDoorPart("horizontal",
+		DoorPartRegistry.registerDoorPart("horizontal_balk",
 				new HorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("double_horizontal",
 				new DoubleHorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
-
+		DoorPartRegistry.registerDoorPart("simple window", new SimpleWindowPartType());
+		DoorPartRegistry.registerDoorPart("glass window", new GlassWindowPartType());
+		DoorPartRegistry.registerDoorPart("glass window 2", new GlassWindow2PartType());
+		DoorPartRegistry.registerDoorPart("simple window 2", new SimpleWindow2PartType());
+		DoorPartRegistry.registerDoorPart("vertical_balk", new VerticalBalkPartType());
+		DoorPartRegistry.registerDoorPart("vertical_balk(f&b)", new FBVerticalBalkPartType());
+		DoorPartRegistry.registerDoorPart("plus_balk", new PlusBalkPartType());
+		DoorPartRegistry.registerDoorPart("double_plus_balk", new DoublePlusBalkPartType());
 	}
 
 	private void registerBlocks() {
 
 		GameRegistry.registerBlock(drawbridgeWorkbench,
 				DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
-
+		GameRegistry.registerBlock(iconoStone, StoneBaseItemBlock.class, "iconoStone");
+		GameRegistry.registerBlock(luiviteOre, OreBaseItemBlock.class, "luiviteOre");
+		
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
 		GameRegistry.registerBlock(mosaicGlass, "mosaicGlass");
@@ -234,6 +317,8 @@ public class TallDoorsBase {
 	}
 
 	private void registerItems() {
+		GameRegistry.registerItem(luiviteIngot, "luviteIngot");
+				
 		GameRegistry.registerItem(doorPlacer, "doorplacer");
 		GameRegistry.registerItem(connector, "connector");
 		GameRegistry.registerItem(drawbridge, "drawbridge");
@@ -346,16 +431,30 @@ public class TallDoorsBase {
 				.registerModEntity(PlainDoorPartEntity.class,
 						"PlainDoorPartEntity", 17, TallDoorsBase.instance, 128,
 						5, true);
-
 		EntityRegistry.registerModEntity(HorizontalBalkPartEntity.class,
 				"HorizontalDoorPartEntity", 18, TallDoorsBase.instance, 128, 5,
 				true);
-
 		EntityRegistry.registerModEntity(DoubleHorizontalBalkPartEntity.class,
 				"DoubleHorizontalBalkPartEntity", 19, TallDoorsBase.instance,
 				128, 5, true);
 		EntityRegistry.registerModEntity(NullPartEntity.class,
 				"NullPartEntity", 20, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(SimpleWindowPartEntity.class,
+				"SimpleWindowPartEntity", 21, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(GlassWindowPartEntity.class,
+				"GlassWindowPartEntity", 22, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(GlassWindow2PartEntity.class,
+				"GlassWindow2PartEntity", 23, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(SimpleWindow2PartEntity.class,
+				"SimpleWindow2PartEntity", 24, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(VerticalBalkPartEntity.class,
+				"VerticalBalkPartEntity", 25, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(FBVerticalBalkPartEntity.class,
+				"FBVerticalBalkPartEntity", 26, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(PlusBalkPartEntity.class,
+				"PlusBalkPartEntity", 27, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(DoublePlusBalkPartEntity.class,
+				"DoublePlusBalkPartEntity", 28, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {
@@ -401,7 +500,15 @@ public class TallDoorsBase {
 		ItemStack redstone = new ItemStack(Items.redstone, 1);
 		ItemStack glass = new ItemStack(Blocks.glass, 1);
 		ItemStack glow = new ItemStack(Items.glowstone_dust, 1);
+		
+		ItemStack luivite = new ItemStack(TallDoorsBase.luiviteIngot,1,0);
 
+		//luivite ingot
+		GameRegistry.addRecipe(new ItemStack(TallDoorsBase.luiviteIngot, 4,
+				0), new Object[] { "YX", "XZ", 'X', iron, 'Y', redstone, 'Z', glow });
+		GameRegistry.addRecipe(new ItemStack(TallDoorsBase.luiviteIngot, 4,
+				0), new Object[] { "ZX", "XY", 'X', iron, 'Y', redstone, 'Z', glow });
+		
 		// mosaic tool
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.mosaicTool, 1,
 				0), new Object[] { "Y Y", "YXY", "X X", 'X', wood, 'Y', iron });
@@ -431,7 +538,7 @@ public class TallDoorsBase {
 		// Destruction Hammer
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.destructionHammer, 1, 0), new Object[] { "YYY",
-				"YXY", " X ", 'X', stick, 'Y', iron });
+				"YXY", " X ", 'X', stick, 'Y', luivite });
 		// Drawbridge Workbench
 		GameRegistry.addShapedRecipe(new ItemStack(
 				TallDoorsBase.drawbridgeWorkbench, 1, 0), new Object[] { "YYY",
@@ -448,9 +555,9 @@ public class TallDoorsBase {
 				cobble, 'Z', iron });
 
 		// Machine Workbench
-		GameRegistry.addShapedRecipe(new ItemStack(
-				TallDoorsBase.doorAssembly, 1, 0), new Object[] { "ZYZ",
-				"ZXZ", "ZXZ", 'X', wood, 'Y', cobble, 'Z', iron });
+		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.doorAssembly,
+				1, 0), new Object[] { "ZYZ", "ZXZ", "ZXZ", 'X', wood, 'Y',
+				cobble, 'Z', iron });
 
 		// Connector
 		GameRegistry.addShapedRecipe(new ItemStack(TallDoorsBase.connector, 1,

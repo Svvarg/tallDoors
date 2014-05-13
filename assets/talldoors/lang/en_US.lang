@@ -1,5 +1,8 @@
 item.doorModule.name=Door Module
 item.modularDoorPlacer.name=Modular Door Placer
+luiviteIngot.name=Luivite Ingot
+luiviteOre.name=Luivite Ore
+iconoStone.name=Icono Stone
 
 drawbridgeBase.name=Drawbridge
 drawbridgeMachine.name=Drawbridge Machine

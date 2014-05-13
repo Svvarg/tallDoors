@@ -1,4 +1,4 @@
-package tektor.minecraft.talldoors.doorworkshop.doorpartrenderer;
+package tektor.minecraft.talldoors.doorworkshop.renderer;
 
 import org.lwjgl.opengl.GL11;
 

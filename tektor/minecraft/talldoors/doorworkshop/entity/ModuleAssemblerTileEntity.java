@@ -285,6 +285,17 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		result = buildForList(dSizeY, prio3, negX, negY, result);
 		result = buildForList(dSizeY, prio2, negX, negY, result);
 		result = buildForList(dSizeY, prio1, negX, negY, result);
+		
+		for(int i = 0; i < result.length; i++)
+		{
+			for(int k = 0; k < result[0].length; k++)
+			{
+				if(result[i][k] == null)
+				{
+					result[i][k] = "plain";
+				}
+			}
+		}
 		this.container.produce(result,left);
 		this.stacks.clear();
 		this.deleteAll();
@@ -295,9 +306,8 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 			int negX, int negY, String[][] result) {
 		for(PositionItemStack st : prio4)
 		{
-			switch(st.stack.stackTagCompound.getString("moduleType"))
-			{
-			case "full":
+			String r = st.stack.stackTagCompound.getString("moduleType");
+			if(r.equals("full"))
 			{
 				for(String[] s:result)
 				{
@@ -308,7 +318,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				}
 				break;
 			}
-			case "horiz.":
+			else if(r.equals("horiz."))
 			{
 				int line = (dSizeY-1)-(st.y + negY);
 				for(String[] s:result)
@@ -317,7 +327,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				}
 				break;
 			}
-			case "vertical":
+			else if(r.equals("vertical"))
 			{
 				int column = st.x + negX;
 				for(int i = 0; i < dSizeY; i++)
@@ -326,13 +336,13 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				}
 				break;
 			}
-			case "single":
+			else if (r.equals("single"))
 			{
 				int column = st.x + negX;
 				int line = (dSizeY-1)-(st.y + negY);
 				result[column][line] = st.stack.stackTagCompound.getString("chosen");
 			}
-			}
+			
 		}
 		return result;
 	}

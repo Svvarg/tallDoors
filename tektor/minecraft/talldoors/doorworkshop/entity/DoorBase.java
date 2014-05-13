@@ -31,7 +31,7 @@ public class DoorBase extends AbstractLockable {
 	public double height2; // 27
 	public double width2; // 24
 
-	public boolean left;
+	public boolean left;//29
 
 	public DoorBase(World par1World) {
 		super(par1World);

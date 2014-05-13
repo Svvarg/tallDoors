@@ -222,7 +222,7 @@ public abstract class AbstractDoorPart extends Entity{
 				}
 			} else {
 				if (pos == 1) {
-					this.boundingBox.setBounds(x-0.8D,y+0.1D,z-depth+1,x-0.2D,y+height2-0.1D,z+1);
+					this.boundingBox.setBounds(x+0.2D,y+0.1D,z-depth+1,x+0.8D,y+height2-0.1D,z+1);
 					
 				} else {
 					this.boundingBox.setBounds(x-depth+1,y+0.1D,z+0.2D,x+1,y+height2-0.1D,z+0.8D);
