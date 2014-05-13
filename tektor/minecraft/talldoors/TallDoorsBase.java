@@ -32,6 +32,7 @@ import tektor.minecraft.talldoors.doorworkshop.doorparttypes.NullPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.PlainDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoubleHorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoublePlusBalkPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.DoubleVerticalFrontBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.FBVerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.HorizontalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.PlusBalkPartType;
@@ -45,6 +46,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleVerticalFrontBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
@@ -99,7 +101,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.2")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.2b")
 public class TallDoorsBase {
 
 	// instance
@@ -290,14 +292,16 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("double_horizontal",
 				new DoubleHorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
-		DoorPartRegistry.registerDoorPart("simple window", new SimpleWindowPartType());
-		DoorPartRegistry.registerDoorPart("glass window", new GlassWindowPartType());
-		DoorPartRegistry.registerDoorPart("glass window 2", new GlassWindow2PartType());
-		DoorPartRegistry.registerDoorPart("simple window 2", new SimpleWindow2PartType());
+		
+		DoorPartRegistry.registerDoorPart("simple_window", new SimpleWindowPartType());
+		DoorPartRegistry.registerDoorPart("glass_window", new GlassWindowPartType());
+		DoorPartRegistry.registerDoorPart("glass_window_2", new GlassWindow2PartType());
+		DoorPartRegistry.registerDoorPart("simple_window_2", new SimpleWindow2PartType());
 		DoorPartRegistry.registerDoorPart("vertical_balk", new VerticalBalkPartType());
-		DoorPartRegistry.registerDoorPart("vertical_balk(f&b)", new FBVerticalBalkPartType());
+		DoorPartRegistry.registerDoorPart("vertical_balk(f_b)", new FBVerticalBalkPartType());
 		DoorPartRegistry.registerDoorPart("plus_balk", new PlusBalkPartType());
 		DoorPartRegistry.registerDoorPart("double_plus_balk", new DoublePlusBalkPartType());
+		DoorPartRegistry.registerDoorPart("2x_vertical_front", new DoubleVerticalFrontBalkPartType());
 	}
 
 	private void registerBlocks() {
@@ -305,7 +309,6 @@ public class TallDoorsBase {
 		GameRegistry.registerBlock(drawbridgeWorkbench,
 				DrawbridgeWorkbenchItemBlock.class, "drawbridgeWorkbench");
 		GameRegistry.registerBlock(iconoStone, StoneBaseItemBlock.class, "iconoStone");
-		GameRegistry.registerBlock(luiviteOre, OreBaseItemBlock.class, "luiviteOre");
 		
 		GameRegistry.registerBlock(keyRedstoneLock, "keyRedstoneLock");
 		GameRegistry.registerBlock(mosaic, "mosaic");
@@ -316,7 +319,6 @@ public class TallDoorsBase {
 	}
 
 	private void registerItems() {
-		GameRegistry.registerItem(luiviteIngot, "luviteIngot");
 				
 		GameRegistry.registerItem(doorPlacer, "doorplacer");
 		GameRegistry.registerItem(connector, "connector");
@@ -454,6 +456,8 @@ public class TallDoorsBase {
 				"PlusBalkPartEntity", 27, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(DoublePlusBalkPartEntity.class,
 				"DoublePlusBalkPartEntity", 28, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(DoubleVerticalFrontBalkPartEntity.class,
+				"DoubleVerticalFrontBalkPartEntity", 29, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {

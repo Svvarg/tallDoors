@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 
 public abstract class AbstractDoorPartType{
 
-	public static float depth;
-	public static List<ItemStack> baseCost;
-	public static List<ItemStack> costPerSize;
-	public static Class<?> entityClass;
+	public float depth;
+	public List<ItemStack> baseCost;
+	public List<ItemStack> costPerSize;
+	public Class<?> entityClass;
 	
 	public abstract void initialize(); 
 	

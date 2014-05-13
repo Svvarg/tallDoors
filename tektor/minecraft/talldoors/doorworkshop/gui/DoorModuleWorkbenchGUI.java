@@ -128,7 +128,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 	
 	public void drawPreview(int x, int y) {
 		this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
-				"textures/doorparts/preview/" + chosen + ".png"));
+				"textures/doorparts/preview/" + chosen + ".jpg"));
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -166,7 +166,6 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			else if (par2 > 86 && par2 < 97 && off + 6 < keys.length)
 				chosen = keys[off + 6];
 		}
-
 	}
 
 	@Override

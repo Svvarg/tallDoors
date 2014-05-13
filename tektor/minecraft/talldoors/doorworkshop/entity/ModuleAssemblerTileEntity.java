@@ -312,7 +312,6 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 						s[i]= st.stack.stackTagCompound.getString("chosen");
 					}
 				}
-				break;
 			}
 			else if(r.equals("horiz."))
 			{
@@ -321,7 +320,6 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				{
 					s[line] = st.stack.stackTagCompound.getString("chosen");
 				}
-				break;
 			}
 			else if(r.equals("vertical"))
 			{
@@ -330,7 +328,6 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				{
 					result[column][i]= st.stack.stackTagCompound.getString("chosen");
 				}
-				break;
 			}
 			else if (r.equals("single"))
 			{

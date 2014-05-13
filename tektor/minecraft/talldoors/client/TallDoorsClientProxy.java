@@ -26,6 +26,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleVerticalFrontBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
@@ -39,6 +40,7 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.NullPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.PlainDoorPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleHorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoublePlusBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleVerticalFrontBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.FBVerticalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.HorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.PlusBalkPartRenderer;
@@ -102,6 +104,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(FBVerticalBalkPartEntity.class, new FBVerticalBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(PlusBalkPartEntity.class, new PlusBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(DoublePlusBalkPartEntity.class, new DoublePlusBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoubleVerticalFrontBalkPartEntity.class, new DoubleVerticalFrontBalkPartRenderer());
 		
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
