@@ -1,7 +1,5 @@
 package tektor.minecraft.talldoors.doorworkshop.renderer;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 

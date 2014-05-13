@@ -3,7 +3,6 @@ package tektor.minecraft.talldoors.doorworkshop.entity.doorparts;
 import java.util.List;
 
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
-import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,20 +1,14 @@
 package tektor.minecraft.talldoors.doorworkshop.gui;
 
-import java.util.List;
-
 import org.apache.commons.lang3.SerializationUtils;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.RestrictingSlot;
-import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
-import tektor.minecraft.talldoors.doorworkshop.util.DeleteAllInventory;
-import tektor.minecraft.talldoors.doorworkshop.util.PositionItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

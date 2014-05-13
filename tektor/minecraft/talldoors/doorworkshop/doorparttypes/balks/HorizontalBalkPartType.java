@@ -2,7 +2,6 @@ package tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks;
 
 import java.util.ArrayList;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
