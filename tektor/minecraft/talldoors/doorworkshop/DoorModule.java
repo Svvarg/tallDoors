@@ -12,7 +12,6 @@ import net.minecraft.util.IIcon;
 
 public class DoorModule extends Item {
 
-	@SideOnly(Side.CLIENT)
 	private IIcon[] icon = new IIcon[9];
 
 	public DoorModule() {
@@ -32,6 +31,10 @@ public class DoorModule extends Item {
 					+ stack.stackTagCompound.getString("moduleType"));
 			par3List.add("Priority: "
 					+ stack.stackTagCompound.getInteger("priority"));
+			par3List.add("Texture1: "
+					+ stack.stackTagCompound.getString("texture1"));
+			par3List.add("Texture2: "
+					+ stack.stackTagCompound.getString("texture2"));
 
 		}
 

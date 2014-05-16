@@ -20,7 +20,7 @@ public class GlassWindow2PartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = GlassWindow2PartEntity.class;
-		
+		textureCount = 2;
 	}
 
 	@Override

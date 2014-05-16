@@ -2,6 +2,8 @@ package tektor.minecraft.talldoors.doorworkshop.renderer.balks;
 
 import org.lwjgl.opengl.GL11;
 
+import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.renderer.AbstractModuleDoorRenderer;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
@@ -18,7 +20,7 @@ public class DoubleHorizontalBalkPartRenderer extends AbstractModuleDoorRenderer
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		return new ResourceLocation("talldoors:textures/doorparts/plain.png");
+		return new ResourceLocation(DoorPartRegistry.texturePaths.get(((AbstractDoorPart) var1).texture1));
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class DoubleHorizontalBalkPartRenderer extends AbstractModuleDoorRenderer
 		this.bindTexture(new ResourceLocation("talldoors:textures/doorparts/side.png"));
 		RenderUtil.renderOutline(ent.height2, 1, ent.depth, 0, ent);
 		
-		this.bindTexture(new ResourceLocation("talldoors:textures/doorparts/horizontalBalk.png"));
+		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.texture2)));
 		GL11.glTranslatef(0f, 0.5f, ent.depth);
 		RenderUtil.renderCuboid(ent, 1, 0.25f, +0.125f, 0);
 		for(int i = 1; i < ent.height2; i++)

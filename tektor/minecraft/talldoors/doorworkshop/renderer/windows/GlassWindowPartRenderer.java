@@ -2,7 +2,9 @@ package tektor.minecraft.talldoors.doorworkshop.renderer.windows;
 
 import org.lwjgl.opengl.GL11;
 
+import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.renderer.AbstractModuleDoorRenderer;
 import tektor.minecraft.talldoors.renderer.RenderUtil;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,13 +22,13 @@ public class GlassWindowPartRenderer extends AbstractModuleDoorRenderer {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		return new ResourceLocation("talldoors:textures/doorparts/plain.png");
+		return new ResourceLocation(DoorPartRegistry.texturePaths.get(((AbstractDoorPart) var1).texture1));
 	}
 
 	@Override
 	protected void renderingStuff(Entity entity, double x, double y, double z,
 			float var8, float var9) {
-		AbstractDoorPart ent = (AbstractDoorPart) entity;
+		GlassWindowPartEntity ent = (GlassWindowPartEntity) entity;
 
 		this.bindTexture(new ResourceLocation(
 				"talldoors:textures/doorparts/side.png"));
@@ -46,9 +48,9 @@ public class GlassWindowPartRenderer extends AbstractModuleDoorRenderer {
 
 	}
 
-	private void drawGlass(AbstractDoorPart ent, Tessellator tess) {
-		this.bindTexture(new ResourceLocation(
-				"minecraft:textures/blocks/glass.png"));
+	private void drawGlass(GlassWindowPartEntity ent, Tessellator tess) {
+
+		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.texture2)));
 		float depth = ent.depth;
 		tess.startDrawingQuads();
 		float depthH = depth / 2;

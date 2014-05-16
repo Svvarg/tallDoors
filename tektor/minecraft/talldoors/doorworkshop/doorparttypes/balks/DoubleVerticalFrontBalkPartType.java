@@ -22,7 +22,7 @@ public class DoubleVerticalFrontBalkPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = DoubleVerticalFrontBalkPartEntity.class;
-		
+		textureCount = 2;
 	}
 
 	@Override

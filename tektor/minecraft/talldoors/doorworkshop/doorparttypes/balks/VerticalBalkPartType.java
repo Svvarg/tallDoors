@@ -21,6 +21,7 @@ public class VerticalBalkPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = VerticalBalkPartEntity.class;
+		textureCount = 2;
 		
 	}
 

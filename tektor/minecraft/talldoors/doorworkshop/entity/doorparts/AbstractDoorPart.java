@@ -18,6 +18,7 @@ public abstract class AbstractDoorPart extends Entity{
 	public double height2; //27
 	public boolean left; //29
 	public double mX,mY,mZ;
+	public String texture1; //24
 	
 	public DoorBase master;
 	
@@ -63,8 +64,16 @@ public abstract class AbstractDoorPart extends Entity{
 		setBoundsAt(posX, posY, posZ);
 	}
 	
+	public void setTexture(int which, String txt)
+	{
+		if(txt == null) texture1 = "plain";
+		else texture1 = txt;
+		this.dataWatcher.updateObject(24, texture1);
+	}
+	
 	public void onUpdate() {
 		if (this.worldObj.isRemote) {
+			texture1 = this.dataWatcher.getWatchableObjectString(24);
 			orientation = this.dataWatcher.getWatchableObjectInt(28);
 			pos = this.dataWatcher.getWatchableObjectInt(25);
 			left = this.dataWatcher.getWatchableObjectInt(29) == 1;
@@ -87,6 +96,14 @@ public abstract class AbstractDoorPart extends Entity{
 			if(master != null)
 			{
 				master.addPart(this);
+			}
+		}
+		if(!this.worldObj.isRemote)
+		{
+			if(this.texture1 == null || this.texture1.equals(""))
+			{
+				this.texture1 = "plain";
+				this.dataWatcher.updateObject(24, texture1);
 			}
 		}
 		setBoundsAt(posX, posY, posZ);
@@ -117,6 +134,8 @@ public abstract class AbstractDoorPart extends Entity{
 		this.dataWatcher.addObject(26, 0f);
 		this.dataWatcher.addObject(27, ""+0);
 		this.dataWatcher.addObject(29, 0);
+		
+		this.dataWatcher.addObject(24, "plain");
 	}
 	
 	@Override
@@ -125,11 +144,13 @@ public abstract class AbstractDoorPart extends Entity{
 		height2 = nbt.getDouble("height2");
 		pos = nbt.getInteger("pos");
 		orientation = nbt.getInteger("orientation");
+		texture1 = nbt.getString("texture1");
 		
 		this.dataWatcher.updateObject(28, this.orientation);
 		this.dataWatcher.updateObject(25, pos);
 		this.dataWatcher.updateObject(26, this.depth);
 		this.dataWatcher.updateObject(27, "" + this.height2);
+		this.dataWatcher.updateObject(24, texture1);
 
 		List<DoorBase> list = (List<DoorBase>) worldObj
 				.getEntitiesWithinAABB(DoorBase.class, boundingBox
@@ -168,6 +189,7 @@ public abstract class AbstractDoorPart extends Entity{
 		nbt.setFloat("depth",depth);
 		nbt.setDouble("height2",height2);
 		nbt.setBoolean("left", left);
+		nbt.setString("texture1", texture1);
 		if (master != null) {
 			nbt.setDouble("mX", master.posX);
 			nbt.setDouble("mY", master.posY);

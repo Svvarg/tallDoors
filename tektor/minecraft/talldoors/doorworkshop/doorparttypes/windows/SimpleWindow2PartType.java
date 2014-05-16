@@ -21,6 +21,7 @@ public class SimpleWindow2PartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = SimpleWindow2PartEntity.class;
+		textureCount = 1;
 		
 	}
 

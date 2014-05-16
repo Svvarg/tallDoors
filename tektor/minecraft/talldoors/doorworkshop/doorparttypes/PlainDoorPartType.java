@@ -20,6 +20,7 @@ public class PlainDoorPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = PlainDoorPartEntity.class;
+		textureCount = 1;
 	}
 
 	@Override

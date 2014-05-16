@@ -21,7 +21,7 @@ public class DoublePlusBalkPartType extends AbstractDoorPartType {
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = DoublePlusBalkPartEntity.class;
-		
+		textureCount = 2;
 	}
 
 	@Override

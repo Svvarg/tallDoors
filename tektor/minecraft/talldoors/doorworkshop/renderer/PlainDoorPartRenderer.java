@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.doorworkshop.renderer;
 
 import tektor.minecraft.talldoors.renderer.RenderUtil;
 
+import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -17,7 +18,7 @@ public class PlainDoorPartRenderer extends AbstractModuleDoorRenderer {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity var1) {
-		return new ResourceLocation("talldoors:textures/doorparts/plain.png");
+		return new ResourceLocation(DoorPartRegistry.texturePaths.get(((AbstractDoorPart) var1).texture1));
 	}
 
 	@Override

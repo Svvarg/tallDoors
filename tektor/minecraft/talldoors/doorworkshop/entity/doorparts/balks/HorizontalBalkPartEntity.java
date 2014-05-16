@@ -1,10 +1,11 @@
 package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks;
 
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class HorizontalBalkPartEntity extends AbstractDoorPart{
+public class HorizontalBalkPartEntity extends Abstract2TextureDoorPart{
 
 	public HorizontalBalkPartEntity(World par1World) {
 		super(par1World);

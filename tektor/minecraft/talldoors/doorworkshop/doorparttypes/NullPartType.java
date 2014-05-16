@@ -19,6 +19,7 @@ public class NullPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,2,0));
 		entityClass = NullPartEntity.class;
+		textureCount = 0;
 	}
 
 	@Override

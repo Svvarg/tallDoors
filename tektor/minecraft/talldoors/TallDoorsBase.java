@@ -101,7 +101,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.2b")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.3")
 public class TallDoorsBase {
 
 	// instance
@@ -181,6 +181,16 @@ public class TallDoorsBase {
 						results.add(a[1]);
 					}
 				}
+				if (ze.getName().contains("assets/talldoors/textures/doorparts/sides/"))
+				{
+					String[] a = ze.getName().split(
+							"assets/talldoors/textures/doorparts/sides/");
+					if (a.length > 1 && a[1].contains(".png")) {
+						DoorPartRegistry.texturePaths.put(a[1].split("\\.(?=[^\\.]+$)")[0],"talldoors:textures/doorparts/sides/"+a[1]);
+					}
+					
+				}
+				
 			}
 			zf.close();
 		} catch (IOException e) {
@@ -212,6 +222,7 @@ public class TallDoorsBase {
 		
 		GameRegistry.registerWorldGenerator(new TallDoorshWorldGen(), 0);
 		registerDoorParts();
+		DoorPartRegistry.initialize();
 		proxy.registerRenderers();
 		registerTileEntities();
 
@@ -243,7 +254,6 @@ public class TallDoorsBase {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 
-		DoorPartRegistry.initialize();
 
 	}
 
@@ -326,6 +336,7 @@ public class TallDoorsBase {
 		GameRegistry.registerItem(destructionHammer, "destructionHammer");
 		GameRegistry.registerItem(key, "key");
 		GameRegistry.registerItem(mosaicTool, "mosaicTool");
+		GameRegistry.registerItem(mosaicTool2, "mosaicTool2");
 		GameRegistry.registerItem(keyMakerPlacer, "keyMakerPlacer");
 		GameRegistry.registerItem(trapDoor, "trapDoorPlacer");
 

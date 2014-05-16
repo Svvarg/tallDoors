@@ -15,6 +15,7 @@ public abstract class AbstractDoorPartType{
 	public List<ItemStack> baseCost;
 	public List<ItemStack> costPerSize;
 	public Class<?> entityClass;
+	public int textureCount;
 	
 	public abstract void initialize(); 
 	
