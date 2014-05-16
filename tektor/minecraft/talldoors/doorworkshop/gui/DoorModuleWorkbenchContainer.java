@@ -31,7 +31,9 @@ public class DoorModuleWorkbenchContainer extends Container {
 		ItemStack[] slot2 = new ItemStack[0];
 		addSlotToContainer(new RestrictingSlot(outputSlot, 1, 225, 133, slot2,
 				null, false));
+		
 		bindPlayerInventory(inventoryPlayer);
+		
 	}
 
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -111,7 +113,7 @@ public class DoorModuleWorkbenchContainer extends Container {
 
 	}
 
-	public void produce(int priority, String chosen, String type) {
+	public void produce(int priority, String chosen, String type, String texture1, String texture2) {
 		if (this.outputSlot.getStackInSlot(0) == null) {
 			ItemStack[] in = inv.mainInventory;
 			List<ItemStack> debt = new LinkedList<ItemStack>();
@@ -169,6 +171,8 @@ public class DoorModuleWorkbenchContainer extends Container {
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("moduleType", type);
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setInteger(
 					"priority", priority);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("texture1", texture1);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("texture2", texture2);
 
 		}
 	}

@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cpw.mods.fml.common.registry.EntityRegistry;
-
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.gui.ModuleAssemblerContainer;
+import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
 import tektor.minecraft.talldoors.doorworkshop.util.PositionItemStack;
-import tektor.minecraft.talldoors.entities.doors_width2.EntranceDoor1;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -280,11 +277,24 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 			}
 		}
 		String[][] result = new String[dSizeX][dSizeY];
-		
-		result = buildForList(dSizeY, prio4, negX, negY, result);
-		result = buildForList(dSizeY, prio3, negX, negY, result);
-		result = buildForList(dSizeY, prio2, negX, negY, result);
-		result = buildForList(dSizeY, prio1, negX, negY, result);
+		String[][] result2 = new String[dSizeX][dSizeY];
+		String[][] result3 = new String[dSizeX][dSizeY];
+		for(int i = 0; i < result.length; i++)
+		{
+			for(int k = 0; k < result[0].length; k++)
+			{
+				if(result[i][k] == null)
+				{
+					result[i][k] = new String();
+					result2[i][k] = new String();
+					result3[i][k] = new String();
+				}
+			}
+		}
+		result = buildForList(dSizeY, prio4, negX, negY, result, result2, result3);
+		result = buildForList(dSizeY, prio3, negX, negY, result, result2, result3);
+		result = buildForList(dSizeY, prio2, negX, negY, result, result2, result3);
+		result = buildForList(dSizeY, prio1, negX, negY, result, result2, result3);
 		
 		for(int i = 0; i < result.length; i++)
 		{
@@ -293,54 +303,65 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				if(result[i][k] == null)
 				{
 					result[i][k] = "plain";
+					result2[i][k] = "plain";
 				}
 			}
 		}
-		this.container.produce(result,left);
+		this.container.produce(result,result2,result3,left);
 		this.stacks.clear();
 		this.deleteAll();
 		
 	}
 
 	private String[][] buildForList(int dSizeY, List<PositionItemStack> prio4,
-			int negX, int negY, String[][] result) {
+			int negX, int negY, String[][] result, String[][] result2, String[][] result3) {
 		for(PositionItemStack st : prio4)
 		{
 			String r = st.stack.stackTagCompound.getString("moduleType");
 			if(r.equals("full"))
 			{
-				for(String[] s:result)
+				for(int i = 0; i < result.length; i++)
 				{
-					for(int i = 0; i < dSizeY; i++)
+					for(int k = 0; k < result[0].length; k++)
 					{
-						s[i]= st.stack.stackTagCompound.getString("chosen");
+						NBTTagCompound tag =  st.stack.stackTagCompound;
+						result[i][k] = tag.getString("chosen");
+						result2[i][k] = tag.getString("texture1");
+						result3[i][k] = tag.getString("texture2");
 					}
 				}
-				break;
+				
 			}
 			else if(r.equals("horiz."))
 			{
 				int line = (dSizeY-1)-(st.y + negY);
-				for(String[] s:result)
+				for(int i = 0; i < result.length; i++)
 				{
-					s[line] = st.stack.stackTagCompound.getString("chosen");
+					NBTTagCompound tag =  st.stack.stackTagCompound;
+					result[i][line] = tag.getString("chosen");
+					result2[i][line] = tag.getString("texture1");
+					result3[i][line] = tag.getString("texture2");
 				}
-				break;
 			}
 			else if(r.equals("vertical"))
 			{
 				int column = st.x + negX;
 				for(int i = 0; i < dSizeY; i++)
 				{
-					result[column][i]= st.stack.stackTagCompound.getString("chosen");
+					NBTTagCompound tag =  st.stack.stackTagCompound;
+					result[column][i]= tag.getString("chosen");
+					result2[column][i]= tag.getString("texture1");
+					result3[column][i]= tag.getString("texture2");
 				}
-				break;
 			}
 			else if (r.equals("single"))
 			{
 				int column = st.x + negX;
 				int line = (dSizeY-1)-(st.y + negY);
-				result[column][line] = st.stack.stackTagCompound.getString("chosen");
+				NBTTagCompound tag =  st.stack.stackTagCompound;
+				result[column][line] = tag.getString("chosen");
+				result2[column][line] = tag.getString("texture1");
+				result3[column][line] = tag.getString("texture2");
 			}
 			
 		}

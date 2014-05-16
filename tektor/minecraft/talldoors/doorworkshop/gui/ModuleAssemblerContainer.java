@@ -1,20 +1,15 @@
 package tektor.minecraft.talldoors.doorworkshop.gui;
 
-import java.util.List;
-
 import org.apache.commons.lang3.SerializationUtils;
 
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.RestrictingSlot;
-import tektor.minecraft.talldoors.doorworkshop.ModularDoorPlacer;
 import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
-import tektor.minecraft.talldoors.doorworkshop.util.DeleteAllInventory;
-import tektor.minecraft.talldoors.doorworkshop.util.PositionItemStack;
+import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -131,12 +126,16 @@ public class ModuleAssemblerContainer extends Container{
 
 	}
 
-	public void produce(String[][] constructionPlan, boolean left) {
+	public void produce(String[][] constructionPlan, String[][] texturePlan1, String[][] texturePlan2, boolean left) {
 		if (this.outputSlot.getStackInSlot(0) == null) {
 			this.outputSlot.setInventorySlotContents(0, new ItemStack(TallDoorsBase.modularDoorPlacer,1,0));
 			this.outputSlot.getStackInSlot(0).stackTagCompound = new NBTTagCompound();
 			final byte[] bytes = SerializationUtils.serialize(constructionPlan);
+			final byte[] bytes2 = SerializationUtils.serialize(texturePlan1);
+			final byte[] bytes3 = SerializationUtils.serialize(texturePlan2);
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setByteArray("constructionPlan", bytes);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setByteArray("texturePlan1", bytes2);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setByteArray("texturePlan2", bytes3);
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setBoolean("left", left);
 		}
 	}

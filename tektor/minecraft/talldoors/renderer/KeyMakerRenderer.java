@@ -19,8 +19,8 @@ public class KeyMakerRenderer extends Render{
 	public void doRender(Entity entity, double x, double y, double z,
 			float f, float f1) {
 		// Push a blank matrix onto the stack
-	    GL11.glPushMatrix();
-	 
+		GL11.glPushMatrix();
+		 
 	    // Move the object into the correct position on the block (because the OBJ's origin is the center of the object)
 	    GL11.glTranslatef((float)x + 0.5f, (float)y + 1.5f, (float)z + 0.5f);
 	 

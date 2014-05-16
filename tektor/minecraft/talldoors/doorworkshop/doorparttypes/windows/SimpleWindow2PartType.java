@@ -9,7 +9,6 @@ import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 
 public class SimpleWindow2PartType extends AbstractDoorPartType{
 
@@ -22,6 +21,7 @@ public class SimpleWindow2PartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = SimpleWindow2PartEntity.class;
+		textureCount = 1;
 		
 	}
 

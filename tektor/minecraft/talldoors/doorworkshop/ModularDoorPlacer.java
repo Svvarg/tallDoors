@@ -3,6 +3,7 @@ package tektor.minecraft.talldoors.doorworkshop;
 import org.apache.commons.lang3.SerializationUtils;
 
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,10 +44,30 @@ public class ModularDoorPlacer extends Item {
 			DoorBase door = new DoorBase(par3World);
 			boolean left = par1ItemStack.stackTagCompound.getBoolean("left");
 			door.setOrientation(left, var24);
-
-			String[][] result = ((String[][]) SerializationUtils
+			String[][] modules = ((String[][]) SerializationUtils
 					.deserialize(par1ItemStack.stackTagCompound
 							.getByteArray("constructionPlan")));
+			String[][] textures1 = ((String[][]) SerializationUtils
+					.deserialize(par1ItemStack.stackTagCompound
+							.getByteArray("texturePlan1")));
+			String[][] textures2 = ((String[][]) SerializationUtils
+					.deserialize(par1ItemStack.stackTagCompound
+							.getByteArray("texturePlan2")));
+			ModuleTexturePackage[][] result = new ModuleTexturePackage[modules.length][modules[0].length];
+			for(int i = 0; i < result.length; i++)
+			{
+				for(int k = 0; k < result[0].length; k++)
+				{
+					if(result[i][k] == null)
+					{
+						result[i][k] = new ModuleTexturePackage();
+						result[i][k].module = modules[i][k];
+						result[i][k].texture1 = textures1[i][k];
+						result[i][k].texture2 = textures2[i][k];
+					}
+				}
+			}
+			
 			
 			if (!left) {
 				switch (var24) {

@@ -9,6 +9,7 @@ import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
+import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
 import tektor.minecraft.talldoors.entities.AbstractLockable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 public class DoorBase extends AbstractLockable {
 
-	String[][] constructionPlan;
+	ModuleTexturePackage[][] constructionPlan;
 
 	public int orientation; // 28
 	public int pos; // 30
@@ -31,11 +32,11 @@ public class DoorBase extends AbstractLockable {
 	public double height2; // 27
 	public double width2; // 24
 
-	public boolean left;//29
+	public boolean left;// 29
 
 	public DoorBase(World par1World) {
 		super(par1World);
-		constructionPlan = new String[1][1];
+		constructionPlan = new ModuleTexturePackage[1][1];
 		parts = new ArrayList<AbstractDoorPart>(1);
 
 		this.preventEntitySpawning = true;
@@ -45,7 +46,7 @@ public class DoorBase extends AbstractLockable {
 		this.left = true;
 	}
 
-	public void setConstructionPlan(String[][] plan) {
+	public void setConstructionPlan(ModuleTexturePackage[][] plan) {
 		this.constructionPlan = plan;
 		this.parts = new ArrayList<AbstractDoorPart>(plan[0].length
 				* plan.length);
@@ -99,51 +100,82 @@ public class DoorBase extends AbstractLockable {
 					continue;
 				}
 				AbstractDoorPart part = null;
+				AbstractDoorPartType classH = DoorPartRegistry
+						.getPartForIndex(constructionPlan[columns][blocks].module);
 				switch (orientation) {
 				case 0: {
-					AbstractDoorPartType classH = DoorPartRegistry
-							.getPartForIndex(constructionPlan[columns][blocks]);
+
 					part = classH.getNewEntity(this.worldObj, (int) this.posX
 							- columns, (int) heightPosition, (int) this.posZ,
 							sizer, orientation);
 					this.parts.add(part);
 					part.setOrientation(left, orientation);
+					for (int i = 0; i < classH.textureCount; i++) {
+						if (i == 0) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture1);
+						} else if (i == 1) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture2);
+						}
+					}
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
 				}
 				case 1: {
-					AbstractDoorPartType classH = DoorPartRegistry
-							.getPartForIndex(constructionPlan[columns][blocks]);
 					part = classH.getNewEntity(this.worldObj, (int) this.posX,
 							(int) heightPosition, (int) this.posZ - columns,
 							sizer, orientation);
 					this.parts.add(part);
 					part.setOrientation(left, orientation);
+					for (int i = 0; i < classH.textureCount; i++) {
+						if (i == 0) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture1);
+						} else if (i == 1) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture2);
+						}
+					}
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
 				}
 				case 2: {
-					AbstractDoorPartType classH = DoorPartRegistry
-							.getPartForIndex(constructionPlan[columns][blocks]);
 					part = classH.getNewEntity(this.worldObj, (int) this.posX
 							+ columns, (int) heightPosition, (int) this.posZ,
 							sizer, orientation);
 					this.parts.add(part);
 					part.setOrientation(left, orientation);
+					for (int i = 0; i < classH.textureCount; i++) {
+						if (i == 0) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture1);
+						} else if (i == 1) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture2);
+						}
+					}
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
 				}
 				case 3: {
-					AbstractDoorPartType classH = DoorPartRegistry
-							.getPartForIndex(constructionPlan[columns][blocks]);
 					part = classH.getNewEntity(this.worldObj, (int) this.posX,
 							(int) heightPosition, (int) this.posZ + columns,
 							sizer, orientation);
 					this.parts.add(part);
 					part.setOrientation(left, orientation);
+					for (int i = 0; i < classH.textureCount; i++) {
+						if (i == 0) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture1);
+						} else if (i == 1) {
+							part.setTexture(i,
+									constructionPlan[columns][blocks].texture2);
+						}
+					}
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
@@ -174,8 +206,8 @@ public class DoorBase extends AbstractLockable {
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		constructionPlan = (String[][]) SerializationUtils.deserialize(nbt
-				.getByteArray("constructionPlan"));
+//		constructionPlan = (ModuleTexturePackage[][]) SerializationUtils
+//				.deserialize(nbt.getByteArray("constructionPlan"));
 		depth = nbt.getFloat("depth");
 		height2 = nbt.getDouble("height2");
 		pos = nbt.getInteger("pos");
@@ -202,9 +234,9 @@ public class DoorBase extends AbstractLockable {
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		final byte[] bytes = SerializationUtils
-				.serialize(this.constructionPlan);
-		nbt.setByteArray("constructionPlan", bytes);
+//		final byte[] bytes = SerializationUtils
+//				.serialize(this.constructionPlan);
+//		nbt.setByteArray("constructionPlan", bytes);
 
 		nbt.setInteger("orientation", orientation);
 		nbt.setInteger("pos", pos);

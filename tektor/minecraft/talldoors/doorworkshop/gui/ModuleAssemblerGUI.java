@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GL11;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
 import tektor.minecraft.talldoors.doorworkshop.network.DirectionPacket;
-import tektor.minecraft.talldoors.doorworkshop.network.DoorModuleWorkbenchPacket;
 import tektor.minecraft.talldoors.doorworkshop.network.ModuleAssemblerPacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;

@@ -9,7 +9,6 @@ import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
 
 public class DoublePlusBalkPartType extends AbstractDoorPartType {
 
@@ -22,7 +21,7 @@ public class DoublePlusBalkPartType extends AbstractDoorPartType {
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = DoublePlusBalkPartEntity.class;
-		
+		textureCount = 2;
 	}
 
 	@Override

@@ -3,14 +3,12 @@ package tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks;
 import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
 
 public class DoubleHorizontalBalkPartType extends AbstractDoorPartType{
 
@@ -23,7 +21,7 @@ public class DoubleHorizontalBalkPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
 		entityClass = DoubleHorizontalBalkPartEntity.class;
-		
+		textureCount = 2;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class TallDoorshWorldGen implements IWorldGenerator {
 				(new WorldGenMinable(TallDoorsBase.iconoStone,0,23, Blocks.stone)).generate(
 				world, random, firstBlockXCoord, firstBlockYCoord,
 				firstBlockZCoord);
-				(new WorldGenMinable(TallDoorsBase.luiviteOre,0,6, TallDoorsBase.iconoStone)).generate(
+				(new WorldGenMinable(TallDoorsBase.luiviteOre,0,7, TallDoorsBase.iconoStone)).generate(
 						world, random, firstBlockXCoord, firstBlockYCoord,
 						firstBlockZCoord);
 				}

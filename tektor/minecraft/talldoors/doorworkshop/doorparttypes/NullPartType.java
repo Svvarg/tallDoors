@@ -3,7 +3,6 @@ package tektor.minecraft.talldoors.doorworkshop.doorparttypes;
 import java.util.ArrayList;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.TallDoorsBase;
@@ -20,6 +19,7 @@ public class NullPartType extends AbstractDoorPartType{
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,2,0));
 		entityClass = NullPartEntity.class;
+		textureCount = 0;
 	}
 
 	@Override
