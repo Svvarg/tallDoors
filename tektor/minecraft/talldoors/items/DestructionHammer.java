@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.items;
 
 import java.util.List;
 
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +23,7 @@ public class DestructionHammer extends Item {
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
 		this.setTextureName("tallDoors:destructionHammer");
-		this.setCreativeTab(CreativeTabs.tabTools);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class DrawbridgeWorkbench extends BlockContainer{
         setResistance(5.0F);
         
 		setUnlocalizedName("drawbridgeWorkplace");
-		setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 	
 	@Override

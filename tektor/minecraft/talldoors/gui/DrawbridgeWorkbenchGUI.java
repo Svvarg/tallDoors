@@ -98,6 +98,7 @@ public class DrawbridgeWorkbenchGUI extends GuiContainer {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 			DataOutputStream outputStream = new DataOutputStream(bos);
 			try {
+				outputStream.writeUTF("drawbridge");
 				outputStream.writeInt(this.x);
 				outputStream.writeInt(this.y);
 				outputStream.writeInt(0);

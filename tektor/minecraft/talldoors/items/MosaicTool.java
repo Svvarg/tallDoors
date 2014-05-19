@@ -15,7 +15,7 @@ public class MosaicTool extends Item{
 		this.setMaxDamage(50);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabs.tabTools);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 		this.setTextureName("tallDoors:mosaicTool");
 		this.setUnlocalizedName("mosaicTool");
 	}

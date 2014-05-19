@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +23,7 @@ public class KeyMakerPlacer extends Item {
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class MosaicBlock extends BlockContainer {
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setUnlocalizedName("mosaic");
-		setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 		this.setLightValue(0);
 		this.setLightOpacity(1000);
 	}

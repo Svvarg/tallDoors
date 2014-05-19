@@ -30,7 +30,7 @@ public class KeyRedstoneLock extends BlockContainer {
 		setHardness(4.2F);
 		setResistance(5.0F);
 		setUnlocalizedName("keyRedstoneLock");
-		setCreativeTab(CreativeTabs.tabRedstone);
+		setCreativeTab(TallDoorsBase.tabTallDoors);
 		active = false;
 	}
 

@@ -18,10 +18,37 @@ import tektor.minecraft.talldoors.renderer.doors2x6.RenderDarkMetalEntranceDoor3
 import tektor.minecraft.talldoors.renderer.doors2x6.RenderEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.doors2x6.RenderMetalEntranceDoor3;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
-import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
 import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoublePlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleVerticalFrontBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.renderer.DoorBaseRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.NullPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleHorizontalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoublePlusBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleVerticalFrontBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.FBVerticalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.HorizontalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.PlusBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.balks.VerticalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindow2PartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindowPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindow2PartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindowPartRenderer;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -37,7 +64,6 @@ import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeBase;
 import tektor.minecraft.talldoors.entities.drawbridge.DrawbridgeMachine;
 import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
-import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.entities.trapdoors.TrapDoor;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
 
@@ -63,9 +89,30 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(FakeEntity.class, new RenderFakeEntity());
 		RenderingRegistry.registerEntityRenderingHandler(KeyMaker.class, new KeyMakerRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(TrapDoor.class, new TrapDoorRenderer());
+		
+		RenderingRegistry.registerEntityRenderingHandler(DoorBase.class, new DoorBaseRenderer());
+		
+		RenderingRegistry.registerEntityRenderingHandler(PlainDoorPartEntity.class, new PlainDoorPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(HorizontalBalkPartEntity.class, new HorizontalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoubleHorizontalBalkPartEntity.class, new DoubleHorizontalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(NullPartEntity.class, new NullPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(SimpleWindowPartEntity.class, new SimpleWindowPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(GlassWindowPartEntity.class, new GlassWindowPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(GlassWindow2PartEntity.class, new GlassWindow2PartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(SimpleWindow2PartEntity.class, new SimpleWindow2PartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(VerticalBalkPartEntity.class, new VerticalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(FBVerticalBalkPartEntity.class, new FBVerticalBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(PlusBalkPartEntity.class, new PlusBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoublePlusBalkPartEntity.class, new DoublePlusBalkPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(DoubleVerticalFrontBalkPartEntity.class, new DoubleVerticalFrontBalkPartRenderer());
+		
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
+		
+		
 		mosaicRenderType = RenderingRegistry.getNextAvailableRenderId();
 		mosaicGlassRenderType = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderMosaicTileEnity());
 	}
 }
+

@@ -11,6 +11,12 @@ import tektor.minecraft.talldoors.container.DrawbridgeWorkbenchContainer;
 import tektor.minecraft.talldoors.container.KeyMakerGuiContainer;
 import tektor.minecraft.talldoors.container.MachineWorkbenchContainer;
 import tektor.minecraft.talldoors.container.MosaicGuiContainer;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
+import tektor.minecraft.talldoors.doorworkshop.gui.DoorModuleWorkbenchContainer;
+import tektor.minecraft.talldoors.doorworkshop.gui.DoorModuleWorkbenchGUI;
+import tektor.minecraft.talldoors.doorworkshop.gui.ModuleAssemblerContainer;
+import tektor.minecraft.talldoors.doorworkshop.gui.ModuleAssemblerGUI;
 import tektor.minecraft.talldoors.entities.tileentities.DrawbridgeWorkbenchTileEntity;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicTileEntity;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
@@ -54,6 +60,19 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 			}
 			
 		}
+		else if (id == 4) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof DoorModuleWorkbenchTileEntity) {
+				return new DoorModuleWorkbenchContainer(player.inventory,
+						(DoorModuleWorkbenchTileEntity) tileEntity);
+			}
+		}else if (id == 5) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof ModuleAssemblerTileEntity) {
+				return new ModuleAssemblerContainer(player.inventory,
+						(ModuleAssemblerTileEntity) tileEntity);
+			}
+		}
 		return null;
 	}
 
@@ -92,7 +111,21 @@ public class TallDoorsGuiHandler implements IGuiHandler {
 				}
 
 			}
+		}else if (id == 4) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof DoorModuleWorkbenchTileEntity) {
+				return new DoorModuleWorkbenchGUI(player, player.inventory,
+						(DoorModuleWorkbenchTileEntity) tileEntity);
+			}
 		}
+		else if (id == 5) {
+			TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+			if (tileEntity instanceof ModuleAssemblerTileEntity) {
+				return new ModuleAssemblerGUI(player, player.inventory,
+						(ModuleAssemblerTileEntity) tileEntity);
+			}
+		}
+
 		return null;
 
 	}
