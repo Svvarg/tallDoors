@@ -21,6 +21,7 @@ public abstract class AbstractDoorPart extends Entity{
 	public String texture1; //24
 	
 	public DoorBase master;
+	public String sideTexture;//30
 	
 	public AbstractDoorPart(World par1World) {
 		super(par1World);
@@ -80,6 +81,7 @@ public abstract class AbstractDoorPart extends Entity{
 			depth = this.dataWatcher.getWatchableObjectFloat(26);
 			height2 = Double.parseDouble(this.dataWatcher
 					.getWatchableObjectString(27));
+			sideTexture = this.dataWatcher.getWatchableObjectString(30);
 			
 		}
 		if(this.master == null)
@@ -104,6 +106,11 @@ public abstract class AbstractDoorPart extends Entity{
 			{
 				this.texture1 = "plain";
 				this.dataWatcher.updateObject(24, texture1);
+			}
+			if(this.sideTexture == null || this.sideTexture.equals(""))
+			{
+				this.sideTexture = "plain";
+				this.dataWatcher.updateObject(30, sideTexture);
 			}
 		}
 		setBoundsAt(posX, posY, posZ);
@@ -134,7 +141,7 @@ public abstract class AbstractDoorPart extends Entity{
 		this.dataWatcher.addObject(26, 0f);
 		this.dataWatcher.addObject(27, ""+0);
 		this.dataWatcher.addObject(29, 0);
-		
+		this.dataWatcher.addObject(30, "");
 		this.dataWatcher.addObject(24, "plain");
 	}
 	
@@ -145,13 +152,14 @@ public abstract class AbstractDoorPart extends Entity{
 		pos = nbt.getInteger("pos");
 		orientation = nbt.getInteger("orientation");
 		texture1 = nbt.getString("texture1");
-		
+		sideTexture = nbt.getString("sideTexture");
 		this.dataWatcher.updateObject(28, this.orientation);
 		this.dataWatcher.updateObject(25, pos);
 		this.dataWatcher.updateObject(26, this.depth);
 		this.dataWatcher.updateObject(27, "" + this.height2);
 		this.dataWatcher.updateObject(24, texture1);
-
+		this.dataWatcher.updateObject(30, sideTexture);
+		
 		List<DoorBase> list = (List<DoorBase>) worldObj
 				.getEntitiesWithinAABB(DoorBase.class, boundingBox
 						.getBoundingBox(nbt.getDouble("mX") - 1,
@@ -190,6 +198,7 @@ public abstract class AbstractDoorPart extends Entity{
 		nbt.setDouble("height2",height2);
 		nbt.setBoolean("left", left);
 		nbt.setString("texture1", texture1);
+		nbt.setString("sideTexture", sideTexture);
 		if (master != null) {
 			nbt.setDouble("mX", master.posX);
 			nbt.setDouble("mY", master.posY);
@@ -337,6 +346,11 @@ public abstract class AbstractDoorPart extends Entity{
 	{
 		this.pos = pos;
 		this.dataWatcher.updateObject(25,pos);
+	}
+
+	public void setSideTexture(String sideTexture) {
+		this.sideTexture = sideTexture;
+		this.dataWatcher.updateObject(30, sideTexture);
 	}
 
 }

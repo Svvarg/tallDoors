@@ -29,7 +29,7 @@ public class DoubleVerticalFrontBalkPartRenderer extends AbstractModuleDoorRende
 		this.bindTexture(this.getEntityTexture(entity));
 		DoubleVerticalFrontBalkPartEntity ent = (DoubleVerticalFrontBalkPartEntity)entity;
 		RenderUtil.renderFrontBack(ent.height2, 1, ent.depth, 0, ent);
-		this.bindTexture(new ResourceLocation("talldoors:textures/doorparts/side.png"));
+		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.sideTexture)));
 		RenderUtil.renderOutline(ent.height2, 1, ent.depth, 0, ent);
 		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.texture2)));
 		GL11.glTranslatef(0.125f, 0, ent.depth);

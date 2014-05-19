@@ -14,10 +14,7 @@ public class ModuleTexturePackage implements Serializable{
 	public static final long serialVersionUID = 123464344512335L;
 	public String module;
 	public String texture1,texture2;
-	public void blub()
-	{
-		
-	}
+	public String sideTexture;
 	
 	private void writeObject(ObjectOutputStream s)
 	{
@@ -25,6 +22,7 @@ public class ModuleTexturePackage implements Serializable{
 			s.writeUTF(module);
 			s.writeUTF(texture1);
 			s.writeUTF(texture2);
+			s.writeUTF(sideTexture);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +33,7 @@ public class ModuleTexturePackage implements Serializable{
 			module = s.readUTF();
 			texture1 = s.readUTF();
 			texture2 = s.readUTF();
+			sideTexture = s.readUTF();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -441,7 +441,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			DoorModuleWorkbenchPacket pack = new DoorModuleWorkbenchPacket(
 					this.te.xCoord, this.te.yCoord, this.te.zCoord,
 					this.priority, this.chosen, this.moduleType, this.texture1,
-					this.texture2);
+					this.texture2, this.sideTexture);
 			if (!te.getWorldObj().isRemote) {
 			} else if (te.getWorldObj().isRemote) {
 				TallDoorsBase.packetPipeline.sendToServer(pack);

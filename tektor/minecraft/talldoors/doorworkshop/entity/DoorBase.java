@@ -119,6 +119,7 @@ public class DoorBase extends AbstractLockable {
 									constructionPlan[columns][blocks].texture2);
 						}
 					}
+					part.setSideTexture(constructionPlan[columns][blocks].sideTexture);
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
