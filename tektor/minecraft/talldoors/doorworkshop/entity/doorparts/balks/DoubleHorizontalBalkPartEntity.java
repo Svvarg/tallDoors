@@ -1,9 +1,8 @@
 package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks;
 
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
 
 public class DoubleHorizontalBalkPartEntity extends Abstract2TextureDoorPart{
 	

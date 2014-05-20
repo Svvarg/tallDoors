@@ -3,8 +3,6 @@ package tektor.minecraft.talldoors.doorworkshop.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.SerializationUtils;
-
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.DoorPartRegistry;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
@@ -119,6 +117,7 @@ public class DoorBase extends AbstractLockable {
 									constructionPlan[columns][blocks].texture2);
 						}
 					}
+					part.setSideTexture(constructionPlan[columns][blocks].sideTexture);
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
@@ -138,6 +137,7 @@ public class DoorBase extends AbstractLockable {
 									constructionPlan[columns][blocks].texture2);
 						}
 					}
+					part.setSideTexture(constructionPlan[columns][blocks].sideTexture);
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
@@ -157,6 +157,7 @@ public class DoorBase extends AbstractLockable {
 									constructionPlan[columns][blocks].texture2);
 						}
 					}
+					part.setSideTexture(constructionPlan[columns][blocks].sideTexture);
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;
@@ -176,6 +177,7 @@ public class DoorBase extends AbstractLockable {
 									constructionPlan[columns][blocks].texture2);
 						}
 					}
+					part.setSideTexture(constructionPlan[columns][blocks].sideTexture);
 					worldObj.spawnEntityInWorld(part);
 					part.master = this;
 					break;

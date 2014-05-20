@@ -1,9 +1,7 @@
 package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 
 public class GlassWindowPartEntity extends Abstract2TextureDoorPart {
 

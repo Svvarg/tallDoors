@@ -122,8 +122,8 @@ public class DoorModuleWorkbenchTileEntity extends TileEntity implements IInvent
 		return true;
 	}
 
-	public void produce(int priority, String chosen, String type,String texture1, String texture2) {
-		container.produce(priority, chosen, type,texture1,texture2);
+	public void produce(int priority, String chosen, String type,String texture1, String texture2, String sideTexture) {
+		container.produce(priority, chosen, type,texture1,texture2,sideTexture);
 		
 	}
 

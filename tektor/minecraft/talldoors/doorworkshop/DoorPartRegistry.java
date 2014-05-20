@@ -1,8 +1,6 @@
 package tektor.minecraft.talldoors.doorworkshop;
 
 import java.util.HashMap;
-import java.util.List;
-
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 
 public class DoorPartRegistry {

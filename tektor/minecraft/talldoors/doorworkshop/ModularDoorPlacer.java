@@ -53,6 +53,9 @@ public class ModularDoorPlacer extends Item {
 			String[][] textures2 = ((String[][]) SerializationUtils
 					.deserialize(par1ItemStack.stackTagCompound
 							.getByteArray("texturePlan2")));
+			String[][] sideTextures = ((String[][]) SerializationUtils
+					.deserialize(par1ItemStack.stackTagCompound
+							.getByteArray("sideTextures")));
 			ModuleTexturePackage[][] result = new ModuleTexturePackage[modules.length][modules[0].length];
 			for(int i = 0; i < result.length; i++)
 			{
@@ -64,6 +67,7 @@ public class ModularDoorPlacer extends Item {
 						result[i][k].module = modules[i][k];
 						result[i][k].texture1 = textures1[i][k];
 						result[i][k].texture2 = textures2[i][k];
+						result[i][k].sideTexture = sideTextures[i][k];
 					}
 				}
 			}

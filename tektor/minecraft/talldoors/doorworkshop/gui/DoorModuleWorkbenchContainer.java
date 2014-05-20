@@ -31,28 +31,28 @@ public class DoorModuleWorkbenchContainer extends Container {
 		ItemStack[] slot2 = new ItemStack[0];
 		addSlotToContainer(new RestrictingSlot(outputSlot, 1, 225, 133, slot2,
 				null, false));
-		
+
 		bindPlayerInventory(inventoryPlayer);
-		
+
 	}
 
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 165));
 		}
-		for(int i = 0; i < 2; i++)
-		{
-			for(int k = 0; k < 6; k++)
-			{
-				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 9, -30 + i * 18, 8 + k * 18));
-				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 21, 252 + i * 18, 8 + k * 18));
+		for (int i = 0; i < 2; i++) {
+			for (int k = 0; k < 6; k++) {
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 9, -30
+						+ i * 18, 8 + k * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, i * 6 + k + 21,
+						252 + i * 18, 8 + k * 18));
 			}
 		}
-		for(int i = 0; i < 3; i++)
-		{
-			addSlotToContainer(new Slot(inventoryPlayer, i + 33, 198 + i * 18, 164));
+		for (int i = 0; i < 3; i++) {
+			addSlotToContainer(new Slot(inventoryPlayer, i + 33, 198 + i * 18,
+					164));
 		}
-		
+
 	}
 
 	@Override
@@ -113,12 +113,12 @@ public class DoorModuleWorkbenchContainer extends Container {
 
 	}
 
-	public void produce(int priority, String chosen, String type, String texture1, String texture2) {
+	public void produce(int priority, String chosen, String type,
+			String texture1, String texture2, String sideTexture) {
 		if (this.outputSlot.getStackInSlot(0) == null) {
 			ItemStack[] in = inv.mainInventory;
 			List<ItemStack> debt = new LinkedList<ItemStack>();
-			for(ItemStack i : DoorPartRegistry.getPartForIndex(chosen).baseCost)
-			{
+			for (ItemStack i : DoorPartRegistry.getPartForIndex(chosen).baseCost) {
 				debt.add(i.copy());
 			}
 			int[] found = new int[debt.size()];
@@ -153,12 +153,16 @@ public class DoorModuleWorkbenchContainer extends Container {
 									&& ((ItemBlock) in[i].getItem()).field_150939_a
 											.equals(((ItemBlock) debt.get(k)
 													.getItem()).field_150939_a)) {
-								debt.get(k).stackSize = debt.get(k).stackSize - inv.decrStackSize(i, debt.get(k).stackSize).stackSize;
+								debt.get(k).stackSize = debt.get(k).stackSize
+										- inv.decrStackSize(i,
+												debt.get(k).stackSize).stackSize;
 							}
 						} else {
 							if (in[i].getItem().equals(debt.get(k).getItem())) {
-								debt.get(k).stackSize = debt.get(k).stackSize - inv.decrStackSize(i, debt.get(k).stackSize).stackSize;
-								
+								debt.get(k).stackSize = debt.get(k).stackSize
+										- inv.decrStackSize(i,
+												debt.get(k).stackSize).stackSize;
+
 							}
 						}
 					}
@@ -167,12 +171,18 @@ public class DoorModuleWorkbenchContainer extends Container {
 			this.outputSlot.setInventorySlotContents(0, new ItemStack(
 					TallDoorsBase.doorModule, 1, 0));
 			this.outputSlot.getStackInSlot(0).stackTagCompound = new NBTTagCompound();
-			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("chosen", chosen);
-			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("moduleType", type);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString(
+					"chosen", chosen);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString(
+					"moduleType", type);
 			this.outputSlot.getStackInSlot(0).stackTagCompound.setInteger(
 					"priority", priority);
-			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("texture1", texture1);
-			this.outputSlot.getStackInSlot(0).stackTagCompound.setString("texture2", texture2);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString(
+					"texture1", texture1);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString(
+					"texture2", texture2);
+			this.outputSlot.getStackInSlot(0).stackTagCompound.setString(
+					"sideTexture", sideTexture);
 
 		}
 	}

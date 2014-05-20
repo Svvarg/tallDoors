@@ -16,3 +16,5 @@ tile.mosaicGlass.name=Mosaic Glass
 tile.keyRedstoneLock.name=Redstone Lock
 
 itemGroup.tallDoors=Tall Doors
+item.mosaicTool.name=Mosaic Tool
+item.mosaicToolPermanent.name=Permanent Mosaic Tool

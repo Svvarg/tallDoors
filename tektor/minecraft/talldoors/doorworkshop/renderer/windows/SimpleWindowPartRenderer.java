@@ -29,8 +29,8 @@ public class SimpleWindowPartRenderer extends AbstractModuleDoorRenderer {
 			float var8, float var9) {
 
 		AbstractDoorPart ent = (AbstractDoorPart) entity;
-		
-		this.bindTexture(new ResourceLocation("talldoors:textures/doorparts/side.png"));
+
+		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.sideTexture)));
 		RenderUtil.renderOutline(ent.height2, 1, ent.depth, 0, ent);
 		
 		this.bindTexture(this.getEntityTexture(entity));

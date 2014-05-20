@@ -2,7 +2,6 @@ package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks;
 
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 
 public class DoublePlusBalkPartEntity extends Abstract2TextureDoorPart {
 

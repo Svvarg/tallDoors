@@ -24,14 +24,14 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 
 	String[] keys;
 	String[] keysOrigin;
-	String[] keysT, keysT2;
+	String[] keysT, keysT2, keysSide;
 	String[] keysTOrigin;
-	int off, off2, off3;
-	int page, pageT, pageT2;
+	int off, off2, off3, offSide;
+	int page, pageT, pageT2, pageSide;
 	int pages, pagesT;
 	String chosen;
 	public GuiTextField itemNameField, itemNameField2;
-	String texture1, texture2;
+	String texture1, texture2, sideTexture;
 
 	private DoorModuleWorkbenchTileEntity te;
 	private String moduleType;
@@ -42,7 +42,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			InventoryPlayer inventoryPlayer, DoorModuleWorkbenchTileEntity e) {
 		super(new DoorModuleWorkbenchContainer(inventoryPlayer, e));
 		te = e;
-		off = off2 = off3 = 0;
+		off = off2 = off3 = offSide = 0;
 		chosen = "plain";
 		xSize = 328;
 		ySize = 205;
@@ -54,15 +54,17 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		SortedSet<String> keyT = new TreeSet<String>();
 
 		keyT.addAll(DoorPartRegistry.texturePaths.keySet());
-		keysT = keysT2 = keysTOrigin = (String[]) keyT.toArray(new String[0]);
+		keysT = keysT2 = keysTOrigin = keysSide = (String[]) keyT.toArray(new String[0]);
 
 		page = 1;
 		pageT = 1;
 		pageT2 = 1;
+		pageSide = 1;
 		priority = 1;
 		moduleType = "horiz.";
 		texture1 = "plain";
 		texture2 = "horizontalBalk";
+		sideTexture = "side";
 		pages = (int) Math.ceil(keys.length / 7f);
 		pagesT = (int) Math.ceil(keysT.length / 7f);
 	}
@@ -125,6 +127,8 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		this.buttonList.add(new GuiButton(11, i, j - 20, 50, 20, "Modules"));
 		this.buttonList.add(new GuiButton(12, i + 50, j - 20, 50, 20,
 				"Textures"));
+		this.buttonList.add(new GuiButton(17, i + 100, j - 20, 50, 20,
+				"Sides"));
 
 	}
 
@@ -144,6 +148,24 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		this.buttonList.add(new GuiButton(15, i + 149, j + 99, 20, 20, "-"));
 		this.buttonList.add(new GuiButton(16, i + 223, j + 99, 20, 20, "+"));
 
+		this.buttonList.add(new GuiButton(17, i + 100, j - 20, 50, 20,
+				"Sides"));
+	}
+	@SuppressWarnings("unchecked")
+	private void addSideChooseElements() {
+		int i = (this.width - this.xSize) / 2;
+		int j = (this.height - this.ySize) / 2;
+		this.buttonList.clear();
+		((List<Slot>) this.te.container.inventorySlots).get(0).yDisplayPosition = -1000;
+		this.itemNameField.setVisible(false);
+		this.itemNameField2.setVisible(true);
+		this.buttonList.add(new GuiButton(11, i, j - 20, 50, 20, "Modules"));
+		this.buttonList.add(new GuiButton(12, i + 50, j - 20, 50, 20,
+				"Textures"));
+		this.buttonList.add(new GuiButton(13, i + 19, j + 99, 20, 20, "-"));
+		this.buttonList.add(new GuiButton(14, i + 93, j + 99, 20, 20, "+"));
+		this.buttonList.add(new GuiButton(17, i + 100, j - 20, 50, 20,
+				"Sides"));
 	}
 
 	@Override
@@ -191,6 +213,18 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			}
 			fontRendererObj.drawString(pageT2 + "/" + pagesT, 190, 105, -1);
 		}
+		else if (mode == 2)
+		{
+			for (int i = offSide; (i < offSide + 7 && i < keysSide.length); i++) {
+				int color = -1;
+				if (sideTexture.equals(keysSide[i]))
+					color = 5919952;
+
+				fontRendererObj.drawString(keysSide[i], 8, 7 + (i - offSide) * 10,
+						color);
+			}
+			fontRendererObj.drawString(pageSide + "/" + pagesT, 58, 105, -1);
+		}
 	}
 
 	@Override
@@ -223,6 +257,36 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			drawPreviewT1(x, y);
 			drawPreviewT2(x, y);
 		}
+		else if (mode == 2){
+			this.mc.renderEngine.bindTexture(new ResourceLocation("talldoors",
+					"textures/gui/doorTextureGUI.png"));
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			int x = (width - xSize) / 2;
+			int y = (height - ySize) / 2;
+			this.drawTexturedModalRect(x, y, 0, 0, 256, 189);
+			this.drawTexturedModalRect(x - 36, y + 3, 0, 189, 36, 67);
+			this.drawTexturedModalRect(x + 256, y + 3, 72, 189, 36, 67);
+			this.drawTexturedModalRect(x - 36, y + 70, 36, 189, 36, 67);
+			this.drawTexturedModalRect(x + 256, y + 70, 108, 189, 36, 49);
+			drawPreviewSide(x, y);
+		}
+	}
+	
+	public void drawPreviewSide(int x, int y) {
+		this.mc.renderEngine.bindTexture(new ResourceLocation(
+				DoorPartRegistry.texturePaths.get(sideTexture)));
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(x + 46, y + 160, 0, 0.0, 1.0);
+		tessellator.addVertexWithUV(x + 86, y + 160, 0, 1.0, 1.0);
+		tessellator.addVertexWithUV(x + 86, y + 120, 0, 1.0, 0.0);
+		tessellator.addVertexWithUV(x + 46, y + 120, 0, 0.0, 0.0);
+		tessellator.draw();
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	public void drawPreviewT1(int x, int y) {
@@ -336,6 +400,26 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 
 				}
 			}
+			else if (mode == 2)
+			{
+				if (par1 < 128) {
+					if (par2 > 6 && par2 < 17 && offSide < keysSide.length)
+						sideTexture = keysSide[offSide];
+					else if (par2 > 16 && par2 < 27 && offSide + 1 < keysSide.length)
+						sideTexture = keysSide[offSide + 1];
+					else if (par2 > 26 && par2 < 37 && offSide + 2 < keysSide.length)
+						sideTexture = keysSide[offSide + 2];
+					else if (par2 > 36 && par2 < 47 && offSide + 3 < keysSide.length)
+						sideTexture = keysSide[offSide + 3];
+					else if (par2 > 46 && par2 < 57 && offSide + 4 < keysSide.length)
+						sideTexture = keysSide[offSide + 4];
+					else if (par2 > 56 && par2 < 67 && offSide + 5 < keysSide.length)
+						sideTexture = keysSide[offSide + 5];
+					else if (par2 > 66 && par2 < 77 && offSide + 6 < keysSide.length)
+						sideTexture = keysSide[offSide + 6];
+
+				}
+			}
 		}
 	}
 
@@ -357,7 +441,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			DoorModuleWorkbenchPacket pack = new DoorModuleWorkbenchPacket(
 					this.te.xCoord, this.te.yCoord, this.te.zCoord,
 					this.priority, this.chosen, this.moduleType, this.texture1,
-					this.texture2);
+					this.texture2, this.sideTexture);
 			if (!te.getWorldObj().isRemote) {
 			} else if (te.getWorldObj().isRemote) {
 				TallDoorsBase.packetPipeline.sendToServer(pack);
@@ -423,16 +507,35 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 			break;
 		}
 		case 13: {
-			if (pageT > 1) {
-				pageT--;
-				off2 = (pageT - 1) * 7;
+			if (mode == 1) {
+				if (pageT > 1) {
+					pageT--;
+					off2 = (pageT - 1) * 7;
+				}
+				
+			}
+			else if (mode == 2){
+				if (pageSide > 1) {
+					pageSide--;
+					offSide = (pageSide - 1) * 7;
+				}
+				
 			}
 			break;
 		}
 		case 14: {
-			if (pageT < pagesT) {
-				pageT++;
-				off2 = (pageT - 1) * 7;
+			if (mode == 1) {
+				if (pageT < pagesT) {
+					pageT++;
+					off2 = (pageT - 1) * 7;
+				}
+			}
+			else if (mode == 2)
+			{
+				if (pageSide < pagesT) {
+					pageSide++;
+					offSide = (pageSide - 1) * 7;
+				}
 			}
 			break;
 		}
@@ -448,6 +551,12 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 				pageT2++;
 				off3 = (pageT2 - 1) * 7;
 			}
+			break;
+		}
+		case 17: {
+			this.mode = 2;
+			this.addSideChooseElements();
+			this.updateScreen();
 			break;
 		}
 		}
@@ -483,6 +592,15 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 				}
 				keysT = (String[]) keyT.toArray(new String[0]);
 			}
+		}
+		else if (mode == 2)
+		{
+			SortedSet<String> keySide = new TreeSet<String>();
+			for (String s : keysTOrigin) {
+				if (s.contains(itemNameField2.getText()))
+					keySide.add(s);
+			}
+			keysSide = (String[]) keySide.toArray(new String[0]);
 		}
 
 	}

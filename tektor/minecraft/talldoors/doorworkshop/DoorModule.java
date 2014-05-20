@@ -20,6 +20,7 @@ public class DoorModule extends Item {
 		this.setUnlocalizedName("doorModule");
 	}
 
+	@SuppressWarnings("unchecked")
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer,
