@@ -33,8 +33,6 @@ public class GlassWindowPartRenderer extends AbstractModuleDoorRenderer {
 		this.bindTexture(new ResourceLocation(DoorPartRegistry.texturePaths.get(ent.sideTexture)));
 		RenderUtil.renderOutline(ent.height2, 1, ent.depth, 0, ent);
 
-		
-
 		Tessellator tess = Tessellator.instance;
 		drawWindow(ent, tess);
 		drawGlass(ent, tess);

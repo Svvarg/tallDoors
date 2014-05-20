@@ -9,7 +9,6 @@ import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleVerticalFrontBalkPartEntity;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVerticalBalkPartEntity;
 
 public class DoubleVerticalFrontBalkPartType extends AbstractDoorPartType{
 

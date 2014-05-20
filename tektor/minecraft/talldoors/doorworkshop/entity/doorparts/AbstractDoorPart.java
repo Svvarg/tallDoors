@@ -29,6 +29,7 @@ public abstract class AbstractDoorPart extends Entity{
 		this.preventEntitySpawning = true;
 		this.noClip = true;
 		setBoundsAt(posX, posY, posZ);
+		this.sideTexture = "plain";
 	}
 	
 	public AbstractDoorPart(World par1World, int posX, int heightPosition, int posZ,
@@ -62,6 +63,7 @@ public abstract class AbstractDoorPart extends Entity{
 		this.ignoreFrustumCheck = true;
 		this.preventEntitySpawning = true;
 		this.noClip = true;
+		this.sideTexture = "plain";
 		setBoundsAt(posX, posY, posZ);
 	}
 	
@@ -88,12 +90,12 @@ public abstract class AbstractDoorPart extends Entity{
 		{
 			List<DoorBase> list = (List<DoorBase>) worldObj
 					.getEntitiesWithinAABB(DoorBase.class, boundingBox
-							.getBoundingBox(mX - 1,
-									mY - 1,
-									mZ - 1,
-									mX + 1,
-									mY + 1,
-									mZ + 1));
+							.getBoundingBox(mX - 0.2,
+									mY - 0.2,
+									mZ - 0.2,
+									mX + 0.2,
+									mY + 0.2,
+									mZ + 0.2));
 			master = list.isEmpty() ? null : list.get(0);
 			if(master != null)
 			{
@@ -160,14 +162,15 @@ public abstract class AbstractDoorPart extends Entity{
 		this.dataWatcher.updateObject(24, texture1);
 		this.dataWatcher.updateObject(30, sideTexture);
 		
+		@SuppressWarnings({ "static-access", "unchecked" })
 		List<DoorBase> list = (List<DoorBase>) worldObj
 				.getEntitiesWithinAABB(DoorBase.class, boundingBox
-						.getBoundingBox(nbt.getDouble("mX") - 1,
-								nbt.getDouble("mY") - 1,
-								nbt.getDouble("mZ") - 1,
-								nbt.getDouble("mx") + 1,
-								nbt.getDouble("mY") + 1,
-								nbt.getDouble("mZ") + 1));
+						.getBoundingBox(nbt.getDouble("mX") - 0.2,
+								nbt.getDouble("mY") - 0.2,
+								nbt.getDouble("mZ") - 0.2,
+								nbt.getDouble("mx") + 0.2,
+								nbt.getDouble("mY") + 0.2,
+								nbt.getDouble("mZ") + 0.2));
 		master = list.isEmpty() ? null : list.get(0);
 		if(master != null)
 		{

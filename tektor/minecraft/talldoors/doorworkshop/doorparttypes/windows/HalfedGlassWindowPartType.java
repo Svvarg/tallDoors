@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.AbstractDoorPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.AbstractDoorPart;
-import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
 
 public class HalfedGlassWindowPartType extends AbstractDoorPartType{
 
@@ -18,14 +18,14 @@ public class HalfedGlassWindowPartType extends AbstractDoorPartType{
 		baseCost.add(new ItemStack(Blocks.glass,2,0));
 		costPerSize = new ArrayList<ItemStack>(1);
 		costPerSize.add(new ItemStack(Blocks.planks,1,0));
-		entityClass = GlassWindow2PartEntity.class;
+		entityClass = HalfedGlassWindowPartEntity.class;
 		textureCount = 2;
 	}
 
 	@Override
 	public AbstractDoorPart getNewEntity(World world, int posX,
 			int heightPosition, int posZ, int heightSize, int orientation) {
-		AbstractDoorPart part = new GlassWindow2PartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
+		AbstractDoorPart part = new HalfedGlassWindowPartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
 		return part;
 	}
 }

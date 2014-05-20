@@ -39,6 +39,7 @@ import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.PlusBalkPartT
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.VerticalBalkPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.HalfedGlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
@@ -53,6 +54,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
@@ -88,16 +90,15 @@ import tektor.minecraft.talldoors.items.TrapDoorsPlacer;
 import tektor.minecraft.talldoors.packet.PacketPipeline;
 import tektor.minecraft.talldoors.services.MosaicIconRegistry;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -170,7 +171,7 @@ public class TallDoorsBase {
 
 		try {
 			ZipFile zf = new ZipFile(jarName.getAbsoluteFile());
-			Enumeration e = zf.entries();
+			Enumeration<?> e = zf.entries();
 			while (e.hasMoreElements()) {
 				ZipEntry ze = (ZipEntry) e.nextElement();
 				if (ze.getName().contains(
@@ -241,7 +242,7 @@ public class TallDoorsBase {
 
 	private void registerOre() {
 		//Luivite
-		GameRegistry.registerBlock(this.luiviteOre, OreBaseItemBlock.class,
+		GameRegistry.registerBlock(luiviteOre, OreBaseItemBlock.class,
 		"luiviteOre");
 		OreDictionary.registerOre("oreLuivite", new ItemStack(luiviteOre, 1,
 		0));
@@ -302,7 +303,6 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("double_horizontal",
 				new DoubleHorizontalBalkPartType());
 		DoorPartRegistry.registerDoorPart("empty", new NullPartType());
-		
 		DoorPartRegistry.registerDoorPart("simple_window", new SimpleWindowPartType());
 		DoorPartRegistry.registerDoorPart("glass_window", new GlassWindowPartType());
 		DoorPartRegistry.registerDoorPart("glass_window_2", new GlassWindow2PartType());
@@ -311,7 +311,9 @@ public class TallDoorsBase {
 		DoorPartRegistry.registerDoorPart("vertical_balk(f_b)", new FBVerticalBalkPartType());
 		DoorPartRegistry.registerDoorPart("plus_balk", new PlusBalkPartType());
 		DoorPartRegistry.registerDoorPart("double_plus_balk", new DoublePlusBalkPartType());
+		
 		DoorPartRegistry.registerDoorPart("2x_vertical_front", new DoubleVerticalFrontBalkPartType());
+		DoorPartRegistry.registerDoorPart("vert_halfed_glass", new HalfedGlassWindowPartType());
 	}
 
 	private void registerBlocks() {
@@ -343,8 +345,6 @@ public class TallDoorsBase {
 		GameRegistry.registerItem(modularDoorPlacer, "modularDoorPlacer");
 		GameRegistry.registerItem(doorModule, "doorModule");
 
-		LanguageRegistry.addName(mosaicTool, "Mosaic Tool");
-		LanguageRegistry.addName(mosaicTool2, "Permanent Mosaic Tool");
 	}
 
 	private void registerEntities() {
@@ -469,6 +469,8 @@ public class TallDoorsBase {
 				"DoublePlusBalkPartEntity", 28, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(DoubleVerticalFrontBalkPartEntity.class,
 				"DoubleVerticalFrontBalkPartEntity", 29, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(HalfedGlassWindowPartEntity.class,
+				"HalfedGlassWindowPartEntity", 30, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {
@@ -488,7 +490,6 @@ public class TallDoorsBase {
 				.registerTileEntity(
 						tektor.minecraft.talldoors.entities.tileentities.KeyRedstoneLockTileEntity.class,
 						"keylock");
-
 		GameRegistry
 				.registerTileEntity(
 						tektor.minecraft.talldoors.doorworkshop.entity.DoorModuleWorkbenchTileEntity.class,

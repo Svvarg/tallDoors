@@ -217,7 +217,7 @@ public class DoorModuleWorkbenchGUI extends GuiContainer {
 		{
 			for (int i = offSide; (i < offSide + 7 && i < keysSide.length); i++) {
 				int color = -1;
-				if (texture1.equals(keysSide[i]))
+				if (sideTexture.equals(keysSide[i]))
 					color = 5919952;
 
 				fontRendererObj.drawString(keysSide[i], 8, 7 + (i - offSide) * 10,

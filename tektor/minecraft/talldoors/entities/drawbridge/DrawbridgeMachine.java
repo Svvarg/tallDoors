@@ -126,6 +126,7 @@ public class DrawbridgeMachine extends Entity {
 		}
 
 		if (base == null) {
+			@SuppressWarnings({ "unchecked", "static-access" })
 			List<DrawbridgeBase> list = (List<DrawbridgeBase>) worldObj
 					.getEntitiesWithinAABB(DrawbridgeBase.class, boundingBox
 							.getBoundingBox(mX - 1, mY - 1, mZ - 1, mX + 1,
@@ -149,6 +150,7 @@ public class DrawbridgeMachine extends Entity {
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 		this.setOrientation(nbt.getInteger("orientation"));
 		this.powered = nbt.getBoolean("power");
+		@SuppressWarnings("unchecked")
 		List<DrawbridgeBase> list = (List<DrawbridgeBase>) worldObj
 				.getEntitiesWithinAABB(DrawbridgeBase.class, AxisAlignedBB
 						.getBoundingBox(nbt.getDouble("mX") - 1,

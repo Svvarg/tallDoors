@@ -5,7 +5,6 @@ import org.apache.commons.lang3.SerializationUtils;
 import tektor.minecraft.talldoors.TallDoorsBase;
 import tektor.minecraft.talldoors.container.RestrictingSlot;
 import tektor.minecraft.talldoors.doorworkshop.entity.ModuleAssemblerTileEntity;
-import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

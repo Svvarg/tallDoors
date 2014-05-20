@@ -1,25 +1,5 @@
 package tektor.minecraft.talldoors.client;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import tektor.minecraft.talldoors.renderer.KeyMakerRenderer;
-import tektor.minecraft.talldoors.renderer.RenderFakeEntity;
-import tektor.minecraft.talldoors.renderer.RenderFenceGate1;
-import tektor.minecraft.talldoors.renderer.RenderMosaicGlassTileEntity;
-import tektor.minecraft.talldoors.renderer.RenderMosaicTileEnity;
-import tektor.minecraft.talldoors.renderer.TrapDoorRenderer;
-import tektor.minecraft.talldoors.renderer.doors2x4.RenderDarkMetalEntranceDoor1;
-import tektor.minecraft.talldoors.renderer.doors2x4.RenderEntranceDoorSize4;
-import tektor.minecraft.talldoors.renderer.doors2x4.RenderMetalEntranceDoor1;
-import tektor.minecraft.talldoors.renderer.doors2x5.RenderDarkMetalEntranceDoor2;
-import tektor.minecraft.talldoors.renderer.doors2x5.RenderEntranceDoor2;
-import tektor.minecraft.talldoors.renderer.doors2x5.RenderMetalEntranceDoor2;
-import tektor.minecraft.talldoors.renderer.doors2x6.RenderDarkMetalEntranceDoor3;
-import tektor.minecraft.talldoors.renderer.doors2x6.RenderEntranceDoor3;
-import tektor.minecraft.talldoors.renderer.doors2x6.RenderMetalEntranceDoor3;
-import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
-import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
-import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
@@ -33,6 +13,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.renderer.DoorBaseRenderer;
@@ -47,6 +28,7 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.balks.PlusBalkPartRender
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.VerticalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindowPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HalfedGlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindowPartRenderer;
 import tektor.minecraft.talldoors.entities.FakeEntity;
@@ -66,6 +48,26 @@ import tektor.minecraft.talldoors.entities.drawbridge.EntityConnector;
 import tektor.minecraft.talldoors.entities.tileentities.MosaicGlassTileEntity;
 import tektor.minecraft.talldoors.entities.trapdoors.TrapDoor;
 import tektor.minecraft.talldoors.entities.workbenches.KeyMaker;
+import tektor.minecraft.talldoors.renderer.KeyMakerRenderer;
+import tektor.minecraft.talldoors.renderer.RenderFakeEntity;
+import tektor.minecraft.talldoors.renderer.RenderFenceGate1;
+import tektor.minecraft.talldoors.renderer.RenderMosaicGlassTileEntity;
+import tektor.minecraft.talldoors.renderer.RenderMosaicTileEnity;
+import tektor.minecraft.talldoors.renderer.TrapDoorRenderer;
+import tektor.minecraft.talldoors.renderer.doors2x4.RenderDarkMetalEntranceDoor1;
+import tektor.minecraft.talldoors.renderer.doors2x4.RenderEntranceDoorSize4;
+import tektor.minecraft.talldoors.renderer.doors2x4.RenderMetalEntranceDoor1;
+import tektor.minecraft.talldoors.renderer.doors2x5.RenderDarkMetalEntranceDoor2;
+import tektor.minecraft.talldoors.renderer.doors2x5.RenderEntranceDoor2;
+import tektor.minecraft.talldoors.renderer.doors2x5.RenderMetalEntranceDoor2;
+import tektor.minecraft.talldoors.renderer.doors2x6.RenderDarkMetalEntranceDoor3;
+import tektor.minecraft.talldoors.renderer.doors2x6.RenderEntranceDoor3;
+import tektor.minecraft.talldoors.renderer.doors2x6.RenderMetalEntranceDoor3;
+import tektor.minecraft.talldoors.renderer.drawbridge.RenderDrawbridgeBase;
+import tektor.minecraft.talldoors.renderer.drawbridge.RenderRopeConnector;
+import tektor.minecraft.talldoors.renderer.drawbridge.TessRenderDrawbridgeMachine;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 	public static int renderPass;
@@ -105,8 +107,8 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(PlusBalkPartEntity.class, new PlusBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(DoublePlusBalkPartEntity.class, new DoublePlusBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(DoubleVerticalFrontBalkPartEntity.class, new DoubleVerticalFrontBalkPartRenderer());
-		
-		
+		RenderingRegistry.registerEntityRenderingHandler(HalfedGlassWindowPartEntity.class, new HalfedGlassWindowPartRenderer());
+				
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
 		
 		

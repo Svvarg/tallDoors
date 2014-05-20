@@ -421,6 +421,7 @@ public class DoorPlacer extends Item {
 		return true;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubItems(Item par1, CreativeTabs tab, List subItems) {
