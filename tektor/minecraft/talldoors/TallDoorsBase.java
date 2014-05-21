@@ -40,6 +40,7 @@ import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.VerticalBalkP
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.HalfedGlassWindowPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.HorHalfedGlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
@@ -55,6 +56,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HorHalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
@@ -314,6 +316,7 @@ public class TallDoorsBase {
 		
 		DoorPartRegistry.registerDoorPart("2x_vertical_front", new DoubleVerticalFrontBalkPartType());
 		DoorPartRegistry.registerDoorPart("vert_halfed_glass", new HalfedGlassWindowPartType());
+		DoorPartRegistry.registerDoorPart("hor_halfed_glass", new HorHalfedGlassWindowPartType());
 	}
 
 	private void registerBlocks() {
@@ -471,6 +474,8 @@ public class TallDoorsBase {
 				"DoubleVerticalFrontBalkPartEntity", 29, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(HalfedGlassWindowPartEntity.class,
 				"HalfedGlassWindowPartEntity", 30, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(HorHalfedGlassWindowPartEntity.class,
+				"HorHalfedGlassWindowPartEntity", 31, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {

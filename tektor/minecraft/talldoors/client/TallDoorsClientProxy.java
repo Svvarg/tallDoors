@@ -14,6 +14,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HorHalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.renderer.DoorBaseRenderer;
@@ -29,6 +30,7 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.balks.VerticalBalkPartRe
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HalfedGlassWindowPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HorHalfedGlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindowPartRenderer;
 import tektor.minecraft.talldoors.entities.FakeEntity;
@@ -108,6 +110,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(DoublePlusBalkPartEntity.class, new DoublePlusBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(DoubleVerticalFrontBalkPartEntity.class, new DoubleVerticalFrontBalkPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(HalfedGlassWindowPartEntity.class, new HalfedGlassWindowPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(HorHalfedGlassWindowPartEntity.class, new HorHalfedGlassWindowPartRenderer());
 				
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
 		
