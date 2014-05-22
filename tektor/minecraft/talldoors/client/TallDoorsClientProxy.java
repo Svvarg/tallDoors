@@ -17,6 +17,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGl
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HorHalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchmen.SmallWatchmanWindowEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchmen.WatchmanWindowEntity;
 import tektor.minecraft.talldoors.doorworkshop.renderer.DoorBaseRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.NullPartRenderer;
@@ -34,6 +35,7 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HalfedGlassWindo
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HorHalfedGlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.SimpleWindowPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.windows.watchmen.SmallWatchmanWindowRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.watchmen.WatchmanWindowRenderer;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
@@ -114,6 +116,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(HalfedGlassWindowPartEntity.class, new HalfedGlassWindowPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(HorHalfedGlassWindowPartEntity.class, new HorHalfedGlassWindowPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(WatchmanWindowEntity.class, new WatchmanWindowRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(SmallWatchmanWindowEntity.class, new SmallWatchmanWindowRenderer());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
 		
