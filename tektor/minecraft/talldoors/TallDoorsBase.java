@@ -358,89 +358,44 @@ public class TallDoorsBase {
 	}
 
 	private void registerEntities() {
-		EntityRegistry.registerGlobalEntityID(EntranceDoor1.class,
-				"EntranceDoor1", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntranceDoor1.class, "EntranceDoor1",
 				0, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(EntranceDoor2.class,
-				"EntranceDoor2", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntranceDoor2.class, "EntranceDoor2",
 				1, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(EntranceDoor3.class,
-				"EntranceDoor3", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntranceDoor3.class, "EntranceDoor3",
 				2, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(FenceGate1.class, "FenceGate1",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(FenceGate1.class, "FenceGate1", 3,
 				TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(EntityConnector.class,
-				"EntityConnector", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntityConnector.class,
 				"EntityConnector", 4, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry
-				.registerGlobalEntityID(MetalEntranceDoor1.class,
-						"MetalEntranceDoor1",
-						EntityRegistry.findGlobalUniqueEntityId());
+		
 		EntityRegistry.registerModEntity(MetalEntranceDoor1.class,
 				"MetalEntranceDoor1", 5, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor1.class,
-				"DarkMetalEntranceDoor1",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DarkMetalEntranceDoor1.class,
 				"DarkMetalEntranceDoor1", 6, TallDoorsBase.instance, 120, 5,
 				true);
-		EntityRegistry.registerGlobalEntityID(DrawbridgeBase.class,
-				"DrawbridgeBase", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DrawbridgeBase.class,
 				"DrawbridgeBase", 7, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(DrawbridgeMachine.class,
-				"DrawbridgeMachine", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DrawbridgeMachine.class,
 				"DrawbridgeMachine", 8, TallDoorsBase.instance, 120, 5, true);
 
-		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor2.class,
-				"DarkMetalEntranceDoor2",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DarkMetalEntranceDoor2.class,
 				"DarkMetalEntranceDoor2", 9, TallDoorsBase.instance, 120, 5,
 				true);
 
-		EntityRegistry.registerGlobalEntityID(DarkMetalEntranceDoor3.class,
-				"DarkMetalEntranceDoor3",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DarkMetalEntranceDoor3.class,
 				"DarkMetalEntranceDoor3", 10, TallDoorsBase.instance, 120, 5,
 				true);
-		EntityRegistry
-				.registerGlobalEntityID(MetalEntranceDoor2.class,
-						"MetalEntranceDoor2",
-						EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(MetalEntranceDoor2.class,
 				"MetalEntranceDoor2", 11, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry
-				.registerGlobalEntityID(MetalEntranceDoor3.class,
-						"MetalEntranceDoor3",
-						EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(MetalEntranceDoor3.class,
 				"MetalEntranceDoor3", 12, TallDoorsBase.instance, 120, 5, true);
-		EntityRegistry.registerGlobalEntityID(FakeEntity.class, "FakeEntity",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(FakeEntity.class, "FakeEntity", 13,
 				TallDoorsBase.instance, 120, 5, true);
-
-		EntityRegistry.registerGlobalEntityID(KeyMaker.class, "KeyMaker",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(KeyMaker.class, "KeyMaker", 14,
 				TallDoorsBase.instance, 120, 5, true);
-
-		EntityRegistry.registerGlobalEntityID(TrapDoor.class, "TrapDoor",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(TrapDoor.class, "TrapDoor", 15,
 				TallDoorsBase.instance, 120, 5, true);
-
-		EntityRegistry.registerGlobalEntityID(DoorBase.class, "DoorBase",
-				EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(DoorBase.class, "DoorBase", 16,
 				TallDoorsBase.instance, 128, 5, true);
 
