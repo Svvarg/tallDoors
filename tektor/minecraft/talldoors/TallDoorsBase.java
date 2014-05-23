@@ -40,8 +40,11 @@ import tektor.minecraft.talldoors.doorworkshop.doorparttypes.balks.VerticalBalkP
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.GlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.HalfedGlassWindowPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.HorHalfedGlassWindowPartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindow2PartType;
 import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.SimpleWindowPartType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.watchmen.SmallWatchmanWindowType;
+import tektor.minecraft.talldoors.doorworkshop.doorparttypes.windows.watchmen.WatchmanWindowType;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
@@ -55,8 +58,11 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBa
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HorHalfedGlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.SimpleWindowPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchmen.SmallWatchmanWindowEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchmen.WatchmanWindowEntity;
 import tektor.minecraft.talldoors.entities.FakeEntity;
 import tektor.minecraft.talldoors.entities.FenceGate1;
 import tektor.minecraft.talldoors.entities.doors_width2.DarkMetalEntranceDoor1;
@@ -102,7 +108,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.4")
+@Mod(modid = "TallDoors", name = "TallDoors", version = "0.4.5")
 public class TallDoorsBase {
 
 	// instance
@@ -314,6 +320,10 @@ public class TallDoorsBase {
 		
 		DoorPartRegistry.registerDoorPart("2x_vertical_front", new DoubleVerticalFrontBalkPartType());
 		DoorPartRegistry.registerDoorPart("vert_halfed_glass", new HalfedGlassWindowPartType());
+		DoorPartRegistry.registerDoorPart("hor_halfed_glass", new HorHalfedGlassWindowPartType());
+		
+		DoorPartRegistry.registerDoorPart("watchman_window", new WatchmanWindowType());
+		DoorPartRegistry.registerDoorPart("small_watchman_window", new SmallWatchmanWindowType());
 	}
 
 	private void registerBlocks() {
@@ -471,6 +481,12 @@ public class TallDoorsBase {
 				"DoubleVerticalFrontBalkPartEntity", 29, TallDoorsBase.instance, 128, 5, true);
 		EntityRegistry.registerModEntity(HalfedGlassWindowPartEntity.class,
 				"HalfedGlassWindowPartEntity", 30, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(HorHalfedGlassWindowPartEntity.class,
+				"HorHalfedGlassWindowPartEntity", 31, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(WatchmanWindowEntity.class,
+				"WatchmanWindowEntity", 32, TallDoorsBase.instance, 128, 5, true);
+		EntityRegistry.registerModEntity(SmallWatchmanWindowEntity.class,
+				"SmallWatchmanWindowEntity", 33, TallDoorsBase.instance, 128, 5, true);
 	}
 
 	private void registerTileEntities() {
