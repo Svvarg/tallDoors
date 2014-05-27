@@ -5,8 +5,8 @@ import net.minecraft.world.World;
 
 public class VerticalBalkPartEntity extends Abstract2TextureDoorPart{
 
-	public VerticalBalkPartEntity(World par1World, int posX,
-			int heightPosition, int posZ, int heightSize, int orientation,
+	public VerticalBalkPartEntity(World par1World, double posX,
+			int heightPosition, double posZ, int heightSize, int orientation,
 			float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation, depth);
 	}

@@ -1,31 +1,43 @@
 package tektor.minecraft.talldoors.doorworkshop;
 
-import org.apache.commons.lang3.SerializationUtils;
-
-import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
-import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
-
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import org.apache.commons.lang3.SerializationUtils;
+
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBaseConstructable;
+import tektor.minecraft.talldoors.doorworkshop.entity.SlidingDoorBase;
+import tektor.minecraft.talldoors.doorworkshop.util.ModuleTexturePackage;
+
 public class ModularDoorPlacer extends Item {
 
 	public ModularDoorPlacer() {
 		super();
 		this.setMaxDamage(0);
-		this.setHasSubtypes(false);
+		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName("modularDoorPlacer");
 		this.setTextureName("tallDoors:modularDoorPlacer");
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
-	
-	
-	
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		switch (stack.getItemDamage()) {
+		case 0:
+			return "modularDoorPlacer";
+		case 1:
+			return "slidingDoorPlacer";
+		}
+		return null;
+	}
+
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, World par3World, int par4, int par5,
@@ -35,13 +47,20 @@ public class ModularDoorPlacer extends Item {
 			int var24 = MathHelper
 					.floor_double(par2EntityPlayer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-//			if (!checkFree(par3World, par4, par5 + 1, par6, 2, 4, true, var24)) {
-//				par2EntityPlayer
-//						.addChatMessage(new ChatComponentText(
-//								"A voice whispers to you: There is not enough space for this"));
-//				return false;
-//			}
-			DoorBase door = new DoorBase(par3World);
+			// if (!checkFree(par3World, par4, par5 + 1, par6, 2, 4, true,
+			// var24)) {
+			// par2EntityPlayer
+			// .addChatMessage(new ChatComponentText(
+			// "A voice whispers to you: There is not enough space for this"));
+			// return false;
+			// }
+
+			DoorBaseConstructable door;
+			if (par1ItemStack.getItemDamage() == 0) {
+				door = new DoorBase(par3World);
+			} else {
+				door = new SlidingDoorBase(par3World);
+			}
 			boolean left = par1ItemStack.stackTagCompound.getBoolean("left");
 			door.setOrientation(left, var24);
 			String[][] modules = ((String[][]) SerializationUtils
@@ -57,12 +76,9 @@ public class ModularDoorPlacer extends Item {
 					.deserialize(par1ItemStack.stackTagCompound
 							.getByteArray("sideTextures")));
 			ModuleTexturePackage[][] result = new ModuleTexturePackage[modules.length][modules[0].length];
-			for(int i = 0; i < result.length; i++)
-			{
-				for(int k = 0; k < result[0].length; k++)
-				{
-					if(result[i][k] == null)
-					{
+			for (int i = 0; i < result.length; i++) {
+				for (int k = 0; k < result[0].length; k++) {
+					if (result[i][k] == null) {
 						result[i][k] = new ModuleTexturePackage();
 						result[i][k].module = modules[i][k];
 						result[i][k].texture1 = textures1[i][k];
@@ -71,28 +87,29 @@ public class ModularDoorPlacer extends Item {
 					}
 				}
 			}
-			
-			
+
 			if (!left) {
 				switch (var24) {
 				case 0:
-					door.setPosition(par4+result.length -1, par5 + 1, par6);break;
+					door.setPositionC(par4 + result.length - 1, par5 + 1, par6);
+					break;
 				case 1:
-					door.setPosition(par4, par5 + 1, par6+result.length-1);break;
+					door.setPositionC(par4, par5 + 1, par6 + result.length - 1);
+					break;
 				case 2:
-					door.setPosition(par4-result.length+1, par5 + 1, par6);break;
+					door.setPositionC(par4 - result.length + 1, par5 + 1, par6);
+					break;
 				case 3:
-					door.setPosition(par4, par5 + 1, par6-result.length+1);break;
+					door.setPositionC(par4, par5 + 1, par6 - result.length + 1);
+					break;
 				}
-			}
-			else
-			{
-				door.setPosition(par4, par5 + 1, par6);
+			} else {
+				door.setPositionC(par4, par5 + 1, par6);
 			}
 			door.setConstructionPlan(result);
 			door.constructFromPlan();
-			
-			par3World.spawnEntityInWorld(door);
+
+			par3World.spawnEntityInWorld((Entity) door);
 			--par1ItemStack.stackSize;
 		}
 

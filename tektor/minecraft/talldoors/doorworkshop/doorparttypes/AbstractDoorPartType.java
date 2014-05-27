@@ -19,7 +19,7 @@ public abstract class AbstractDoorPartType{
 	
 	public abstract void initialize(); 
 	
-	public abstract AbstractDoorPart getNewEntity(World world, int posX, int heightPosition, int posZ, int heightSize, int orientation);
+	public abstract AbstractDoorPart getNewEntity(World world, double d, int heightPosition, double e, int heightSize, int orientation);
 	
 	public List<String> getCostAsString() {
 		List<String> a = new LinkedList<String>();

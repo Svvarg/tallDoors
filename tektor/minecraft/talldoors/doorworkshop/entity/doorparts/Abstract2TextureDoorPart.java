@@ -8,8 +8,8 @@ public abstract class Abstract2TextureDoorPart extends AbstractDoorPart{
 
 	public String texture2;
 	
-	public Abstract2TextureDoorPart(World par1World, int posX,
-			int heightPosition, int posZ, int heightSize, int orientation,
+	public Abstract2TextureDoorPart(World par1World, double posX,
+			int heightPosition, double posZ, int heightSize, int orientation,
 			float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation, depth);
 	}
@@ -43,7 +43,6 @@ public abstract class Abstract2TextureDoorPart extends AbstractDoorPart{
 			}
 		}
 	}
-	
 	@Override
 	protected void entityInit() {
 		super.entityInit();

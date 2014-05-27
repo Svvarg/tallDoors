@@ -9,7 +9,7 @@ public class SimpleWindow2PartEntity extends AbstractDoorPart{
 		super(par1World);
 		}
 
-	public SimpleWindow2PartEntity(World par1World, int posX, int heightPosition, int posZ,
+	public SimpleWindow2PartEntity(World par1World, double posX, int heightPosition, double posZ,
 			int heightSize, int orientation, float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation, depth);
 	}

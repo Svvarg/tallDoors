@@ -8,7 +8,7 @@ public class PlainDoorPartEntity extends AbstractDoorPart{
 		super(par1World);
 	}
 
-	public PlainDoorPartEntity(World par1World, int posX, int heightPosition, int posZ,
+	public PlainDoorPartEntity(World par1World, double posX, int heightPosition, double posZ,
 			int heightSize, int orientation, float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation, depth);
 	}

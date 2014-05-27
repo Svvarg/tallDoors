@@ -1,5 +1,6 @@
 package tektor.minecraft.talldoors.doorworkshop.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,13 +13,14 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 	int corX,corY,corZ;
 	int dSizeX, dSizeY;
 	boolean left;
+	String doortype;
 	
 	public ModuleAssemblerPacket()
 	{
 		
 	}
 	
-	public ModuleAssemblerPacket(int corX, int corY, int corZ, int dX, int dY,boolean left)
+	public ModuleAssemblerPacket(int corX, int corY, int corZ, int dX, int dY,boolean left, String doortype)
 	{
 		this.corX = corX;
 		this.corY = corY;
@@ -26,6 +28,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		this.dSizeX = dX;
 		this.dSizeY = dY;
 		this.left = left;
+		this.doortype = doortype;
 	}
 	
 	@Override
@@ -36,6 +39,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		buffer.writeInt(dSizeX);
 		buffer.writeInt(dSizeY);
 		buffer.writeBoolean(left);
+		ByteBufUtils.writeUTF8String(buffer, doortype);
 		
 	}
 
@@ -47,6 +51,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		dSizeX = buffer.readInt();
 		dSizeY = buffer.readInt();
 		left = buffer.readBoolean();
+		doortype = ByteBufUtils.readUTF8String(buffer);
 	}
 
 	@Override
@@ -60,7 +65,7 @@ public class ModuleAssemblerPacket extends AbstractPacket{
 		if (play.worldObj.getTileEntity(corX, corY, corZ) instanceof ModuleAssemblerTileEntity) {
 			ModuleAssemblerTileEntity ent = (ModuleAssemblerTileEntity) play.worldObj
 					.getTileEntity(corX, corY, corZ);
-			ent.produce(dSizeX,dSizeY,left);
+			ent.produce(dSizeX,dSizeY,left,doortype);
 		}
 	}
 

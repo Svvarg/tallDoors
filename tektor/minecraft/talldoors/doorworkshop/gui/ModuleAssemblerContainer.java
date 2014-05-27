@@ -125,9 +125,16 @@ public class ModuleAssemblerContainer extends Container{
 
 	}
 
-	public void produce(String[][] constructionPlan, String[][] texturePlan1, String[][] texturePlan2, String[][] sideTextures, boolean left) {
+	public void produce(String doortype, String[][] constructionPlan, String[][] texturePlan1, String[][] texturePlan2, String[][] sideTextures, boolean left) {
 		if (this.outputSlot.getStackInSlot(0) == null) {
-			this.outputSlot.setInventorySlotContents(0, new ItemStack(TallDoorsBase.modularDoorPlacer,1,0));
+			if ("standard".equals(doortype)) {
+				this.outputSlot.setInventorySlotContents(0, new ItemStack(
+						TallDoorsBase.modularDoorPlacer, 1, 0));
+			}
+			else {
+				this.outputSlot.setInventorySlotContents(0, new ItemStack(
+						TallDoorsBase.modularDoorPlacer, 1, 1));
+			}
 			this.outputSlot.getStackInSlot(0).stackTagCompound = new NBTTagCompound();
 			final byte[] bytes = SerializationUtils.serialize(constructionPlan);
 			final byte[] bytes2 = SerializationUtils.serialize(texturePlan1);

@@ -2,13 +2,14 @@ package tektor.minecraft.talldoors.doorworkshop.entity.doorparts;
 
 import java.util.List;
 
-import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.DoorBaseConstructable;
 
 public abstract class AbstractDoorPart extends Entity{
 
@@ -20,7 +21,7 @@ public abstract class AbstractDoorPart extends Entity{
 	public double mX,mY,mZ;
 	public String texture1; //24
 	
-	public DoorBase master;
+	public DoorBaseConstructable master;
 	public String sideTexture;//30
 	
 	public AbstractDoorPart(World par1World) {
@@ -32,7 +33,7 @@ public abstract class AbstractDoorPart extends Entity{
 		this.sideTexture = "plain";
 	}
 	
-	public AbstractDoorPart(World par1World, int posX, int heightPosition, int posZ,
+	public AbstractDoorPart(World par1World, double posX, int heightPosition, double posZ,
 			int heightSize, int orientation, float depth) {
 		super(par1World);
 		this.posX = posX;
@@ -88,8 +89,8 @@ public abstract class AbstractDoorPart extends Entity{
 		}
 		if(this.master == null)
 		{
-			List<DoorBase> list = (List<DoorBase>) worldObj
-					.getEntitiesWithinAABB(DoorBase.class, boundingBox
+			List<DoorBaseConstructable> list = (List<DoorBaseConstructable>) worldObj
+					.getEntitiesWithinAABB(DoorBaseConstructable.class, boundingBox
 							.getBoundingBox(mX - 0.2,
 									mY - 0.2,
 									mZ - 0.2,
@@ -163,8 +164,8 @@ public abstract class AbstractDoorPart extends Entity{
 		this.dataWatcher.updateObject(30, sideTexture);
 		
 		@SuppressWarnings({ "static-access", "unchecked" })
-		List<DoorBase> list = (List<DoorBase>) worldObj
-				.getEntitiesWithinAABB(DoorBase.class, boundingBox
+		List<DoorBaseConstructable> list = (List<DoorBaseConstructable>) worldObj
+				.getEntitiesWithinAABB(DoorBaseConstructable.class, boundingBox
 						.getBoundingBox(nbt.getDouble("mX") - 0.2,
 								nbt.getDouble("mY") - 0.2,
 								nbt.getDouble("mZ") - 0.2,
@@ -203,9 +204,9 @@ public abstract class AbstractDoorPart extends Entity{
 		nbt.setString("texture1", texture1);
 		nbt.setString("sideTexture", sideTexture);
 		if (master != null) {
-			nbt.setDouble("mX", master.posX);
-			nbt.setDouble("mY", master.posY);
-			nbt.setDouble("mZ", master.posZ);
+			nbt.setDouble("mX", master.getPosX());
+			nbt.setDouble("mY", master.getPosY());
+			nbt.setDouble("mZ", master.getPosZ());
 		}
 	}
 	
@@ -304,7 +305,8 @@ public abstract class AbstractDoorPart extends Entity{
 
 		if (!this.worldObj.isRemote) {
 			if (master != null)
-				master.interactFirst(player);
+				master.doWork(player);
+			else this.setDead();
 			return true;
 		}
 		return false;

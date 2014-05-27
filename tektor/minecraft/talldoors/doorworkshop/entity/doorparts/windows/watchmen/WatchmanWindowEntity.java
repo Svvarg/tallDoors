@@ -3,14 +3,17 @@ package tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchme
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.Abstract2TextureDoorPart;
 
 public class WatchmanWindowEntity extends Abstract2TextureDoorPart {
 
 	public boolean watchmanWindow;
 
-	public WatchmanWindowEntity(World par1World, int posX, int heightPosition,
-			int posZ, int heightSize, int orientation, float depth) {
+	public WatchmanWindowEntity(World par1World, double posX, int heightPosition,
+			double posZ, int heightSize, int orientation, float depth) {
 		super(par1World, posX, heightPosition, posZ, heightSize, orientation,
 				depth);
 		watchmanWindow = false;
@@ -61,7 +64,15 @@ public class WatchmanWindowEntity extends Abstract2TextureDoorPart {
 	@Override
 	public boolean interactFirst(EntityPlayer player) {
 		if (!this.worldObj.isRemote) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
+			{
+
 			this.setWatchmanWindowState(!watchmanWindow);
+			}
+			else
+			{
+				super.interactFirst(player);
+			}
 		}
 		return true;
 

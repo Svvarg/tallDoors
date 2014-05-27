@@ -2,6 +2,7 @@ package tektor.minecraft.talldoors.client;
 
 import tektor.minecraft.talldoors.TallDoorsCommonProxy;
 import tektor.minecraft.talldoors.doorworkshop.entity.DoorBase;
+import tektor.minecraft.talldoors.doorworkshop.entity.SlidingDoorBase;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.NullPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.PlainDoorPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.DoubleHorizontalBalkPartEntity;
@@ -11,6 +12,9 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.FBVertical
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.HorizontalBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.PlusBalkPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.balks.VerticalBalkPartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.nails.FourNailsSquare2PartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.nails.FourNailsSquarePartEntity;
+import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.nails.NailedPlainPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindow2PartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.GlassWindowPartEntity;
 import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.HalfedGlassWindowPartEntity;
@@ -22,6 +26,7 @@ import tektor.minecraft.talldoors.doorworkshop.entity.doorparts.windows.watchmen
 import tektor.minecraft.talldoors.doorworkshop.renderer.DoorBaseRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.NullPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.PlainDoorPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.SlidingDoorBaseRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleHorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoublePlusBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.DoubleVerticalFrontBalkPartRenderer;
@@ -29,6 +34,9 @@ import tektor.minecraft.talldoors.doorworkshop.renderer.balks.FBVerticalBalkPart
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.HorizontalBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.PlusBalkPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.balks.VerticalBalkPartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.nails.FourNailsSquare2PartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.nails.FourNailsSquarePartRenderer;
+import tektor.minecraft.talldoors.doorworkshop.renderer.nails.NailedPlainPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindow2PartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.GlassWindowPartRenderer;
 import tektor.minecraft.talldoors.doorworkshop.renderer.windows.HalfedGlassWindowPartRenderer;
@@ -99,6 +107,7 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(TrapDoor.class, new TrapDoorRenderer());
 		
 		RenderingRegistry.registerEntityRenderingHandler(DoorBase.class, new DoorBaseRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(SlidingDoorBase.class, new SlidingDoorBaseRenderer());
 		
 		RenderingRegistry.registerEntityRenderingHandler(PlainDoorPartEntity.class, new PlainDoorPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(HorizontalBalkPartEntity.class, new HorizontalBalkPartRenderer());
@@ -117,6 +126,10 @@ public class TallDoorsClientProxy extends TallDoorsCommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(HorHalfedGlassWindowPartEntity.class, new HorHalfedGlassWindowPartRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(WatchmanWindowEntity.class, new WatchmanWindowRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(SmallWatchmanWindowEntity.class, new SmallWatchmanWindowRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(NailedPlainPartEntity.class, new NailedPlainPartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(FourNailsSquarePartEntity.class, new FourNailsSquarePartRenderer());
+		RenderingRegistry.registerEntityRenderingHandler(FourNailsSquare2PartEntity.class, new FourNailsSquare2PartRenderer());
+				
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MosaicGlassTileEntity.class, new RenderMosaicGlassTileEntity());
 		

@@ -26,8 +26,8 @@ public class SimpleWindowPartType extends AbstractDoorPartType{
 	}
 
 	@Override
-	public AbstractDoorPart getNewEntity(World world, int posX,
-			int heightPosition, int posZ, int heightSize, int orientation) {
+	public AbstractDoorPart getNewEntity(World world, double posX,
+			int heightPosition, double posZ, int heightSize, int orientation) {
 		AbstractDoorPart part = new SimpleWindowPartEntity(world, posX, heightPosition, posZ, heightSize, orientation,depth);
 		return part;
 	}

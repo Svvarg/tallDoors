@@ -18,7 +18,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class DoorBase extends AbstractLockable {
+public class DoorBase extends AbstractLockable implements DoorBaseConstructable {
 
 	ModuleTexturePackage[][] constructionPlan;
 
@@ -92,8 +92,8 @@ public class DoorBase extends AbstractLockable {
 
 			for (int blocks = 0; blocks < constructionPlan[columns].length; blocks++) {
 				if (blocks < (constructionPlan[columns].length - 1)
-						&& constructionPlan[columns][blocks]
-								.equals(constructionPlan[columns][blocks + 1])) {
+						&& constructionPlan[columns][blocks].module
+								.equals(constructionPlan[columns][blocks + 1].module)) {
 					sizer++;
 					continue;
 				}
@@ -283,6 +283,14 @@ public class DoorBase extends AbstractLockable {
 
 	@Override
 	public void setPosition(double par1, double par3, double par5) {
+		this.posX = par1;
+		this.posY = par3;
+		this.posZ = par5;
+		setBoundsAt(par1, par3, par5);
+
+	}
+	@Override
+	public void setPositionC(double par1, double par3, double par5) {
 		this.posX = par1;
 		this.posY = par3;
 		this.posZ = par5;
@@ -636,4 +644,25 @@ public class DoorBase extends AbstractLockable {
 		parts.add(abstractDoorPart);
 
 	}
+
+	@Override
+	public double getPosX() {
+		return this.posX;
+	}
+
+	@Override
+	public double getPosY() {
+		return this.posY;
+	}
+
+	@Override
+	public double getPosZ() {
+		return this.posZ;
+	}
+	
+	@Override
+	public boolean doWork(EntityPlayer player) {
+		return this.interactFirst(player);
+	}
+
 }

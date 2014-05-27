@@ -242,7 +242,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 		}
 	}
 
-	public void produce(int dSizeX, int dSizeY, boolean left) {
+	public void produce(int dSizeX, int dSizeY, boolean left, String doortype) {
 		List<PositionItemStack> prio4 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio3 = new ArrayList<PositionItemStack>();
 		List<PositionItemStack> prio2 = new ArrayList<PositionItemStack>();
@@ -309,7 +309,7 @@ public class ModuleAssemblerTileEntity extends TileEntity implements IInventory 
 				}
 			}
 		}
-		this.container.produce(result,result2,result3,result4,left);
+		this.container.produce(doortype,result,result2,result3,result4,left);
 		this.stacks.clear();
 		this.deleteAll();
 		
