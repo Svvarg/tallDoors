@@ -1,0 +1,16 @@
+[
+{
+  "modid": "TallDoors",
+  "name": "Tall Doors Mod",
+  "description": "Modular Doors, nice mosaics, colorful windows",
+  "version": "1.7.10-0.5.2 OrdinaryEditions-0.2",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Tektor707"],
+  "credits": "To all who helped or made a well made foundation",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
